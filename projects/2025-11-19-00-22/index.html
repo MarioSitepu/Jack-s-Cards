@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --background-light: #ffffff;
+            --background-dark: #2c3e50;
+            --accent-color: #00bcd4;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.2);
+            --border-radius-lg: 15px;
+            --border-radius-md: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--background-light);
+            padding: 20px 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #2575fc;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out 0.3s;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-gradient);
+            color: var(--text-dark);
+            padding: 15px 30px;
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+            border: none;
+            cursor: pointer;
+            animation: fadeInUp 1s ease-out 0.6s;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            color: #fff; /* text becomes white on hover for better contrast with secondary gradient */
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f9f9f9;
+        }
+
+        section h2 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--background-light);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-card .icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .about-text {
+            flex: 2;
+            min-width: 300px;
+            max-width: 700px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 250px;
+            max-width: 400px;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+        }
+
+        /* Project Date Section */
+        .project-date {
+            background: var(--background-dark);
+            color: var(--text-light);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .project-date h2 {
+            color: var(--text-light);
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            margin-bottom: 30px;
+        }
+
+        .project-date h2::after {
+            background: var(--text-light);
+        }
+
+        .project-date p {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            color: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: var(--secondary-gradient);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--background-dark);
+            color: var(--text-light);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            nav ul li {
+                margin-left: 0;
+            }
+
+            .hero {
+                padding: 80px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            section h2 {
+                font-size: 2em;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-image {
+                order: -1; /* Image appears above text on mobile */
+            }
+
+            .project-date p {
+                font-size: 1.4em;
+            }
+
+            footer .container {
+                gap: 15px;
+            }
+
+            .footer-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5em;
+            }
+
+            nav ul li a {
+                font-size: 0.9em;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9em;
+            }
+
+            section h2 {
+                font-size: 1.8em;
+            }
+
+            .feature-card {
+                padding: 30px;
+            }
+
+            .feature-card .icon {
+                font-size: 2.5em;
+            }
+
+            .feature-card h3 {
+                font-size: 1.3em;
+            }
+
+            .project-date p {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">ProjectFlow</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Unlock Your Project's Full Potential</h1>
+                <p>Innovative solutions for modern challenges. Streamline your workflow, collaborate effortlessly, and achieve your goals with our cutting-edge platform.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Experience unparalleled speed and efficiency. Our platform is optimized for quick load times and smooth operation, even with complex projects.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💡</div>
+                        <h3>Intuitive User Interface</h3>
+                        <p>Designed for ease of use, our interface allows you to navigate and manage your projects with minimal effort and a short learning curve.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🤝</div>
+                        <h3>Seamless Collaboration</h3>
+                        <p>Work together effectively. Share files, assign tasks, and communicate in real-time, ensuring everyone is on the same page, always.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h3>Robust Security</h3>
+                        <p>Your data is our top priority. We employ industry-leading security measures to protect your information and ensure privacy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About ProjectFlow</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>ProjectFlow was founded with a clear vision: to empower teams and individuals to bring their ideas to life with unparalleled ease and efficiency. We believe that great projects stem from great tools, and we're committed to providing just that.</p>
+                        <p>Our journey began with a small team of passionate developers and designers who saw a need for a more intuitive, powerful, and collaborative project management solution. Today, we continue to innovate, driven by the feedback of our growing community and the ever-evolving landscape of technology.</p>
+                        <p>We're more than just a platform; we're a partner in your success, dedicated to helping you navigate the complexities of modern project execution.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/400x300/6a11cb/ffffff?text=Our+Team" alt="About Us Image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-date">
+            <div class="container">
+                <h2>Looking Ahead</h2>
+                <p>Anticipate exciting new updates and features on <strong>2025-11-19</strong>!</p>
+                <a href="#contact" class="btn">Get Notified</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2024 ProjectFlow. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons (CDN) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
