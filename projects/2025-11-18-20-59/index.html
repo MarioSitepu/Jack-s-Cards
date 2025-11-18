@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <style>
+        /* Modern CSS Reset & Base Styles */
+        :root {
+            --color-dark-bg: #1a1a2e;
+            --color-light-text: #e0e0e0;
+            --color-accent-purple: #6c5ce7;
+            --color-accent-teal: #00cfd8;
+            --color-accent-pink: #ff7e5f;
+            --color-card-bg: #2a2a4a;
+            --color-footer-bg: #131320;
+            --gradient-main: linear-gradient(135deg, var(--color-accent-purple) 0%, var(--color-accent-teal) 100%);
+            --gradient-alt: linear-gradient(135deg, var(--color-accent-teal) 0%, var(--color-accent-purple) 100%);
+            --gradient-hero: linear-gradient(45deg, #4b3f7e 0%, #00cfd8 100%);
+            --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--color-light-text);
+            background: var(--color-dark-bg);
+            background-size: 400% 400%;
+            animation: backgroundShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        a {
+            color: var(--color-accent-teal);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-accent-pink);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.8rem; }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(26, 26, 46, 0.9);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--color-light-text);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--gradient-main);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+        }
+
+        .hero-section {
+            background: var(--gradient-hero);
+            color: #fff;
+            padding: 6rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 1%, transparent 10%),
+                        radial-gradient(circle at top left, rgba(255,255,255,0.03) 5%, transparent 20%);
+            animation: moveGradient 20s linear infinite;
+        }
+
+        @keyframes moveGradient {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50%, 50%); }
+        }
+
+        .hero-section * {
+            position: relative; /* Keep content above pseudo-element */
+            z-index: 1;
+        }
+
+        .hero-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: var(--shadow-md);
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            background: var(--gradient-main);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            background: var(--gradient-alt);
+        }
+
+        .content-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .content-section h2 {
+            margin-bottom: 3rem;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .alternate-bg {
+            background-color: var(--color-card-bg);
+            border-radius: 15px;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--color-card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border: 1px solid rgba(108, 92, 231, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-accent-teal);
+        }
+
+        .feature-card h3 {
+            color: var(--color-accent-teal);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background-color: var(--color-dark-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .portfolio-info h3 {
+            font-size: 1.4rem;
+            color: var(--color-accent-purple);
+        }
+
+        .portfolio-info p {
+            font-size: 0.95rem;
+            opacity: 0.7;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--color-card-bg);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-lg);
+            text-align: left;
+            border: 1px solid rgba(0, 207, 216, 0.2);
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-accent-teal);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #4a4a6e;
+            border-radius: 8px;
+            background-color: #2a2a4a;
+            color: var(--color-light-text);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--color-accent-pink);
+            box-shadow: 0 0 0 3px rgba(255, 126, 95, 0.3);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form .btn {
+            width: auto;
+            margin-top: 1rem;
+            display: block; /* Make it block to center with text-align */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-footer-bg);
+            color: var(--color-light-text);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            box-shadow: inset 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            header .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .hero-section {
+                padding: 4rem 1rem;
+                min-height: 60vh;
+            }
+
+            .hero-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .content-section {
+                padding: 3rem 1rem;
+            }
+
+            .feature-grid, .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card, .portfolio-item {
+                margin: 0 auto;
+                max-width: 400px;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .hero-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            Project Zenith
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <h2>Unleash Your Vision with Project Zenith</h2>
+            <p>
+                A platform designed for innovation and seamless collaboration. Empowering your next big idea with cutting-edge technology and intuitive design.
+                Project initialized on <time datetime="2025-11-18">2025-11-18</time>.
+            </p>
+            <a href="#features" class="btn">Explore Features</a>
+        </section>
+
+        <section id="features" class="content-section">
+            <h2>Core Capabilities</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Adaptive AI Integration</h3>
+                    <p>Leverage intelligent algorithms that learn and adapt to your workflow, providing predictive insights and automating routine tasks.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Real-time Collaboration</h3>
+                    <p>Work together seamlessly with your team, no matter where you are. Instant updates and shared environments keep everyone in sync.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Scalable Cloud Infrastructure</h3>
+                    <p>Our robust cloud architecture ensures your projects can grow without limits, offering unparalleled performance and reliability.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Intuitive User Experience</h3>
+                    <p>Designed with you in mind, our interface is clean, modern, and easy to navigate, reducing learning curves and boosting productivity.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="content-section alternate-bg">
+            <h2>Our Recent Works</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x200/4B3F7E/E0E0E0?text=Project+Atlas" alt="Project Atlas">
+                    <div class="portfolio-info">
+                        <h3>Project Atlas</h3>
+                        <p>A data visualization tool for global market trends.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x200/00CFD8/1A1A2E?text=Orbital+Launch" alt="Orbital Launch System">
+                    <div class="portfolio-info">
+                        <h3>Orbital Launch System</h3>
+                        <p>Simulation software for aerospace engineering.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x200/6C5CE7/FFFFFF?text=Quantum+Connect" alt="Quantum Connect Network">
+                    <div class="portfolio-info">
+                        <h3>Quantum Connect</h3>
+                        <p>Secure, distributed network for enterprise solutions.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x200/FF7E5F/1A1A2E?text=Eco+Tracker" alt="Eco Tracker App">
+                    <div class="portfolio-info">
+                        <h3>Eco Tracker</h3>
+                        <p>Mobile application for sustainable living initiatives.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <h2>Get in Touch</h2>
+            <form class="contact-form">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required placeholder="John Doe">
+
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
+
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required placeholder="Inquiry about Project Zenith">
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required placeholder="Tell us more about your needs..."></textarea>
+
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Project Zenith. All rights reserved.</p>
+        <p>Designed with passion and modern aesthetics.</p>
+    </footer>
+</body>
+</html>
