@@ -29,14 +29,29 @@ export default function Hero({ onSectionChange }: HeroProps) {
         >
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight">
             <span className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
-              Digital Experiences
+              AI-Generated Projects
             </span>
-            <span className="block text-foreground">Crafted with Care</span>
+            <span className="block text-foreground">Powered by Gemini Flash 2.0</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-foreground/60 mb-12 max-w-2xl mx-auto leading-relaxed">
-            We design and develop modern web experiences that captivate, engage, and convert. From concept to launch, we bring your vision to life.
+          <p className="text-lg md:text-xl text-foreground/60 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Showcase koleksi website HTML/CSS yang di-generate secara otomatis menggunakan Google Gemini Flash 2.0. Setiap project dibuat dengan AI yang menghasilkan design unik dan modern setiap 30 menit.
           </p>
+
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            <span className="px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full text-sm font-medium">
+              🤖 Gemini Flash 2.0
+            </span>
+            <span className="px-4 py-2 bg-pink-500/10 border border-pink-500/20 rounded-full text-sm font-medium">
+              ⚡ Auto-Generated
+            </span>
+            <span className="px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-full text-sm font-medium">
+              🎨 Unique Designs
+            </span>
+            <span className="px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-sm font-medium">
+              ⏱️ Every 30 Minutes
+            </span>
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -44,11 +59,10 @@ export default function Hero({ onSectionChange }: HeroProps) {
               onClick={() => onSectionChange('projects')}
               className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all"
             >
-              View Our Work
+              View Projects
             </a>
             <a
-              href="#contact"
-              onClick={() => onSectionChange('contact')}
+              href="mailto:stinart123@gmail.com"
               className="px-8 py-3 border border-foreground/20 rounded-lg font-semibold hover:bg-foreground/5 transition-all"
             >
               Get in Touch

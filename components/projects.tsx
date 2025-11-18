@@ -76,9 +76,20 @@ export default function Projects({ onSectionChange }: ProjectsProps) {
           }`}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured Projects</h2>
-          <p className="text-foreground/60 text-lg">
-            Explore AI-generated websites and see how we bring ideas to life
+          <p className="text-foreground/60 text-lg mb-4">
+            Koleksi website HTML/CSS yang di-generate otomatis oleh Gemini Flash 2.0. Setiap project memiliki design unik dan modern.
           </p>
+          <div className="flex flex-wrap gap-2 text-sm">
+            <span className="px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full">
+              🤖 Powered by Gemini Flash 2.0
+            </span>
+            <span className="px-3 py-1 bg-pink-500/10 border border-pink-500/20 rounded-full">
+              ⚡ Auto-Generated Every 30 Minutes
+            </span>
+            <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full">
+              🎨 Unique Designs
+            </span>
+          </div>
         </div>
 
         {loading ? (

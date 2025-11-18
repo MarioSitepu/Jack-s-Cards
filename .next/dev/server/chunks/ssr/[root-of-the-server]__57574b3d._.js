@@ -112,9 +112,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$Jack
 ;
 ;
 const metadata = {
-    title: 'Studio - Modern Web Design & Development',
-    description: 'Explore our portfolio of modern, innovative web projects and digital experiences.',
-    generator: 'v0.app',
+    title: 'AI Showcase - Gemini Flash 2.0 Generated Projects',
+    description: 'Showcase koleksi website HTML/CSS yang di-generate secara otomatis menggunakan Google Gemini Flash 2.0. Setiap project memiliki design unik dan modern yang di-generate setiap 30 menit.',
+    generator: 'Next.js',
     icons: {
         icon: [
             {

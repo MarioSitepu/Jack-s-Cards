@@ -11,7 +11,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const menuItems = [
-    { label: 'Portfolio', href: '#projects' },
+    { label: 'Projects', href: '#projects' },
     { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
   ]
@@ -23,8 +23,9 @@ export default function Navbar({ activeSection }: NavbarProps) {
           {/* Logo */}
           <div className="flex-shrink-0">
             <span className="text-xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Studio.
+              AI Showcase
             </span>
+            <span className="text-xs text-foreground/50 ml-2">Gemini 2.0</span>
           </div>
 
           {/* Desktop Menu */}
