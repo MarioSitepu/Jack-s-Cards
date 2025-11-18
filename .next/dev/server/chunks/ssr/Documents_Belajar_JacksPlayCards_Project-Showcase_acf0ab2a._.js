@@ -825,19 +825,51 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$Jack
 function ProjectCard({ project }) {
     const [isHovered, setIsHovered] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [previewHtml, setPreviewHtml] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
+    const [previewCss, setPreviewCss] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
+    const [previewLoaded, setPreviewLoaded] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         // Load preview from API
         if (project.id) {
-            fetch(`/api/projects/${project.id}`).then((res)=>res.json()).then((data)=>{
+            // Try API route first
+            fetch(`/api/projects/${project.id}`).then((res)=>{
+                if (!res.ok) throw new Error(`API returned ${res.status}`);
+                return res.json();
+            }).then((data)=>{
                 if (data.html) {
-                    // Extract body content for preview
-                    const bodyMatch = data.html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                    if (bodyMatch) {
-                        setPreviewHtml(bodyMatch[1]);
-                    }
+                    console.log(`✅ Loaded preview for project ${project.id}`, {
+                        htmlLength: data.html.length,
+                        cssLength: (data.css || '').length
+                    });
+                    setPreviewHtml(data.html);
+                    setPreviewCss(data.css || '');
+                    setPreviewLoaded(true);
+                } else {
+                    console.warn(`No HTML content for project ${project.id}`);
                 }
-            }).catch(()=>{
-            // Ignore errors
+            }).catch((error)=>{
+                console.warn(`API route failed for ${project.id}, trying static files:`, error);
+                // If API fails, try fetching from static files
+                Promise.all([
+                    fetch(`/projects/${project.id}/index.html`).catch(()=>null),
+                    fetch(`/projects/${project.id}/style.css`).catch(()=>null)
+                ]).then(([htmlRes, cssRes])=>{
+                    if (htmlRes && htmlRes.ok) {
+                        htmlRes.text().then((html)=>{
+                            console.log(`✅ Loaded preview from static files for project ${project.id}`, {
+                                htmlLength: html.length
+                            });
+                            setPreviewHtml(html);
+                            if (cssRes && cssRes.ok) {
+                                cssRes.text().then((css)=>{
+                                    setPreviewCss(css);
+                                });
+                            }
+                            setPreviewLoaded(true);
+                        });
+                    } else {
+                        console.warn(`Failed to load static files for ${project.id}`);
+                    }
+                });
             });
         }
     }, [
@@ -853,53 +885,136 @@ function ProjectCard({ project }) {
             className: "group relative h-80 rounded-xl overflow-hidden bg-gradient-to-br from-card to-card border border-border transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20 cursor-pointer",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "relative w-full h-full",
+                    className: "relative w-full h-full overflow-hidden bg-background",
                     children: [
-                        previewHtml ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "w-full h-full scale-150 origin-top-left pointer-events-none",
-                            dangerouslySetInnerHTML: {
-                                __html: previewHtml
-                            },
-                            style: {
-                                transform: 'scale(0.5)',
-                                transformOrigin: 'top left',
-                                width: '200%',
-                                height: '200%'
-                            }
-                        }, void 0, false, {
-                            fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                            lineNumber: 59,
-                            columnNumber: 13
-                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "w-full h-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center",
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "text-6xl opacity-50",
-                                children: "🎨"
+                        previewLoaded && previewHtml ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "absolute inset-0 w-full h-full",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("iframe", {
+                                srcDoc: (()=>{
+                                    // Process HTML to inject CSS
+                                    let htmlWithCss = previewHtml;
+                                    // Remove external CSS link
+                                    htmlWithCss = htmlWithCss.replace(/<link[^>]*rel=["']stylesheet["'][^>]*>/gi, '');
+                                    // Extract body content
+                                    const bodyMatch = htmlWithCss.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                                    const bodyContent = bodyMatch ? bodyMatch[1] : htmlWithCss;
+                                    // Create complete HTML with CSS
+                                    const fullHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { overflow: hidden; }
+    ${previewCss || ''}
+  </style>
+</head>
+<body>
+${bodyContent}
+</body>
+</html>`;
+                                    return fullHtml;
+                                })(),
+                                className: "absolute top-0 left-0 border-0 pointer-events-none",
+                                style: {
+                                    transform: 'scale(0.35)',
+                                    transformOrigin: 'top left',
+                                    width: '285%',
+                                    height: '285%',
+                                    minWidth: '100%',
+                                    minHeight: '100%'
+                                },
+                                title: `Preview of ${project.name}`,
+                                sandbox: "allow-same-origin",
+                                loading: "lazy"
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                lineNumber: 71,
+                                lineNumber: 87,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                            lineNumber: 70,
+                            lineNumber: 86,
+                            columnNumber: 13
+                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "w-full h-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center relative",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "text-6xl opacity-50 animate-pulse",
+                                    children: "🎨"
+                                }, void 0, false, {
+                                    fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
+                                    lineNumber: 137,
+                                    columnNumber: 15
+                                }, this),
+                                !previewLoaded && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "absolute bottom-4 left-1/2 transform -translate-x-1/2",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "flex items-center gap-2 text-xs text-foreground/40",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "w-2 h-2 bg-purple-500 rounded-full animate-bounce",
+                                                style: {
+                                                    animationDelay: '0ms'
+                                                }
+                                            }, void 0, false, {
+                                                fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
+                                                lineNumber: 141,
+                                                columnNumber: 21
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "w-2 h-2 bg-pink-500 rounded-full animate-bounce",
+                                                style: {
+                                                    animationDelay: '150ms'
+                                                }
+                                            }, void 0, false, {
+                                                fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
+                                                lineNumber: 142,
+                                                columnNumber: 21
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "w-2 h-2 bg-purple-500 rounded-full animate-bounce",
+                                                style: {
+                                                    animationDelay: '300ms'
+                                                }
+                                            }, void 0, false, {
+                                                fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
+                                                lineNumber: 143,
+                                                columnNumber: 21
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
+                                        lineNumber: 140,
+                                        columnNumber: 19
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
+                                    lineNumber: 139,
+                                    columnNumber: 17
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
+                            lineNumber: 136,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"
+                            className: "absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent pointer-events-none z-10"
                         }, void 0, false, {
                             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                            lineNumber: 74,
+                            lineNumber: 150,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                    lineNumber: 57,
+                    lineNumber: 84,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: `absolute inset-0 bg-gradient-to-b from-background/0 to-background/95 flex flex-col justify-end p-6 transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-90'}`,
+                    className: `absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/95 flex flex-col justify-end p-6 transition-all duration-300 z-20 ${isHovered ? 'opacity-100' : 'opacity-90'}`,
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "space-y-3",
                         children: [
@@ -912,7 +1027,7 @@ function ProjectCard({ project }) {
                                             children: project.category
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                            lineNumber: 86,
+                                            lineNumber: 162,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -920,7 +1035,7 @@ function ProjectCard({ project }) {
                                             children: title
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                            lineNumber: 89,
+                                            lineNumber: 165,
                                             columnNumber: 17
                                         }, this),
                                         project.displayDate && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -928,18 +1043,18 @@ function ProjectCard({ project }) {
                                             children: project.displayDate
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                            lineNumber: 91,
+                                            lineNumber: 167,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                    lineNumber: 85,
+                                    lineNumber: 161,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                lineNumber: 84,
+                                lineNumber: 160,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -947,7 +1062,7 @@ function ProjectCard({ project }) {
                                 children: description
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                lineNumber: 96,
+                                lineNumber: 172,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -957,12 +1072,12 @@ function ProjectCard({ project }) {
                                         children: tag
                                     }, tag, false, {
                                         fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                        lineNumber: 106,
+                                        lineNumber: 182,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                lineNumber: 102,
+                                lineNumber: 178,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -970,29 +1085,29 @@ function ProjectCard({ project }) {
                                 children: "View Project"
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                lineNumber: 115,
+                                lineNumber: 191,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                        lineNumber: 83,
+                        lineNumber: 159,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                    lineNumber: 78,
+                    lineNumber: 154,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-            lineNumber: 51,
+            lineNumber: 78,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-        lineNumber: 50,
+        lineNumber: 77,
         columnNumber: 5
     }, this);
 }

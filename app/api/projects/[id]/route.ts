@@ -8,50 +8,74 @@ export async function GET(
 ) {
   try {
     const projectId = params.id
-    // Check both public/projects and projects (root)
-    // Priority: public/projects first (for Vercel deployment)
-    const publicProjectDir = path.join(process.cwd(), 'public', 'projects', projectId)
+    
+    // In production (Vercel), files in public/ are served as static files
+    // We need to try reading from file system first (for local dev and if files are in projects/)
+    // Then fallback to fetching from static URL (for Vercel production)
+    
     const rootProjectDir = path.join(process.cwd(), 'projects', projectId)
+    const rootHtmlPath = path.join(rootProjectDir, 'index.html')
+    const rootCssPath = path.join(rootProjectDir, 'style.css')
     
-    // Try public first (for production/Vercel)
-    let projectDir = publicProjectDir
-    let htmlPath = path.join(projectDir, 'index.html')
+    let html = ''
+    let css = ''
     
-    if (!fs.existsSync(htmlPath)) {
-      // Fallback to root projects (for local development)
-      projectDir = rootProjectDir
-      htmlPath = path.join(projectDir, 'index.html')
+    // Try reading from file system first (works in local dev and if files are in projects/)
+    if (fs.existsSync(rootHtmlPath)) {
+      html = fs.readFileSync(rootHtmlPath, 'utf-8')
+      css = fs.existsSync(rootCssPath) ? fs.readFileSync(rootCssPath, 'utf-8') : ''
+    } else {
+      // In production, try to fetch from static URL
+      // Get the base URL from request
+      const url = new URL(request.url)
+      const baseUrl = `${url.protocol}//${url.host}`
+      
+      try {
+        // Try fetching from public/projects/ (static file)
+        const htmlUrl = `${baseUrl}/projects/${projectId}/index.html`
+        const cssUrl = `${baseUrl}/projects/${projectId}/style.css`
+        
+        const [htmlResponse, cssResponse] = await Promise.all([
+          fetch(htmlUrl).catch(() => null),
+          fetch(cssUrl).catch(() => null)
+        ])
+        
+        if (htmlResponse && htmlResponse.ok) {
+          html = await htmlResponse.text()
+        }
+        
+        if (cssResponse && cssResponse.ok) {
+          css = await cssResponse.text()
+        }
+      } catch (fetchError) {
+        console.error('Error fetching from static URL:', fetchError)
+      }
     }
     
-    const cssPath = path.join(projectDir, 'style.css')
-
-    if (!fs.existsSync(htmlPath)) {
-      console.error(`Project not found: ${projectId}`)
-      console.error(`Checked paths:`)
-      console.error(`  - ${publicProjectDir}`)
-      console.error(`  - ${rootProjectDir}`)
+    if (!html) {
       return NextResponse.json(
         { 
           error: 'Project not found',
           projectId,
-          checkedPaths: [publicProjectDir, rootProjectDir]
+          message: 'Project HTML file not found. Make sure the project exists in projects/ or public/projects/'
         },
         { status: 404 }
       )
     }
 
-    const html = fs.readFileSync(htmlPath, 'utf-8')
-    const css = fs.existsSync(cssPath) ? fs.readFileSync(cssPath, 'utf-8') : ''
-
     return NextResponse.json({
       id: projectId,
       html,
-      css
+      css: css || ''
     })
   } catch (error) {
     console.error('Error reading project:', error)
     return NextResponse.json(
-      { error: 'Failed to read project', details: error instanceof Error ? error.message : String(error) },
+      { 
+        error: 'Failed to read project', 
+        details: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined
+      },
       { status: 500 }
     )
   }

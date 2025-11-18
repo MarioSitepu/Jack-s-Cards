@@ -17,14 +17,51 @@ export default function ProjectPage() {
   useEffect(() => {
     async function loadProject() {
       try {
-        const response = await fetch(`/api/projects/${projectId}`)
-        if (!response.ok) {
-          throw new Error('Project not found')
+        // Try API route first
+        let html = ''
+        let css = ''
+        
+        try {
+          const response = await fetch(`/api/projects/${projectId}`)
+          if (response.ok) {
+            const data = await response.json()
+            if (data.html) {
+              html = data.html
+              css = data.css || ''
+            }
+          }
+        } catch (apiError) {
+          console.warn('API route failed, trying static files:', apiError)
         }
-        const data = await response.json()
-        setHtml(data.html)
-        setCss(data.css)
+        
+        // If API route failed, try fetching directly from static files
+        if (!html) {
+          try {
+            const [htmlResponse, cssResponse] = await Promise.all([
+              fetch(`/projects/${projectId}/index.html`).catch(() => null),
+              fetch(`/projects/${projectId}/style.css`).catch(() => null)
+            ])
+            
+            if (htmlResponse && htmlResponse.ok) {
+              html = await htmlResponse.text()
+            }
+            
+            if (cssResponse && cssResponse.ok) {
+              css = await cssResponse.text()
+            }
+          } catch (staticError) {
+            console.error('Error fetching static files:', staticError)
+          }
+        }
+        
+        if (!html) {
+          throw new Error('Project not found. Make sure the project exists in public/projects/')
+        }
+        
+        setHtml(html)
+        setCss(css)
       } catch (err) {
+        console.error('Error loading project:', err)
         setError(err instanceof Error ? err.message : 'Failed to load project')
       } finally {
         setLoading(false)
@@ -49,13 +86,25 @@ export default function ProjectPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="text-center max-w-2xl">
           <h1 className="text-2xl font-bold mb-4">Project Not Found</h1>
-          <p className="text-foreground/60 mb-6">{error}</p>
+          <p className="text-foreground/60 mb-2">{error}</p>
+          <p className="text-sm text-foreground/40 mb-6">
+            Project ID: <code className="bg-muted px-2 py-1 rounded">{projectId}</code>
+          </p>
+          <div className="bg-muted/50 p-4 rounded-lg mb-6 text-left text-sm">
+            <p className="font-semibold mb-2">Troubleshooting:</p>
+            <ul className="list-disc list-inside space-y-1 text-foreground/70">
+              <li>Pastikan file project ada di <code>public/projects/{projectId}/</code></li>
+              <li>Pastikan file sudah di-commit dan push ke GitHub</li>
+              <li>Pastikan Vercel sudah melakukan deployment terbaru</li>
+              <li>Cek console browser untuk detail error</li>
+            </ul>
+          </div>
           <Link
             href="/#projects"
-            className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-lg transition-all"
+            className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-lg transition-all inline-block"
           >
             Back to Projects
           </Link>

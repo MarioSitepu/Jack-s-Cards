@@ -22,23 +22,50 @@ interface ProjectCardProps {
 export default function ProjectCard({ project }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [previewHtml, setPreviewHtml] = useState<string>('')
+  const [previewCss, setPreviewCss] = useState<string>('')
+  const [previewLoaded, setPreviewLoaded] = useState(false)
 
   useEffect(() => {
     // Load preview from API
     if (project.id) {
+      // Try API route first
       fetch(`/api/projects/${project.id}`)
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) throw new Error(`API returned ${res.status}`)
+          return res.json()
+        })
         .then(data => {
           if (data.html) {
-            // Extract body content for preview
-            const bodyMatch = data.html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)
-            if (bodyMatch) {
-              setPreviewHtml(bodyMatch[1])
-            }
+            console.log(`✅ Loaded preview for project ${project.id}`, { htmlLength: data.html.length, cssLength: (data.css || '').length })
+            setPreviewHtml(data.html)
+            setPreviewCss(data.css || '')
+            setPreviewLoaded(true)
+          } else {
+            console.warn(`No HTML content for project ${project.id}`)
           }
         })
-        .catch(() => {
-          // Ignore errors
+        .catch((error) => {
+          console.warn(`API route failed for ${project.id}, trying static files:`, error)
+          // If API fails, try fetching from static files
+          Promise.all([
+            fetch(`/projects/${project.id}/index.html`).catch(() => null),
+            fetch(`/projects/${project.id}/style.css`).catch(() => null)
+          ]).then(([htmlRes, cssRes]) => {
+            if (htmlRes && htmlRes.ok) {
+              htmlRes.text().then(html => {
+                console.log(`✅ Loaded preview from static files for project ${project.id}`, { htmlLength: html.length })
+                setPreviewHtml(html)
+                if (cssRes && cssRes.ok) {
+                  cssRes.text().then(css => {
+                    setPreviewCss(css)
+                  })
+                }
+                setPreviewLoaded(true)
+              })
+            } else {
+              console.warn(`Failed to load static files for ${project.id}`)
+            }
+          })
         })
     }
   }, [project.id])
@@ -53,30 +80,79 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         onMouseLeave={() => setIsHovered(false)}
         className="group relative h-80 rounded-xl overflow-hidden bg-gradient-to-br from-card to-card border border-border transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20 cursor-pointer"
       >
-        {/* Preview Background - Render HTML preview */}
-        <div className="relative w-full h-full">
-          {previewHtml ? (
-            <div 
-              className="w-full h-full scale-150 origin-top-left pointer-events-none"
-              dangerouslySetInnerHTML={{ __html: previewHtml }}
-              style={{
-                transform: 'scale(0.5)',
-                transformOrigin: 'top left',
-                width: '200%',
-                height: '200%',
-              }}
-            />
+        {/* Preview Background - Render website preview */}
+        <div className="relative w-full h-full overflow-hidden bg-background">
+          {previewLoaded && previewHtml ? (
+            <div className="absolute inset-0 w-full h-full">
+              <iframe
+                srcDoc={(() => {
+                  // Process HTML to inject CSS
+                  let htmlWithCss = previewHtml
+                  
+                  // Remove external CSS link
+                  htmlWithCss = htmlWithCss.replace(
+                    /<link[^>]*rel=["']stylesheet["'][^>]*>/gi,
+                    ''
+                  )
+                  
+                  // Extract body content
+                  const bodyMatch = htmlWithCss.match(/<body[^>]*>([\s\S]*?)<\/body>/i)
+                  const bodyContent = bodyMatch ? bodyMatch[1] : htmlWithCss
+                  
+                  // Create complete HTML with CSS
+                  const fullHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { overflow: hidden; }
+    ${previewCss || ''}
+  </style>
+</head>
+<body>
+${bodyContent}
+</body>
+</html>`
+                  
+                  return fullHtml
+                })()}
+                className="absolute top-0 left-0 border-0 pointer-events-none"
+                style={{
+                  transform: 'scale(0.35)',
+                  transformOrigin: 'top left',
+                  width: '285%',
+                  height: '285%',
+                  minWidth: '100%',
+                  minHeight: '100%',
+                }}
+                title={`Preview of ${project.name}`}
+                sandbox="allow-same-origin"
+                loading="lazy"
+              />
+            </div>
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
-              <div className="text-6xl opacity-50">🎨</div>
+            <div className="w-full h-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center relative">
+              <div className="text-6xl opacity-50 animate-pulse">🎨</div>
+              {!previewLoaded && (
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                  <div className="flex items-center gap-2 text-xs text-foreground/40">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-2 h-2 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+          {/* Gradient overlay for better text readability - less opaque to show preview */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent pointer-events-none z-10" />
         </div>
 
         {/* Content Overlay */}
         <div
-          className={`absolute inset-0 bg-gradient-to-b from-background/0 to-background/95 flex flex-col justify-end p-6 transition-all duration-300 ${
+          className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/95 flex flex-col justify-end p-6 transition-all duration-300 z-20 ${
             isHovered ? 'opacity-100' : 'opacity-90'
           }`}
         >
