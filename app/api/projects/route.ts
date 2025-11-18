@@ -15,8 +15,13 @@ interface Project {
   preview?: string
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    // Get query parameters for pagination
+    const { searchParams } = new URL(request.url)
+    const page = parseInt(searchParams.get('page') || '1', 10)
+    const limit = parseInt(searchParams.get('limit') || '6', 10)
+    
     // Check both public/projects and projects (root)
     const publicProjectsDir = path.join(process.cwd(), 'public', 'projects')
     const rootProjectsDir = path.join(process.cwd(), 'projects')
@@ -24,7 +29,15 @@ export async function GET() {
     
     // Check if projects directory exists
     if (!fs.existsSync(projectsDir)) {
-      return NextResponse.json({ projects: [] })
+      return NextResponse.json({ 
+        projects: [],
+        pagination: {
+          page: 1,
+          limit,
+          total: 0,
+          totalPages: 0
+        }
+      })
     }
 
     const projects: Project[] = []
@@ -126,14 +139,38 @@ export async function GET() {
       }
     }
 
-    // Sort by date (newest first)
+    // Sort by date (newest first) - Page 1 starts with newest
     projects.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
-    return NextResponse.json({ projects })
+    // Calculate pagination
+    const total = projects.length
+    const totalPages = Math.ceil(total / limit)
+    const startIndex = (page - 1) * limit
+    const endIndex = startIndex + limit
+    const paginatedProjects = projects.slice(startIndex, endIndex)
+
+    return NextResponse.json({ 
+      projects: paginatedProjects,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages
+      }
+    })
   } catch (error) {
     console.error('Error reading projects:', error)
     return NextResponse.json(
-      { error: 'Failed to read projects', projects: [] },
+      { 
+        error: 'Failed to read projects', 
+        projects: [],
+        pagination: {
+          page: 1,
+          limit: 6,
+          total: 0,
+          totalPages: 0
+        }
+      },
       { status: 500 }
     )
   }

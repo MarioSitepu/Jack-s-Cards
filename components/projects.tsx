@@ -29,13 +29,26 @@ export default function Projects({ onSectionChange }: ProjectsProps) {
 
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [totalProjects, setTotalProjects] = useState(0)
+  const projectsPerPage = 6
 
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const response = await fetch('/api/projects')
+        setLoading(true)
+        const response = await fetch(`/api/projects?page=${currentPage}&limit=${projectsPerPage}`)
         const data = await response.json()
         setProjects(data.projects || [])
+        setTotalPages(data.pagination?.totalPages || 1)
+        setTotalProjects(data.pagination?.total || 0)
+        
+        // Scroll to top of projects section when page changes
+        const projectsSection = document.getElementById('projects')
+        if (projectsSection) {
+          projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
       } catch (error) {
         console.error('Error fetching projects:', error)
         setProjects([])
@@ -45,7 +58,7 @@ export default function Projects({ onSectionChange }: ProjectsProps) {
     }
 
     fetchProjects()
-  }, [])
+  }, [currentPage])
 
   // Generate color gradient based on index
   const getColorGradient = (index: number) => {
@@ -102,28 +115,106 @@ export default function Projects({ onSectionChange }: ProjectsProps) {
             <p className="text-foreground/60 text-lg">No projects found. Projects will appear here once generated.</p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
-              <div
-                key={project.id}
-                className={`transform transition-all duration-1000 ${
-                  inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{
-                  transitionDelay: inView ? `${index * 100}ms` : '0ms',
-                }}
-              >
-                <ProjectCard 
-                  project={{
-                    ...project,
-                    category: 'AI Generated',
-                    tags: ['HTML', 'CSS', 'AI'],
-                    color: getColorGradient(index),
-                  }} 
-                />
+          <>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project, index) => (
+                <div
+                  key={project.id}
+                  className={`transform transition-all duration-1000 ${
+                    inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{
+                    transitionDelay: inView ? `${index * 100}ms` : '0ms',
+                  }}
+                >
+                  <ProjectCard 
+                    project={{
+                      ...project,
+                      category: 'AI Generated',
+                      tags: ['HTML', 'CSS', 'AI'],
+                      color: getColorGradient(index),
+                    }} 
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="mt-12 flex flex-col items-center gap-4">
+                <div className="flex items-center gap-2 text-sm text-foreground/60">
+                  <span>
+                    Showing {((currentPage - 1) * projectsPerPage) + 1} to {Math.min(currentPage * projectsPerPage, totalProjects)} of {totalProjects} projects
+                  </span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  {/* Previous Button */}
+                  <button
+                    onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                    disabled={currentPage === 1}
+                    className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${
+                      currentPage === 1
+                        ? 'bg-foreground/10 text-foreground/30 cursor-not-allowed'
+                        : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:shadow-lg hover:scale-105'
+                    }`}
+                  >
+                    Previous
+                  </button>
+
+                  {/* Page Numbers */}
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
+                      // Show first page, last page, current page, and pages around current
+                      const showPage = 
+                        pageNum === 1 ||
+                        pageNum === totalPages ||
+                        (pageNum >= currentPage - 1 && pageNum <= currentPage + 1)
+                      
+                      if (!showPage) {
+                        // Show ellipsis
+                        if (pageNum === currentPage - 2 || pageNum === currentPage + 2) {
+                          return (
+                            <span key={pageNum} className="px-2 text-foreground/40">
+                              ...
+                            </span>
+                          )
+                        }
+                        return null
+                      }
+
+                      return (
+                        <button
+                          key={pageNum}
+                          onClick={() => setCurrentPage(pageNum)}
+                          className={`w-10 h-10 rounded-lg font-semibold transition-all duration-200 ${
+                            currentPage === pageNum
+                              ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg scale-110'
+                              : 'bg-foreground/10 text-foreground/70 hover:bg-foreground/20 hover:scale-105'
+                          }`}
+                        >
+                          {pageNum}
+                        </button>
+                      )
+                    })}
+                  </div>
+
+                  {/* Next Button */}
+                  <button
+                    onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                    disabled={currentPage === totalPages}
+                    className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${
+                      currentPage === totalPages
+                        ? 'bg-foreground/10 text-foreground/30 cursor-not-allowed'
+                        : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:shadow-lg hover:scale-105'
+                    }`}
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
-            ))}
-          </div>
+            )}
+          </>
         )}
       </div>
     </section>
