@@ -26,7 +26,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const [previewLoaded, setPreviewLoaded] = useState(false)
 
   useEffect(() => {
-    // Load preview from API
+    // Load preview from API - ensure CSS is always loaded
     if (project.id) {
       // Try API route first
       fetch(`/api/projects/${project.id}`)
@@ -36,9 +36,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         })
         .then(data => {
           if (data.html) {
-            console.log(`✅ Loaded preview for project ${project.id}`, { htmlLength: data.html.length, cssLength: (data.css || '').length })
+            // Ensure CSS is always present
+            const css = data.css || ''
+            console.log(`✅ Loaded preview for project ${project.id}`, { 
+              htmlLength: data.html.length, 
+              cssLength: css.length,
+              hasCss: css.length > 0
+            })
             setPreviewHtml(data.html)
-            setPreviewCss(data.css || '')
+            setPreviewCss(css) // Always set CSS, even if empty
             setPreviewLoaded(true)
           } else {
             console.warn(`No HTML content for project ${project.id}`)
@@ -53,14 +59,33 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           ]).then(([htmlRes, cssRes]) => {
             if (htmlRes && htmlRes.ok) {
               htmlRes.text().then(html => {
-                console.log(`✅ Loaded preview from static files for project ${project.id}`, { htmlLength: html.length })
-                setPreviewHtml(html)
+                // Always try to get CSS
+                let css = ''
                 if (cssRes && cssRes.ok) {
-                  cssRes.text().then(css => {
+                  cssRes.text().then(cssText => {
+                    css = cssText
+                    console.log(`✅ Loaded preview from static files for project ${project.id}`, { 
+                      htmlLength: html.length,
+                      cssLength: css.length,
+                      hasCss: css.length > 0
+                    })
+                    setPreviewHtml(html)
                     setPreviewCss(css)
+                    setPreviewLoaded(true)
+                  }).catch(() => {
+                    // CSS fetch failed, but continue with HTML
+                    console.warn(`CSS fetch failed for ${project.id}, continuing without CSS`)
+                    setPreviewHtml(html)
+                    setPreviewCss('')
+                    setPreviewLoaded(true)
                   })
+                } else {
+                  // No CSS response, but continue with HTML
+                  console.warn(`No CSS file for ${project.id}, continuing without CSS`)
+                  setPreviewHtml(html)
+                  setPreviewCss('')
+                  setPreviewLoaded(true)
                 }
-                setPreviewLoaded(true)
               })
             } else {
               console.warn(`Failed to load static files for ${project.id}`)
@@ -99,7 +124,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   const bodyMatch = htmlWithCss.match(/<body[^>]*>([\s\S]*?)<\/body>/i)
                   const bodyContent = bodyMatch ? bodyMatch[1] : htmlWithCss
                   
-                  // Create complete HTML with CSS
+                  // Create complete HTML with CSS - ALWAYS include CSS
+                  // Ensure CSS is always present, even if empty
+                  const cssContent = previewCss || '/* No CSS available */'
                   const fullHtml = `<!DOCTYPE html>
 <html>
 <head>
@@ -108,7 +135,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { overflow: hidden; }
-    ${previewCss || ''}
+    ${cssContent}
   </style>
 </head>
 <body>
@@ -126,10 +153,17 @@ ${bodyContent}
                   height: '285%',
                   minWidth: '100%',
                   minHeight: '100%',
+                  backgroundColor: 'transparent',
                 }}
                 title={`Preview of ${project.name}`}
                 sandbox="allow-same-origin"
                 loading="lazy"
+                onLoad={() => {
+                  console.log(`✅ Iframe loaded for project ${project.id}`)
+                }}
+                onError={(e) => {
+                  console.error(`❌ Iframe error for project ${project.id}:`, e)
+                }}
               />
             </div>
           ) : (

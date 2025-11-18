@@ -114,6 +114,7 @@ export default function ProjectPage() {
   }
 
   // Process HTML to inject CSS and fix external links
+  // ALWAYS ensure CSS is injected, even if empty
   let htmlWithCss = html
   
   // Remove external CSS link and inject CSS as inline style
@@ -122,16 +123,40 @@ export default function ProjectPage() {
     ''
   )
   
-  // Inject CSS into head
-  if (css) {
-    if (htmlWithCss.includes('</head>')) {
+  // ALWAYS inject CSS into head - ensure CSS is always present
+  const cssContent = css || '/* No CSS available */'
+  if (htmlWithCss.includes('</head>')) {
+    // If head exists, inject CSS before closing head tag
+    htmlWithCss = htmlWithCss.replace(
+      '</head>',
+      `<style>${cssContent}</style></head>`
+    )
+  } else if (htmlWithCss.includes('<head>')) {
+    // If head tag exists but no closing tag, add it
+    htmlWithCss = htmlWithCss.replace(
+      '<head>',
+      `<head><style>${cssContent}</style>`
+    )
+  } else {
+    // If no head tag, create one with CSS
+    if (htmlWithCss.includes('<!DOCTYPE html>') || htmlWithCss.includes('<html')) {
       htmlWithCss = htmlWithCss.replace(
-        '</head>',
-        `<style>${css}</style></head>`
+        /(<html[^>]*>)/i,
+        `$1<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><style>${cssContent}</style></head>`
       )
     } else {
-      // If no head tag, add it
-      htmlWithCss = `<head><style>${css}</style></head>${htmlWithCss}`
+      // No HTML structure, wrap everything
+      htmlWithCss = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>${cssContent}</style>
+</head>
+<body>
+${htmlWithCss}
+</body>
+</html>`
     }
   }
   

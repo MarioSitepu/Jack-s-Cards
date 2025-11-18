@@ -864,7 +864,7 @@ function ProjectCard({ project }) {
     const [previewLoaded, setPreviewLoaded] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "ProjectCard.useEffect": ()=>{
-            // Load preview from API
+            // Load preview from API - ensure CSS is always loaded
             if (project.id) {
                 // Try API route first
                 fetch(`/api/projects/${project.id}`).then({
@@ -875,12 +875,15 @@ function ProjectCard({ project }) {
                 }["ProjectCard.useEffect"]).then({
                     "ProjectCard.useEffect": (data)=>{
                         if (data.html) {
+                            // Ensure CSS is always present
+                            const css = data.css || '';
                             console.log(`✅ Loaded preview for project ${project.id}`, {
                                 htmlLength: data.html.length,
-                                cssLength: (data.css || '').length
+                                cssLength: css.length,
+                                hasCss: css.length > 0
                             });
                             setPreviewHtml(data.html);
-                            setPreviewCss(data.css || '');
+                            setPreviewCss(css); // Always set CSS, even if empty
                             setPreviewLoaded(true);
                         } else {
                             console.warn(`No HTML content for project ${project.id}`);
@@ -902,18 +905,37 @@ function ProjectCard({ project }) {
                                 if (htmlRes && htmlRes.ok) {
                                     htmlRes.text().then({
                                         "ProjectCard.useEffect": (html)=>{
-                                            console.log(`✅ Loaded preview from static files for project ${project.id}`, {
-                                                htmlLength: html.length
-                                            });
-                                            setPreviewHtml(html);
+                                            // Always try to get CSS
+                                            let css = '';
                                             if (cssRes && cssRes.ok) {
                                                 cssRes.text().then({
-                                                    "ProjectCard.useEffect": (css)=>{
+                                                    "ProjectCard.useEffect": (cssText)=>{
+                                                        css = cssText;
+                                                        console.log(`✅ Loaded preview from static files for project ${project.id}`, {
+                                                            htmlLength: html.length,
+                                                            cssLength: css.length,
+                                                            hasCss: css.length > 0
+                                                        });
+                                                        setPreviewHtml(html);
                                                         setPreviewCss(css);
+                                                        setPreviewLoaded(true);
+                                                    }
+                                                }["ProjectCard.useEffect"]).catch({
+                                                    "ProjectCard.useEffect": ()=>{
+                                                        // CSS fetch failed, but continue with HTML
+                                                        console.warn(`CSS fetch failed for ${project.id}, continuing without CSS`);
+                                                        setPreviewHtml(html);
+                                                        setPreviewCss('');
+                                                        setPreviewLoaded(true);
                                                     }
                                                 }["ProjectCard.useEffect"]);
+                                            } else {
+                                                // No CSS response, but continue with HTML
+                                                console.warn(`No CSS file for ${project.id}, continuing without CSS`);
+                                                setPreviewHtml(html);
+                                                setPreviewCss('');
+                                                setPreviewLoaded(true);
                                             }
-                                            setPreviewLoaded(true);
                                         }
                                     }["ProjectCard.useEffect"]);
                                 } else {
@@ -951,7 +973,9 @@ function ProjectCard({ project }) {
                                     // Extract body content
                                     const bodyMatch = htmlWithCss.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
                                     const bodyContent = bodyMatch ? bodyMatch[1] : htmlWithCss;
-                                    // Create complete HTML with CSS
+                                    // Create complete HTML with CSS - ALWAYS include CSS
+                                    // Ensure CSS is always present, even if empty
+                                    const cssContent = previewCss || '/* No CSS available */';
                                     const fullHtml = `<!DOCTYPE html>
 <html>
 <head>
@@ -960,7 +984,7 @@ function ProjectCard({ project }) {
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { overflow: hidden; }
-    ${previewCss || ''}
+    ${cssContent}
   </style>
 </head>
 <body>
@@ -976,19 +1000,26 @@ ${bodyContent}
                                     width: '285%',
                                     height: '285%',
                                     minWidth: '100%',
-                                    minHeight: '100%'
+                                    minHeight: '100%',
+                                    backgroundColor: 'transparent'
                                 },
                                 title: `Preview of ${project.name}`,
                                 sandbox: "allow-same-origin",
-                                loading: "lazy"
+                                loading: "lazy",
+                                onLoad: ()=>{
+                                    console.log(`✅ Iframe loaded for project ${project.id}`);
+                                },
+                                onError: (e)=>{
+                                    console.error(`❌ Iframe error for project ${project.id}:`, e);
+                                }
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                lineNumber: 87,
+                                lineNumber: 112,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                            lineNumber: 86,
+                            lineNumber: 111,
                             columnNumber: 13
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "w-full h-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center relative",
@@ -998,7 +1029,7 @@ ${bodyContent}
                                     children: "🎨"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                    lineNumber: 137,
+                                    lineNumber: 171,
                                     columnNumber: 15
                                 }, this),
                                 !previewLoaded && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1013,7 +1044,7 @@ ${bodyContent}
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                                lineNumber: 141,
+                                                lineNumber: 175,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1023,7 +1054,7 @@ ${bodyContent}
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                                lineNumber: 142,
+                                                lineNumber: 176,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1033,37 +1064,37 @@ ${bodyContent}
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                                lineNumber: 143,
+                                                lineNumber: 177,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                        lineNumber: 140,
+                                        lineNumber: 174,
                                         columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                    lineNumber: 139,
+                                    lineNumber: 173,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                            lineNumber: 136,
+                            lineNumber: 170,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent pointer-events-none z-10"
                         }, void 0, false, {
                             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                            lineNumber: 150,
+                            lineNumber: 184,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                    lineNumber: 84,
+                    lineNumber: 109,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1080,7 +1111,7 @@ ${bodyContent}
                                             children: project.category
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                            lineNumber: 162,
+                                            lineNumber: 196,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -1088,7 +1119,7 @@ ${bodyContent}
                                             children: title
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                            lineNumber: 165,
+                                            lineNumber: 199,
                                             columnNumber: 17
                                         }, this),
                                         project.displayDate && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1096,18 +1127,18 @@ ${bodyContent}
                                             children: project.displayDate
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                            lineNumber: 167,
+                                            lineNumber: 201,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                    lineNumber: 161,
+                                    lineNumber: 195,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                lineNumber: 160,
+                                lineNumber: 194,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1115,7 +1146,7 @@ ${bodyContent}
                                 children: description
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                lineNumber: 172,
+                                lineNumber: 206,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1125,12 +1156,12 @@ ${bodyContent}
                                         children: tag
                                     }, tag, false, {
                                         fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                        lineNumber: 182,
+                                        lineNumber: 216,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                lineNumber: 178,
+                                lineNumber: 212,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Belajar$2f$JacksPlayCards$2f$Project$2d$Showcase$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1138,29 +1169,29 @@ ${bodyContent}
                                 children: "View Project"
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                                lineNumber: 191,
+                                lineNumber: 225,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                        lineNumber: 159,
+                        lineNumber: 193,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-                    lineNumber: 154,
+                    lineNumber: 188,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-            lineNumber: 78,
+            lineNumber: 103,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/Documents/Belajar/JacksPlayCards/Project-Showcase/components/project-card.tsx",
-        lineNumber: 77,
+        lineNumber: 102,
         columnNumber: 5
     }, this);
 }
