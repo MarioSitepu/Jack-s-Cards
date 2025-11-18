@@ -9,13 +9,27 @@ export async function GET(
   try {
     const projectId = params.id
     // Check both public/projects and projects (root)
+    // Priority: public/projects first (for Vercel deployment)
     const publicProjectDir = path.join(process.cwd(), 'public', 'projects', projectId)
     const rootProjectDir = path.join(process.cwd(), 'projects', projectId)
-    const projectDir = fs.existsSync(rootProjectDir) ? rootProjectDir : publicProjectDir
-    const htmlPath = path.join(projectDir, 'index.html')
+    
+    // Try public first (for production/Vercel)
+    let projectDir = publicProjectDir
+    let htmlPath = path.join(projectDir, 'index.html')
+    
+    if (!fs.existsSync(htmlPath)) {
+      // Fallback to root projects (for local development)
+      projectDir = rootProjectDir
+      htmlPath = path.join(projectDir, 'index.html')
+    }
+    
     const cssPath = path.join(projectDir, 'style.css')
 
     if (!fs.existsSync(htmlPath)) {
+      console.error(`Project not found: ${projectId}`)
+      console.error(`Checked paths:`)
+      console.error(`  - ${publicProjectDir}`)
+      console.error(`  - ${rootProjectDir}`)
       return new NextResponse('Project not found', { status: 404 })
     }
 
