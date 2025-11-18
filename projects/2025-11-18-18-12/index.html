@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-bg-start: #0f2027; /* Dark Blue-Grey */
+            --primary-bg-middle: #203a43; /* Medium Blue-Grey */
+            --primary-bg-end: #2c5364;   /* Lighter Blue-Grey */
+            --accent-color: #00bcd4;     /* Cyan */
+            --accent-color-dark: #00796b; /* Darker Cyan */
+            --text-color: #e0e0e0;       /* Light Grey */
+            --heading-color: #ffffff;    /* White */
+            --card-bg: rgba(255, 255, 255, 0.08); /* Subtle transparent white */
+            --border-color: rgba(255, 255, 255, 0.15);
+            --button-bg: var(--accent-color);
+            --button-hover-bg: var(--accent-color-dark);
+            --font-family-primary: 'Montserrat', sans-serif;
+            --font-family-secondary: 'Roboto', sans-serif;
+            --spacing-unit: 1rem;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-secondary);
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(to right, var(--primary-bg-start), var(--primary-bg-middle), var(--primary-bg-end));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--font-family-primary);
+            color: var(--heading-color);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color-dark);
+        }
+
+        /* Layout & Structure */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 2);
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        header h1 a {
+            color: var(--heading-color);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        nav a {
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a:focus::after {
+            width: 100%;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: calc(var(--spacing-unit) * 3) 0;
+        }
+
+        .hero-section {
+            background: linear-gradient(45deg, var(--accent-color), var(--accent-color-dark));
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 6) 0;
+            color: var(--heading-color);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+            animation: moveGradient 15s linear infinite;
+        }
+
+        @keyframes moveGradient {
+            0% { transform: rotate(0deg) scale(1); opacity: 0.8; }
+            50% { transform: rotate(180deg) scale(1.1); opacity: 1; }
+            100% { transform: rotate(360deg) scale(1); opacity: 0.8; }
+        }
+
+        .hero-section * {
+            position: relative; /* Ensure content is above the pseudo-element */
+            z-index: 1;
+        }
+
+        .hero-section p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            max-width: 800px;
+            margin: 0 auto calc(var(--spacing-unit) * 2);
+        }
+
+        .content-section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .content-section:last-of-type {
+            border-bottom: none;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: calc(var(--spacing-unit) * 2);
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Cards & Grids */
+        .card-grid, .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .card, .team-member {
+            background-color: var(--card-bg);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .card:hover, .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h4, .team-member h4 {
+            color: var(--accent-color);
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            font-size: 1.3rem;
+        }
+
+        .team-member p {
+            font-style: italic;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        /* Buttons */
+        button {
+            display: inline-block;
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            background-color: var(--button-bg);
+            color: var(--heading-color);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Forms */
+        form {
+            max-width: 600px;
+            margin: calc(var(--spacing-unit) * 3) auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-unit);
+            background-color: var(--card-bg);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form textarea {
+            width: 100%;
+            padding: var(--spacing-unit);
+            border: 1px solid var(--border-color);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: var(--text-color);
+            border-radius: 5px;
+            font-family: var(--font-family-secondary);
+            font-size: 1rem;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        form input[type="text"]:focus,
+        form input[type="email"]:focus,
+        form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        form button[type="submit"] {
+            align-self: flex-start;
+        }
+
+        /* Utility classes */
+        .text-center {
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: calc(var(--spacing-unit) * 0.5);
+                margin-top: var(--spacing-unit);
+            }
+
+            nav a {
+                padding: calc(var(--spacing-unit) * 0.5) 0;
+            }
+
+            .hero-section {
+                padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 1.5);
+            }
+
+            .card-grid, .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: calc(var(--spacing-unit) * 2) 0;
+            }
+
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: clamp(1.8rem, 8vw, 2.5rem);
+            }
+            h2 {
+                font-size: clamp(1.6rem, 7vw, 2.2rem);
+            }
+            h3 {
+                font-size: clamp(1.3rem, 6vw, 1.8rem);
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            button {
+                font-size: 1rem;
+                padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.5);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="#">Project Alpha</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h2>Welcome to Project Alpha!</h2>
+                <p>A cutting-edge solution designed to revolutionize modern challenges with unparalleled efficiency and innovation.</p>
+                <p>Project Launch Date: <strong>2025-11-18</strong></p>
+                <button>Discover More</button>
+            </div>
+        </section>
+
+        <section id="overview" class="content-section">
+            <div class="container">
+                <h3 class="text-center">Project Overview</h3>
+                <p>Project Alpha stands at the forefront of technological advancement, offering a comprehensive platform built on robust architecture and user-centric design. Our mission is to empower businesses and individuals alike with tools that simplify complex processes and foster growth.</p>
+                <p>We believe in creating solutions that are not only powerful but also intuitive and accessible, ensuring a seamless experience for all users.</p>
+                <div class="card-grid">
+                    <div class="card">
+                        <h4>Innovation Driven</h4>
+                        <p>Continuously pushing boundaries with new ideas and cutting-edge research.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Optimized Efficiency</h4>
+                        <p>Streamline your workflows and maximize productivity with our intelligent systems.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Scalable Architecture</h4>
+                        <p>Built to grow with you, ensuring performance and reliability at any scale.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="content-section">
+            <div class="container">
+                <h3 class="text-center">Key Features</h3>
+                <ul>
+                    <li><strong>Advanced Analytics Dashboard:</strong> Gain deep insights with real-time data visualization and customizable reports.</li>
+                    <li><strong>Seamless Integration Capabilities:</strong> Connect effortlessly with your existing tools and services.</li>
+                    <li><strong>Robust Security Protocols:</strong> Your data is protected with industry-leading encryption and security measures.</li>
+                    <li><strong>Intuitive UI/UX Design:</strong> Enjoy a clean, easy-to-navigate interface designed for productivity.</li>
+                    <li><strong>Cross-Platform Compatibility:</strong> Access Project Alpha from any device, anywhere, anytime.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="team" class="content-section">
+            <div class="container">
+                <h3 class="text-center">Meet Our Visionary Team</h3>
+                <p class="text-center">Behind every great project is a passionate team. Meet the experts driving Project Alpha forward.</p>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <h4>Jane Doe</h4>
+                        <p>Lead Software Engineer</p>
+                    </div>
+                    <div class="team-member">
+                        <h4>John Smith</h4>
+                        <p>Product Manager</p>
+                    </div>
+                    <div class="team-member">
+                        <h4>Emily White</h4>
+                        <p>UI/UX Designer</p>
+                    </div>
+                    <div class="team-member">
+                        <h4>David Green</h4>
+                        <p>DevOps Specialist</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <div class="container">
+                <h3 class="text-center">Get in Touch</h3>
+                <p class="text-center">Have questions, feedback, or want to collaborate? We'd love to hear from you!</p>
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="6" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project Alpha. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
