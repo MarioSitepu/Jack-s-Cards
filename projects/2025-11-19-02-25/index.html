@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #1a2a6c; /* Deep Blue */
+            --secondary-bg: #b21f1f; /* Deep Red */
+            --tertiary-bg: #fdbb2d; /* Golden Yellow */
+            --text-light: #e0e7e9;
+            --text-dark: #333;
+            --accent-color: #00bcd4; /* Cyan */
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-radius: 12px;
+            --gradient-main: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 50%, var(--tertiary-bg) 100%);
+            --gradient-card: linear-gradient(45deg, rgba(26, 42, 108, 0.8) 0%, rgba(178, 31, 31, 0.8) 100%);
+            --shadow-light: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--gradient-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--accent-color);
+        }
+
+        main {
+            flex: 1;
+            padding: 40px 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            margin-bottom: 60px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--text-light);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-dark);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 188, 212, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 188, 212, 0.6);
+            background: #00acc1; /* Slightly darker cyan */
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-light);
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-card);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: auto;
+            box-shadow: var(--shadow-light);
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                text-align: center;
+            }
+            nav a {
+                display: block;
+                padding: 10px 0;
+            }
+            .hero {
+                padding: 60px 20px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            .card {
+                padding: 25px;
+            }
+            .card h3 {
+                font-size: 1.5rem;
+            }
+            footer {
+                padding: 20px 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">FutureTech Solutions</a>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Welcome to Our Modern Project Showcase</h1>
+                <p>Discover innovative solutions and cutting-edge technologies. This project is proudly presented on <strong>2025-11-19</strong>, marking a new era of digital excellence.</p>
+                <a href="#features" class="cta-button">Explore Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features" class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="grid-layout">
+                <div class="card">
+                    <h3>Responsive Design</h3>
+                    <p>Our platform adapts seamlessly to any device, ensuring an optimal user experience across desktops, tablets, and smartphones.</p>
+                </div>
+                <div class="card">
+                    <h3>Scalable Architecture</h3>
+                    <p>Built on a robust and scalable foundation, our solutions are designed to grow with your needs, handling increasing demands effortlessly.</p>
+                </div>
+                <div class="card">
+                    <h3>Intuitive Interface</h3>
+                    <p>Experience a user-friendly interface crafted for simplicity and efficiency, making complex tasks feel straightforward.</p>
+                </div>
+                <div class="card">
+                    <h3>Advanced Security</h3>
+                    <p>Your data's safety is our top priority, implemented with state-of-the-art encryption and security protocols.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="grid-layout">
+                <div class="card">
+                    <h3>Web Development</h3>
+                    <p>Crafting dynamic and engaging websites tailored to your specific business objectives and aesthetic preferences.</p>
+                </div>
+                <div class="card">
+                    <h3>Cloud Solutions</h3>
+                    <p>Leveraging the power of cloud computing for flexible, secure, and highly available infrastructure and applications.</p>
+                </div>
+                <div class="card">
+                    <h3>AI & Machine Learning</h3>
+                    <p>Integrating intelligent algorithms to automate processes, gain insights, and enhance decision-making.</p>
+                </div>
+                <div class="card">
+                    <h3>UI/UX Design</h3>
+                    <p>Designing captivating user interfaces and seamless user experiences that delight your audience.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="card" style="max-width: 600px; margin: 0 auto 60px auto;">
+                <p>Have a project in mind or want to learn more about our services? We'd love to hear from you. Reach out today!</p>
+                <p style="margin-top: 20px;">Email: <a href="mailto:info@futuretech.com" style="color: var(--accent-color); text-decoration: none;">info@futuretech.com</a></p>
+                <p>Phone: +1 (555) 123-4567</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureTech Solutions. All rights reserved. Project Date: 2025-11-19.</p>
+        </div>
+    </footer>
+</body>
+</html>
