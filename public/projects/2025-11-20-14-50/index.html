@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6e8efb, #a777e3);
+            --secondary-gradient: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            --dark-blue: #2c3e50;
+            --light-grey: #ecf0f1;
+            --text-color-dark: #34495e;
+            --text-color-light: #fdfdfd;
+            --accent-color: #00c6ff;
+            --accent-hover: #00aaff;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-strong: rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --spacing-xl: 96px;
+        }
+
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background: var(--secondary-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--dark-blue);
+        }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2.2rem); }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Header */
+        .header {
+            background: var(--dark-blue);
+            color: var(--light-grey);
+            padding: var(--spacing-sm) 0;
+            box-shadow: 0 4px 10px var(--shadow-strong);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light-grey);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: '🚀';
+            margin-right: var(--spacing-xs);
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .nav a {
+            color: var(--light-grey);
+            font-weight: 600;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotateBackground 20s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            color: var(--text-color-light);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-bottom: var(--spacing-lg);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-color-light);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px var(--shadow-strong);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px var(--shadow-strong);
+        }
+
+        /* Section Styling */
+        section {
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        section h2 {
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 20px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px var(--shadow-strong);
+        }
+
+        .feature-card .icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .feature-card h3 {
+            color: var(--dark-blue);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .feature-card p {
+            color: var(--text-color-dark);
+            flex-grow: 1;
+        }
+
+        /* About Section */
+        .about .container {
+            max-width: 900px;
+        }
+
+        .about p {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-md);
+            text-align: left;
+            color: var(--text-color-dark);
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            color: var(--text-color-light);
+            margin-bottom: var(--spacing-lg);
+        }
+        .cta h2::after {
+            background: var(--text-color-light);
+        }
+
+        .cta p {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            margin-bottom: var(--spacing-lg);
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta .btn {
+            background: var(--light-grey);
+            color: var(--dark-blue);
+        }
+
+        .cta .btn:hover {
+            background: #e0e5ea;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-blue);
+            color: var(--light-grey);
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            margin-top: auto; /* Pushes footer to the bottom */
+            box-shadow: 0 -4px 10px var(--shadow-strong);
+        }
+
+        .footer p {
+            margin-bottom: var(--spacing-xs);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            margin-top: var(--spacing-sm);
+        }
+
+        .social-links a {
+            color: var(--light-grey);
+            font-size: 1.5rem;
+            margin: 0 var(--spacing-xs);
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .nav ul {
+                flex-direction: column;
+                gap: var(--spacing-xs);
+                text-align: center;
+            }
+
+            .nav a {
+                padding: var(--spacing-xs);
+                display: block;
+            }
+
+            .hero {
+                padding: var(--spacing-lg) 0;
+                min-height: 60vh;
+            }
+
+            section {
+                padding: var(--spacing-lg) 0;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer {
+                padding: var(--spacing-md) var(--spacing-sm);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                padding: var(--spacing-xs) var(--spacing-md);
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .hero p {
+                font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">Project Nova</a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Unleash Your Project's Potential</h1>
+                <p>Discover innovative solutions designed for the future. Our platform is ready to transform your ideas into reality. This project was finalized on <strong style="color: var(--accent-color);">2025-11-20</strong>.</p>
+                <a href="#features" class="btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="icon">💡</span>
+                        <h3>Intuitive Design</h3>
+                        <p>Experience a seamless and user-friendly interface crafted for optimal productivity and engagement.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">⚡</span>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed, our platform ensures a smooth and responsive experience for all users.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🔒</span>
+                        <h3>Robust Security</h3>
+                        <p>Your data is protected with state-of-the-art encryption and security protocols, ensuring peace of mind.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🌐</span>
+                        <h3>Scalable Architecture</h3>
+                        <p>Built to grow with you, our flexible architecture can handle increasing demands effortlessly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">✨</span>
+                        <h3>Modern Toolkit</h3>
+                        <p>Leveraging the latest technologies to deliver powerful and cutting-edge functionalities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🤝</span>
+                        <h3>Dedicated Support</h3>
+                        <p>Our team is always ready to assist you, providing timely and effective solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About Project Nova</h2>
+                <p>Project Nova is a testament to modern web development and design principles. Conceived with the vision of creating a truly impactful digital experience, it combines aesthetic appeal with powerful functionality. Our journey began with a simple idea: to build a platform that is not only beautiful but also incredibly efficient and easy to use.</p>
+                <p>From the ground up, we focused on user-centric design, ensuring every element serves a purpose and enhances the overall experience. We embraced responsive design to guarantee accessibility across all devices, from desktops to smartphones. The choice of a vibrant, gradient-based color scheme reflects our commitment to a dynamic and forward-thinking approach.</p>
+                <p>This project represents countless hours of dedication, innovation, and collaboration. We believe in continuous improvement and are excited about the future enhancements planned for Project Nova. Join us in shaping the next generation of digital solutions.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Start Your Journey?</h2>
+                <p>Don't just imagine the future, build it with us. Reach out today to learn how Project Nova can benefit you.</p>
+                <a href="mailto:info@projectnova.com" class="btn">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Project Nova. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+    <!-- Font Awesome for social icons. Using a CDN for simplicity. -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
