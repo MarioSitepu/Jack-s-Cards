@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureVision - Modern Project Showcase</title>
+    <style>
+        /* Modern Reset & Base Styles */
+        :root {
+            --color-dark-bg: #1a1a2e;
+            --color-dark-secondary-bg: #16213e;
+            --color-card-bg: #252a41;
+            --color-text-primary: #e0e0e0;
+            --color-text-secondary: #a0a0a0;
+            --gradient-primary: linear-gradient(to right, #a770ef, #cf8bf3, #fdb99b); /* Purple, Pink, Orange */
+            --gradient-secondary: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Purple to Blue */
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --spacing-xl: 96px;
+            --spacing-lg: 64px;
+            --spacing-md: 32px;
+            --spacing-sm: 16px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background-color: var(--color-dark-bg);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        a {
+            color: var(--color-text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #fdb99b; /* Light orange from gradient */
+        }
+
+        /* Header */
+        header {
+            background-color: var(--color-dark-secondary-bg);
+            padding: var(--spacing-sm) 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support text-fill-color */
+            padding: 5px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        nav a {
+            font-weight: 500;
+            font-size: 1.05rem;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-secondary);
+            color: white;
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh;
+        }
+
+        .hero-section h2 {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto var(--spacing-md);
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 14px 30px;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            color: white; /* Ensure text color remains white on hover */
+        }
+
+        /* Main Content Sections */
+        section {
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+
+        section h3 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+            font-weight: 700;
+        }
+
+        section p {
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        .highlight-date {
+            font-weight: bold;
+            color: #fdb99b; /* Orange accent */
+            padding: 2px 6px;
+            background-color: rgba(253, 185, 155, 0.1);
+            border-radius: 4px;
+        }
+
+        /* Feature Grid */
+        .feature-grid, .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .feature-item, .portfolio-item {
+            background-color: var(--color-card-bg);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover, .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+            display: block;
+        }
+
+        .feature-item h4, .portfolio-item h4 {
+            font-size: 1.6rem;
+            margin-bottom: var(--spacing-sm);
+            color: white;
+        }
+
+        .feature-item p, .portfolio-item p {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 0; /* Override default paragraph margin */
+        }
+
+        /* Portfolio Grid */
+        .portfolio-item img {
+            max-width: 100%;
+            border-radius: var(--border-radius-md);
+            margin-bottom: var(--spacing-sm);
+            object-fit: cover;
+            height: 200px;
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark-secondary-bg);
+            color: var(--color-text-secondary);
+            text-align: center;
+            padding: var(--spacing-md) 0;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer p:first-of-type {
+            margin-bottom: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: var(--spacing-sm);
+            }
+
+            .hero-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            section h3 {
+                font-size: 2rem;
+            }
+
+            .feature-grid, .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+
+            section h3 {
+                font-size: 1.8rem;
+            }
+
+            section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FutureVision Projects</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#features">Key Features</a></li>
+                    <li><a href="#portfolio">Our Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h2>Innovating Tomorrow, Today.</h2>
+                <p>Welcome to our showcase of cutting-edge solutions designed to shape the future. Experience the next generation of technology and design.</p>
+                <a href="#portfolio" class="btn">Explore Projects</a>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h3>Our Vision</h3>
+                <p>At FutureVision, we are a collective of dreamers and doers, dedicated to pushing the boundaries of what's possible. We believe in creating impactful solutions that resonate with the modern world and anticipate tomorrow's needs.</p>
+                <p>This page reflects our ongoing commitment to excellence and innovation, meticulously updated as of <span class="highlight-date">2025-11-21</span> to bring you the latest.</p>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h3>Key Features</h3>
+                <p>Our projects are built on a foundation of robust principles, ensuring quality, scalability, and user satisfaction.</p>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <span class="icon">🚀</span>
+                        <h4>Scalable Architecture</h4>
+                        <p>Designed for growth and resilience, our solutions adapt to evolving demands.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">✨</span>
+                        <h4>Intuitive Design</h4>
+                        <p>Seamless user experiences crafted with precision and a deep understanding of human interaction.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">💡</span>
+                        <h4>Innovative Solutions</h4>
+                        <p>Leveraging cutting-edge technologies to solve complex challenges with creative approaches.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">🔒</span>
+                        <h4>Robust Security</h4>
+                        <p>Prioritizing data integrity and user privacy with industry-leading security protocols.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio-section">
+            <div class="container">
+                <h3>Our Portfolio</h3>
+                <p>Discover a selection of our pioneering projects that are making a difference across various sectors.</p>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x250/a770ef/ffffff?text=Project+Nebula" alt="Project Nebula">
+                        <h4>Project Nebula</h4>
+                        <p>An AI-driven data analytics platform revolutionizing business intelligence.</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x250/cf8bf3/ffffff?text=Project+Aurora" alt="Project Aurora">
+                        <h4>Project Aurora</h4>
+                        <p>Next-generation augmented reality application for immersive learning experiences.</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x250/fdb99b/ffffff?text=Project+Zenith" alt="Project Zenith">
+                        <h4>Project Zenith</h4>
+                        <p>Sustainable urban planning software integrating smart city technologies.</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x250/6a11cb/ffffff?text=Project+Vortex" alt="Project Vortex">
+                        <h4>Project Vortex</h4>
+                        <p>Decentralized finance (DeFi) solution enhancing secure digital transactions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h3>Get in Touch</h3>
+                <p>Have a project in mind or want to learn more about our work? We'd love to hear from you.</p>
+                <a href="mailto:info@futurevision.com" class="btn">Contact Us Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureVision. All rights reserved.</p>
+            <p>Page last updated: 2025-11-21</p>
+        </div>
+    </footer>
+</body>
+</html>
