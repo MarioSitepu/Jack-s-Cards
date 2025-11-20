@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles & Reset */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #fc6767 0%, #ec008c 100%);
+            --text-color: #333;
+            --light-text-color: #f8f9fa;
+            --background-light: #ffffff;
+            --background-dark: #2c3e50;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: #f4f7f6; /* A very light grey background */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--light-text-color);
+            padding: var(--spacing-unit) 0;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--light-text-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--light-text-color);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section:nth-child(even) {
+            background-color: #eef1f0; /* Slightly darker light grey for alternating sections */
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 2px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--light-text-color);
+            padding: 6rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.1) 0%, transparent 50%);
+            transform: rotate(20deg);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero h2 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            color: var(--light-text-color);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-gradient);
+            color: var(--light-text-color);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Features Section */
+        .features .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--background-light);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 6px 20px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-gradient);
+            transition: height 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-card:hover::before {
+            height: 100%;
+            opacity: 0.1;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #444;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* About Section */
+        .about .container {
+            max-width: 800px;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .about .date-highlight {
+            font-weight: 700;
+            color: #2575fc;
+            background-color: rgba(37, 117, 252, 0.1);
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: var(--secondary-gradient);
+            color: var(--light-text-color);
+            padding: 5rem 0;
+        }
+
+        .cta h2 {
+            color: var(--light-text-color);
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta h2::after {
+            background: var(--light-text-color); /* White underline for CTA */
+        }
+
+        .cta .btn {
+            background: var(--primary-gradient);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--background-dark);
+            color: var(--light-text-color);
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        footer .social-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        footer .social-links a {
+            color: var(--light-text-color);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: #2575fc; /* Primary blue for hover */
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 3.5rem;
+            }
+            .hero p {
+                font-size: 1.3rem;
+            }
+            h2 {
+                font-size: 2.5rem;
+            }
+            nav ul {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            header h1 {
+                margin-bottom: 1rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+                width: 100%;
+            }
+            nav li {
+                width: 100%;
+            }
+            nav a {
+                padding: 0.5rem 0;
+                display: block;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            nav a::after {
+                height: 2px;
+                bottom: -1px;
+            }
+            nav li:last-child a {
+                border-bottom: none;
+            }
+
+            .hero {
+                min-height: 60vh;
+                padding: 4rem 0;
+            }
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+            section {
+                padding: 3rem 0;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .feature-card {
+                padding: 2rem;
+            }
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .feature-card {
+                padding: 1.5rem;
+            }
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            .about p {
+                font-size: 1rem;
+            }
+            .cta h2 {
+                font-size: 2rem;
+            }
+            footer {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FutureSphere</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>Innovate. Create. Elevate.</h2>
+                <p>Empowering your vision with cutting-edge solutions and seamless experiences. Discover the future of digital excellence.</p>
+                <a href="#features" class="btn">Explore Our Solutions</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Core Features</h2>
+                <div class="grid-container">
+                    <article class="feature-card">
+                        <h3>Intuitive Design</h3>
+                        <p>Experience user interfaces crafted for simplicity and efficiency, ensuring a delightful interaction every time.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Robust Performance</h3>
+                        <p>Our solutions are engineered for speed and reliability, delivering top-tier performance under any load.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Scalable Architecture</h3>
+                        <p>Designed to grow with your needs, our flexible architecture adapts effortlessly to future demands and expansions.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Secure by Design</h3>
+                        <p>We prioritize your data's safety with advanced security protocols and continuous monitoring, built into every layer.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Seamless Integration</h3>
+                        <p>Easily connect with your existing tools and services, creating a unified ecosystem that works for you.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Dedicated Support</h3>
+                        <p>Our expert team is always ready to assist, providing timely and effective support whenever you need it.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About FutureSphere</h2>
+                <p>FutureSphere is at the forefront of digital innovation, committed to developing solutions that not only meet today's challenges but also anticipate tomorrow's needs. We believe in harnessing the power of technology to create meaningful impact and drive progress.</p>
+                <p>Our team comprises passionate experts dedicated to crafting exceptional products and experiences. From concept to deployment, we focus on precision, quality, and user satisfaction, ensuring every project reflects our commitment to excellence.</p>
+                <p>This project was conceptualized and brought to life with a vision for the future, culminating in its official launch on <span class="date-highlight">2025-11-20</span>. We're excited for what's next!</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Join FutureSphere and embark on a journey of innovation. Let's build something extraordinary together.</p>
+                <a href="mailto:info@futuresphere.com" class="btn">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureSphere. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.271 0-4.192 1.58-4.192 4.615v3.385z"/></svg></a>
+                <a href="#" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.791-1.574 2.161-2.723-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.594 0-6.495 2.902-6.495 6.495 0 .509.058 1.007.172 1.488-5.39-2.705-10.19-5.707-13.4-10.223-.574.98-.906 2.108-.906 3.323 0 2.276 1.157 4.286 2.915 5.467-.852-.029-1.656-.263-2.362-.638v.079c0 3.155 2.247 5.787 5.224 6.39-.54.145-1.11.225-1.701.225-.417 0-.82-.041-1.215-.116.823 2.572 3.22 4.441 6.04 4.441 0-.001 0-.001 0-.002 0 0 0 0 0 0-2.228 1.75-5.044 2.805-8.077 2.805-.521 0-1.033-.03-1.536-.092 2.868 1.837 6.299 2.905 9.993 2.905 11.996 0 18.514-9.916 18.514-18.519 0-.281-.008-.562-.023-.842.995-.719 1.868-1.619 2.558-2.656z"/></svg></a>
+                <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.381 1.11-2.5 2.48-2.5s2.48 1.119 2.48 2.5zm.02 6.5l-.012 10h-4.965l.012-10h4.965zm7.999 0h-4.965v10h4.965v-3.611c0-3.376 4.965-3.664 4.965 0v3.611h4.965v-7.143c0-3.153-2.028-5.857-5.004-5.857-2.384 0-3.558 1.411-4.044 2.193h-.06v-1.857h-4.965z"/></svg></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
