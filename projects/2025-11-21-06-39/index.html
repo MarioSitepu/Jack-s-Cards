@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <style>
+        /* Basic Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f7fa; /* Light background for general sections */
+            scroll-behavior: smooth;
+        }
+
+        /* Header & Hero Section */
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Purple to Blue */
+            color: #fff;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full viewport height */
+        }
+
+        header::before { /* Subtle overlay for visual depth */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #a1c4fd; /* Lighter blue on hover */
+        }
+
+        .hero {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%); /* Vibrant light blue */
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 242, 254, 0.4);
+        }
+
+        /* Main Content Sections */
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .dark-section {
+            background: #2c3e50; /* Darker blue/grey */
+            color: #e0e0e0;
+        }
+
+        .dark-section h2 {
+            color: #fff;
+        }
+
+        .dark-section h2::after {
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Primary gradient for dark section */
+        }
+
+        .dark-section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            line-height: 1.8;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #6a11cb;
+        }
+
+        .feature-item p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 50px auto 0;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #2575fc;
+            box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2);
+            outline: none;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form .btn {
+            width: fit-content;
+            align-self: center;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a2e; /* Dark navy */
+            color: #b0b0b0;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 20px;
+                position: static; /* Remove absolute positioning on small screens */
+                background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Apply gradient to nav as well */
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero {
+                padding-top: 50px; /* Adjust for nav not being absolute anymore */
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 60px 15px;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+                margin-bottom: 30px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr; /* Stack features on small screens */
+            }
+
+            .feature-item {
+                padding: 30px;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">FutureForge</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <h1>Innovative Solutions for Tomorrow</h1>
+            <p>Empowering your future, today. Launching on 2025-11-21.</p>
+            <a href="#features" class="btn">Explore More</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="features" class="section">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>Seamless Integration</h3>
+                    <p>Effortlessly connect with your existing systems and workflows.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Intuitive Design</h3>
+                    <p>User-friendly interface crafted for an unparalleled experience.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Robust Performance</h3>
+                    <p>Built for exceptional speed, reliability, and scalability, always.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section dark-section">
+            <h2>About Our Vision</h2>
+            <p>We believe in creating impactful technology that drives progress and transforms industries. Our dedicated team is committed to pushing boundaries and delivering excellence in every solution we craft.</p>
+            <p>This project marks a significant milestone in our journey, set to revolutionize the market upon its launch on <strong>2025-11-21</strong>. Our commitment to innovation ensures we remain at the forefront of technological advancements.</p>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Get in Touch</h2>
+            <p>Have questions or want to learn more about our upcoming project?</p>
+            <p>Reach out to us and we'll be happy to assist you!</p>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FutureForge. All rights reserved.</p>
+        <p>Project Launch Date: <time datetime="2025-11-21">November 21, 2025</time></p>
+    </footer>
+</body>
+</html>
