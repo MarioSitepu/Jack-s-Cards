@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-gradient-1: linear-gradient(45deg, #00c6ff, #0072ff); /* Blue-Cyan */
+            --accent-gradient-2: linear-gradient(45deg, #ff6b6b, #f06595); /* Pink-Red */
+            --text-light: #e0e0e0;
+            --text-dark: #333;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.15);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --heading-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background-color: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--secondary-bg);
+            padding: 20px 0;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background-image: var(--accent-gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.05rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent-gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: #ffffff;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--secondary-bg) 0%, #0f3460 100%);
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(0, 198, 255, 0.1) 0%, transparent 70%);
+            animation: rotateBg 20s linear infinite;
+        }
+
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background-image: var(--accent-gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+            background-image: var(--accent-gradient-1);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+            transform: skewX(-20deg);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            background-image: var(--accent-gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            background-image: var(--accent-gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--heading-color);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--heading-color);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px var(--shadow-color);
+            border: 2px solid var(--border-color);
+        }
+
+        footer {
+            background-color: var(--secondary-bg);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px var(--shadow-color);
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 0 15px 10px;
+            }
+            .hero-section {
+                height: 60vh;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-card {
+                padding: 30px;
+            }
+            .about-content {
+                flex-direction: column;
+            }
+            .about-text h3 {
+                font-size: 2rem;
+            }
+            .about-text p {
+                font-size: 1rem;
+            }
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            nav ul li {
+                margin: 0 10px 10px;
+            }
+            .hero-section {
+                height: 50vh;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+            .feature-card i {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 40px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project 2025</a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h1>The Future is Now</h1>
+                <p>Unveiling cutting-edge solutions for a smarter tomorrow. Experience innovation designed for 2025 and beyond.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI Integration</h3>
+                        <p>Seamlessly integrated artificial intelligence to automate tasks and enhance user experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Advanced Security</h3>
+                        <p>State-of-the-art encryption and robust security protocols to protect your data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cloud"></i>
+                        <h3>Cloud Native</h3>
+                        <p>Built for the cloud, offering unparalleled scalability, reliability, and global access.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Cross-Platform</h3>
+                        <p>Optimized for all devices, delivering a consistent and fluid experience everywhere.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Innovation for a Brighter Future</h3>
+                        <p>Our project aims to redefine industry standards by leveraging the latest technological advancements. We believe in creating products that are not only powerful but also intuitive and accessible to everyone.</p>
+                        <p>This initiative began with a clear vision to address future challenges and opportunities, culminating in this release scheduled for <strong style="background-image: var(--accent-gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent;">2025-11-22</strong>.</p>
+                        <p>Join us on this journey to shape the digital landscape of tomorrow.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/0f3460/e0e0e0?text=Future+Tech" alt="Future Technology">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p style="text-align: center; font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9;">
+                    Have questions or want to learn more? Reach out to us!
+                </p>
+                <div style="text-align: center;">
+                    <a href="mailto:info@project2025.com" class="btn" style="background-image: var(--accent-gradient-2); box-shadow: 0 5px 15px rgba(240, 101, 149, 0.4);">Email Us</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project Showcase. All rights reserved. | Project Date: 2025-11-22</p>
+        </div>
+    </footer>
+</body>
+</html>
