@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nexus 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary-dark: #1a2a6c;
+            --color-primary-light: #b21f1f;
+            --color-secondary-dark: #3a2a6b;
+            --color-secondary-light: #e0eafc;
+            --color-accent: #ffb347; /* Tangerine */
+            --color-text-light: #e0e0e0;
+            --color-text-dark: #333;
+            --color-bg-light: #f4f7f6;
+            --color-bg-dark: #121212;
+            --gradient-primary: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-secondary-dark) 100%);
+            --gradient-hero: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            --gradient-button: linear-gradient(45deg, #f7b733 0%, #fc4a1a 100%);
+            --gradient-card: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%);
+            --gradient-footer: linear-gradient(90deg, #1a2a6c 0%, #b21f1f 100%);
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 3rem;
+            --spacing-xl: 5rem;
+            --border-radius: 8px;
+            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-dark: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            background-color: var(--color-bg-light);
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-primary-dark);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-primary-dark);
+            font-weight: 700;
+        }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2.2rem); }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-primary);
+            color: var(--color-text-light);
+            padding: var(--spacing-md) 0;
+            box-shadow: var(--box-shadow-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+            text-decoration: none;
+            flex-shrink: 0;
+            margin-right: var(--spacing-md);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-lg);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--color-text-light);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: var(--spacing-xs) 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-hero);
+            color: var(--color-text-light);
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 10%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero h1 {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-sm);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            max-width: 800px;
+            margin-bottom: var(--spacing-lg);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--gradient-button);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--box-shadow-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Sections General */
+        section {
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--color-bg-light);
+        }
+        
+        section:nth-of-type(odd) {
+            background-color: white;
+        }
+
+        section h2 {
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            display: inline-block;
+            padding-bottom: var(--spacing-sm);
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-button);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .feature-card {
+            background: var(--gradient-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-light);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h3 {
+            color: var(--color-primary-dark);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.8rem;
+        }
+
+        .feature-card p {
+            color: var(--color-text-dark);
+            flex-grow: 1;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .about-content strong {
+            color: var(--color-primary-dark);
+        }
+
+        /* Call to Action */
+        .call-to-action {
+            background: var(--gradient-primary);
+            color: var(--color-text-light);
+            padding: var(--spacing-xl) 0;
+        }
+
+        .call-to-action h2 {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .call-to-action h2::after {
+            background: var(--color-accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gradient-footer);
+            color: var(--color-text-light);
+            text-align: center;
+            padding: var(--spacing-md) 0;
+            font-size: 0.9rem;
+            box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header .logo {
+                margin-bottom: var(--spacing-md);
+                margin-right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                width: 100%;
+            }
+
+            nav a {
+                padding: var(--spacing-xs) 0;
+                display: block;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            nav a::after {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+            }
+
+            nav a:hover::after,
+            nav a.active::after {
+                width: 50%;
+            }
+
+            .hero {
+                padding: var(--spacing-lg) var(--spacing-md);
+                min-height: 50vh;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .hero p {
+                font-size: clamp(0.9rem, 3vw, 1.1rem);
+            }
+
+            .btn {
+                padding: var(--spacing-sm) var(--spacing-lg);
+                font-size: 1rem;
+            }
+
+            section {
+                padding: var(--spacing-lg) 0;
+            }
+            
+            .features .grid-container {
+                gap: var(--spacing-md);
+            }
+            
+            .feature-card {
+                padding: var(--spacing-md);
+            }
+
+            .about-content {
+                padding: 0 var(--spacing-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.4rem; }
+
+            .hero {
+                padding: var(--spacing-md) var(--spacing-sm);
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+            
+            footer {
+                padding: var(--spacing-sm) 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Nexus</a>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Unlock the Future with Project Nexus</h1>
+                <p>Revolutionizing digital experiences with cutting-edge technology and seamless integration. Discover what's next.</p>
+                <a href="#features" class="btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Core Capabilities</h2>
+                <div class="grid-container">
+                    <article class="feature-card">
+                        <h3>Advanced AI Integration</h3>
+                        <p>Leverage intelligent algorithms to automate tasks, personalize user experiences, and gain deeper insights.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Scalable Cloud Solutions</h3>
+                        <p>Build and deploy applications with unparalleled flexibility and performance on a robust cloud infrastructure.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Intuitive User Interfaces</h3>
+                        <p>Experience beautifully designed and easy-to-use interfaces that prioritize user satisfaction and productivity.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Robust Security Protocols</h3>
+                        <p>Protect your data with multi-layered security measures and continuous threat monitoring, ensuring peace of mind.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Real-time Analytics</h3>
+                        <p>Monitor performance and user engagement with real-time data, enabling swift, informed decision-making.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Seamless Cross-Platform Access</h3>
+                        <p>Access your projects and data from any device, anywhere, with a consistent and optimized experience.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>Our Vision</h2>
+                <div class="about-content">
+                    <p>At Project Nexus, we believe in shaping a future where technology empowers every individual and organization to achieve their full potential. Our mission is to build innovative solutions that are not only powerful and efficient but also intuitive and accessible.</p>
+                    <p>We are a dedicated team of visionaries, engineers, and designers committed to pushing the boundaries of what's possible. Our focus is on creating tools that streamline complex processes, foster creativity, and connect communities across the globe. This project, conceived and developed with meticulous attention to detail, is set to redefine industry standards.</p>
+                    <p>Expect more updates and groundbreaking announcements around <strong>November 21, 2025</strong>, as we prepare for our official launch. Join us on this exciting journey!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="call-to-action">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p>Connect with us to learn how Project Nexus can elevate your business to new heights.</p>
+                <a href="#" class="btn">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project Nexus. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
