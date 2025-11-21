@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureVision Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --color-primary-dark: #2c3e50;
+            --color-primary-light: #ecf0f1;
+            --color-accent-1: #3498db;
+            --color-accent-2: #2ecc71;
+            --color-text-dark: #34495e;
+            --color-text-light: #fefefe;
+            --gradient-main: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --gradient-secondary: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            --gradient-button: linear-gradient(90deg, #1abc9c 0%, #2ecc71 100%);
+            --gradient-card: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            --font-family-primary: 'Poppins', sans-serif;
+            --spacing-unit: 1rem;
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-heavy: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-primary);
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            background-color: var(--color-primary-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        a {
+            color: var(--color-accent-1);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        a:hover {
+            color: #1a7bb9;
+            transform: translateY(-2px);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            color: var(--color-text-dark);
+        }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-main);
+            color: var(--color-text-light);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--box-shadow-heavy);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 700;
+            color: var(--color-text-light);
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        nav a {
+            color: var(--color-text-light);
+            font-weight: 600;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-md);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-secondary);
+            color: var(--color-text-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotateBackground 20s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero h2 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: var(--spacing-unit);
+            color: var(--color-text-light);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            max-width: 700px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-button);
+            color: var(--color-text-light);
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-lg);
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: var(--box-shadow-heavy);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            transform: skewX(-20deg);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex: 1; /* Allows main content to grow and push footer down */
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--color-primary-light);
+        }
+
+        section:nth-of-type(odd) {
+            background-color: #f0f4f7;
+        }
+
+        section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-button);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 3);
+            text-align: left;
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .about-text, .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            line-height: 1.7;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-heavy);
+            transition: transform 0.4s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.03);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .feature-item {
+            background: var(--gradient-card);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--box-shadow-heavy);
+        }
+
+        .feature-item .icon {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: var(--spacing-unit);
+            background: var(--gradient-button);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .feature-item h3 {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: var(--spacing-unit);
+            color: var(--color-primary-dark);
+        }
+
+        .feature-item p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            color: var(--color-text-dark);
+            flex-grow: 1;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: var(--gradient-main);
+            color: var(--color-text-light);
+            padding: calc(var(--spacing-unit) * 5) calc(var(--spacing-unit) * 2);
+            text-align: center;
+        }
+
+        .cta h2 {
+            color: var(--color-text-light);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .cta p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin-bottom: calc(var(--spacing-unit) * 2.5);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-primary-dark);
+            color: var(--color-text-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2);
+            margin-top: auto; /* Pushes footer to the bottom */
+            font-size: 0.9rem;
+            box-shadow: inset 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        footer .social-links a {
+            color: var(--color-text-light);
+            margin: 0 0.8rem;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--color-accent-2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: var(--spacing-unit);
+            }
+
+            header .logo {
+                margin-bottom: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
+            }
+
+            nav a {
+                padding: 0.7rem 1.5rem;
+                width: fit-content;
+            }
+
+            .hero {
+                padding: calc(var(--spacing-unit) * 4) var(--spacing-unit);
+                min-height: 60vh;
+            }
+
+            .hero h2 {
+                font-size: clamp(2rem, 5vw, 3.5rem);
+            }
+
+            .hero p {
+                font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-image {
+                order: -1; /* Image appears before text on small screens */
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item {
+                text-align: center;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: var(--spacing-unit);
+            }
+
+            header .logo {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                width: 100%;
+            }
+
+            nav a {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero h2 {
+                font-size: clamp(1.8rem, 7vw, 3rem);
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 0.95rem;
+            }
+
+            section h2 {
+                font-size: clamp(1.8rem, 5vw, 2.5rem);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">FutureVision</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Innovate. Create. Elevate.</h2>
+                <p>Empowering your digital future with cutting-edge solutions and a commitment to excellence.</p>
+                <a href="#features" class="btn">Discover Our Vision</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>At FutureVision, we believe in pushing the boundaries of what's possible. Our team of dedicated professionals is passionate about crafting innovative solutions that drive progress and deliver tangible results. We focus on creating seamless, intuitive experiences that not only meet but exceed expectations.</p>
+                        <p>This project represents a significant milestone in our journey, showcasing our commitment to advanced technology and user-centric design. We are thrilled to announce that this ambitious endeavor is on track for its grand unveiling by <strong>2025-11-21</strong>.</p>
+                        <p>Join us as we redefine the future, one elegant solution at a time. Our mission is to transform complex challenges into simple, powerful tools that empower individuals and businesses alike.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/9b59b6/ecf0f1?text=Innovation+Hub" alt="Innovation Hub">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="icon">&#9733;</span> <!-- Star icon -->
+                        <h3>Advanced Analytics</h3>
+                        <p>Gain deeper insights with our powerful, real-time data analytics tools, designed to help you make informed decisions quickly.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#9889;</span> <!-- Lightning bolt icon -->
+                        <h3>Scalable Infrastructure</h3>
+                        <p>Built on a robust and flexible architecture, our platform scales effortlessly to meet your growing demands, ensuring peak performance.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128187;</span> <!-- Laptop icon -->
+                        <h3>Intuitive Interface</h3>
+                        <p>Experience unparalleled ease of use with our beautifully designed and highly intuitive user interface, crafted for efficiency.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128274;</span> <!-- Lock icon -->
+                        <h3>Enhanced Security</h3>
+                        <p>Your data's safety is our top priority. We implement industry-leading security protocols to protect your information.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128161;</span> <!-- Lightbulb icon -->
+                        <h3>AI-Powered Automation</h3>
+                        <p>Streamline your workflows with intelligent automation driven by cutting-edge artificial intelligence, saving you time and resources.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128172;</span> <!-- Speech bubble icon -->
+                        <h3>24/7 Support</h3>
+                        <p>Access our dedicated support team anytime, anywhere, ensuring you always have the help you need when you need it most.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Connect with us today to explore how FutureVision can empower your next big idea. Let's build something extraordinary together.</p>
+                <a href="mailto:info@futurevision.com" class="btn">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureVision. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">&#xf09a;</a> <!-- Placeholder for FontAwesome, if used -->
+                <a href="#" aria-label="Twitter">&#xf099;</a>
+                <a href="#" aria-label="LinkedIn">&#xf0e1;</a>
+            </div>
+            <p>Designed with passion and future-forward thinking.</p>
+        </div>
+    </footer>
+    <!-- Note: Font Awesome icons (e.g., &#xf09a;) would typically require linking to the Font Awesome library. For this pure HTML/CSS example, they are represented by their Unicode values or would be replaced by actual SVG/image icons. -->
+</body>
+</html>
