@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(45deg, #ff7e5f 0%, #feb47b 100%);
+            --text-light: #e0e0e0;
+            --text-dark: #333;
+            --bg-card: rgba(255, 255, 255, 0.1);
+            --bg-footer: rgba(0, 0, 0, 0.2);
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-dark: 0 5px 15px rgba(0, 0, 0, 0.2);
+            --border-radius: 12px;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            box-shadow: var(--shadow-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(45deg, #ffeb3b, #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: calc(var(--spacing-unit) * 0.5) var(--spacing-unit);
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--secondary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        nav a:hover::after {
+            transform: scaleX(1);
+        }
+
+        main {
+            flex: 1;
+            padding-top: calc(var(--spacing-unit) * 2);
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 3rem;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            font-weight: 700;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-unit) auto;
+            color: var(--text-light);
+        }
+
+        #hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            padding: calc(var(--spacing-unit) * 4) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            animation: rotateBackground 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            line-height: 1.1;
+            background: linear-gradient(45deg, #fff, #a7d9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--shadow-light);
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            max-width: 900px;
+            color: #c0c0c0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 2);
+            background: var(--secondary-gradient);
+            color: #fff;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 126, 95, 0.6);
+        }
+
+        #features {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(5px);
+            padding: calc(var(--spacing-unit) * 5) 0;
+            border-radius: var(--border-radius);
+            margin: calc(var(--spacing-unit) * 4) 0;
+            box-shadow: var(--shadow-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            padding: calc(var(--spacing-unit) * 2.5);
+            box-shadow: var(--shadow-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-unit);
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #c0c0c0;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+        
+        #about {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(8px);
+            border-radius: var(--border-radius);
+            margin: calc(var(--spacing-unit) * 4) 0;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+        }
+
+        #about h2 {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        #about p {
+            margin-bottom: var(--spacing-unit);
+            color: #c0c0c0;
+        }
+
+        .project-date {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffeb3b; /* A contrasting color for the date */
+            margin-top: calc(var(--spacing-unit) * 2);
+            display: inline-block;
+            padding: calc(var(--spacing-unit) * 0.5) var(--spacing-unit);
+            background: rgba(255, 235, 59, 0.1);
+            border-radius: 8px;
+        }
+
+        footer {
+            background: var(--bg-footer);
+            padding: calc(var(--spacing-unit) * 2);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: calc(var(--spacing-unit) * 4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            #hero h1 {
+                font-size: 3.5rem;
+            }
+            #hero p {
+                font-size: 1.2rem;
+            }
+            section h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: var(--spacing-unit);
+            }
+            #hero h1 {
+                font-size: 2.8rem;
+            }
+            #hero p {
+                font-size: 1rem;
+            }
+            section h2 {
+                font-size: 2rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-card {
+                text-align: center;
+            }
+            .feature-card p {
+                text-align: center;
+            }
+            .container {
+                padding: var(--spacing-unit);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            #hero h1 {
+                font-size: 2rem;
+            }
+            #hero p {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.5);
+                font-size: 1rem;
+            }
+            section h2 {
+                font-size: 1.8rem;
+            }
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+            .feature-card p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Nova</a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Unleash Your Potential with Project Nova</h1>
+                <p>A revolutionary platform designed for the future. Experience unparalleled efficiency and innovation.</p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Core Features</h2>
+                <p>Discover what makes Project Nova stand out from the crowd.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Interface</h3>
+                        <p>Our user-friendly design ensures a seamless experience for everyone, regardless of technical expertise.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Architecture</h3>
+                        <p>Built to grow with your needs, Project Nova handles everything from small tasks to enterprise-level demands.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Robust Security</h3>
+                        <p>Your data is our top priority. We employ state-of-the-art encryption and security protocols to keep it safe.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Real-time Analytics</h3>
+                        <p>Gain instant insights with our powerful analytics dashboard, helping you make informed decisions quickly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Project Nova</h2>
+                <p>Project Nova represents the culmination of years of research and development, aimed at providing a cutting-edge solution for modern challenges. We believe in empowering users with tools that are not just powerful, but also a joy to use.</p>
+                <p>Our team of dedicated innovators has meticulously crafted every aspect of this platform, ensuring performance, reliability, and an exceptional user experience.</p>
+                <p class="project-date">Project Date: 2025-11-21</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project Nova. All rights reserved.</p>
+            <p>Designed with passion for the future.</p>
+        </div>
+    </footer>
+</body>
+</html>
