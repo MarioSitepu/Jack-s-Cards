@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureTech Project 2025</title>
+    <style>
+        /* Modern Reset & Base Styles */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            --accent-gradient: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --bg-light: #ffffff;
+            --bg-dark-card: rgba(255, 255, 255, 0.08);
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-dark: rgba(0, 0, 0, 0.3);
+            --border-radius: 12px;
+            --spacing-unit: 1.5rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Container for content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: var(--spacing-unit) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px var(--shadow-dark);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-unit);
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            padding: 0.7rem 1.2rem;
+            border-radius: var(--border-radius);
+            transition: background 0.3s ease, transform 0.2s ease;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease-in-out;
+            z-index: -1;
+        }
+
+        nav a:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding-bottom: var(--spacing-unit);
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 3) 0;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            color: #333;
+            letter-spacing: -0.03em;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--secondary-gradient);
+            color: var(--text-dark);
+            padding: calc(var(--spacing-unit) * 5) 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .hero h2 {
+            font-size: 4.5rem;
+            margin-bottom: var(--spacing-unit);
+            color: #2575fc;
+            text-shadow: 3px 3px 6px var(--shadow-light);
+        }
+
+        .hero h2::after {
+            background: var(--accent-gradient);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto calc(var(--spacing-unit) * 2);
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(0);
+            border-radius: 50%;
+            transition: transform 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            transform: scale(2);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Features Section */
+        .features {
+            background-color: #f9f9f9;
+        }
+
+        .features h2 {
+            color: #6a11cb;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-card {
+            background-color: var(--bg-light);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border-top: 5px solid transparent;
+            border-image: var(--accent-gradient);
+            border-image-slice: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: #2575fc;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .feature-card p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+            color: var(--text-dark);
+        }
+
+        .about h2 {
+            color: #6a11cb;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .about-content p {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .highlight-date {
+            font-weight: 700;
+            color: #2575fc;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        /* Footer */
+        footer {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: var(--spacing-unit) 0;
+            text-align: center;
+            margin-top: auto;
+            box-shadow: 0 -4px 15px var(--shadow-dark);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 3.5rem;
+            }
+
+            .hero p {
+                font-size: 1.3rem;
+            }
+
+            section h2 {
+                font-size: 2.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            nav a {
+                padding: 0.6rem 1rem;
+            }
+
+            .hero {
+                min-height: 60vh;
+                padding: calc(var(--spacing-unit) * 3) 0;
+            }
+
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: calc(var(--spacing-unit) * 2) 0;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                text-align: center;
+            }
+
+            .about-content {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FutureTech Innovations</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="container">
+                <h2>Pioneering Tomorrow's Solutions</h2>
+                <p>Welcome to the forefront of innovation. We're building the future, one elegant solution at a time. Explore our cutting-edge projects and see how we're making an impact.</p>
+                <a href="#features" class="btn">Discover Our Work</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Project Highlights</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Advanced AI Integration</h3>
+                        <p>Our latest algorithms provide unparalleled efficiency and intelligence, streamlining complex operations and driving smarter decisions across all platforms.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Seamless User Experience</h3>
+                        <p>Designed with the user in mind, our interfaces are intuitive, responsive, and aesthetically pleasing, ensuring a delightful interaction every time.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Robust Security Protocols</h3>
+                        <p>We prioritize your data's safety with multi-layered encryption and state-of-the-art security measures, giving you peace of mind in a connected world.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Cloud Infrastructure</h3>
+                        <p>Built on a flexible and robust cloud architecture, our solutions grow with your needs, offering limitless scalability and reliability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>Our Vision</h2>
+                <div class="about-content">
+                    <p>At FutureTech Innovations, we believe in the power of technology to transform lives and businesses. Our team of dedicated engineers, designers, and strategists are constantly pushing the boundaries of what's possible, creating solutions that are not just innovative but also meaningful.</p>
+                    <p>This particular project represents a significant leap forward in our development roadmap, culminating in its official launch and ongoing refinement by <span class="highlight-date">2025-11-21</span>. We are excited for you to experience the next generation of technological advancement.</p>
+                    <p>Join us on this journey as we continue to innovate and shape the digital landscape for a brighter future.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have a question or want to collaborate? We'd love to hear from you!</p>
+                <a href="mailto:info@futuretech.com" class="btn">Email Us Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureTech Innovations. All rights reserved.</p>
+            <p>Project milestones achieved by <span class="highlight-date">2025-11-21</span>.</p>
+        </div>
+    </footer>
+</body>
+</html>
