@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #8b5cf6; /* Purple */
+            --color-secondary: #ec4899; /* Pink */
+            --color-tertiary: #22d3ee; /* Cyan */
+            --color-dark-bg: #0f172a; /* Dark Blue-Gray */
+            --color-dark-bg-light: #1a202c; /* Slightly Lighter Dark Blue-Gray */
+            --color-text-light: #e2e8f0; /* Off-White */
+            --color-text-muted: #94a3b8; /* Muted Gray */
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --border-radius: 0.5rem;
+            --font-main: 'Poppins', sans-serif;
+            --font-code: 'Roboto Mono', monospace;
+        }
+
+        /* Base Styles & Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--color-text-light);
+            background: linear-gradient(135deg, var(--color-dark-bg) 0%, var(--color-dark-bg-light) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            color: var(--color-tertiary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-primary);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(15, 23, 42, 0.8); /* Slightly transparent dark background */
+            padding: var(--spacing-sm) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        nav a {
+            color: var(--color-text-light);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+            color: var(--color-text-light);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background: none;
+            border: 2px solid var(--color-tertiary);
+            color: var(--color-tertiary);
+            padding: 0.7rem 1.7rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-tertiary);
+            color: var(--color-dark-bg);
+            transform: translateY(-3px);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+            margin-bottom: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            margin: var(--spacing-md) auto var(--spacing-lg) auto;
+            max-width: 1000px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            animation: pulse 10s infinite alternate;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8) rotate(0deg); opacity: 0.7; }
+            50% { transform: scale(1.2) rotate(15deg); opacity: 0.5; }
+            100% { transform: scale(0.8) rotate(0deg); opacity: 0.7; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            background: linear-gradient(45deg, var(--color-primary), var(--color-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--color-text-muted);
+            max-width: 700px;
+            margin: 0 auto var(--spacing-md) auto;
+        }
+
+        .hero .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: var(--spacing-lg) 0;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(45deg, var(--color-tertiary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .card {
+            background-color: var(--color-dark-bg-light);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: var(--color-text-muted);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-text {
+            flex: 1 1 500px;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1 1 300px;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--color-primary);
+            filter: grayscale(20%) brightness(90%);
+            transition: filter 0.3s ease;
+        }
+
+        .about-image img:hover {
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        .cta-banner {
+            background: linear-gradient(45deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: var(--color-text-light);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-banner h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-banner p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: var(--spacing-md);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark-bg-light);
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            margin-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                text-align: center;
+            }
+
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .btn-group {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Nova</a>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Revolutionizing Tomorrow's Solutions</h1>
+                <p>
+                    Discover Project Nova, a cutting-edge platform designed to streamline your workflows and ignite innovation. We're building the future, one elegant solution at a time.
+                </p>
+                <div class="btn-group">
+                    <a href="#features" class="btn btn-primary">Explore Features</a>
+                    <a href="#contact" class="btn btn-secondary">Get Started</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2 class="section-title">Key Capabilities</h2>
+                <div class="grid-layout">
+                    <div class="card">
+                        <h3>Intuitive Dashboard</h3>
+                        <p>Access all your vital information and controls from a beautifully designed, user-friendly interface.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Scalable Architecture</h3>
+                        <p>Built on a robust, cloud-native infrastructure that grows seamlessly with your demands.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Real-time Analytics</h3>
+                        <p>Gain instant insights with powerful data visualization and live reporting tools.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Secure & Reliable</h3>
+                        <p>Your data is protected with industry-leading encryption and continuous security monitoring.</p>
+                    </div>
+                    <div class="card">
+                        <h3>API Integration</h3>
+                        <p>Connect effortlessly with your existing tools and services through our flexible API.</p>
+                    </div>
+                    <div class="card">
+                        <h3>24/7 Support</h3>
+                        <p>Our dedicated team is always ready to assist you, ensuring smooth operations around the clock.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About Project Nova</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>
+                            Project Nova was conceived with a vision to simplify complex challenges and empower users with advanced, yet accessible, technology. Our team of passionate engineers and designers are dedicated to crafting solutions that are not only powerful but also a joy to use.
+                        </p>
+                        <p>
+                            We believe in continuous improvement and agile development, constantly evolving our platform based on user feedback and emerging technological trends. Our commitment to excellence drives us to deliver a product that truly makes a difference.
+                        </p>
+                        <p>
+                            This project is on track for a major release update on <span style="font-family: var(--font-code); color: var(--color-tertiary); font-weight: 700;">2025-11-23</span>, bringing even more innovative features and performance enhancements.
+                        </p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/0f172a/8b5cf6?text=Innovation+Visualized" alt="Abstract futuristic image representing innovation">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-banner">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p>Join the growing number of businesses and individuals leveraging Project Nova to achieve their goals faster and more efficiently. Let's build the future together.</p>
+                <a href="#" class="btn btn-secondary" style="border-color: var(--color-text-light); color: var(--color-text-light);">Contact Our Team</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Project Nova. All rights reserved.</p>
+            <p>Designed with passion and modern technologies.</p>
+        </div>
+    </footer>
+</body>
+</html>
