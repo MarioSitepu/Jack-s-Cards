@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(45deg, #00c6ff 0%, #0072ff 100%);
+            --text-light: #e0e0e0;
+            --text-dark: #333;
+            --accent-color: #ffcc00; /* Gold */
+            --bg-dark: #1a1a2e;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-radius-lg: 15px;
+            --border-radius-sm: 8px;
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-dark: 0 15px 45px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            background: -webkit-linear-gradient(45deg, #ffcc00, #ff66b2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section:nth-of-type(even) {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fff;
+            background: -webkit-linear-gradient(45deg, #e0e0e0, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-top: 40px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-gradient);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 114, 255, 0.6);
+        }
+
+        /* Hero Section */
+        #hero {
+            padding: 150px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-gradient); /* Ensure hero has a strong background */
+        }
+
+        #hero .container {
+            max-width: 800px;
+        }
+
+        #hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* Features Section */
+        #features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            background: -webkit-linear-gradient(45deg, #ffcc00, #ff9900);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        /* About Section */
+        #about .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        #about img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            margin-bottom: 20px;
+        }
+
+        /* Call to Action */
+        #cta {
+            background: var(--secondary-gradient);
+            padding: 100px 0;
+            box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #cta h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #fff;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+        }
+
+        #cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            margin-top: auto;
+        }
+
+        footer .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        footer p {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            #hero {
+                padding: 100px 0;
+            }
+
+            #hero p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            header .container {
+                flex-direction: column;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            #cta h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">ModernFlow</a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#cta">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Unlock Your Potential with ModernFlow</h1>
+                <p>Experience the next generation of productivity and creativity. Seamlessly designed for the future.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <p>Designed with innovation at its core, ModernFlow brings you unparalleled capabilities.</p>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Interface</h3>
+                        <p>A clean, user-friendly design that makes complex tasks simple and accessible.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Powerful Performance</h3>
+                        <p>Optimized for speed and efficiency, ensuring a smooth experience even under heavy load.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Cross-Device Sync</h3>
+                        <p>Access your projects from anywhere, on any device, with real-time synchronization.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Secure & Private</h3>
+                        <p>Your data is protected with industry-leading encryption and strict privacy policies.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <div class="about-content">
+                    <img src="https://via.placeholder.com/600x400/0072ff/e0e0e0?text=Innovation+Visual" alt="Innovation" loading="lazy">
+                    <div>
+                        <p>ModernFlow was conceived with a singular vision: to empower individuals and teams to achieve more with less effort. We believe that technology should serve to amplify human potential, not complicate it.</p>
+                        <p>Our dedicated team of innovators has poured countless hours into crafting a platform that is not just powerful, but also a joy to use. We are constantly evolving, driven by feedback and the ever-changing landscape of modern work.</p>
+                        <p>This project was officially dated for release on <strong style="color: var(--accent-color);">2025-11-24</strong>, marking a new chapter in digital collaboration and creativity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p>Join the growing community of users who are revolutionizing their productivity with ModernFlow. Start your journey today!</p>
+                <a href="#" class="btn">Get Started Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><img width="24" height="24" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e0e0e0'%3E%3Cpath d='M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15h-3v-3h3V9c0-3.31 2.72-6 6-6 1.76 0 3.3.48 3.3.48v3.5h-2c-1.17 0-1.55.73-1.55 1.48V12h3.9L19 15h-3v6.95c5.05-.5 9-4.76 9-9.95z'/%3E%3C/svg%3E"></a>
+                <a href="#" aria-label="Twitter"><img width="24" height="24" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e0e0e0'%3E%3Cpath d='M22.46 6c-.77.34-1.6.56-2.46.66.89-.53 1.57-1.37 1.89-2.37-.83.49-1.75.85-2.72 1.05C18.18 4.63 17.03 4 15.7 4c-2.37 0-4.3 1.93-4.3 4.3 0 .34.04.67.11.99C7.79 8.61 4.14 6.64 1.79 3.7c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.89 3.59-.7-.02-1.37-.21-1.95-.5v.05c0 2.08 1.48 3.81 3.44 4.2-.36.1-.73.15-1.11.15-.27 0-.53-.03-.79-.08.54 1.7 2.11 2.93 3.98 2.97C9.36 18.25 7.5 19 5.57 19c-.38 0-.76-.02-1.13-.07 1.95 1.25 4.26 1.97 6.75 1.97 8.1 0 12.55-6.7 12.55-12.55v-.55c.86-.62 1.6-1.39 2.18-2.27z'/%3E%3C/svg%3E"></a>
+                <a href="#" aria-label="LinkedIn"><img width="24" height="24" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e0e0e0'%3E%3Cpath d='M20.447 20.452h-3.554v-5.564c0-1.38-.277-2.757-1.588-2.757-1.597 0-1.859 1.193-1.859 2.859v5.462H9.837V9.579h3.416v1.548h.049c.447-.746 1.291-1.624 3.37-1.624 3.616 0 4.259 2.37 4.259 7.271v7.986zM5.795 8.358a2.378 2.378 0 01-2.377-2.378c0-1.314 1.066-2.378 2.377-2.378s2.377 1.064 2.377 2.378c0 1.314-1.065 2.378-2.377 2.378zM7.568 20.452H4.01V9.579h3.558v10.873zM22.227 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.456C23.208 24 24 23.227 24 22.271V1.729C24 .774 23.208 0 22.227 0z'/%3E%3C/svg%3E"></a>
+            </div>
+            <p>&copy; 2025 ModernFlow. All rights reserved.</p>
+            <p>Projected Release Date: 2025-11-24</p>
+        </div>
+    </footer>
+</body>
+</html>
