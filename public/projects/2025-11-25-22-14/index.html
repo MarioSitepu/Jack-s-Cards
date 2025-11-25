@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
+            --accent-color: #ff6b6b;
+            --text-light: #f4f4f4;
+            --text-dark: #333;
+            --bg-light: #ffffff;
+            --bg-dark-card: rgba(255, 255, 255, 0.08);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-dark: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --border-radius-lg: 15px;
+            --border-radius-md: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--bg-light);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: #2575fc;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 40px 0;
+        }
+
+        section {
+            padding: 60px 0;
+            margin-bottom: 40px;
+            border-radius: var(--border-radius-lg);
+            color: var(--text-light);
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 120px 20px;
+            background: var(--secondary-gradient);
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 60px;
+            box-shadow: var(--shadow-dark);
+            color: var(--text-light);
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--accent-color);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        .features-section {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 80px 20px;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 60px;
+        }
+
+        .features-section h2, .about-section h2, .cta-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .features-section h2::after, .about-section h2::after, .cta-section h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: var(--accent-color);
+            bottom: -10px;
+            left: 20%;
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: var(--bg-dark-card);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-dark);
+            text-align: left;
+            transition: transform 0.3s ease, background 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        .about-section {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding: 80px 20px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            text-align: center;
+        }
+
+        .about-section h2 {
+            color: var(--text-dark);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+            text-align: left;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-light);
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 100px 20px;
+            background: var(--primary-gradient);
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 60px;
+            box-shadow: var(--shadow-dark);
+            color: var(--text-light);
+        }
+
+        .cta-section h2 {
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        footer {
+            background: #222;
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: auto;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ff9999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-section h1 {
+                font-size: 2.8rem;
+            }
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+            .features-section h2, .about-section h2, .cta-section h2 {
+                font-size: 2.2rem;
+            }
+            nav ul {
+                display: none; /* Hide nav on smaller screens, could replace with a hamburger menu */
+            }
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+            .hero-section {
+                padding: 80px 15px;
+            }
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            .features-section, .about-section, .cta-section {
+                padding: 50px 15px;
+            }
+            .features-section h2, .about-section h2, .cta-section h2 {
+                font-size: 1.8rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-content {
+                flex-direction: column;
+            }
+            .about-image {
+                order: -1; /* Image appears above text on mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            .features-section h2, .about-section h2, .cta-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">ProjectFlow</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Revolutionize Your Workflow</h1>
+                <p>Empower your team with intuitive tools and seamless collaboration. Designed for efficiency, built for the future.</p>
+                <a href="#cta" class="btn">Get Started Today</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Experience unparalleled speed and responsiveness, keeping your projects moving forward without delay.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">✨</div>
+                        <h3>Intuitive User Interface</h3>
+                        <p>A clean, modern design makes managing complex tasks simple and enjoyable for everyone on your team.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔗</div>
+                        <h3>Seamless Integrations</h3>
+                        <p>Connect with your favorite tools and platforms to create a unified ecosystem for all your project needs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🛡️</div>
+                        <h3>Robust Security</h3>
+                        <p>Your data's safety is our top priority with industry-leading encryption and security protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📈</div>
+                        <h3>Advanced Analytics</h3>
+                        <p>Gain deep insights into project progress and team performance with customizable reports and dashboards.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💬</div>
+                        <h3>Real-time Collaboration</h3>
+                        <p>Communicate and collaborate instantly with built-in chat, comments, and shared workspaces.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About ProjectFlow</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>ProjectFlow was born from the idea that project management shouldn't be a chore, but an enabler. We believe in tools that adapt to your team, not the other way around. Our platform is crafted with a focus on user experience, performance, and flexibility.</p>
+                        <p>Since our inception, we've been dedicated to continuous improvement and listening to our users. We're proud to offer a solution that truly helps teams achieve their goals, big or small. This version of ProjectFlow is set for a major update on <strong>2025-11-25</strong>, bringing even more innovative features!</p>
+                        <p>Join the growing community of professionals who trust ProjectFlow to streamline their operations and boost productivity.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1556761175-b413da4b931a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTc1Mjh8MHwxfHNlYXJjaHw4Nnx8bW9kZXJuJTIwdGVhbSUyMHdvcmtpbmdfb3V0fGVufDB8fHx8MTcwMTU0NzY3N3ww&ixlib=rb-4.0.3&q=80&w=1080" alt="Team working collaboratively">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Projects?</h2>
+                <p>Join thousands of happy teams. Start your free trial today and experience the difference ProjectFlow can make.</p>
+                <a href="#" class="btn">Sign Up Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ProjectFlow. All rights reserved.</p>
+            <p>Designed with ❤️ for modern teams.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+</body>
+</html>
