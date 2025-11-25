@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(to right, #fcb045 0%, #fd1d1d 100%);
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --bg-light: #ffffff;
+            --bg-dark-accent: #1a202c;
+            --border-radius: 12px;
+            --transition-speed: 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: #f0f2f5; /* Light subtle background */
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color var(--transition-speed), transform var(--transition-speed);
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--secondary-gradient);
+            transition: width var(--transition-speed);
+        }
+
+        nav ul li a:hover {
+            color: #ffeb3b; /* A lighter accent color on hover */
+            transform: translateY(-2px);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 50%, #00f2fe 100%);
+            color: var(--text-light);
+            text-align: center;
+            padding: 100px 20px;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        #hero p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: left var(--transition-speed);
+            transform: skewX(-20deg);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f8f9fa; /* Slightly off-white for contrast */
+        }
+
+        section h3 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        section h3::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-gradient);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        #about p {
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Features Section */
+        #features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            text-align: left;
+            border: 1px solid #eee;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #4a5568;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        .feature-card h4::before {
+            content: '✨'; /* Modern icon */
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+            top: -2px;
+        }
+        .feature-card:nth-child(2) h4::before { content: '🚀'; }
+        .feature-card:nth-child(3) h4::before { content: '💡'; }
+
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: #e9ecef;
+            padding-bottom: 100px;
+        }
+
+        #contact p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #4a5568;
+        }
+
+        #contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        #contact form .form-group {
+            margin-bottom: 20px;
+        }
+
+        #contact form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        #contact form input[type="text"],
+        #contact form input[type="email"],
+        #contact form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        #contact form input[type="text"]:focus,
+        #contact form input[type="email"]:focus,
+        #contact form textarea:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+            outline: none;
+        }
+
+        #contact form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        #contact form button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition-speed), transform var(--transition-speed);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #contact form button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(to right, #2575fc 0%, #6a11cb 100%); /* Reverse gradient on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark-accent);
+            color: #a0aec0;
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px 0;
+                width: 100%;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            #hero {
+                padding: 80px 20px;
+            }
+
+            #hero h2 {
+                font-size: 2.5rem;
+            }
+
+            #hero p {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            section h3 {
+                font-size: 2rem;
+            }
+
+            #features .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 400px;
+            }
+
+            #contact form {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            #hero h2 {
+                font-size: 2rem;
+            }
+
+            #hero p {
+                font-size: 1rem;
+            }
+
+            section h3 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Nova</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Empowering the Future with Innovation</h2>
+                <p>Leading the next generation of digital solutions. Join us on a journey of transformation.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h3>Our Vision & Mission</h3>
+                <p>Project Nova is at the forefront of technological advancement, dedicated to creating intuitive and powerful tools that simplify complex challenges. Our team of visionary engineers and designers work tirelessly to bring groundbreaking ideas to life, ensuring a seamless and impactful experience for our users.</p>
+                <p>We believe in sustainable innovation, fostering a culture of continuous learning and adaptation to meet the evolving demands of the modern world. Our commitment extends beyond technology, aiming to build a community where creativity thrives and possibilities are limitless.</p>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h3>Key Capabilities</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Intuitive User Experience</h4>
+                        <p>Designed with you in mind, our platform offers a clean, easy-to-navigate interface that makes complex tasks feel simple and enjoyable.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Robust Performance</h4>
+                        <p>Experience lightning-fast speeds and unparalleled stability, ensuring your work flows smoothly without interruptions, even under heavy loads.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Scalable Architecture</h4>
+                        <p>Built on a flexible and modern architecture, Project Nova can grow with your needs, effortlessly adapting to increasing demands and future expansions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Advanced Security</h4>
+                        <p>Your data's safety is our top priority. We implement state-of-the-art encryption and security protocols to protect your information at all times.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Seamless Integration</h4>
+                        <p>Connect effortlessly with your existing tools and workflows, enhancing productivity and creating a unified ecosystem for all your operations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Dedicated Support</h4>
+                        <p>Our expert support team is always ready to assist you, providing timely and effective solutions to any challenges you might encounter.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h3>Get in Touch</h3>
+                <p>Have questions or want to learn more about Project Nova? We'd love to hear from you!</p>
+                <p>Project Nova is on track for its next major milestone by: <strong>2025-11-25</strong></p>
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Project Nova. All rights reserved.</p>
+            <p>Designed with passion for a better tomorrow.</p>
+        </div>
+    </footer>
+</body>
+</html>
