@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Resets & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f4f7f6; /* Light background */
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header Styling */
+        header {
+            background: #fff;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            font-weight: 600;
+            color: #555;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #00f2fe;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Button Styling */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .primary-btn {
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.6);
+        }
+
+        .secondary-btn {
+            background: #fff;
+            color: #4facfe;
+            border: 2px solid #4facfe;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .secondary-btn:hover {
+            background: #4facfe;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+        }
+
+        /* Section Base Styling */
+        section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        section h1, section h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            color: #666;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            color: #fff;
+            padding: 8rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(45deg);
+            opacity: 0.2;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #fff; /* Override gradient for white text on gradient background */
+            -webkit-text-fill-color: initial;
+            background: none;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: #eee;
+        }
+
+        .hero-section .highlight-date {
+            font-weight: 700;
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 0.2rem 0.6rem;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: #fdfdfd;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid transparent;
+            border-image: linear-gradient(to bottom, #4facfe, #00f2fe) 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        /* About Section */
+        .about-section {
+            background: #eef2f5;
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            color: #fff;
+            padding: 5rem 0;
+        }
+
+        .cta-section h2 {
+            color: #fff;
+            -webkit-text-fill-color: initial;
+            background: none;
+            font-size: 3rem;
+        }
+
+        .cta-section p {
+            color: #eee;
+            margin-bottom: 3rem;
+        }
+
+        /* Footer Styling */
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 2.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            margin-left: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #00f2fe;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-section h1 {
+                font-size: 3.5rem;
+            }
+            section h1, section h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            nav ul li a {
+                padding: 0.5rem 1rem;
+            }
+            .hero-section {
+                padding: 6rem 0;
+                min-height: 60vh;
+            }
+            .hero-section h1 {
+                font-size: 2.8rem;
+            }
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+            section {
+                padding: 4rem 0;
+            }
+            section h1, section h2 {
+                font-size: 2rem;
+            }
+            section p {
+                font-size: 1rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-card {
+                text-align: center;
+            }
+            footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-links {
+                margin-top: 1rem;
+            }
+            .footer-links a {
+                margin: 0 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            nav ul {
+                gap: 0.8rem;
+            }
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+            section h1, section h2 {
+                font-size: 1.8rem;
+            }
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project 2025</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Future-Proof Your Vision</h1>
+                <p>A cutting-edge solution for tomorrow's challenges. Project launch: <span class="highlight-date">2025-11-27</span></p>
+                <a href="#features" class="btn primary-btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Innovations</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Seamless Integration</h3>
+                        <p>Connect effortlessly with your existing workflows and tools.</p
