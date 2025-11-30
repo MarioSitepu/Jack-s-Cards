@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles & Variables */
+        :root {
+            --primary-bg-gradient: linear-gradient(135deg, #2c3e50, #3498db); /* Dark Blue to Bright Blue */
+            --secondary-bg-gradient: linear-gradient(135deg, #3498db, #2980b9); /* Bright Blue to Darker Blue */
+            --accent-gradient: linear-gradient(45deg, #e67e22, #f39c12); /* Orange to Darker Orange */
+            --text-color-dark: #333;
+            --text-color-light: #ecf0f1;
+            --background-light: #f4f7f6;
+            --background-dark: #233140;
+            --container-max-width: 1200px;
+            --spacing-unit: 1.5rem;
+            --border-radius: 8px;
+            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-dark: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--background-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            color: var(--text-color-dark);
+        }
+
+        h1 { font-size: 3em; }
+        h2 { font-size: 2.2em; }
+        h3 { font-size: 1.8em; }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2980b9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-gradient);
+            color: var(--text-color-light);
+            padding: 0.8em 2em;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(230, 126, 34, 0.6);
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-bg-gradient);
+            color: var(--text-color-light);
+            padding: var(--spacing-unit) 0;
+            box-shadow: var(--box-shadow-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--text-color-light);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-unit);
+        }
+
+        nav a {
+            color: var(--text-color-light);
+            font-weight: 400;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--secondary-bg-gradient);
+            color: var(--text-color-light);
+            padding: 6rem 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: pulse 15s infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            margin-bottom: 0.5em;
+            color: var(--text-color-light);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 2em;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--background-light);
+        }
+
+        section:nth-of-type(odd) {
+            background-color: #fff;
+        }
+
+        /* Features Section */
+        .features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-unit) * 2;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: #fff;
+            padding: var(--spacing-unit) * 1.5;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border-top: 5px solid transparent; /* Placeholder for gradient border */
+            border-image: linear-gradient(to right, #3498db, #e67e22) 1; /* Gradient border */
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h3 {
+            margin-top: 0.5em;
+            margin-bottom: 0.8em;
+            color: #2c3e50;
+        }
+
+        .feature-card p {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        /* About Section */
+        .about .container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            text-align: left;
+            gap: var(--spacing-unit) * 2;
+        }
+
+        .about-content {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-light);
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: var(--primary-bg-gradient);
+            color: var(--text-color-light);
+            padding: 5rem 0;
+        }
+
+        .cta h2 {
+            color: var(--text-color-light);
+            margin-bottom: var(--spacing-unit);
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+        }
+
+        .cta p {
+            font-size: 1.1em;
+            margin-bottom: 2em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--background-dark);
+            color: var(--text-color-light);
+            padding: var(--spacing-unit) * 2 0;
+            text-align: center;
+            margin-top: auto; /* Pushes footer to the bottom */
+            font-size: 0.9em;
+        }
+
+        footer p {
+            margin: 0.5em 0;
+        }
+
+        footer a {
+            color: var(--text-color-light);
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            color: #3498db;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8em; }
+            h2 { font-size: 2em; }
+            h3 { font-size: 1.6em; }
+
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .hero h1 {
+                font-size: 3em;
+            }
+
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: var(--spacing-unit);
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            nav a {
+                padding: 0.5em;
+            }
+
+            .about .container {
+                flex-direction: column;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2em; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.4em; }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .btn {
+                padding: 0.7em 1.5em;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">FutureSphere</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Innovate. Create. Elevate.</h1>
+                <p>Empowering your vision with cutting-edge solutions and a seamless user experience. Discover what's next.</p>
+                <a href="#features" class="btn">Explore Our Solutions</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <p>Designed to bring efficiency and innovation to your fingertips.</p>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Design</h3>
+                        <p>Our platform boasts a user-friendly interface, making complex tasks simple and accessible for everyone.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Robust Performance</h3>
+                        <p>Experience lightning-fast speeds and unwavering reliability, ensuring your projects run smoothly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Solutions</h3>
+                        <p>Grow without limits. Our architecture is built to scale with your needs, from startups to enterprises.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Secure & Private</h3>
+                        <p>Your data is our priority. We implement advanced security measures to protect your information and privacy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2>About FutureSphere</h2>
+                    <p>At FutureSphere, we believe in pushing the boundaries of technology to create solutions that not only meet today's demands but also anticipate tomorrow's challenges. Our dedicated team of innovators, designers, and engineers are passionate about crafting products that make a real difference.</p>
+                    <p>We are committed to fostering a culture of continuous improvement, collaboration, and customer-centricity. Join us on our journey to shape the future.</p>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/600x400/3498db/ecf0f1?text=Innovation" alt="About FutureSphere">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Project?</h2>
+                <p>Connect with FutureSphere today and let's build something extraordinary together.</p>
+                <a href="#" class="btn">Start Your Project</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureSphere. All rights reserved.</p>
+            <p>Project Date: 2025-12-01</p>
+            <p>Designed with <span style="color: #e67e22;">&#10084;</span> by FutureSphere Team.</p>
+        </div>
+    </footer>
+</body>
+</html>
