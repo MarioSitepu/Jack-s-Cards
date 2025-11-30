@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --bg-gradient-start: #0f0c29; /* Dark Blue-Purple */
+            --bg-gradient-end: #302b63; /* Darker Purple */
+            --primary-color: #8e2de2;   /* Vibrant Purple */
+            --secondary-color: #4a00e0; /* Darker Vibrant Purple */
+            --text-light: #e0e0e0;
+            --text-dark: #333;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.15);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --header-bg: rgba(15, 12, 41, 0.8); /* Semi-transparent for blur effect */
+            --button-gradient: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px var(--shadow-color);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            background: var(--button-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary-color);
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        section h1, section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: var(--button-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+        }
+
+        section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            color: var(--text-light);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--button-gradient);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px var(--shadow-color);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Hero Section */
+        #hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 90px); /* Adjust for header height */
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        #hero .hero-content {
+            max-width: 900px;
+        }
+
+        #hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 25px;
+        }
+
+        #hero p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        #features {
+            background: rgba(0, 0, 0, 0.1);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: var(--button-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        #about .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        #about .about-text {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        #about img {
+            max-width: 100%;
+            width: 400px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px var(--shadow-color);
+            border: 2px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        #about img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+
+        footer .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-links a:hover {
+            color: var(--text-light);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 10px 15px;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            section h1 {
+                font-size: 3rem;
+            }
+
+            #hero h1 {
+                font-size: 3.5rem;
+            }
+
+            section h2 {
+                font-size: 2.2rem;
+            }
+
+            section p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 30px;
+            }
+
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+
+            #about .about-content {
+                flex-direction: column;
+            }
+
+            #about img {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul li {
+                margin: 5px 10px;
+            }
+
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            #hero p {
+                font-size: 1.1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card {
+                padding: 25px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project 2025</a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container hero-content">
+                <h1>Unleash the Future with Our Innovative Solutions</h1>
+                <p>Experience cutting-edge technology designed to transform your world. Built for tomorrow, available today.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features That Set Us Apart</h2>
+                <p>Our platform is engineered with precision and passion, offering unparalleled capabilities to empower your journey.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Interface</h3>
+                        <p>Effortlessly navigate through our beautifully designed and user-friendly interface, crafted for optimal experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Performance</h3>
+                        <p>Built on a robust architecture, our solution scales seamlessly to meet your growing demands, no matter the size.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Advanced Security</h3>
+                        <p>Your data is our priority. We implement state-of-the-art encryption and security protocols to keep your information safe.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Cross-Platform Compatibility</h3>
+                        <p>Access our services from any device, anywhere. Our platform is optimized for web, mobile, and desktop.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Real-time Analytics</h3>
+                        <p>Gain valuable insights with our comprehensive real-time analytics dashboard, helping you make informed decisions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Dedicated Support</h3>
+                        <p>Our expert support team is available 24/7 to assist you with any queries or challenges you might encounter.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>We are a team of passionate innovators dedicated to creating solutions that push the boundaries of technology. Our mission is to simplify complex challenges and deliver powerful tools that inspire progress.</p>
+                        <p>With a focus on user experience and cutting-edge development, we strive to build products that are not just functional, but truly transformative. We believe in a future where technology empowers everyone.</p>
+                    </div>
+                    <img src="https://via.placeholder.com/400x300/8e2de2/e0e0e0?text=Our+Vision" alt="Our Vision">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have questions or want to collaborate? Reach out to us!</p>
+                <a href="mailto:info@project2025.com" class="btn">Send Us an Email</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Project 2025. All rights reserved. </p>
+            <p>Project Launch Date: 2025-12-01</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Update current year dynamically
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
