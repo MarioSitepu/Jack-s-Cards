@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nebula - Modern Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(to right, #00c6ff 0%, #0072ff 100%);
+            --accent-color: #00ffc8;
+            --text-light: #e0e0e0;
+            --text-dark: #333;
+            --bg-dark: #1a1a2e;
+            --bg-card: rgba(255, 255, 255, 0.08);
+            --bg-card-hover: rgba(255, 255, 255, 0.15);
+            --border-radius-lg: 15px;
+            --border-radius-sm: 8px;
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.2);
+            --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--bg-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: var(--primary-gradient);
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        main {
+            flex: 1;
+            padding: 4rem 0;
+        }
+
+        section {
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section:nth-of-type(even) {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 4rem;
+            line-height: 1.2;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -15px;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-light);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: var(--secondary-gradient);
+        }
+
+        .hero {
+            background: var(--primary-gradient);
+            padding: 10rem 0;
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: var(--bg-card-hover);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            text-align: left;
+            margin-bottom: 0;
+            color: var(--text-light);
+        }
+
+        .cta {
+            background: var(--secondary-gradient);
+            padding: 8rem 0;
+            color: #fff;
+        }
+
+        .cta h2 {
+            color: #fff;
+        }
+
+        .cta h2::after {
+            background: var(--accent-color);
+        }
+
+        footer {
+            background: #111;
+            color: var(--text-light);
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.7rem;
+            }
+
+            .nav-links {
+                display: none; /* Hide for mobile for simplicity, could add a hamburger menu */
+            }
+
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .hero {
+                padding: 7rem 0;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .feature-card i {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Project Nebula</a>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="container">
+                <h1>Unlocking Tomorrow's Potential Today</h1>
+                <p>Revolutionizing the future with cutting-edge technology and innovative solutions. Join us on this journey.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Project Nebula</h2>
+                <p>Project Nebula is at the forefront of technological advancement, dedicated to creating solutions that empower businesses and individuals alike. Our team of visionary engineers and designers work tirelessly to bring concepts to life, pushing the boundaries of what's possible. We believe in a future where technology is intuitive, powerful, and accessible to everyone.</p>
+                <p>Our mission is to build robust, scalable, and user-centric platforms that not only meet today's demands but also anticipate tomorrow's challenges. We are committed to excellence, innovation, and making a positive impact on the world.</p>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Core Features</h2>
+                <p>Explore the powerful capabilities that make Project Nebula stand out.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-rocket"></i> <!-- Placeholder for Font Awesome icon -->
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Experience unparalleled speed and efficiency with our optimized infrastructure designed for peak performance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-lock"></i> <!-- Placeholder for Font Awesome icon -->
+                        <h3>Ironclad Security</h3>
+                        <p>Your data is our top priority. We implement advanced encryption and robust security protocols to keep it safe.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cogs"></i> <!-- Placeholder for Font Awesome icon -->
+                        <h3>Seamless Integration</h3>
+                        <p>Connect effortlessly with your existing tools and workflows. Our API-first approach ensures smooth interoperability.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-headset"></i> <!-- Placeholder for Font Awesome icon -->
+                        <h3>24/7 Premium Support</h3>
+                        <p>Our dedicated support team is always ready to assist you, ensuring a smooth and uninterrupted experience.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Join the growing number of innovators who trust Project Nebula for their most ambitious projects.</p>
+                <a href="#" class="btn">Get Started Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project Nebula. All rights reserved.</p>
+            <p>Project Date: 2025-11-30</p>
+            <p>Designed with passion and precision.</p>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons (optional, but good for modern appeal) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
