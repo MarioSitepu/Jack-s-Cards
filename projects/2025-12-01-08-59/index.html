@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Project 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary-dark: #1a1a2e;
+            --color-primary-light: #0f3460;
+            --color-accent-pink: #e94560;
+            --color-accent-purple: #533483;
+            --color-text-light: #e0e0e0;
+            --color-text-dark: #aaaaaa;
+            --gradient-main: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%);
+            --gradient-button: linear-gradient(45deg, var(--color-accent-pink) 0%, var(--color-accent-purple) 100%);
+            --gradient-card: linear-gradient(135deg, rgba(83, 52, 131, 0.2) 0%, rgba(233, 69, 96, 0.2) 100%);
+            --spacing-unit: 1rem;
+            --border-radius: 8px;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --shadow-dark: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-light);
+            background: var(--gradient-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: var(--color-accent-pink);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-accent-purple);
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(2 * var(--spacing-unit));
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(15, 52, 96, 0.7);
+            padding: calc(1 * var(--spacing-unit)) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            box-shadow: var(--shadow-light);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: var(--color-text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(2 * var(--spacing-unit));
+        }
+
+        nav a {
+            color: var(--color-text-light);
+            font-weight: 400;
+            padding: calc(0.5 * var(--spacing-unit)) calc(1 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: var(--color-accent-pink);
+            color: var(--color-text-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-main);
+            padding: calc(8 * var(--spacing-unit)) 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 70% 30%, rgba(233, 69, 96, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 30% 70%, rgba(83, 52, 131, 0.1) 0%, transparent 50%);
+            animation: rotateBackground 20s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: calc(1 * var(--spacing-unit));
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: var(--shadow-dark);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            margin-bottom: calc(3 * var(--spacing-unit));
+            color: var(--color-text-dark);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-button);
+            color: var(--color-text-light);
+            padding: calc(1.2 * var(--spacing-unit)) calc(3 * var(--spacing-unit));
+            border-radius: 50px;
+            font-size: clamp(1rem, 1.5vw, 1.1rem);
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-light);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+            padding: calc(4 * var(--spacing-unit)) 0;
+        }
+
+        section {
+            padding: calc(4 * var(--spacing-unit)) 0;
+            margin-bottom: calc(2 * var(--spacing-unit));
+        }
+
+        section:nth-of-type(even) {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin-bottom: calc(2 * var(--spacing-unit));
+            font-weight: 600;
+            color: var(--color-accent-pink);
+            text-align: center;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--color-accent-purple);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(3 * var(--spacing-unit));
+            margin-top: calc(4 * var(--spacing-unit));
+        }
+
+        .feature-card {
+            background: var(--gradient-card);
+            padding: calc(2 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .feature-card i { /* Placeholder for icon if using font-awesome */
+            font-size: 3rem;
+            color: var(--color-accent-pink);
+            margin-bottom: calc(1 * var(--spacing-unit));
+        }
+
+        .feature-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: calc(0.5 * var(--spacing-unit));
+            color: var(--color-text-light);
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--color-text-dark);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: calc(2 * var(--spacing-unit));
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--color-text-dark);
+        }
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: calc(3 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: calc(1.5 * var(--spacing-unit));
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: calc(0.5 * var(--spacing-unit));
+            font-weight: 600;
+            color: var(--color-text-light);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: calc(1 * var(--spacing-unit));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: var(--color-text-light);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group textarea:focus {
+            border-color: var(--color-accent-pink);
+            background-color: rgba(0, 0, 0, 0.5);
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-primary-dark);
+            color: var(--color-text-dark);
+            text-align: center;
+            padding: calc(2 * var(--spacing-unit)) 0;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer p {
+            margin-bottom: calc(0.5 * var(--spacing-unit));
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: calc(1 * var(--spacing-unit));
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: calc(1 * var(--spacing-unit));
+            }
+
+            .hero {
+                padding: calc(6 * var(--spacing-unit)) 0;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h2, h3 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: calc(1 * var(--spacing-unit)) calc(2 * var(--spacing-unit));
+                font-size: 0.9rem;
+            }
+
+            h2, h3 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureSphere</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="container">
+                <h1>Unleashing Tomorrow's Potential Today</h1>
+                <p>Innovative solutions for a better future, powered by cutting-edge technology.</p>
+                <a href="#features" class="cta-button">Explore Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features & Innovations</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <!-- Placeholder for icon, e.g., <i class="fas fa-rocket"></i> -->
+                        <h4>AI-Driven Insights</h4>
+                        <p>Leveraging advanced artificial intelligence to provide unparalleled data analysis and predictions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <!-- Placeholder for icon -->
+                        <h4>Seamless Integration</h4>
+                        <p>Designed for effortless compatibility with existing systems, ensuring a smooth transition.</p>
+                    </div>
+                    <div class="feature-card">
+                        <!-- Placeholder for icon -->
+                        <h4>Sustainable Design</h4>
+                        <p>Committed to eco-friendly practices, minimizing environmental impact without compromising performance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <!-- Placeholder for icon -->
+                        <h4>Global Scalability</h4>
+                        <p>Built on a robust infrastructure capable of expanding to meet demands worldwide.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>Our Vision for 2025</h2>
+                <div class="about-content">
+                    <p>At FutureSphere, we are dedicated to pioneering technologies that redefine industry standards. Our project, conceptualized with the future in mind, aims to deliver solutions that are not only powerful and efficient but also intuitive and accessible to everyone.</p>
+                    <p>We envision a world where technology empowers, connects, and simplifies. This initiative is a testament to our commitment to innovation, sustainability, and user-centric design. We believe that by focusing on these core principles, we can create lasting value and drive meaningful change.</p>
+                    <p>Join us on this exciting journey as we build the future, one innovation at a time.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button submit-button">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureSphere. All rights reserved.</p>
+            <p>Project Date: 2025-12-01</p>
+            <p>Designed with <span style="color: var(--color-accent-pink);">&hearts;</span> for a better tomorrow.</p>
+        </div>
+    </footer>
+</body>
+</html>
