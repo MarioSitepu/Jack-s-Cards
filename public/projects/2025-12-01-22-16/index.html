@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary-dark: #2c3e50; /* Dark Blue-Grey */
+            --color-primary-light: #ecf0f1; /* Light Grey */
+            --color-accent-blue: #3498db; /* Bright Blue */
+            --color-accent-purple: #8e44ad; /* Deep Purple */
+            --color-accent-green: #2ecc71; /* Vibrant Green */
+            --color-text-dark: #333;
+            --color-text-light: #f4f4f4;
+            --gradient-header: linear-gradient(90deg, var(--color-primary-dark) 0%, #34495e 100%); /* Dark to slightly lighter dark */
+            --gradient-hero: linear-gradient(135deg, var(--color-accent-blue) 0%, var(--color-accent-purple) 100%); /* Blue to Purple */
+            --gradient-card: linear-gradient(45deg, #fdfbfb 0%, #ebedee 100%); /* Light subtle gradient */
+            --gradient-btn: linear-gradient(45deg, var(--color-accent-green) 0%, #27ae60 100%); /* Green button */
+            --gradient-btn-hover: linear-gradient(45deg, #27ae60 0%, var(--color-accent-green) 100%);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.2);
+            --border-radius: 8px;
+            --spacing-unit: 1rem;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            background-color: var(--color-primary-light);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 1.5);
+        }
+
+        h1, h2, h3 {
+            color: var(--color-primary-dark);
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.75rem; }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        a {
+            color: var(--color-accent-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-accent-purple);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-btn);
+            color: var(--color-text-light);
+            padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 2);
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--gradient-btn-hover);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-header);
+            color: var(--color-text-light);
+            padding: var(--spacing-unit) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: calc(var(--spacing-unit) * 2);
+        }
+
+        nav ul li a {
+            color: var(--color-text-light);
+            font-weight: 600;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: var(--color-accent-green);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            left: 0;
+            background: var(--color-accent-green);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-hero);
+            color: var(--color-text-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 8) 0;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-section h1 {
+            color: var(--color-text-light);
+            font-size: 4.5rem;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            opacity: 0.9;
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 5) 0;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f8f8f8;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            position: relative;
+            padding-bottom: var(--spacing-unit);
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-hero);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-card {
+            background: var(--gradient-card);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-card h3 {
+            color: var(--color-accent-blue);
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* About Section */
+        .about-section p {
+            max-width: 800px;
+            margin: 0 auto var(--spacing-unit) auto;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: calc(var(--spacing-unit) * 1);
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--color-accent-blue);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form .btn {
+            align-self: flex-end;
+            margin-top: var(--spacing-unit);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gradient-header);
+            color: var(--color-text-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2) 0;
+            margin-top: calc(var(--spacing-unit) * 3);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        footer a {
+            color: var(--color-accent-green);
+            margin: 0 calc(var(--spacing-unit) * 0.5);
+        }
+
+        footer a:hover {
+            color: var(--color-accent-blue);
+        }
+
+        .social-links {
+            margin-top: var(--spacing-unit);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+
+            .hero-section {
+                padding: calc(var(--spacing-unit) * 6) 0;
+                min-height: 60vh;
+            }
+
+            .hero-section h1 {
+                font-size: 3.2rem;
+            }
+
+            .hero-section p {
+                font-size: 1.2rem;
+            }
+
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: calc(var(--spacing-unit) * 0.5);
+            }
+
+            nav ul li {
+                margin: 0;
+            }
+
+            nav ul li a {
+                padding: calc(var(--spacing-unit) * 0.5) 0;
+                display: block;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form .btn {
+                align-self: stretch;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.3rem; }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: calc(var(--spacing-unit) * 0.6) calc(var(--spacing-unit) * 1.5);
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project X</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h1>Future-Proofing Your Vision</h1>
+                <p>Innovative solutions for a connected world.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Seamless Integration</h3>
+                        <p>Connect effortlessly with your existing ecosystem with our robust APIs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>AI-Powered Analytics</h3>
+                        <p>Gain deep, actionable insights with intelligent data processing and reporting.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Architecture</h3>
+                        <p>Grow without limits, designed for future expansion and high-demand scenarios.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Robust Security</h3>
+                        <p>Your data is protected with industry-leading measures and continuous monitoring.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>Our Mission</h2>
+                <p>At Project X, we believe in empowering businesses and individuals with cutting-edge technology that simplifies complexity and unlocks new possibilities. We are committed to delivering excellence and driving innovation in every solution we craft.</p>
+                <p>Our dedicated team comprises passionate experts who are constantly pushing the boundaries of what's possible, ensuring our clients stay ahead in a rapidly evolving digital landscape.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have a question, a project idea, or want to collaborate? Reach out to us!</p>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project X. All rights reserved.</p>
+            <p>Project Date: 2025-12-01</p>
+            <div class="social-links">
+                <a href="#" aria-label="Twitter">Twitter</a>
+                <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                <a href="#" aria-label="GitHub">GitHub</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
