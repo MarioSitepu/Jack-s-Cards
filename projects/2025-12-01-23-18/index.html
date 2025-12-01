@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Forward Project - 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for consistent styling */
+        :root {
+            --primary-bg: #1a1a2e; /* Dark background */
+            --secondary-bg: #16213e; /* Slightly lighter dark for sections */
+            --accent-gradient-start: #7F00FF; /* Purple */
+            --accent-gradient-end: #E100FF; /* Magenta */
+            --text-color-light: #e0e0e0;
+            --text-color-dark: #f0f0f0;
+            --header-height: 80px;
+            --border-radius-sm: 8px;
+            --border-radius-lg: 15px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition-speed: 0.3s ease;
+            --font-family-heading: 'Montserrat', sans-serif;
+            --font-family-body: 'Open Sans', sans-serif;
+        }
+
+        /* Global Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            line-height: 1.6;
+            color: var(--text-color-light);
+            background: var(--primary-bg);
+            background-image: linear-gradient(135deg, #1a1a2e 0%, #0f0f1d 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-heading);
+            color: var(--text-color-dark);
+            margin-bottom: 0.8em;
+            font-weight: 700;
+        }
+
+        h1 { font-size: 3.2em; line-height: 1.1; }
+        h2 { font-size: 2.5em; }
+        h3 { font-size: 1.8em; }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        a {
+            color: var(--text-color-dark);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: var(--accent-gradient-end);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: var(--border-radius-lg);
+            font-family: var(--font-family-heading);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+
+        .primary-btn {
+            background-image: linear-gradient(45deg, var(--accent-gradient-start) 0%, var(--accent-gradient-end) 100%);
+            color: white;
+            box-shadow: var(--box-shadow);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(127, 0, 255, 0.4);
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            border: 2px solid var(--accent-gradient-end);
+            color: var(--accent-gradient-end);
+            box-shadow: inset 0 0 0 rgba(0,0,0,0); /* Initial transparent shadow */
+        }
+
+        .secondary-btn:hover {
+            transform: translateY(-3px);
+            background-image: linear-gradient(45deg, var(--accent-gradient-start) 0%, var(--accent-gradient-end) 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 10px 25px rgba(127, 0, 255, 0.3);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-family-heading);
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--text-color-dark);
+            background-image: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            font-family: var(--font-family-heading);
+            font-weight: 600;
+            font-size: 1.05em;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-image: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            transition: width var(--transition-speed);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--secondary-bg);
+            background-image: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-image: linear-gradient(135deg, #0f0f1d 0%, var(--primary-bg) 100%);
+            padding: 120px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        .hero-section h1 {
+            font-size: 4.5em;
+            margin-bottom: 0.4em;
+            background-image: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero-section p {
+            font-size: 1.4em;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            color: var(--text-color-light);
+        }
+
+        .hero-section .project-date {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: var(--text-color-light);
+        }
+
+        .hero-section .project-date span {
+            background-image: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Features Section */
+        .features-section h2 {
+            margin-bottom: 60px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            background-color: var(--secondary-bg);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border: 1px solid rgba(127, 0, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(127, 0, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+            z-index: 0;
+        }
+
+        .feature-item:hover::before {
+            opacity: 1;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent-gradient-end);
+        }
+
+        .feature-item .icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-item p {
+            font-size: 0.95em;
+            color: var(--text-color-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* About Section */
+        .about-section h2 {
+            margin-bottom: 40px;
+        }
+
+        .about-section p {
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.1em;
+            color: var(--text-color-light);
+        }
+
+        .about-section p span {
+            background-image: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .about-section .btn {
+            margin-top: 30px;
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background-image: linear-gradient(135deg, var(--accent-gradient-start) 0%, var(--accent-gradient-end) 100%);
+            color: white;
+            padding: 100px 0;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.3em;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-section .primary-btn {
+            background-image: linear-gradient(45deg, #f0f0f0 0%, #ffffff 100%);
+            color: var(--accent-gradient-start);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .cta-section .primary-btn:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            color: var(--accent-gradient-end);
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-color-light);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9em;
+            border-top: 1px solid rgba(127, 0, 255, 0.1);
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: var(--text-color-light);
+            margin: 0 15px;
+            transition: color var(--transition-speed);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gradient-end);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.8em; }
+            h2 { font-size: 2em; }
+            .hero-section h1 { font-size: 3.5em; }
+            .hero-section p { font-size: 1.2em; }
+            .cta-section h2 { font-size: 2.5em; }
+            .cta-section p { font-size: 1.1em; }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 15px 10px 15px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .hero-section {
+                padding: 80px 0;
+                min-height: auto;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+
+            .hero-section p {
+                font-size: 1em;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .feature-item {
+                padding: 25px;
+            }
+
+            .cta-section {
+                padding: 80px 0;
+            }
+            .cta-section h2 {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2em; }
+            h2 { font-size: 1.8em; }
+            .hero-section h1 { font-size: 2em; }
+            .hero-section p { font-size: 0.9em; }
+
+            nav ul li {
+                margin: 0 10px 10px 10px;
+                font-size: 0.9em;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9em;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8em;
+            }
+
+            footer .footer-links {
+                flex-direction: column;
+            }
+            footer .footer-links a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project 2025</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Future Forward Project Initiative</h1>
+                <p>Launching a new era of innovation and design. Experience the future, today.</p>
+                <p class="project-date">Project Live Date: <span>2025-12-01</span></p>
+                <a href="#features" class="btn primary-btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="icon">🚀</i>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed and efficiency, ensuring a seamless user experience across all devices.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon">✨</i>
+                        <h3>Intuitive Design</h3>
+                        <p>A clean, modern interface designed for ease of use and visual appeal.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon">🛡️</i>
+                        <h3>Robust Security</h3>
+                        <p>Built with enterprise-grade security protocols to protect your data.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon">💡</i>
+                        <h3>Scalable Architecture</h3>
+                        <p>Designed to grow with your needs, from small startups to large enterprises.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <p>At Project 2025, we believe in pushing the boundaries of what's possible. Our dedicated team of innovators, designers, and engineers have poured their passion into creating a solution that not only meets the demands of tomorrow but anticipates them.</p>
+                <p>This project, officially launched on <span class="project-date-inline">2025-12-01</span>, represents a significant leap forward in our commitment to excellence and user-centric development. We're excited for you to be a part of this journey.</p>
+                <a href="#contact" class="btn secondary-btn">Get in Touch</a>
+            </div>
+        </section>
+
+        <section id="cta" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Join us and be a part of the next big thing. Contact us today to learn more about Project 2025.</p>
+                <a href="#contact" class="btn primary-btn">Contact Us Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2025 Project 2025. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
