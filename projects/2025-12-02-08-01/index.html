@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(to right, #5e30e6, #8e2de2); /* Violet to Purple */
+            --secondary-gradient: linear-gradient(to right, #00c6ff, #0072ff); /* Cyan to Blue */
+            --bg-dark: #1a1a2e; /* Dark blue-purple */
+            --text-light: #e0e0e0;
+            --text-muted: #b0b0b0;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --font-family: 'Poppins', sans-serif;
+            --transition-speed: 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, var(--bg-dark), #0f0f1c); /* Subtle dark gradient for body */
+            color: var(--text-light);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            background: rgba(26, 26, 46, 0.8); /* Semi-transparent dark background */
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: transform var(--transition-speed);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 400;
+            position: relative;
+            transition: color var(--transition-speed), transform var(--transition-speed);
+            padding: 0.5rem 0;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-gradient);
+            transition: width var(--transition-speed);
+        }
+
+        nav ul li a:hover {
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--primary-gradient);
+            padding: 8rem 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: pulse 10s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #fff, #b0e0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            background: var(--secondary-gradient);
+            box-shadow: 0 8px 25px rgba(0, 198, 255, 0.3);
+        }
+
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 198, 255, 0.5);
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left var(--transition-speed);
+            z-index: -1;
+        }
+
+        .button:hover::before {
+            left: 0;
+        }
+
+        /* Main Sections */
+        section {
+            padding: 6rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #fff, var(--secondary-gradient));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            text-align: center;
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #0f0f1c, var(--bg-dark));
+        }
+
+        .cta-section h2 {
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #fff, var(--primary-gradient));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f0f1c;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-section h1 {
+                font-size: 3rem;
+            }
+            .hero-section p {
+                font-size: 1.2rem;
+            }
+            h2 {
+                font-size: 2.5rem;
+            }
+            nav ul li {
+                margin-left: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                padding: 1rem 1.5rem;
+            }
+            nav {
+                margin-top: 1rem;
+                width: 100%;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            nav ul li a {
+                display: block;
+                padding: 0.8rem 0;
+            }
+            .hero-section {
+                padding: 6rem 0;
+                min-height: 60vh;
+            }
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+            section {
+                padding: 4rem 0;
+            }
+            .button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .card h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Visionary Solutions</a>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1>Unlock Your Digital Potential</h1>
+                <p>Innovative solutions crafted for the future. Project dated: <strong>2025-12-02</strong>.</p>
+                <a href="#contact" class="button">Get Started Today</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Capabilities</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Cutting-Edge Design</h3>
+                        <p>Modern aesthetics combined with intuitive user experience to make your brand stand out.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Robust Development</h3>
+                        <p>Scalable and secure web applications built with the latest technologies and best practices.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Performance Optimization</h3>
+                        <p>Ensuring lightning-fast loading times and smooth interactions for every user.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Strategic Consulting</h3>
+                        <p>Expert guidance to help you navigate the digital landscape and achieve your business goals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2>Our Latest Innovations</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>AI-Powered Analytics Dashboard</h3>
+                        <p>Transforming complex data into actionable insights for smarter business decisions.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Interactive E-commerce Platform</h3>
+                        <p>A seamless shopping experience with personalized recommendations and secure transactions.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Decentralized Blockchain App</h3>
+                        <p>Building secure and transparent solutions for the next generation of web applications.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Cloud-Native Microservices</h3>
+                        <p>Flexible and resilient architectures designed for unparalleled scalability and reliability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Vision?</h2>
+                <p style="color: var(--text-light); margin-bottom: 2.5rem; font-size: 1.2rem;">Let's collaborate and build something extraordinary together.</p>
+                <a href="mailto:info@visionsolutions.com" class="button">Contact Us Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Visionary Solutions. All rights reserved. Project Date: 2025-12-02.</p>
+        </div>
+    </footer>
+</body>
+</html>
