@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Project - 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg-gradient: linear-gradient(135deg, #E0C3FC 0%, #8EC5FC 100%); /* Light purple to light blue */
+            --secondary-bg-color: #f8f9fa; /* Off-white for section backgrounds */
+            --text-color-dark: #333333;
+            --text-color-light: #ffffff;
+            --accent-color: #6A82FB; /* Vibrant blue */
+            --accent-gradient: linear-gradient(45deg, #6A82FB 0%, #FC5C7D 100%); /* Blue to pink for buttons */
+            --card-bg-color: #ffffff;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --border-radius-large: 12px;
+            --border-radius-small: 8px;
+            --font-family-primary: 'Poppins', sans-serif;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-primary);
+            color: var(--text-color-dark);
+            line-height: 1.6;
+            background: var(--primary-bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 2.8rem; }
+        h2 { font-size: 2.2rem; }
+        h3 { font-size: 1.6rem; }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #4a6ffb; /* Slightly darker accent on hover */
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-color-dark);
+            font-weight: 600;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: var(--border-radius-small);
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: var(--text-color-light);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: var(--accent-gradient);
+            color: var(--text-color-light);
+            padding: 100px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: var(--border-radius-large);
+            border-bottom-right-radius: var(--border-radius-large);
+            margin-bottom: 40px;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(45deg);
+            z-index: 1;
+            animation: hero-animate 20s infinite linear;
+        }
+
+        @keyframes hero-animate {
+            0% { transform: rotate(0deg); opacity: 0.05; }
+            50% { transform: rotate(180deg); opacity: 0.1; }
+            100% { transform: rotate(360deg); opacity: 0.05; }
+        }
+
+        #hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.9;
+        }
+
+        /* Main Content Sections */
+        main {
+            flex: 1;
+        }
+
+        section {
+            padding: 60px 0;
+            margin-bottom: 40px;
+            background-color: var(--card-bg-color);
+            box-shadow: var(--shadow-light);
+            border-radius: var(--border-radius-large);
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--secondary-bg-color);
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-gradient);
+            border-radius: 5px;
+        }
+
+        /* Features Section */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background: var(--card-bg-color);
+            padding: 30px;
+            border-radius: var(--border-radius-small);
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 250px;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-color-dark);
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #555;
+            flex-grow: 1;
+        }
+
+        /* About Section */
+        #about p {
+            max-width: 800px;
+            margin: 0 auto 1rem auto;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Contact Section */
+        #contact .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background: var(--card-bg-color);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-light);
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color-dark);
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-small);
+            font-family: var(--font-family-primary);
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(106, 130, 251, 0.2);
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50; /* Darker background for footer */
+            color: #ecf0f1;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top-left-radius: var(--border-radius-large);
+            border-top-right-radius: var(--border-radius-large);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #ecf0f1;
+            font-weight: 400;
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            #hero h1 { font-size: 3rem; }
+            #hero p { font-size: 1.1rem; }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            header .logo {
+                margin-bottom: 1rem;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 0 0 10px 0;
+            }
+            #hero {
+                padding: 80px 0;
+                min-height: 50vh;
+            }
+            #hero h1 { font-size: 2.5rem; }
+            #hero p { font-size: 1rem; }
+            section {
+                padding: 40px 0;
+                margin-bottom: 20px;
+            }
+            h2 { font-size: 1.8rem; }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.6rem; }
+            #hero h1 { font-size: 2rem; }
+            #hero p { font-size: 0.9rem; }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            .feature-item {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureSphere</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Welcome to FutureSphere Projects</h1>
+                <p>Innovating for tomorrow, today. Explore our cutting-edge solutions designed to shape the future.</p>
+                <a href="#features" class="btn btn-primary">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="icon">🚀</div>
+                        <h3>Innovative Solutions</h3>
+                        <p>We leverage the latest technologies to build solutions that are not just current, but future-proof.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">💡</div>
+                        <h3>Smart Design</h3>
+                        <p>Our designs are intuitive, user-friendly, and aesthetically pleasing, ensuring a seamless experience.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">🌐</div>
+                        <h3>Global Reach</h3>
+                        <p>Designed for scalability and internationalization, our projects are ready for a global audience.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">🔒</div>
+                        <h3>Robust Security</h3>
+                        <p>Security is paramount. We implement industry-leading practices to protect your data and privacy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <p>FutureSphere is dedicated to pushing the boundaries of what's possible. We believe in creating technology that empowers individuals and transforms industries. Our team of passionate innovators works tirelessly to bring groundbreaking ideas to life, focusing on sustainability, efficiency, and human-centered design.</p>
+                <p>With a strong commitment to excellence and a forward-thinking approach, we're not just building products; we're building the future.</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <div class="contact-form">
+                    <form action="#" method="POST">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureSphere. All rights reserved. Project Date: <strong>2025-12-02</strong>.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+</body>
+</html>
