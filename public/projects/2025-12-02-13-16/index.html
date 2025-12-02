@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #f72b7e 0%, #f98b5e 100%);
+            --bg-color-light: #f0f2f5;
+            --bg-color-dark: #1a1a2e;
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-strong: rgba(0, 0, 0, 0.15);
+            --border-radius-sm: 8px;
+            --border-radius-lg: 15px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--bg-color-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: 20px 0;
+            box-shadow: 0 4px 8px var(--shadow-strong);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: var(--border-radius-sm);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        nav a:hover, nav a:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        main {
+            flex-grow: 1;
+            padding-top: 20px;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 6px 15px var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        .hero {
+            background: var(--secondary-gradient);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 2.2em;
+            color: #444;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-color-light);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 10px var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px var(--shadow-strong);
+        }
+
+        .feature-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: -webkit-linear-gradient(135deg, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        footer {
+            background: var(--bg-color-dark);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        .social-links a {
+            color: var(--text-color-light);
+            font-size: 1.5em;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #2575fc;
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 15px;
+            }
+
+            nav a {
+                padding: 10px 20px;
+                display: block;
+            }
+
+            .hero {
+                padding: 60px 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            section {
+                padding: 30px 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .logo {
+                font-size: 1.5em;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureFlow Innovations</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero" id="home">
+                <h1>Unlock Your Potential with Cutting-Edge Solutions</h1>
+                <p>We provide innovative technology and strategic insights to drive your success in a rapidly evolving digital landscape.</p>
+                <a href="#services" class="btn">Explore Our Services</a>
+            </section>
+
+            <section id="services">
+                <h2>Our Core Services</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h3>Digital Transformation</h3>
+                        <p>Guiding businesses through seamless integration of digital technology into all areas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💡</div>
+                        <h3>AI & Machine Learning</h3>
+                        <p>Leveraging artificial intelligence to automate processes and generate actionable insights.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🌐</div>
+                        <h3>Cloud Solutions</h3>
+                        <p>Scalable and secure cloud infrastructure to power your applications and data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h3>Cybersecurity</h3>
+                        <p>Protecting your digital assets with robust security measures and proactive threat detection.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about">
+                <h2>About FutureFlow Innovations</h2>
+                <div class="about-content">
+                    <p>FutureFlow Innovations is at the forefront of technological advancement, dedicated to empowering businesses with the tools and strategies needed to thrive in the modern era. Our team of experts specializes in developing bespoke solutions that address unique challenges and unlock new opportunities.</p>
+                    <p>We believe in a future where technology serves as a catalyst for growth and efficiency. Our commitment to innovation, quality, and client success drives every project we undertake, ensuring measurable results and sustainable impact.</p>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2>Get In Touch</h2>
+                <p style="text-align: center; margin-bottom: 20px; font-size: 1.1em; color: #555;">Have a project in mind or just want to say hello? Reach out to us!</p>
+                <form style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;">
+                    <input type="text" placeholder="Your Name" style="padding: 12px; border: 1px solid #ddd; border-radius: var(--border-radius-sm); font-family: 'Poppins', sans-serif;">
+                    <input type="email" placeholder="Your Email" style="padding: 12px; border: 1px solid #ddd; border-radius: var(--border-radius-sm); font-family: 'Poppins', sans-serif;">
+                    <textarea placeholder="Your Message" rows="5" style="padding: 12px; border: 1px solid #ddd; border-radius: var(--border-radius-sm); font-family: 'Poppins', sans-serif; resize: vertical;"></textarea>
+                    <button type="submit" class="btn" style="align-self: flex-start;">Send Message</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureFlow Innovations. All rights reserved.</p>
+            <p>Project Date: 2025-12-02</p>
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+    <!-- Font Awesome for social icons. Consider self-hosting for production. -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
