@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Launch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            --bg-light: #f8faff;
+            --text-dark: #333;
+            --text-light: #fff;
+            --accent-color: #2575fc;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+            --transition-speed: 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: #004d9c; /* Darker shade of accent */
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.2rem; }
+        h3 { font-size: 1.6rem; }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all var(--transition-speed);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .primary-btn {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            box-shadow: 0 8px 20px -5px rgba(37, 117, 252, 0.6);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px -5px rgba(37, 117, 252, 0.7);
+            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%); /* Reverse gradient on hover */
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 600;
+            color: var(--text-dark);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary-gradient);
+            transition: width var(--transition-speed);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 100px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse-effect 15s infinite alternate;
+        }
+
+        @keyframes pulse-effect {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 0.9; }
+        }
+
+
+        .hero-section h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .hero-section p span {
+            font-weight: 700;
+            color: #ffeb3b; /* A contrasting color for the date */
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f0f4f8;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.8rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-section .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background-color: var(--text-light);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px var(--shadow-light);
+            text-align: center;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow-medium);
+        }
+
+        .feature-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            border-radius: 50%;
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.4);
+            font-style: normal; /* To prevent italicizing icon text */
+        }
+        .feature-item h3 {
+            margin-top: 1rem;
+            font-size: 1.4rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Showcase Section */
+        .showcase-section .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .showcase-item {
+            background-color: var(--text-light);
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px var(--shadow-light);
+            overflow: hidden;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .showcase-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow-medium);
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .showcase-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .showcase-item .content {
+            padding: 25px;
+        }
+
+        .showcase-item h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .showcase-item p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+        }
+
+        .contact-section p {
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+            outline: none;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--text-light);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            opacity: 0.7;
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+            color: var(--accent-color);
+        }
+        /* Simple text for icon placeholders, replace with actual icons if using library */
+        .icon-design::before { content: "✨"; }
+        .icon-performance::before { content: "⚡"; }
+        .icon-security::before { content: "🔒"; }
+        .icon-support::before { content: "💬"; }
+        .icon-facebook::before { content: "f"; font-weight: bold; }
+        .icon-twitter::before { content: "t"; font-weight: bold; }
+        .icon-linkedin::before { content: "in"; font-weight: bold; font-size: 1rem; }
+
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.4rem; }
+
+            .hero-section {
+                padding: 80px 0;
+                min-height: 70vh;
+            }
+            .hero-section h1 {
+                font-size: 3.2rem;
+            }
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero-section {
+                padding: 60px 0;
+                min-height: 60vh;
+            }
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .feature-grid, .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            footer .container {
+                flex-direction: column;
+            }
+            .social-links {
+                margin-top: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Ascend</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#showcase">Showcase</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Unleash the Future with Project Ascend</h1>
+                <p>Innovating with cutting-edge technology and design. Our journey officially began on <span>2025-12-03</span>.</p>
+                <a href="#features" class="btn primary-btn">Explore Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <span class="icon icon-design"></span>
+                        <h3>Intuitive Design</h3>
+                        <p>Experience seamless navigation and a visually stunning interface crafted for you.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon icon-performance"></span>
+                        <h3>Blazing Performance</h3>
+                        <p>Optimized for speed and efficiency, ensuring a smooth experience on any device.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon icon-security"></span>
+                        <h3>Enterprise-Grade Security</h3>
+                        <p>Your data is our priority. Protected with advanced encryption and robust protocols.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon icon-support"></span>
+                        <h3>Dedicated Support</h3>
+                        <p>Our expert team is available 24/7 to assist you with any queries or challenges.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="showcase" class="showcase-section">
+            <div class="container">
+                <h2>Our Work in Action</h2>
+                <div class="showcase-grid">
+                    <div class="showcase-item">
+                        <img src="https://via.placeholder.com/400x250/2575fc/ffffff?text=Modern+Interface" alt="Modern Interface Mockup">
+                        <div class="content">
+                            <h3>Modern Interface</h3>
+                            <p>A sleek and intuitive user interface designed for maximum productivity.</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://via.placeholder.com/400x250/00c6ff/ffffff?text=Data+Analytics" alt="Data Analytics Dashboard Mockup">
+                        <div class="content">
+                            <h3>Dynamic Data Analytics</h3>
+                            <p>Visualize your data with powerful, real-time analytics dashboards.</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://via.placeholder.com/400x250/6a11cb/ffffff?text=Seamless+Integration" alt="Seamless Integration Mockup">
+                        <div class="content">
+                            <h3>Seamless Integration</h3>
+                            <p>Connect effortlessly with your favorite tools and services for a unified workflow.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have a question, a project idea, or just want to say hello? We'd love to hear from you!</p>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="6"></textarea>
+                    <button type="submit" class="btn primary-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project Ascend. All rights reserved. Launched with vision on 2025-12-03.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><span class="icon icon-facebook"></span></a>
+                <a href="#" aria-label="Twitter"><span class="icon icon-twitter"></span></a>
+                <a href="#" aria-label="LinkedIn"><span class="icon icon-linkedin"></span></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
