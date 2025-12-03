@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #1a2a6c; /* Dark Blue */
+            --color-secondary: #b21f1f; /* Dark Red */
+            --color-accent: #fdbb2d; /* Gold/Yellow */
+            --color-text-light: #e0e0e0;
+            --color-text-dark: #333;
+            --color-bg-dark: #0f0c29; /* Dark Purple */
+            --color-bg-light: #24243e; /* Slightly Lighter Purple */
+            --gradient-main: linear-gradient(135deg, #0f0c29 0%, #3a0e4a 50%, #24243e 100%);
+            --gradient-button: linear-gradient(45deg, #fdbb2d 0%, #fc6603 100%);
+            --gradient-card: linear-gradient(135deg, #2a2a4a 0%, #1c1c3a 100%);
+            --border-radius-lg: 15px;
+            --border-radius-md: 8px;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-light);
+            background: var(--gradient-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-text-light);
+        }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+        p { margin-bottom: 1rem; }
+
+        /* Links & Buttons */
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffdd88;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: var(--border-radius-md);
+            background: var(--gradient-button);
+            color: var(--color-bg-dark); /* Dark text on bright button */
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(253, 187, 45, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(253, 187, 45, 0.6);
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(15, 12, 41, 0.8);
+            padding: var(--spacing-sm) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+            letter-spacing: -0.05em;
+        }
+
+        .logo span {
+            color: var(--color-accent);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        nav ul li a {
+            color: var(--color-text-light);
+            font-weight: 400;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: var(--spacing-lg) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, #000428, #004e92); /* Deep blue gradient */
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(45deg, #e0e0e0, var(--color-accent), #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+            color: var(--color-text-light);
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--color-bg-light);
+            text-align: center;
+        }
+
+        .features h2 {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .feature-card {
+            background: var(--gradient-card);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-md);
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-card h3 {
+            color: var(--color-accent);
+            margin-bottom: 0.8rem;
+            font-size: 1.8rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--color-bg-dark);
+            text-align: center;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            align-items: center;
+        }
+
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: linear-gradient(90deg, #1CB5E0 0%, #000046 100%); /* Blue to Dark Blue */
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cta h2 {
+            color: var(--color-text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            color: var(--color-text-light);
+            opacity: 0.9;
+        }
+
+        .cta .project-date {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-top: 1rem;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-light);
+            text-align: center;
+            padding: var(--spacing-md) 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-nav ul li a {
+            color: var(--color-text-light);
+            opacity: 0.8;
+        }
+
+        .footer-nav ul li a:hover {
+            opacity: 1;
+            color: var(--color-accent);
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            margin: 0 0.8rem;
+            color: var(--color-text-light);
+            opacity: 0.7;
+        }
+
+        .social-links a:hover {
+            color: var(--color-accent);
+            opacity: 1;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+                width: 100%;
+            }
+
+            nav ul li a {
+                padding: 0.5rem 0;
+                display: block;
+            }
+
+            .hero {
+                padding: var(--spacing-md) 0;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            footer .container {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project<span>X</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Unleash Your Creative Potential</h1>
+                <p>Experience the next generation of innovative solutions designed to transform your workflow and elevate your projects to new heights.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Design</h3>
+                        <p>Streamlined user interfaces that make complex tasks simple and accessible for everyone, regardless of technical expertise.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Powerful Performance</h3>
+                        <p>Optimized for speed and efficiency, ensuring your projects run smoothly and deliver results faster than ever before.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Solutions</h3>
+                        <p>Designed to grow with your needs, our flexible architecture supports everything from small tasks to enterprise-level demands.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Secure & Reliable</h3>
+                        <p>Your data's safety is our top priority with advanced encryption and robust security protocols protecting your information.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>Our Vision</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>At ProjectX, we believe in crafting tools that empower creators and innovators. Our journey began with a simple idea: to build a platform that not only meets the current demands of modern development but also anticipates future challenges. We're a team of passionate engineers and designers dedicated to pushing the boundaries of what's possible.</p>
+                        <p>We focus on user-centric design, robust architecture, and a commitment to continuous improvement, ensuring our solutions remain cutting-edge and relevant in a rapidly evolving digital landscape.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Start Your Next Big Project?</h2>
+                <p>Join the future of innovation. Our team is ready to assist you in making your vision a reality. Let's connect and build something amazing together.</p>
+                <a href="#" class="btn">Get in Touch</a>
+                <span class="project-date">Project Date: 2025-12-03</span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <p>&copy; 2025 ProjectX. All rights reserved. Built with passion for the future.</p>
+            <p>Project Initiated: 2025-12-03</p>
+        </div>
+    </footer>
+</body>
+</html>
