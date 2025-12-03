@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg-start: #0F2027; /* Dark Blue-Gray */
+            --primary-bg-end: #2C5364;   /* Darker Blue */
+            --accent-color-1: #4CAF50; /* Green for success/call to action */
+            --accent-color-2: #8E2DE2; /* Vibrant Purple */
+            --accent-color-3: #4A00E0; /* Deeper Purple */
+            --text-light: #e0e0e0;
+            --text-dark: #333;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-radius-lg: 12px;
+            --border-radius-sm: 6px;
+            --gradient-button: linear-gradient(45deg, var(--accent-color-2), var(--accent-color-3));
+            --gradient-hover: linear-gradient(45deg, var(--accent-color-3), var(--accent-color-2));
+        }
+
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--primary-bg-start), var(--primary-bg-end));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            background: linear-gradient(45deg, #FFD700, #FFA500); /* Gold/Orange gradient for logo */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--accent-color-2);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color-2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Y29kZSxkZXNpZ24scHJvZ3JhbW1pbmd8fHx8fHwxNzAzNTg0Mjcx&ixlib=rb-4.0.3&q=80&w=1920') no-repeat center center/cover;
+            padding: 100px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1; /* Allow hero to take up available space */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(142, 45, 226, 0.1) 0%, rgba(74, 0, 224, 0.05) 50%, transparent 70%);
+            animation: pulse 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8) rotate(0deg); opacity: 0.8; }
+            100% { transform: scale(1.2) rotate(10deg); opacity: 1; }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Warm gradient for hero title */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: var(--text-light);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--gradient-button);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: var(--border-radius-lg);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease-in-out;
+            transform: skewX(-20deg);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+            background: var(--gradient-hover);
+        }
+
+        /* Main Sections */
+        main {
+            padding: 60px 0;
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 80px 0;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #6a11cb, #2575fc); /* Blue-Purple gradient for section titles */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-button);
+            transition: all 0.3s ease;
+            transform: translateY(-100%);
+        }
+
+        .feature-card:hover::before {
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+            color: var(--accent-color-1);
+            background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59); /* Tri-color gradient for feature titles */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            background: linear-gradient(90deg, #FFC371, #FF5F6D); /* Orange-red gradient for about title */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--accent-color-2);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Project Details Section */
+        .project-details {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 60px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-details h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--text-light);
+            background: linear-gradient(90deg, #00c6ff, #0072ff); /* Bright blue gradient for project details title */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-details p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .project-date {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--accent-color-1);
+            background: linear-gradient(45deg, #1D976C, #93F9B9); /* Green gradient for date */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: var(--border-radius-sm);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--accent-color-2);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color-1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                display: none; /* Hide nav for small screens, typically replaced by a hamburger menu */
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-image {
+                order: -1; /* Image above text on mobile */
+            }
+
+            .project-details {
+                padding: 40px 20px;
+            }
+
+            .project-details h2 {
+                font-size: 2rem;
+            }
+
+            .project-details p {
+                font-size: 1rem;
+            }
+
+            .project-date {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 40px;
+            }
+
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .feature-card p {
+                font-size: 0.9rem;
+            }
+
+            .about-text h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-text p {
+                font-size: 0.95rem;
+            }
+
+            .project-details h2 {
+                font-size: 1.8rem;
+            }
+
+            .project-date {
+                font-size: 1.2rem;
+            }
+
+            footer p {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">ProjectX</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Revolutionizing Digital Experiences</h1>
+                <p>Unleash the power of innovation with our cutting-edge solutions designed for the future.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2 class="section-title">Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Design</h3>
+                        <p>Experience seamless navigation and user-friendly interfaces crafted for optimal engagement.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Architecture</h3>
+                        <p>Our robust infrastructure ensures your project grows effortlessly with your demands.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Cutting-Edge Technology</h3>
+                        <p>Leverage the latest advancements in web development for unparalleled performance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Secure & Reliable</h3>
+                        <p>Your data and operations are safeguarded with industry-leading security protocols.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About Our Vision</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Driving Innovation Forward</h2>
+                        <p>At ProjectX, we believe in pushing boundaries and creating solutions that not only meet today's needs but also anticipate tomorrow's challenges. Our team of dedicated experts combines creativity with technical prowess to deliver products that truly make a difference.</p>
+                        <p>From conceptualization to deployment, we prioritize excellence and user satisfaction. Join us on a journey to redefine possibilities in the digital landscape.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1542831371-d365f917df0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Y29kaW5nLHdlYmRldmVsb3BtZW50fHx8fHwxNzAzNTg0NDg0&ixlib=rb-4.0.3&q=80&w=600" alt="About Us">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">Project Milestones</h2>
+                <div class="project-details">
+                    <h2>Current Project Status</h2>
+                    <p>We are currently working on exciting new features and optimizations to enhance your experience. Our next major release is scheduled for:</p>
+                    <p class="project-date">2025-12-04</p>
+                    <p>Stay tuned for more updates and groundbreaking advancements!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 ProjectX. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
