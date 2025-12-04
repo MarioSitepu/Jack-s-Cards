@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #6A11CB; /* Deep Purple */
+            --secondary-color: #2575FC; /* Bright Blue */
+            --accent-color: #FFC107; /* Amber */
+            --text-dark: #333;
+            --text-light: #f0f0f0;
+            --bg-light: #f8f8f8;
+            --bg-dark: #2a2a2a;
+            --gradient-header: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            --gradient-button: linear-gradient(to right, #FFD700, var(--accent-color));
+            --gradient-hero-overlay: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: var(--text-light);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-header);
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-button);
+            color: var(--text-dark);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: var(--text-dark); /* Ensure text color remains readable on hover */
+        }
+
+        .secondary-btn {
+            background: var(--gradient-header);
+            color: var(--text-light);
+        }
+
+        .secondary-btn:hover {
+            color: var(--text-light);
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-header);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--box-shadow);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        /* Navigation */
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        nav ul li a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-hero-overlay), url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            color: var(--text-light);
+            text-align: center;
+            padding: 8rem 0;
+            display: flex;
+            align-items: center;
+            min-height: 70vh;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 0;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--bg-light);
+        }
+
+        section:nth-of-type(odd) {
+            background-color: #fff;
+        }
+
+        /* Features Section */
+        .features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        /* Placeholder for icons, if FontAwesome is not linked */
+        .feature-item .icon::before {
+            content: "💡"; /* Example unicode icon */
+            display: inline-block;
+            font-size: 3rem;
+            line-height: 1;
+        }
+        .feature-item:nth-child(2) .icon::before { content: "⚙️"; }
+        .feature-item:nth-child(3) .icon::before { content: "📈"; }
+
+
+        .feature-item h3 {
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* About Section */
+        .about {
+            text-align: center;
+        }
+
+        .about p {
+            max-width: 800px;
+            margin: 1rem auto 2rem auto;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .about p strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: var(--gradient-header);
+            color: var(--text-light);
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .cta h2 {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        .cta h2::after {
+            background: var(--gradient-button);
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item {
+                padding: 2rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            .cta h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project 2025</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Welcome to Our Modern Project</h1>
+                <p>Innovating for the future, today.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <span class="icon" aria-hidden="true"></span>
+                        <h3>Innovative Solutions</h3>
+                        <p>We bring fresh perspectives and cutting-edge technology to every challenge.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon" aria-hidden="true"></span>
+                        <h3>Seamless Integration</h3>
+                        <p>Our systems are designed for effortless compatibility and smooth operation.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon" aria-hidden="true"></span>
+                        <h3>Performance Driven</h3>
+                        <p>Optimized for speed and efficiency, delivering exceptional results.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About Us</h2>
+                <p>We are a dedicated team passionate about creating impactful digital experiences. Our project, initiated for the future, aims to set new benchmarks in innovation and user satisfaction. We believe in transparency, collaboration, and continuous improvement.</p>
+                <p>This initiative is proudly moving forward, with key milestones targeted for <strong class="highlight-date">2025-12-04</strong>.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Start?</h2>
+                <p>Get in touch with us to learn how we can help your vision come to life.</p>
+                <a href="#" class="btn secondary-btn">Contact Us</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Modern Project. All rights reserved.</p>
+            <p>Project Status Date: 2025-12-04</p>
+        </div>
+    </footer>
+</body>
+</html>
