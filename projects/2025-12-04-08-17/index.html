@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nova - Future Forward</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for a consistent theme */
+        :root {
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --text-light: #e0e0e0;
+            --text-accent: #b8c6db;
+            --gradient-start: #3f0071;
+            --gradient-middle: #8d00b3;
+            --gradient-end: #c700ff;
+            --accent-color: #e94560;
+            --card-bg: #222c4b;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-light: rgba(0, 0, 0, 0.3);
+            --shadow-dark: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styling */
+        header {
+            background: var(--bg-darker);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 15px var(--shadow-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-middle), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2.5rem;
+        }
+
+        nav ul li a {
+            color: var(--text-accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-color);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--text-light);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content Styling */
+        main {
+            flex-grow: 1;
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(45deg, var(--gradient-start) 0%, var(--gradient-middle) 50%, var(--gradient-end) 100%);
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            position: relative;
+            overflow: hidden;
+            color: var(--text-light); /* Ensure text is readable on gradient */
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0.2;
+            animation: pulse 10s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.2; }
+            100% { transform: scale(1.05); opacity: 0.3; }
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 5px var(--shadow-dark);
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(233, 69, 96, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            background-color: #ff5e7d; /* Lighter shade of accent */
+            box-shadow: 0 12px 25px rgba(233, 69, 96, 0.6);
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-light);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Grid Container for Cards */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Card Styling */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px var(--shadow-dark);
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--text-accent);
+            font-size: 1rem;
+        }
+
+        /* Date Highlight Styling */
+        .date-highlight {
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-color) 0%, #ff7f50 100%); /* Orange-red gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block; /* Required for text gradient */
+        }
+
+        /* Footer Styling */
+        footer {
+            background: var(--bg-darker);
+            color: var(--text-accent);
+            text-align: center;
+            padding: 2rem 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr; /* Stack cards on smaller screens */
+            }
+
+            main {
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.7rem 1.8rem;
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .card h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Project Nova</a>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h1>Welcome to Project Nova</h1>
+            <p>Your ultimate solution for modern project management and collaboration, designed for the future. The next major milestone is set for <span class="date-highlight">2025-12-04</span>.</p>
+            <a href="#" class="cta-button">Get Started Today</a>
+        </section>
+
+        <section>
+            <h2 class="section-title">Key Features</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Intuitive Dashboard</h3>
+                    <p>A beautifully designed interface that makes managing your projects effortless and insightful. Track progress at a glance.</p>
+                </div>
+                <div class="card">
+                    <h3>Real-time Collaboration</h3>
+                    <p>Work together seamlessly with your team, no matter where you are. Instant updates and shared workspaces keep everyone aligned.</p>
+                </div>
+                <div class="card">
+                    <h3>Advanced Analytics</h3>
+                    <p>Gain deep insights into your project's performance with powerful, customizable analytics and reporting tools.</p>
+                </div>
+                <div class="card">
+                    <h3>Secure & Scalable</h3>
+                    <p>Built with enterprise-grade security and designed to scale with your growing needs, from small teams to large corporations.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Our Vision for the Future</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>AI-Powered Automation</h3>
+                    <p>By <span class="date-highlight">2025-12-04</span>, we aim to integrate cutting-edge AI for intelligent task automation and predictive analysis.</p>
+                </div>
+                <div class="card">
+                    <h3>Enhanced Integrations</h3>
+                    <p>Our platform will offer seamless integration with hundreds of popular tools, expanding your workflow possibilities by the end of 2025.</p>
+                </div>
+                <div class="card">
+                    <h3>Community & Support</h3>
+                    <p>We're building a vibrant community and expanding our 24/7 support to ensure you always have the help you need.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Project Nova. All rights reserved. Designed with passion for the future.</p>
+    </footer>
+</body>
+</html>
