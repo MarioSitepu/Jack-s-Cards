@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureTech Project 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg-start: #0f0c29;
+            --primary-bg-end: #302b63;
+            --primary-bg-mid: #24243e;
+            --accent-gradient-start: #6a11cb;
+            --accent-gradient-end: #2575fc;
+            --text-color-light: #e0e0e0;
+            --text-color-dark: #f0f0f0;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.15);
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-light);
+            background: linear-gradient(135deg, var(--primary-bg-start) 0%, var(--primary-bg-mid) 50%, var(--primary-bg-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            background-color: rgba(15, 12, 41, 0.8);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            backdrop-filter: blur(5px);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color-dark);
+            text-decoration: none;
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: var(--text-color-dark);
+            transform: translateY(-2px);
+        }
+        
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section:nth-of-type(even) {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-color-light);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-color-dark);
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            box-shadow: 0 8px 15px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-gradient-end), var(--accent-gradient-start));
+            z-index: -1;
+            transition: transform 0.5s ease;
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+
+        .btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px var(--shadow-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            padding: 8rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+        }
+
+        #hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 900px;
+            color: var(--text-color-dark);
+        }
+
+        /* Features Section */
+        #features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        .feature-item h3 {
+            margin-bottom: 1rem;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            margin-bottom: 0;
+            color: var(--text-color-light);
+        }
+
+        /* About Section */
+        #about {
+            text-align: left;
+        }
+
+        #about .content {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        #about .text-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        #about .image-placeholder {
+            flex: 1;
+            min-width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-color-dark);
+            box-shadow: 0 5px 20px var(--shadow-color);
+        }
+        
+        #about p {
+            text-align: left;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        /* CTA Section */
+        #cta {
+            background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            padding: 5rem 0;
+            color: var(--text-color-dark);
+            box-shadow: inset 0 5px 20px var(--shadow-color), inset 0 -5px 20px var(--shadow-color);
+        }
+
+        #cta h2 {
+            color: var(--text-color-dark);
+            -webkit-text-fill-color: var(--text-color-dark);
+        }
+
+        #cta p {
+            color: var(--text-color-dark);
+            margin-bottom: 2.5rem;
+        }
+        
+        #cta .btn {
+            background: var(--primary-bg-start); /* Darker button for contrast */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.6);
+        }
+
+        #cta .btn::before {
+             background: var(--primary-bg-end);
+        }
+
+        footer {
+            background-color: rgba(15, 12, 41, 0.9);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -2px 10px var(--shadow-color);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: var(--accent-gradient-end);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-gradient-start);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            #hero p {
+                font-size: 1.15rem;
+            }
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+            #about .content {
+                flex-direction: column;
+                text-align: center;
+            }
+            #about .image-placeholder {
+                width: 100%;
+                max-width: 400px;
+                height: 250px;
+            }
+            #about p {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+                width: 100%;
+            }
+            nav a {
+                font-size: 0.95rem;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            section {
+                padding: 4rem 0;
+            }
+            #hero {
+                padding: 6rem 0;
+                min-height: 70vh;
+            }
+            .feature-item {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .logo {
+                font-size: 1.5rem;
+            }
+            .btn {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">FutureTech</a>
+            <nav>
+                <ul>
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Unlock Tomorrow's Potential Today</h1>
+                <p>Experience the cutting edge of innovation with our revolutionary platform, designed for the future.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Innovations</h2>
+                <p>Our platform brings a suite of powerful features designed to streamline your workflow and enhance productivity.</p>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h3>AI-Powered Analytics</h3>
+                        <p>Gain deeper insights with advanced artificial intelligence, predicting trends and optimizing performance.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Seamless Integration</h3>
+                        <p>Connect effortlessly with your existing tools and services, creating a unified ecosystem.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Adaptive Security</h3>
+                        <p>Your data is protected by next-generation security protocols that learn and adapt to new threats.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Intuitive Interface</h3>
+                        <p>A beautifully designed user experience ensures ease of use and maximum efficiency for all users.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About FutureTech</h2>
+                <div class="content">
+                    <div class="text-content">
+                        <p>At FutureTech, we believe in pushing the boundaries of what's possible. Our journey began with a vision to create technology that not only solves today's problems but anticipates tomorrow's challenges.</p>
+                        <p>We are a team of passionate innovators, engineers, and designers committed to delivering excellence. Our core philosophy revolves around user-centric design, robust performance, and sustainable growth. We are constantly evolving, driven by curiosity and the desire to make a meaningful impact in the digital landscape.</p>
+                        <a href="#contact" class="btn">Join Our Journey</a>
+                    </div>
+                    <div class="image-placeholder">
+                        <span>Innovation in Action</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Don't get left behind. Embrace the future with FutureTech and elevate your capabilities.</p>
+                <a href="#contact" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureTech. All rights reserved.</p>
+            <p>Project Date: 2025-12-05</p>
+            <p>Designed with <span style="color: #e25555;">&hearts;</span> for a better tomorrow.</p>
+        </div>
+    </footer>
+</body>
+</html>
