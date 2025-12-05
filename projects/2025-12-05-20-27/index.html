@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere - Project 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #6a11cb;
+            --primary-gradient-end: #2575fc;
+            --secondary-gradient-start: #fc6076;
+            --secondary-gradient-end: #ff9a44;
+            --text-light: #f0f0f0;
+            --text-dark: #333;
+            --accent-color: #00f2fe;
+            --background-dark: #1a1a2e;
+            --card-background: rgba(255, 255, 255, 0.08);
+            --border-radius-lg: 15px;
+            --border-radius-sm: 8px;
+            --spacing-unit: 1rem;
+        }
+
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--background-dark);
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-light);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            background: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+        }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 2);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            color: var(--text-light);
+            padding: 0.8rem 2rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Header */
+        header {
+            background: var(--background-dark);
+            padding: var(--spacing-unit) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent-color), var(--text-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: calc(var(--spacing-unit) * 2);
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            font-weight: 600;
+            transition: color 0.3s ease, background-image 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            padding: calc(var(--spacing-unit) * 6) 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: var(--border-radius-lg);
+            border-bottom-right-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: moveGradient 15s infinite alternate;
+        }
+
+        @keyframes moveGradient {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(50%, 50%);
+            }
+        }
+
+        #hero .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        #hero h1 {
+            font-size: 4rem;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            color: var(--text-light);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #hero p {
+            font-size: 1.4rem;
+            margin-bottom: calc(var(--spacing-unit) * 2.5);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        /* General Section Styling */
+        section {
+            padding: calc(var(--spacing-unit) * 5) 0;
+        }
+
+        /* Features Section */
+        #features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        #features .feature-item {
+            background: var(--card-background);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #features .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        #features .feature-item i {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-unit);
+            background: linear-gradient(to right, var(--accent-color), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #features .feature-item h3 {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        #features .feature-item p {
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        #about {
+            background: linear-gradient(45deg, var(--background-dark) 0%, #2a2a4a 100%);
+            color: var(--text-light);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #about .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 4);
+        }
+
+        #about .about-text, #about .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        #about .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease;
+        }
+
+        #about .about-image img:hover {
+            transform: scale(1.02);
+        }
+
+        #about h2 {
+            text-align: left;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        #about p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+        }
+
+        #contact .contact-info {
+            margin-top: calc(var(--spacing-unit) * 3);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-unit);
+            align-items: center;
+        }
+
+        #contact .contact-info p {
+            font-size: 1.2rem;
+        }
+
+        #contact .contact-info a {
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--background-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2) 0;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            opacity: 0.7;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            #hero {
+                min-height: 60vh;
+                padding: calc(var(--spacing-unit) * 4) 0;
+            }
+
+            #hero h1 {
+                font-size: 3rem;
+            }
+
+            #hero p {
+                font-size: 1.1rem;
+            }
+
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header .logo {
+                margin-bottom: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem var(--spacing-unit);
+            }
+
+            #features .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #about .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            #about .about-text, #about .about-image {
+                min-width: unset;
+            }
+
+            #about h2 {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            #hero {
+                min-height: 50vh;
+                padding: calc(var(--spacing-unit) * 3) 0;
+            }
+
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            #hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0.8rem;
+            }
+        }
+
+        /* Font Awesome for icons (optional, but good for modern appeal) */
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureSphere</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Unlock Tomorrow's Potential Today</h1>
+                <p>Revolutionary solutions for a connected future. Experience innovation designed for 2025 and beyond.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed and efficiency, delivering unparalleled user experience.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Advanced Security</h3>
+                        <p>State-of-the-art encryption and protection to keep your data safe and sound.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Seamless Integration</h3>
+                        <p>Effortlessly connect with your existing tools and workflows for maximum productivity.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-brain"></i>
+                        <h3>Intelligent Automation</h3>
+                        <p>Harness the power of AI to automate complex tasks and streamline operations.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Cross-Platform Compatibility</h3>
+                        <p>Access your projects from any device, anywhere, with a consistent experience.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Insightful Analytics</h3>
+                        <p>Gain deep understanding with powerful, real-time data visualization and reporting.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>About FutureSphere</h2>
+                        <p>FutureSphere is at the forefront of technological innovation, building solutions that empower businesses and individuals to thrive in a rapidly evolving digital landscape. Our team of visionary engineers and designers is committed to pushing the boundaries of what's possible, delivering products that are not just functional, but truly transformative.</p>
+                        <p>With a focus on user-centric design and cutting-edge technology, we believe in creating tools that are intuitive, powerful, and future-proof. Our journey is driven by a passion for progress and a commitment to excellence.</p>
+                        <p>This project, conceptualized for release on <span style="font-weight: 600; color: var(--accent-color);">2025-12-05</span>, represents a significant leap forward in our mission.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/6a11cb/2575fc?text=FutureSphere+Vision" alt="Abstract future vision">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have questions or want to learn more about FutureSphere? We'd love to hear from you!</p>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:info@futuresphere.com">info@futuresphere.com</a></p>
+                    <p><i class="fas fa-phone"></i> Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> Address: 123 Innovation Drive, Tech City, FS 12345</p>
+                </div>
+                <a href="#" class="btn" style="margin-top: calc(var(--spacing-unit) * 2);">Send Us a Message</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureSphere. All rights reserved. | Project Date: 2025-12-05</p>
+        </div>
+    </footer>
+</body>
+</html>
