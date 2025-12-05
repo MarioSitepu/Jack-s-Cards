@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Innovations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark-bg: #0a0a0a;
+            --color-light-text: #e0e0e0;
+            --color-accent-blue: #00c6ff;
+            --color-accent-purple: #92278f;
+            --gradient-primary: linear-gradient(135deg, var(--color-accent-purple) 0%, var(--color-accent-blue) 100%);
+            --gradient-secondary: linear-gradient(45deg, #0072ff 0%, #00c6ff 100%);
+            --card-bg: #1a1a1a;
+            --card-border: #333;
+            --shadow-light: rgba(0, 0, 0, 0.4);
+            --shadow-heavy: rgba(0, 0, 0, 0.7);
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Roboto Mono', monospace;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            color: var(--color-light-text);
+            background: var(--color-dark-bg);
+            background-attachment: fixed;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        header {
+            background: var(--gradient-primary);
+            padding: var(--spacing-md) 0;
+            box-shadow: 0 4px 15px var(--shadow-heavy);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-family: var(--font-secondary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-light-text);
+            text-decoration: none;
+            text-shadow: 2px 2px 5px var(--shadow-light);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+
+        nav a {
+            color: var(--color-light-text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: var(--spacing-xs) 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-light-text);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--color-accent-blue);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+            background: var(--color-accent-blue);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            padding: var(--spacing-lg) var(--spacing-md);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="%232e2e4a" /></pattern></defs><rect width="100%" height="100%" fill="url(%23dots)" /></svg>');
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: var(--spacing-md);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px var(--color-accent-blue);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-light-text);
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--gradient-secondary);
+            color: var(--color-light-text);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px var(--shadow-light);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px var(--shadow-heavy);
+            filter: brightness(1.1);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-top: var(--spacing-lg);
+        }
+
+        .features, .about, .contact {
+            padding: var(--spacing-lg) 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            text-align: center;
+            box-shadow: 0 4px 10px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(0, 198, 255, 0.1) 0%, rgba(146, 39, 143, 0.1) 50%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow-heavy);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-accent-blue);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--color-light-text);
+            opacity: 0.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            align-items: center;
+            text-align: center;
+        }
+
+        .about-content p {
+            max-width: 800px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .about-content strong {
+            color: var(--color-accent-blue);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: var(--spacing-md);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-light);
+            border: 1px solid var(--card-border);
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            font-weight: 600;
+            color: var(--color-accent-blue);
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            border: 1px solid var(--card-border);
+            background-color: #2a2a2a;
+            color: var(--color-light-text);
+            border-radius: 8px;
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--color-accent-blue);
+            box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.2);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+            margin-top: var(--spacing-sm);
+        }
+
+        footer {
+            background: linear-gradient(90deg, #0f0c29, #302b63);
+            color: var(--color-light-text);
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            border-top: 1px solid var(--card-border);
+            box-shadow: 0 -4px 15px var(--shadow-heavy);
+        }
+
+        footer p {
+            margin: var(--spacing-xs) 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .footer-links a {
+            color: var(--color-light-text);
+            text-decoration: none;
+            margin: 0 var(--spacing-xs);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-accent-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                width: 100%;
+                text-align: center;
+            }
+
+            nav a {
+                padding: var(--spacing-sm) 0;
+                display: block;
+            }
+
+            .hero {
+                min-height: 60vh;
+                padding: var(--spacing-lg) var(--spacing-sm);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: var(--spacing-sm) var(--spacing-md);
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">FutureSphere</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Revolutionizing Tomorrow, Today.</h1>
+                <p>Empowering innovation with cutting-edge technology and visionary solutions for a brighter future.</p>
+                <a href="#features" class="btn">Discover Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Our Core Innovations</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Advanced AI Integration</h3>
+                        <p>Seamlessly integrate intelligent AI systems to optimize workflows and enhance decision-making.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Decentralized Platforms</h3>
+                        <p>Build secure, transparent, and robust applications on decentralized blockchain architectures.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Immersive XR Experiences</h3>
+                        <p>Create captivating virtual and augmented reality experiences that redefine interaction.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Sustainable Tech Solutions</h3>
+                        <p>Develop eco-friendly technologies that minimize environmental impact while maximizing efficiency.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About FutureSphere</h2>
+                <div class="about-content">
+                    <p>
+                        At FutureSphere, we are driven by a passion for innovation and a commitment to shaping the next generation of technology. Our team of experts works tirelessly to push the boundaries of what's possible, delivering solutions that are not only advanced but also intuitive and impactful. We believe in technology that serves humanity, creating tools that empower individuals and businesses alike.
+                    </p>
+                    <p>
+                        This project encapsulates our dedication to progress and our forward-thinking approach.
+                        <strong>Project Status Report | Dated: 2025-12-06</strong>.
+                        We are constantly evolving, adapting to new challenges, and embracing the future with open arms.
+                    </p>
+                    <a href="#contact" class="btn">Join Our Journey</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Get in Touch</h2>
+                <form class="contact-form">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureSphere Innovations. All rights reserved.</p>
+            <p class="footer-links">
+                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
