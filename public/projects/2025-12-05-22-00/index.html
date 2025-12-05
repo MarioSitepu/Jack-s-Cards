@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Project 2025-12-05</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            --button-gradient: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            --text-dark: #212529;
+            --text-light: #f8f9fa;
+            --background-light: #f8f9fa;
+            --card-background: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --spacing-unit: 1rem; /* 16px */
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-background);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers not supporting text-fill-color */
+        }
+
+        nav ul {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        nav a {
+            font-weight: 600;
+            padding: var(--spacing-unit) 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .primary-btn {
+            background: var(--button-gradient);
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.6);
+        }
+
+        .secondary-btn {
+            background: var(--card-background);
+            color: #2575fc;
+            border: 2px solid #2575fc;
+            box-shadow: 0 2px 8px rgba(37, 117, 252, 0.2);
+        }
+        
+        .secondary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(37, 117, 252, 0.4);
+            background-color: rgba(37, 117, 252, 0.05);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: var(--border-radius-lg);
+            border-bottom-right-radius: var(--border-radius-lg);
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            max-width: 800px;
+            opacity: 0.9;
+        }
+
+        /* Sections General */
+        section {
+            padding: calc(var(--spacing-unit) * 6) 0;
+        }
+
+        section h2, section h3 {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            font-weight: 700;
+            font-size: 2.5rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        section h3 {
+            font-size: 2rem;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        /* Features Section */
+        #features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: calc(var(--spacing-unit) * 4);
+        }
+
+        .feature-card {
+            background-color: var(--card-background);
+            padding: calc(var(--spacing-unit) * 3);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 20px var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-unit);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        /* About Section */
+        #about .about-content {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 4);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        #about .about-text p {
+            margin-bottom: var(--spacing-unit);
+            line-height: 1.8;
+            text-align: left;
+            font-size: 1.1rem;
+            color: #495057;
+        }
+
+        #about .about-image {
+            flex-shrink: 0;
+            width: 300px;
+            height: 300px;
+            background: var(--secondary-gradient);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 8px 25px rgba(0, 114, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+        #about .about-image span {
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+        }
+
+        /* CTA Section */
+        #cta {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 4);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 30px rgba(0, 114, 255, 0.4);
+        }
+
+        #cta h3 {
+            font-size: 2.5rem;
+            color: var(--text-light);
+            -webkit-text-fill-color: var(--text-light); /* Override text-fill-color from general h3 */
+        }
+
+        #cta p {
+            font-size: 1.3rem;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            opacity: 0.9;
+        }
+
+        #cta .btn {
+            background: var(--text-light);
+            color: #0072ff;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        #cta .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--background-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 4);
+            font-size: 0.9rem;
+        }
+
+        footer .social-links {
+            margin-top: var(--spacing-unit);
+            display: flex;
+            justify-content: center;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        footer .social-links a {
+            color: var(--background-light);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: #00f2fe;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            #hero h1 {
+                font-size: 3rem;
+            }
+            #hero p {
+                font-size: 1.3rem;
+            }
+            section h2, section h3 {
+                font-size: 2rem;
+            }
+            #features .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            #about .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            #about .about-text p {
+                text-align: center;
+            }
+            #about .about-image {
+                margin-top: calc(var(--spacing-unit) * 2);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+            }
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: var(--spacing-unit);
+            }
+            nav a {
+                padding: calc(var(--spacing-unit) * 0.5) var(--spacing-unit);
+            }
+            #hero {
+                padding: calc(var(--spacing-unit) * 6) var(--spacing-unit);
+            }
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+            #hero p {
+                font-size: 1.1rem;
+            }
+            section h2, section h3 {
+                font-size: 1.8rem;
+            }
+            .feature-card {
+                padding: calc(var(--spacing-unit) * 2);
+            }
+            #about .about-image {
+                width: 250px;
+                height: 250px;
+                font-size: 5rem;
+            }
+            #cta h3 {
+                font-size: 2rem;
+            }
+            #cta p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: calc(var(--spacing-unit) * 0.5);
+            }
+            #hero h1 {
+                font-size: 2rem;
+            }
+            #hero p {
+                font-size: 1rem;
+            }
+            section h2, section h3 {
+                font-size: 1.5rem;
+            }
+            .feature-card .icon {
+                font-size: 2.5rem;
+            }
+            .feature-card h4 {
+                font-size: 1.3rem;
+            }
+            #about .about-image {
+                width: 200px;
+                height: 200px;
+                font-size: 4rem;
+            }
+            #cta h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Future</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Revolutionizing Tomorrow, Today.</h1>
+                <p>Welcome to our ambitious project, set to launch on <strong>2025-12-05</strong>. We're building the future, one innovation at a time.</p>
+                <a href="#features" class="btn primary-btn">Discover Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Innovations</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="icon"><i class="fas fa-brain"></i></div>
+                        <h4>Intelligent Automation</h4>
+                        <p>Leveraging AI to streamline processes and enhance efficiency across all operations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                        <h4>Robust Security</h4>
+                        <p>Next-gen encryption and security protocols ensure your data is always protected.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fas fa-globe"></i></div>
+                        <h4>Global Connectivity</h4>
+                        <p>Seamless integration and access from anywhere in the world, fostering collaboration.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fas fa-lightbulb"></i></div>
+                        <h4>Sustainable Solutions</h4>
+                        <p>Committed to eco-friendly practices and energy-efficient designs for a greener future.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h3>About Our Initiative</h3>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Project Future is an ambitious endeavor to redefine industry standards through cutting-edge technology and innovative thinking. Our team of experts is dedicated to creating solutions that are not only powerful but also intuitive and user-centric.</p>
+                        <p>With a strong focus on research and development, we are pushing the boundaries of what's possible, ensuring that our offerings provide unparalleled value and drive significant progress in their respective fields.</p>
+                        <p>We believe in a future where technology empowers every individual and organization to achieve their full potential, and we are building the tools to make that future a reality.</p>
+                    </div>
+                    <div class="about-image">
+                        <span><i class="fas fa-rocket"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta">
+            <div class="container">
+                <h3>Ready to Transform Your World?</h3>
+                <p>Join us on this exciting journey towards a brighter, more efficient tomorrow. Explore how Project Future can empower you.</p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project Future. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
