@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Project 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles & Reset */
+        :root {
+            --primary-gradient: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #ff6a00 0%, #ee0979 100%);
+            --dark-bg: #1a1a2e;
+            --dark-bg-light: #2c2c4d;
+            --text-light: #e0e0e0;
+            --text-dark: #f0f0f0;
+            --accent-color: #00f2fe;
+            --button-hover: #00d9e0;
+            --card-shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background-color: var(--dark-bg);
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--button-hover);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--dark-bg-light);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: var(--primary-gradient);
+            position: relative;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 L 0 10" fill="none" stroke="%23ffffff22" stroke-width="0.5" /></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)" /></svg>') repeat;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .hero .date {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            padding: 0.5rem 1rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent-color);
+            color: var(--dark-bg);
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--button-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 242, 254, 0.4);
+        }
+
+        /* Main Content Sections */
+        section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            text-align: left;
+        }
+
+        .about-content p {
+            margin-bottom: 1rem;
+        }
+
+        .features-grid, .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card, .service-card {
+            background-color: var(--dark-bg-light);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before, .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(106, 17, 203, 0.1) 0%, rgba(37, 117, 252, 0.1) 50%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: rotate(45deg);
+        }
+
+        .feature-card:hover::before, .service-card:hover::before {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        .feature-card:hover, .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-card h3, .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card p, .service-card p {
+            font-size: 1rem;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg-light);
+            padding: 3rem 5%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer .social-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        footer .social-links a {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem 5%;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .hero {
+                height: auto;
+                min-height: 60vh;
+                padding: 4rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 3rem 5%;
+            }
+
+            section h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .features-grid, .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card, .service-card {
+                padding: 2rem;
+            }
+
+            .feature-card h3, .service-card h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">FutureSphere</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Empowering Your Future</h1>
+                <p>Innovation for Tomorrow, Today. Discover the next generation of solutions.</p>
+                <a href="#features" class="btn">Explore Our Vision</a>
+                <p class="date">Project Date: 2025-12-06</p>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <h2>Who We Are</h2>
+            <div class="about-content">
+                <p>At FutureSphere, we are a collective of visionary engineers, designers, and strategists committed to pushing the boundaries of what's possible. Our mission is to craft innovative solutions that solve complex challenges and create meaningful impact.</p>
+                <p>With a focus on cutting-edge technology and user-centric design, we're building the tools and platforms that will define the future. Our agile approach ensures we deliver robust, scalable, and intuitive products that exceed expectations.</p>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Adaptive AI Integration</h3>
+                    <p>Leverage intelligent algorithms that learn and adapt, providing personalized experiences and optimized performance across all touchpoints.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Seamless Cloud Connectivity</h3>
+                    <p>Experience unparalleled access and synchronization with our robust cloud infrastructure, ensuring your data is always secure and available.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Intuitive User Experience</h3>
+                    <p>Designed with you in mind, our interfaces are clean, responsive, and incredibly easy to navigate, making powerful tools accessible to everyone.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Robust Security Protocols</h3>
+                    <p>Your privacy and data integrity are paramount. We implement industry-leading encryption and security measures to protect your information.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Product Development</h3>
+                    <p>From concept to launch, we guide you through every stage of bringing your innovative product to life with precision and expertise.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Digital Transformation</h3>
+                    <p>Modernize your operations and embrace the digital age with our comprehensive strategies and implementation support.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Consulting & Strategy</h3>
+                    <p>Gain insights from our experts to refine your vision, identify opportunities, and formulate a winning strategy for growth.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Get In Touch</h2>
+            <p style="max-width: 600px; margin: 0 auto 2rem; color: var(--text-dark);">
+                Ready to collaborate or have a question? We'd love to hear from you. Reach out and let's build the future together.
+            </p>
+            <a href="mailto:info@futuresphere.com" class="btn">Contact Us</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FutureSphere. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.791-1.574 2.161-2.723-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.498 0-6.346 2.848-6.346 6.346 0 .497.056.983.164 1.445-5.272-.265-9.91-2.793-13.029-6.64-.547.93-.863 2.01-.863 3.132 0 2.19.117 3.963 1.347 5.097-1.104-.028-2.14-.359-3.048-.838v.079c0 3.067 2.184 5.626 5.088 6.207-.4.11-.82.162-1.25.162-.308 0-.607-.028-.898-.086.762 2.373 2.966 4.102 5.592 4.141-2.015 1.581-4.564 2.52-7.314 2.52-.475 0-.947-.028-1.406-.083 2.607 1.662 5.698 2.632 9.004 2.632 10.814 0 16.703-8.983 16.703-16.703 0-.254-.006-.508-.019-.76z"/></svg></a>
+            <a href="#" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576c4.765-1.589 8.197-6.095 8.197-11.389 0-6.627-5.373-12-12-12z"/></svg></a>
+        </div>
+    </footer>
+</body>
+</html>
