@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-gradient: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(to right, #00c6ff 0%, #0072ff 100%);
+            --text-dark: #333;
+            --text-light: #f9f9f9;
+            --bg-light: #ffffff;
+            --bg-medium: #f4f7f6;
+            --accent-color: #2575fc;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --border-radius: 8px;
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-medium);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: #004cbe; /* Darker shade of accent */
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.8rem; }
+        p { margin-bottom: 1rem; }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-light);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: opacity var(--transition-speed);
+        }
+
+        nav ul li a:hover {
+            opacity: 0.8;
+            color: var(--text-light); /* Keep white on hover */
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: var(--text-light);
+        }
+
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 2px 10px var(--shadow-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-medium);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--bg-light);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 120px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .hero-section h1 {
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Features Section */
+        .features-section h2 {
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background-color: var(--bg-light);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px var(--shadow-light);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px var(--shadow-medium);
+        }
+
+        .feature-item .icon {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-item h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Services Section */
+        .services-section {
+            background-color: var(--bg-medium);
+        }
+
+        .services-section h2 {
+            margin-bottom: 3rem;
+        }
+
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px var(--shadow-light);
+            text-align: left;
+            transition: all var(--transition-speed);
+            border-top: 5px solid transparent;
+            border-image: var(--primary-gradient);
+            border-image-slice: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow-medium);
+        }
+
+        .service-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 100px 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #ccc;
+            padding: 40px 0;
+            font-size: 0.9rem;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .social-links a {
+            color: #ccc;
+            margin-left: 20px;
+            transition: color var(--transition-speed);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+
+            .hero-section h1 { font-size: 3rem; }
+            .hero-section p { font-size: 1.1rem; }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            .logo {
+                margin-bottom: 1rem;
+            }
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            nav ul li a {
+                padding: 0.5rem 0;
+                display: block;
+            }
+
+            .hero-section {
+                padding: 80px 0;
+                min-height: auto;
+            }
+            .hero-section h1 { font-size: 2.5rem; }
+            .hero-section p { font-size: 1rem; }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .feature-grid, .service-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section h2 { font-size: 2.2rem; }
+            .cta-section p { font-size: 1rem; }
+
+            footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            footer p {
+                margin-bottom: 1rem;
+            }
+            .social-links a {
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.3rem; }
+
+            .hero-section h1 { font-size: 2rem; }
+            .hero-section p { font-size: 0.9rem; }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+
+            .feature-item, .service-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureForge</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h1>Crafting Tomorrow's Digital Landscape</h1>
+                <p>Innovative solutions for a connected world. Project dated: <strong>2025-12-06</strong></p>
+                <a href="#features" class="btn">Explore Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Unleash Your Potential with Our Core Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="icon fas fa-cogs"></i>
+                        <h3>Advanced Customization</h3>
+                        <p>Tailor every aspect to fit your unique brand and operational needs perfectly.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon fas fa-rocket"></i>
+                        <h3>Optimized Performance</h3>
+                        <p>Experience lightning-fast load times and seamless interactions across all platforms.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon fas fa-mobile-alt"></i>
+                        <h3>Cross-Device Compatibility</h3>
+                        <p>Flawless design and functionality, ensuring a consistent experience on any device.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services-section">
+            <div class="container">
+                <h2>Our Comprehensive Service Offerings</h2>
+                <div class="service-cards">
+                    <div class="service-card">
+                        <h3>Strategic Web Development</h3>
+                        <p>Building robust, scalable, and secure web applications from the ground up.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Intuitive UI/UX Design</h3>
+                        <p>Designing user interfaces that are not just beautiful but also incredibly easy to use.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Cloud Integration & DevOps</h3>
+                        <p>Streamlining your operations with cutting-edge cloud solutions and automated workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Business?</h2>
+                <p>Partner with us to bring your groundbreaking ideas to life.</p>
+                <a href="mailto:info@futureforge.com" class="btn btn-secondary">Get a Free Consultation</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureForge. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
