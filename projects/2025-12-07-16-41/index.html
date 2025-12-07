@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureTech Project 2025 - Modern Innovations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset & Base Styles */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6e8efb, #a777e3);
+            --secondary-gradient: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+            --dark-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --text-light: #f4f4f4;
+            --text-dark: #333;
+            --text-muted: #888;
+            --bg-light: #ffffff;
+            --bg-dark: #2c3e50;
+            --accent-color: #00bcd4; /* Cyan */
+            --border-radius-lg: 12px;
+            --border-radius-sm: 8px;
+            --box-shadow-light: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --box-shadow-dark: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0097a7; /* Darker cyan */
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Header */
+        header {
+            background: var(--dark-gradient);
+            color: var(--text-light);
+            padding: 1.2rem 0;
+            box-shadow: var(--box-shadow-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-lg);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex: 1;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background: #f8f9fa; /* Light gray background */
+        }
+
+        .hero-section {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 120px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section h1 {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Features Section */
+        .features-section h2, .about-section h2, .contact-section h2 {
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            color: var(--text-dark);
+        }
+
+        .features-section h2::after, .about-section h2::after, .contact-section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-item h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .feature-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* About Section */
+        .about-section p {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--secondary-gradient);
+            color: var(--text-dark);
+        }
+
+        .contact-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            border: 1px solid #eee;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-sm);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form .btn {
+            width: auto;
+            align-self: flex-end; /* Align button to the right */
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9rem;
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            margin: 0 8px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links {
+            margin-top: 15px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+                padding-bottom: 10px;
+            }
+
+            nav a {
+                padding: 5px 10px;
+            }
+
+            .hero-section {
+                padding: 80px 0;
+            }
+
+            .hero-section h1 {
+                font-size: clamp(2rem, 6vw, 3rem);
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+
+            .contact-form .btn {
+                align-self: stretch; /* Make button full width */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.7rem; }
+            h3 { font-size: 1.3rem; }
+
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-section {
+                padding: 60px 0;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureTech</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h1>Pioneering Tomorrow's Digital Landscape</h1>
+                <p>Welcome to FutureTech Innovations, where cutting-edge technology meets intuitive design to create unparalleled solutions for the modern world.</p>
+                <a href="#features" class="btn">Discover Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Innovations</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="icon">🚀</i>
+                        <h3>Advanced AI Integration</h3>
+                        <p>Leveraging artificial intelligence to automate tasks and provide intelligent insights.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon">💡</i>
+                        <h3>Seamless User Experience</h3>
+                        <p>Crafting interfaces that are not just beautiful, but incredibly easy and efficient to use.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon">🔒</i>
+                        <h3>Next-Gen Security Protocols</h3>
+                        <p>Protecting your data with state-of-the-art encryption and robust security measures.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon">🔗</i>
+                        <h3>Cross-Platform Compatibility</h3>
+                        <p>Ensuring our solutions work flawlessly across all devices and operating systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About FutureTech</h2>
+                <p>At FutureTech, we are more than just technologists; we are visionaries dedicated to shaping the future. Our team comprises brilliant minds committed to pushing the boundaries of innovation, delivering products that empower businesses and individuals alike.</p>
+                <p>Founded on principles of excellence and user-centric design, we strive to build solutions that are not only powerful but also intuitive and accessible. Join us on our journey to redefine what's possible in the digital realm.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>We'd love to hear from you! Whether you have a question, a project idea, or just want to connect, feel free to reach out.</p>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="6" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureTech Innovations. All rights reserved.</p>
+            <p>Project Date: <strong>2025-12-07</strong></p>
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn Profile">LinkedIn</a> |
+                <a href="#" aria-label="Twitter Profile">Twitter</a> |
+                <a href="#" aria-label="GitHub Repository">GitHub</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
