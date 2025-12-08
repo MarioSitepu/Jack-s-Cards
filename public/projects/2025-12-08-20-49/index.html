@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4A90E2; /* Clean Blue */
+            --secondary-color: #50C878; /* Emerald Green */
+            --accent-color: #8A2BE2; /* Blue-Violet */
+            --text-dark: #333333;
+            --text-light: #f8f9fa;
+            --bg-light: #ffffff;
+            --bg-dark-section: #f0f4f8; /* Light blue-gray */
+            --gradient-start: #e0eafc; /* Light Blue */
+            --gradient-end: #cfdef3; /* Slightly darker Light Blue */
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+        h3 { font-size: clamp(1.75rem, 3.5vw, 2.8rem); }
+        h4 { font-size: clamp(1.25rem, 2.5vw, 2rem); }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 0;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        header nav a {
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        header nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary-color);
+            left: 0;
+            bottom: -8px;
+            transition: width 0.3s ease;
+        }
+
+        header nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sections */
+        main {
+            flex: 1;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(74, 144, 226, 0.9), rgba(80, 200, 120, 0.9)), url('https://source.unsplash.com/random/1600x900/?technology,abstract') center/cover no-repeat;
+            color: var(--text-light);
+            padding: 8rem 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+        }
+
+        .hero-section h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section p {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+            opacity: 0.9;
+        }
+
+        .content-section {
+            padding: 6rem 0;
+            text-align: center;
+            background-color: var(--bg-light);
+        }
+
+        .content-section:nth-of-type(even) {
+            background-color: var(--bg-dark-section);
+        }
+
+        /* Features Grid */
+        .features-grid, .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .feature-card, .team-member {
+            background-color: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-card:hover, .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Team Section */
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-member h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .team-member p {
+            color: #777;
+            font-size: 0.95rem;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0 auto;
+            background-color: var(--bg-light);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: var(--font-family);
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            margin: 0 1rem;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+            color: var(--secondary-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            header nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .hero-section {
+                padding: 6rem 0;
+            }
+
+            .content-section {
+                padding: 4rem 0;
+            }
+
+            .features-grid, .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card, .team-member {
+                padding: 2rem;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+
+            footer .container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+            }
+
+            h3 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FutureSphere</h1>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h2>Innovate. Collaborate. Succeed.</h2>
+                <p>Empowering your vision with cutting-edge technology and seamless collaboration tools.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="overview" class="content-section">
+            <div class="container">
+                <h3>Project Overview</h3>
+                <p>FutureSphere is a groundbreaking platform designed to revolutionize project management and team collaboration. We leverage AI-driven insights and an intuitive user interface to help businesses achieve their goals more efficiently than ever before.</p>
+                <p>Our commitment to innovation ensures your projects are not just managed, but meticulously crafted for success.</p>
+                <p><strong>Anticipated Launch Date: 2025-12-08</strong></p>
+            </div>
+        </section>
+
+        <section id="features" class="content-section">
+            <div class="container">
+                <h3>Key Features</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>Intelligent Task Automation</h4>
+                        <p>Streamline workflows with smart task assignment and progress tracking.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Real-time Communication Hub</h4>
+                        <p>Integrated chat, video conferencing, and document sharing for instant collaboration.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Predictive Analytics Dashboard</h4>
+                        <p>Gain foresight with AI-powered insights into project health and potential roadblocks.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Scalable & Secure Infrastructure</h4>
+                        <p>Built on a robust, secure, and scalable cloud architecture ready for enterprise demands.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="content-section">
+            <div class="container">
+                <h3>Meet Our Visionaries</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/150/4A90E2/FFFFFF?text=A.J.Smith" alt="Alex J. Smith">
+                        <h4>Alex J. Smith</h4>
+                        <p>Chief Executive Officer</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/150/50C878/FFFFFF?text=M.K.Lee" alt="Maria K. Lee">
+                        <h4>Maria K. Lee</h4>
+                        <p>Head of Product Development</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/150/8A2BE2/FFFFFF?text=D.R.Chen" alt="David R. Chen">
+                        <h4>David R. Chen</h4>
+                        <p>Lead UI/UX Designer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <div class="container">
+                <h3>Get in Touch</h3>
+                <p>Ready to transform your project management? Have questions? We're here to help.</p>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email Address" required>
+                    <textarea placeholder="Tell us about your needs..." rows="6" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureSphere. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
