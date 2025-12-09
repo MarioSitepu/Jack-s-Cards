@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureTech Project 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4A00E0; /* Deep Purple */
+            --secondary-color: #8E2DE2; /* Lighter Purple */
+            --accent-color: #FC466B; /* Vibrant Pink */
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --background-light: #fdfdfd;
+            --background-dark: #1a1a2e;
+            --gradient-main: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-accent: linear-gradient(45deg, var(--accent-color) 0%, #FF6B6B 100%);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+            --padding-section: 80px 0;
+            --max-width-content: 1200px;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: var(--max-width-content);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--gradient-main);
+            color: var(--text-light);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(var(--primary-color-rgb), 0.3);
+            background: var(--gradient-accent); /* Subtle change on hover */
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 12px 28px;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--background-light);
+            padding: 20px 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-dark);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-main);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-main);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--padding-section) 20px;
+            display: flex;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            transform: rotate(45deg);
+            animation: float-element 10s infinite ease-in-out;
+            opacity: 0.8;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            animation: float-element 12s infinite ease-in-out reverse;
+            opacity: 0.8;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons .btn {
+            margin: 0 10px;
+        }
+
+        .hero-buttons .btn-secondary {
+            color: var(--text-light);
+            border-color: var(--text-light);
+        }
+        .hero-buttons .btn-secondary:hover {
+            background-color: var(--text-light);
+            color: var(--primary-color);
+        }
+
+        /* Section Styles */
+        section {
+            padding: var(--padding-section);
+            text-align: center;
+        }
+
+        .section-title {
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: var(--background-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: inline-block;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(to bottom, var(--background-light) 0%, #eef1f5 100%);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            text-align: left;
+            margin-top: 60px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+
+        .about-text h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* CTA Section (with date) */
+        .cta-section {
+            background: var(--gradient-accent);
+            color: var(--text-light);
+            padding: var(--padding-section) 20px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: var(--text-light);
+            margin-bottom: 30px;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-date {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-top: 30px;
+            display: block;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            padding: 50px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        footer .footer-links a {
+            color: var(--text-light);
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .footer-date {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 992px) {
+            nav ul {
+                display: none; /* Hide nav for smaller screens, could add a hamburger menu */
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons .btn {
+                margin: 10px 0;
+                width: 80%;
+                max-width: 300px;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-text {
+                max-width: 100%;
+            }
+            .about-image {
+                max-width: 80%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .logo {
+                margin-bottom: 10px;
+            }
+
+            .hero-section {
+                min-height: 60vh;
+                padding: 100px 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item {
+                padding: 30px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                margin-bottom: 40px;
+            }
+
+            .cta-section h2 {
+                font-size: 2.5rem;
+            }
+            .cta-section p {
+                font-size: 1rem;
+            }
+
+            footer .footer-links {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            footer .footer-links a {
+                margin: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+            .cta-date {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Simple animation for floating elements */
+        @keyframes float-element {
+            0% { transform: translate(0, 0) rotate(45deg); opacity: 0.8; }
+            50% { transform: translate(-20px, 20px) rotate(50deg); opacity: 0.9; }
+            100% { transform: translate(0, 0) rotate(45deg); opacity: 0.8; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureTech</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container hero-content">
+                <h1>Innovate. Create. Elevate.</h1>
+                <p>Welcome to the forefront of digital transformation. Discover solutions designed for tomorrow, available today.</p>
+                <div class="hero-buttons">
+                    <a href="#features" class="btn btn-primary">Explore Features</a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2 class="section-title">Cutting-Edge Capabilities</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="icon">&#9889;</div> <!-- Unicode for high voltage sign -->
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized algorithms and state-of-the-art infrastructure ensure unparalleled speed and efficiency.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">&#128187;</div> <!-- Unicode for laptop -->
+                        <h3>Intuitive User Experience</h3>
+                        <p>Designed with user-centric principles, our interfaces are easy to navigate and a joy to use.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">&#128274;</div> <!-- Unicode for locked with key -->
+                        <h3>Robust Security Protocols</h3>
+                        <p>Your data is protected with advanced encryption and multi-layered security measures.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">&#128640;</div> <!-- Unicode for rocket -->
+                        <h3>Scalable Architecture</h3>
+                        <p>Grow without limits. Our solutions are built to scale seamlessly with your evolving needs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2 class="section-title">About Our Vision</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Pioneering the Future of Technology</h3>
+                        <p>At FutureTech, we believe in pushing boundaries. Our dedicated team of innovators, engineers, and designers are committed to creating solutions that not only meet current demands but also anticipate future challenges.</p>
+                        <p>We focus on sustainable development, ethical AI, and empowering businesses and individuals with tools that make a real difference.</p>
+                        <a href="#contact" class="btn btn-primary">Learn More</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1516110833957-e1cdcd7896a2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Abstract modern tech background" width="600" height="400">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Project?</h2>
+                <p>Join us on a journey to redefine possibilities. Let's build something extraordinary together.</p>
+                <a href="mailto:info@futuretech.com" class="btn btn-primary">Contact Us Today</a>
+                <span class="cta-date">Project Readiness: 2025-12-09</span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureTech. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Sitemap</a>
+            </div>
+            <p class="footer-date">Project Date: 2025-12-09</p>
+        </div>
+    </footer>
+</body>
+</html>
