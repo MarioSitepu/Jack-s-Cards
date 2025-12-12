@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-gradient: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(to right, #00c6ff 0%, #0072ff 100%);
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-bold: 0 8px 25px rgba(0, 0, 0, 0.2);
+            --border-radius-sm: 8px;
+            --border-radius-lg: 12px;
+            --font-family: 'Poppins', sans-serif;
+            --header-height: 80px;
+        }
+
+        /* Base Styles & Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-white);
+            color: var(--text-color-dark);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 600;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 3px;
+            background-image: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support text-fill-color */
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-image: var(--primary-gradient);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 100px 20px;
+            min-height: calc(100vh - var(--header-height));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: floatBubble 10s infinite ease-in-out;
+            animation-delay: 0s;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: floatBubble 12s infinite ease-in-out;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatBubble {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+            50% { transform: translate(20px, 20px) scale(1.05); opacity: 1; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+        }
+
+        .hero-section h2 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero-section p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .hero-section p strong {
+            font-weight: 600;
+            color: #ffeb3b; /* A contrasting accent color */
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: var(--border-radius-lg);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn.primary {
+            background-image: var(--secondary-gradient);
+            color: var(--text-color-light);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.3);
+        }
+
+        .btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 114, 255, 0.4);
+            background-image: linear-gradient(to right, #0072ff 0%, #00c6ff 100%); /* Slightly shifted gradient on hover */
+        }
+
+        .btn:not(.primary) {
+            background: var(--bg-white);
+            color: var(--text-color-dark);
+        }
+
+        .btn:not(.primary):hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-bold);
+            color: #2575fc;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+            background-color: var(--bg-white);
+            margin-bottom: 20px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+        }
+
+        .content-section:nth-of-type(odd) {
+            background-color: var(--bg-light);
+        }
+
+        .content-section h3 {
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            text-align: center;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-bold);
+        }
+
+        .feature-item h4 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            background-image: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+            text-align: center;
+            margin-bottom: 0; /* Override default p margin */
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background-image: var(--secondary-gradient);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 80px 20px;
+            margin-top: 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-bold);
+        }
+
+        .cta-section h3 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--text-color-light); /* Override gradient for better contrast on dark background */
+        }
+
+        .cta-section .btn {
+            background: var(--bg-white);
+            color: #0072ff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-section .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            color: #6a11cb;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-color-dark);
+            color: var(--bg-light);
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+            border-top-left-radius: var(--border-radius-lg);
+            border-top-right-radius: var(--border-radius-lg);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero-section {
+                padding: 80px 20px;
+                min-height: 70vh;
+            }
+
+            .hero-section h2 {
+                font-size: clamp(2rem, 8vw, 3.5rem);
+            }
+
+            .hero-section p {
+                font-size: clamp(0.9rem, 3vw, 1.1rem);
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .content-section {
+                padding: 60px 0;
+            }
+
+            .content-section h3 {
+                font-size: clamp(1.5rem, 5vw, 2.2rem);
+            }
+
+            .content-section p {
+                font-size: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .cta-section {
+                padding: 60px 20px;
+            }
+
+            .cta-section h3 {
+                font-size: clamp(1.8rem, 6vw, 2.8rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                height: auto;
+            }
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            .hero-section {
+                padding: 60px 15px;
+            }
+            .content-section {
+                padding: 40px 0;
+            }
+            footer {
+                padding: 30px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Zenith</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h2>Welcome to Our Future-Forward Vision</h2>
+                <p>Innovating for tomorrow, today. This project is meticulously crafted and proudly dated: <strong>2025-12-12</strong>.</p>
+                <a href="#about" class="btn primary">Discover More</a>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="container">
+                <h3>About Project Zenith</h3>
+                <p>Project Zenith represents the pinnacle of modern design and technological integration. Our mission is to deliver unparalleled user experiences through intuitive interfaces and robust, scalable solutions. We believe in pushing boundaries and setting new standards for digital excellence, ensuring every aspect is meticulously thought out and executed with precision.</p>
+                <p>From concept to deployment, our team of dedicated professionals collaborates to bring forth a product that is not just functional, but truly inspiring. We focus on sustainability, accessibility, and future-proofing our solutions to adapt to an ever-evolving digital landscape.</p>
+            </div>
+        </section>
+
+        <section id="features" class="content-section">
+            <div class="container">
+                <h3>Key Features</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h4>Intuitive Design</h4>
+                        <p>Experience seamless navigation and a visually stunning interface crafted for ultimate user satisfaction.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Robust Performance</h4>
+                        <p>Built on a foundation of cutting-edge technology, ensuring speed, reliability, and scalability for any demand.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Cross-Platform Compatibility</h4>
+                        <p>Access your project effortlessly on any device, from desktops to tablets and smartphones, without compromise.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Secure & Private</h4>
+                        <p>Your data and privacy are paramount. We employ advanced security measures to protect your information.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Dynamic Content</h4>
+                        <p>Engage with content that adapts and evolves, providing a personalized experience for every user.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Future-Proof Architecture</h4>
+                        <p>Designed for easy updates and integration of future technologies, ensuring longevity and relevance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="cta-section">
+            <div class="container">
+                <h3>Ready to Transform Your Digital Presence?</h3>
+                <p>Join the future with Project Zenith. Let's create something extraordinary together.</p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project Zenith. All rights reserved. Designed with passion for a better tomorrow.</p>
+        </div>
+    </footer>
+</body>
+</html>
