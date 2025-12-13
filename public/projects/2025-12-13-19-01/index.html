@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --color-dark-bg: #1a1a2e;
+            --color-light-bg: #21213e;
+            --color-primary-accent: #e94560;
+            --color-secondary-accent: #0f3460;
+            --color-text-light: #e0e0e0;
+            --color-text-dark: #cccccc;
+            --color-gradient-start: #0a1128;
+            --color-gradient-end: #001f54;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --spacing-unit: 1rem; /* 16px */
+            --border-radius-sm: 5px;
+            --border-radius-lg: 10px;
+        }
+
+        /* Base Styles & Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--color-text-light);
+            background-color: var(--color-dark-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 1.5);
+            width: 100%;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            margin-bottom: var(--spacing-unit);
+            line-height: 1.2;
+            color: var(--color-text-light);
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        a {
+            color: var(--color-primary-accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-text-light);
+        }
+
+        button, .button {
+            display: inline-block;
+            padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1.5);
+            background: linear-gradient(45deg, var(--color-primary-accent), #ff6b81);
+            color: var(--color-text-light);
+            border: none;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        button:hover, .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--color-light-bg);
+            padding: var(--spacing-unit) 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary-accent);
+            text-decoration: none;
+            padding: calc(var(--spacing-unit) * 0.25) 0;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .nav a {
+            color: var(--color-text-dark);
+            font-weight: 400;
+            font-size: 1.05rem;
+            position: relative;
+            padding: calc(var(--spacing-unit) * 0.25) 0;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-primary-accent);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            text-align: center;
+            position: relative;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--color-light-bg);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+            color: var(--color-text-light);
+            padding: calc(var(--spacing-unit) * 6) 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            max-width: 800px;
+            margin: 0 auto calc(var(--spacing-unit) * 2);
+            font-weight: 300;
+        }
+
+        /* Features Section */
+        .features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+            text-align: left;
+        }
+
+        .feature-item {
+            background-color: var(--color-dark-bg);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-item h4 {
+            font-size: 1.4rem;
+            color: var(--color-primary-accent);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: var(--color-text-dark);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--color-secondary-accent);
+            margin-bottom: var(--spacing-unit);
+            display: block;
+        }
+
+        /* About Section */
+        .about .content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            font-size: 1.1rem;
+            color: var(--color-text-dark);
+        }
+        
+        .about .content h3 {
+            text-align: center;
+            color: var(--color-text-light);
+        }
+
+        .about strong {
+            color: var(--color-primary-accent);
+            font-weight: 600;
+        }
+
+        /* Call to Action */
+        .cta {
+            background: linear-gradient(90deg, var(--color-primary-accent), #ff6b81);
+            color: var(--color-text-light);
+            padding: calc(var(--spacing-unit) * 5) 0;
+        }
+
+        .cta h2 {
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            color: var(--color-text-light);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--color-light-bg);
+            color: var(--color-text-dark);
+            padding: calc(var(--spacing-unit) * 2) 0;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: auto; /* Push footer to the bottom */
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+            }
+
+            .logo {
+                margin-bottom: var(--spacing-unit);
+            }
+
+            .nav ul {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav li {
+                width: 100%;
+            }
+
+            .nav a {
+                display: block;
+                padding: var(--spacing-unit) 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .nav a::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .nav a:hover::after {
+                width: 50%; /* Shorter line for mobile */
+            }
+
+            .hero {
+                padding: calc(var(--spacing-unit) * 4) 0;
+                min-height: 50vh;
+            }
+
+            .hero h2 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .hero p {
+                font-size: clamp(1rem, 3vw, 1.2rem);
+            }
+
+            section {
+                padding: calc(var(--spacing-unit) * 3) 0;
+            }
+
+            .features .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .nav ul {
+                gap: calc(var(--spacing-unit) * 0.5);
+            }
+
+            .nav a {
+                font-size: 0.9rem;
+                padding: calc(var(--spacing-unit) * 0.75) 0;
+            }
+
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.4rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">FutureSphere</a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Innovate. Create. Elevate.</h2>
+                <p>Unlocking the potential of tomorrow, one solution at a time. Join us on a journey to redefine the future.</p>
+                <a href="#features" class="button">Explore Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h3>Core Capabilities</h3>
+                <p>Built on a foundation of cutting-edge technology and forward-thinking design.</p>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon">&#9733;</span> <!-- Star icon -->
+                        <h4>Seamless Integration</h4>
+                        <p>Our platform effortlessly connects with your existing systems, ensuring a smooth transition and enhanced workflow.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">&#9881;</span> <!-- Gear icon -->
+                        <h4>Advanced Analytics</h4>
+                        <p>Gain deep insights with powerful data analysis tools, empowering smarter decisions and strategic growth.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">&#9998;</span> <!-- Pen icon -->
+                        <h4>Intuitive Design</h4>
+                        <p>Experience unparalleled user-friendliness with an interface crafted for efficiency and aesthetic appeal.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">&#128161;</span> <!-- Lightbulb icon -->
+                        <h4>Scalable Solutions</h4>
+                        <p>Designed to grow with you, our flexible architecture adapts to your evolving needs and future expansions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="content">
+                    <h3>About FutureSphere</h3>
+                    <p>FutureSphere is a visionary project aimed at revolutionizing how businesses interact with technology. Our mission is to provide robust, intuitive, and future-proof solutions that drive innovation and foster sustainable growth.</p>
+                    <p>We believe in a world where technology serves humanity, simplifying complex tasks and opening new avenues for creativity and progress. Our dedicated team of engineers, designers, and strategists are committed to delivering excellence.</p>
+                    <p>This phase of our development is scheduled for completion by <strong aria-label="Project completion date">2025-12-13</strong>, marking a significant milestone in our journey towards a brighter, more connected future.</p>
+                    <p>Stay tuned for more updates as we continue to push the boundaries of what's possible!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Connect with us to discuss how FutureSphere can empower your next big idea.</p>
+                <a href="mailto:info@futuresphere.com" class="button">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 FutureSphere. All rights reserved. Designed with passion for a better tomorrow.</p>
+        </div>
+    </footer>
+</body>
+</html>
