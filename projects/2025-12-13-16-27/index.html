@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-bg: #1a1a2e; /* Dark Blue */
+            --secondary-bg: #16213e; /* Slightly lighter Dark Blue */
+            --accent-color-1: #0f3460; /* Darker Blue for accents */
+            --accent-color-2: #e94560; /* Vibrant Red/Pink */
+            --text-color-light: #e0e0e0; /* Off-white */
+            --text-color-dark: #cccccc; /* Light gray */
+            --gradient-1: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Purple to Blue */
+            --gradient-2: linear-gradient(135deg, #fc6076 0%, #ff9a44 100%); /* Pink to Orange */
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --border-radius: 12px;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-color-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: linear-gradient(to right bottom, #1a1a2e, #16213e); /* Subtle dark gradient */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+        }
+
+        h1, h2, h3 {
+            color: var(--text-color-light);
+            margin-bottom: var(--spacing-unit);
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+        }
+
+        a {
+            color: var(--accent-color-2);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffc107; /* Brighter yellow on hover */
+        }
+
+        /* Header */
+        header {
+            background-color: var(--secondary-bg);
+            padding: var(--spacing-unit) 0;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color-light);
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--text-color-dark);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: var(--accent-color-1);
+            color: var(--text-color-light);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: calc(var(--spacing-unit) * 2) 0;
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 3) 0;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 5) var(--spacing-unit);
+            background: var(--gradient-1);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            color: #fff;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            margin-bottom: var(--spacing-unit);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            max-width: 800px;
+            margin: 0 auto calc(var(--spacing-unit) * 2);
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-color-2);
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            background: var(--gradient-2);
+        }
+
+        /* Features Section */
+        .features {
+            text-align: center;
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: calc(var(--spacing-unit) * 3);
+            box-shadow: var(--box-shadow);
+        }
+
+        .features h2 {
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .feature-card {
+            background-color: var(--accent-color-1);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            transition: transform 0.3s ease, background 0.3s ease;
+            background-image: linear-gradient(135deg, #0f3460 0%, #16213e 100%); /* Subtle gradient for cards */
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background-image: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+        }
+
+        .feature-card h3 {
+            color: var(--text-color-light);
+            margin-bottom: var(--spacing-unit);
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-color-dark);
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: calc(var(--spacing-unit) * 3);
+            box-shadow: var(--box-shadow);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .about h2 {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: calc(var(--spacing-unit) * 2);
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-color-dark);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2) 0;
+            margin-top: calc(var(--spacing-unit) * 3);
+            box-shadow: inset 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+                width: 100%;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                display: block;
+                text-align: center;
+            }
+
+            .hero {
+                padding: calc(var(--spacing-unit) * 3) var(--spacing-unit);
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+            .about-image {
+                order: -1; /* Image appears above text on mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: var(--spacing-unit);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Zenith</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero container">
+            <h1>Welcome to Project Zenith</h1>
+            <p>Unleashing the future of innovation with cutting-edge solutions. This project is set to launch on <strong>2025-12-13</strong>, marking a new era of possibilities.</p>
+            <a href="#" class="cta-button">Learn More</a>
+        </section>
+
+        <section id="features" class="features container">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Advanced Analytics</h3>
+                    <p>Gain deep insights with our state-of-the-art analytical tools. Understand your data like never before.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Seamless Integration</h3>
+                    <p>Effortlessly integrate with your existing systems for a smooth and unified workflow experience.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Scalable Architecture</h3>
+                    <p>Designed for growth, our platform scales with your needs, ensuring performance at any size.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Intuitive User Interface</h3>
+                    <p>Experience a clean, modern, and user-friendly interface that simplifies complex tasks.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about container">
+            <h2>About Project Zenith</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Project Zenith is a groundbreaking initiative aimed at revolutionizing industry standards through technological advancement. Our team of dedicated experts has poured countless hours into crafting a solution that is not only powerful but also intuitive and sustainable.</p>
+                    <p>We believe in pushing boundaries and challenging the status quo. With a strong focus on innovation and user experience, Project Zenith is poised to deliver unparalleled value and efficiency to our clients worldwide. Our vision is to empower businesses and individuals with tools that drive progress and foster creativity.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/400x300/1a1a2e/e94560?text=Innovation" alt="Abstract image representing innovation">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project Zenith. All rights reserved. Launch Date: 2025-12-13</p>
+        </div>
+    </footer>
+</body>
+</html>
