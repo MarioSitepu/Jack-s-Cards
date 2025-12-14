@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(to right, #6A11CB 0%, #2575FC 100%);
+            --secondary-gradient: linear-gradient(to right, #00C2BA 0%, #00877F 100%);
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --bg-light: #f4f7f6;
+            --bg-dark: #1a202c;
+            --accent-color: #FFD700; /* Gold */
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-dark: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: -webkit-linear-gradient(45deg, #FFD700, #FFC107);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            font-weight: 600;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            left: 0;
+            bottom: -8px;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;charset=UTF-8,<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23dots)"/></svg>') no-repeat center center/cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: var(--shadow-dark);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .hero .cta-button {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-dark);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: var(--shadow-light);
+        }
+
+        .hero .cta-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+            background: #FFEB3B; /* Slightly lighter gold */
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--bg-light);
+        }
+
+        section:nth-of-type(odd) {
+            background-color: #e0e6eb; /* A slightly darker light background */
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            color: var(--text-dark);
+            font-weight: 700;
+            position: relative;
+            display: inline-block; /* To center the pseudo-element */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 5px;
+            background: var(--primary-gradient);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .about-text, .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image img:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: var(--primary-gradient); /* This won't work directly, needs color property */
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: 15px;
+            margin: 0 auto;
+            max-width: 1000px;
+            box-shadow: var(--shadow-dark);
+            transform: translateY(40px); /* Lift it slightly above footer */
+            position: relative;
+            z-index: 50;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-section .cta-button {
+            background: var(--accent-color);
+            color: var(--text-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 60px 20px 30px;
+            margin-top: -40px; /* Overlap with CTA */
+            padding-top: 100px; /* Ensure content is below CTA */
+            position: relative;
+        }
+
+        footer .social-links {
+            margin-top: 20px;
+        }
+
+        footer .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        footer p {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .about-text h3 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none; /* Hide nav for mobile, could add a hamburger menu */
+            }
+            header .container {
+                justify-content: center;
+            }
+            .logo {
+                font-size: 1.5rem;
+            }
+            .hero {
+                padding: 80px 20px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .hero .cta-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            section {
+                padding: 60px 0;
+            }
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+            .about-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .about-text, .about-image {
+                min-width: unset;
+                width: 100%;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .cta-section {
+                padding: 60px 20px;
+            }
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+            .cta-section p {
+                font-size: 1rem;
+            }
+            footer {
+                padding-top: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .about-text h3 {
+                font-size: 1.5rem;
+            }
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Nova</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Igniting Innovation. Shaping Tomorrow.</h1>
+                <p>Leading the charge in groundbreaking solutions. Our vision for the future is now a reality. Project completion: <strong>2025-12-15</strong>.</p>
+                <a href="#features" class="cta-button">Discover Our Impact</a>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Project Nova</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Our Vision & Mission</h3>
+                        <p>Project Nova represents a paradigm shift in how we approach technology and societal challenges. We are a collective of brilliant minds, driven by a shared passion to create sustainable, impactful, and user-centric solutions that redefine industry standards.</p>
+                        <p>Our mission is to empower communities and businesses with tools that foster growth, efficiency, and a brighter future. We believe in transparency, collaboration, and continuous improvement, ensuring our innovations are not just advanced, but also accessible and beneficial to all.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/6A11CB/FFFFFF?text=Innovation+Concept" alt="About Project Nova">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Key Features & Solutions</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="icon">🚀</span>
+                        <h3>Advanced AI Integration</h3>
+                        <p>Leveraging cutting-edge artificial intelligence to automate processes and provide intelligent insights, enhancing decision-making and operational efficiency.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">💡</span>
+                        <h3>Sustainable Technologies</h3>
+                        <p>Committed to eco-friendly development, our solutions are designed to minimize environmental impact while maximizing resource efficiency.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🌐</span>
+                        <h3>Global Scalability</h3>
+                        <p>Built on a robust and flexible architecture, Project Nova's solutions are designed to scale effortlessly to meet global demands and diverse needs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🔒</span>
+                        <h3>Uncompromised Security</h3>
+                        <p>Employing state-of-the-art encryption and security protocols to ensure your data and operations are always protected against threats.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">📈</span>
+                        <h3>Performance Optimization</h3>
+                        <p>Engineered for speed and reliability, our systems deliver unparalleled performance, ensuring seamless user experiences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🤝</span>
+                        <h3>Seamless Collaboration</h3>
+                        <p>Facilitating real-time collaboration and communication, our platforms connect teams and stakeholders for enhanced productivity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Join us on this journey of innovation. Contact us today to learn more about Project Nova and how we can collaborate.</p>
+                <a href="mailto:info@projectnova.com" class="cta-button">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.271 0-4.192 1.504-4.192 4.667v2.333z"/></svg></a>
+                <a href="#" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.594 0-6.495 2.902-6.495 6.495 0 .509.058 1.007.163 1.49-5.405-.271-10.183-2.86-13.38-6.816-.562.97-.88 2.09-.88 3.303 0 2.254 1.144 4.248 2.873 5.412-.847-.026-1.649-.26-2.352-.646-.006.027-.006.052-.006.08 0 3.149 2.239 5.778 5.196 6.38-.546.148-1.116.225-1.702.225-.418 0-.823-.041-1.22-.116.82 2.572 3.2 4.45 6.011 4.5-.224.176-.45.348-.68.51-.837.591-1.724.934-2.652.934-1.72 0-3.327-.502-4.68-1.385 1.777.19 3.29.584 4.66 1.143 1.37.559 2.76 1.05 4.22 1.05 5.06 0 9.71-3.92 9.71-8.75 0-.133-.002-.265-.006-.397.669-.481 1.252-1.077 1.714-1.751z"/></svg></a>
+                <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+            </div>
+            <p>&copy; 2025 Project Nova. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
