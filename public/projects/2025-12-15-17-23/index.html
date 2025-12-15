@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureScape Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #4A00B0; /* Deep Violet */
+            --secondary-color: #00C6FF; /* Bright Cyan */
+            --accent-color: #F0F2F5; /* Light Gray */
+            --dark-text: #333333;
+            --light-text: #FFFFFF;
+            --gradient-bg: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --section-bg-light: #FFFFFF;
+            --section-bg-dark: #2C2F33; /* Darker neutral for contrast */
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --border-radius-lg: 15px;
+            --border-radius-md: 10px;
+        }
+
+        /* Base Styles & Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--accent-color);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--section-bg-light);
+            padding: 15px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            background: -webkit-linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            font-weight: 600;
+            color: var(--dark-text);
+            padding: 5px 0;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .primary-btn {
+            background: var(--gradient-bg);
+            color: var(--light-text);
+            box-shadow: 0 5px 20px rgba(0, 198, 255, 0.3);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 198, 255, 0.4);
+            opacity: 0.9;
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .secondary-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--dark-text);
+            background: -webkit-linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            color: #555;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-bg);
+            color: var(--light-text);
+            padding: 120px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: var(--section-bg-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--light-text);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            background: -webkit-linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        /* Project Info Section */
+        .project-info-section {
+            background-color: var(--accent-color);
+        }
+
+        .project-card {
+            background: var(--gradient-bg);
+            color: var(--light-text);
+            padding: 50px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--card-shadow);
+            max-width: 800px;
+            margin: 50px auto 0 auto;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card h3 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .project-card p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .project-card .project-date {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .project-card .btn {
+            background-color: var(--light-text);
+            color: var(--primary-color);
+        }
+        .project-card .btn:hover {
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+
+        /* Call to Action Section */
+        .cta-section {
+            background-color: var(--section-bg-light);
+            padding: 100px 0;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--section-bg-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 40px 0;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-section h1 {
+                font-size: 3rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                padding: 15px 20px;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero-section {
+                padding: 80px 0;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 30px;
+            }
+
+            .project-card {
+                padding: 40px 20px;
+            }
+
+            .project-card h3 {
+                font-size: 1.8rem;
+            }
+
+            .project-card .project-date {
+                font-size: 1rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            .project-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .project-card p {
+                font-size: 0.9rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+            }
+
+            .footer-links a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureScape</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Capabilities</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Innovate. Create. Elevate.</h1>
+                <p>Leading the future with cutting-edge solutions and design excellence.</p>
+                <a href="#projects" class="btn primary-btn">Explore Our Work</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Our Core Capabilities</h2>
+                <p>We combine strategic thinking with technical prowess to deliver exceptional results.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="icon fas fa-lightbulb"></i>
+                        <h3>Innovative Design</h3>
+                        <p>Crafting intuitive and visually stunning user experiences that captivate and convert.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="icon fas fa-code"></i>
+                        <h3>Robust Development</h3>
+                        <p>Building scalable, secure, and high-performance applications with modern technologies.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="icon fas fa-rocket"></i>
+                        <h3>Strategic Growth</h3>
+                        <p>Driving success through data-driven insights, market analysis, and targeted strategies.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="project-info-section">
+            <div class="container">
+                <h2>Featured Project Insight</h2>
+                <div class="project-card">
+                    <h3>Quantum Leap Initiative</h3>
+                    <p>A groundbreaking project set to redefine digital interactions and push the boundaries of technology.</p>
+                    <p class="project-date"><strong>Target Completion:</strong> 2025-12-15</p>
+                    <a href="#" class="btn secondary-btn">View Case Study</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Vision?</h2>
+                <p>Let's collaborate and bring your most ambitious ideas to life with our expert team.</p>
+                <a href="mailto:info@futurescape.com" class="btn primary-btn">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureScape. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
