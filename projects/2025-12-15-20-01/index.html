@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #6a11cb;
+            --primary-gradient-end: #2575fc;
+            --secondary-gradient-start: #00c6fb;
+            --secondary-gradient-end: #005bea;
+            --text-light: #f0f4f8;
+            --text-dark: #333d47;
+            --background-light: #ffffff;
+            --background-dark: #1a202c;
+            --accent-color: #ff6b6b;
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --box-shadow-light: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --box-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --spacing-unit: 1rem;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        /* Header */
+        header {
+            background: var(--background-light);
+            box-shadow: var(--box-shadow-light);
+            padding: var(--spacing-unit) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        nav a:hover {
+            color: var(--primary-gradient-end);
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 6) 0;
+            text-align: center;
+            border-bottom-left-radius: var(--border-radius-lg);
+            border-bottom-right-radius: var(--border-radius-lg);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            max-width: 800px;
+            margin: 0 auto calc(var(--spacing-unit) * 2);
+            opacity: 0.9;
+        }
+
+        .hero .date {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: calc(var(--spacing-unit) * 2);
+            background-color: rgba(255, 255, 255, 0.15);
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--border-radius-md);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex: 1;
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        section h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            color: var(--text-dark);
+            position: relative;
+            padding-bottom: var(--spacing-unit);
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            padding-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-card {
+            background: var(--background-light);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            padding: calc(var(--spacing-unit) * 2);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-unit);
+            background: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-unit);
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* About Section */
+        .about {
+            background-color: #f0f4f8;
+            border-top: 1px solid #e0e6ed;
+            border-bottom: 1px solid #e0e6ed;
+        }
+
+        .about .content {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 4);
+            flex-wrap: wrap;
+        }
+
+        .about .text-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about .image-content {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+        }
+
+        .contact p {
+            font-size: 1.1rem;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-unit);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-gradient-end);
+            box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2);
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--background-dark);
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 3) 0;
+            text-align: center;
+            margin-top: calc(var(--spacing-unit) * 4);
+            border-top-left-radius: var(--border-radius-lg);
+            border-top-right-radius: var(--border-radius-lg);
+        }
+
+        footer p {
+            margin-bottom: var(--spacing-unit);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 0.8rem;
+            opacity: 0.8;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: var(--spacing-unit);
+            }
+
+            .hero {
+                padding: calc(var(--spacing-unit) * 4) 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: calc(var(--spacing-unit) * 3) 0;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .about .content {
+                flex-direction: column;
+            }
+
+            .about .text-content,
+            .about .image-content {
+                min-width: unset;
+                width: 100%;
+            }
+
+            .container {
+                padding: calc(var(--spacing-unit) * 1.5);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .features .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: calc(var(--spacing-unit) * 1.5);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Nova</a>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Unleash the Future of Innovation</h1>
+                <p>Revolutionary solutions designed for the modern world. Experience unparalleled performance and intuitive design.</p>
+                <a href="#features" class="btn">Explore Features</a>
+                <div class="date">Project Launch: 2025-12-15</div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="grid">
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed, our platform ensures a seamless and responsive user experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">✨</div>
+                        <h3>Intuitive User Interface</h3>
+                        <p>Designed with you in mind, our UI is clean, modern, and incredibly easy to navigate.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h3>Robust Security</h3>
+                        <p>Your data is our priority. We employ industry-leading security protocols to keep it safe.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💡</div>
+                        <h3>Innovative AI Integration</h3>
+                        <p>Harness the power of AI to automate tasks and gain deeper insights, effortlessly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🌐</div>
+                        <h3>Scalable & Cloud-Native</h3>
+                        <p>Built on a scalable architecture to grow with your needs, powered by cutting-edge cloud technology.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🛠️</div>
+                        <h3>Customizable Workflows</h3>
+                        <p>Tailor the platform to fit your unique processes with highly flexible customization options.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About Project Nova</h2>
+                <div class="content">
+                    <div class="text-content">
+                        <p>Project Nova represents the culmination of years of research and development, aimed at addressing the evolving challenges of the digital landscape. Our dedicated team of engineers, designers, and strategists has meticulously crafted a platform that not only meets current demands but also anticipates future needs.</p>
+                        <p>We believe in creating tools that empower, streamline, and inspire. With a focus on user-centric design and cutting-edge technology, Project Nova is set to redefine efficiency and innovation in its domain. Join us on this exciting journey into the future.</p>
+                    </div>
+                    <div class="image-content">
+                        <img src="https://via.placeholder.com/500x350/6a11cb/ffffff?text=Innovation" alt="About Project Nova">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have questions or want to learn more about Project Nova? We'd love to hear from you!</p>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project Nova. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
