@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #6a11cb;
+            --primary-gradient-end: #2575fc;
+            --secondary-gradient-start: #fc6767;
+            --secondary-gradient-end: #ec008c;
+            --text-light: #f4f7f6;
+            --text-dark: #333;
+            --bg-light: #ffffff;
+            --bg-dark-card: #2c2c2c;
+            --accent-blue: #007bff;
+            --accent-green: #28a745;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #e0f2f7, #c1e4f4);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: var(--text-light);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo {
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        main {
+            flex: 1;
+            padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        section {
+            background-color: var(--bg-light);
+            padding: calc(var(--spacing-unit) * 3);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-gradient-end), var(--primary-gradient-start));
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto calc(var(--spacing-unit) * 2);
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            color: var(--text-light);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2.5);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        h2, h3 {
+            color: var(--primary-gradient-start);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 2rem;
+            color: var(--text-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-card {
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: calc(var(--spacing-unit) * 2);
+            text-align: center;
+            box-shadow: 0 5px 15px var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: var(--primary-gradient-end);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-unit);
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .about p {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        footer {
+            background: var(--bg-dark-card);
+            color: var(--text-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2);
+            margin-top: auto;
+            font-size: 0.9rem;
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-top: var(--spacing-unit);
+            }
+
+            nav a {
+                padding: 0.5rem;
+                display: block;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            h3 {
+                font-size: 1.7rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: calc(var(--spacing-unit) * 2);
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 0.7rem 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Project 2025</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1>Elevate Your Digital Experience</h1>
+            <p>
+                Welcome to the future of innovation. This project is set to launch on 
+                <strong>December 16, 2025</strong>, bringing groundbreaking solutions to your fingertips.
+            </p>
+            <a href="#" class="btn">Discover More</a>
+        </section>
+
+        <section id="features">
+            <h2>Core Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="icon">&#9889;</span> <!-- Lightning bolt icon -->
+                    <h4>Blazing Fast Performance</h4>
+                    <p>Optimized for speed and efficiency, ensuring a seamless user experience.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">&#128187;</span> <!-- Laptop icon -->
+                    <h4>Cross-Platform Compatibility</h4>
+                    <p>Access your data and features from any device, anywhere, anytime.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">&#128274;</span> <!-- Lock icon -->
+                    <h4>Robust Security</h4>
+                    <p>Your data is protected with state-of-the-art encryption and security protocols.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">&#128161;</span> <!-- Lightbulb icon -->
+                    <h4>Intuitive Interface</h4>
+                    <p>Designed for ease of use, making complex tasks simple and enjoyable.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <h2>About Our Vision</h2>
+            <p>
+                We are a team of passionate innovators dedicated to creating digital products that
+                solve real-world problems and enhance daily life. Our philosophy centers around
+                user-centric design, cutting-edge technology, and unwavering commitment to quality.
+                The project launching on <strong>2025-12-16</strong> embodies these principles,
+                promising a new era of digital interaction and productivity.
+            </p>
+        </section>
+
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">
+                Have questions or want to learn more? Reach out to us!
+            </p>
+            <div style="text-align: center;">
+                <a href="mailto:info@project2025.com" class="btn">Email Us</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Project 2025. All rights reserved. Built with passion for the future.</p>
+    </footer>
+</body>
+</html>
