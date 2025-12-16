@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #0f3460;
+            --accent-color-1: #e94560;
+            --accent-color-2: #2575fc;
+            --text-color: #e0e0e0;
+            --light-text-color: #f0f0f0;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gradient-hero: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --gradient-button: linear-gradient(90deg, #FF6B6B 0%, #5D5FEF 100%);
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color-1);
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--light-text-color);
+            margin-bottom: 0.8em;
+            font-weight: 700;
+        }
+
+        h1 { font-size: 2.8em; }
+        h2 { font-size: 2.2em; }
+        h3 { font-size: 1.8em; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5em;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 1.2em 0;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--light-text-color);
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 1.5em;
+        }
+
+        nav a {
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent-color-1);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: var(--gradient-hero);
+            padding: 6em 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: rotateBackground 20s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #hero .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        #hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #hero p {
+            font-size: 1.3em;
+            margin-bottom: 2em;
+            color: var(--light-text-color);
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-button);
+            color: var(--light-text-color);
+            padding: 1em 2.5em;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4em 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        section h2 {
+            margin-bottom: 1.5em;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-button);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        #features .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2em;
+            margin-top: 3em;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            color: var(--accent-color-1);
+            margin-top: 0;
+            margin-bottom: 1em;
+        }
+
+        .card p {
+            color: var(--text-color);
+            font-size: 0.95em;
+        }
+
+        /* About Section */
+        #about .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            padding-top: 2em;
+        }
+
+        #about p {
+            margin-bottom: 1.5em;
+            font-size: 1.1em;
+            color: var(--text-color);
+        }
+
+        #about ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 2em;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1em;
+        }
+
+        #about ul li {
+            background-color: var(--card-bg);
+            padding: 1em 1.5em;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent-color-2);
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: var(--light-text-color);
+        }
+
+        #about ul li::before {
+            content: '✓';
+            color: var(--accent-color-1);
+            margin-right: 0.8em;
+            font-size: 1.2em;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            text-align: center;
+            padding: 2em 0;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2em; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.5em; }
+
+            #hero {
+                padding: 4em 0;
+                min-height: 60vh;
+            }
+
+            #hero h1 {
+                font-size: 2.5em;
+            }
+
+            #hero p {
+                font-size: 1em;
+            }
+
+            .cta-button {
+                padding: 0.8em 2em;
+                font-size: 1em;
+            }
+
+            header .container {
+                flex-direction: column;
+                gap: 1em;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.8em;
+                width: 100%;
+                text-align: center;
+            }
+
+            nav a {
+                padding: 0.8em;
+                display: block;
+            }
+
+            #features .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #about ul {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1em;
+            }
+
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.6em; }
+
+            #hero h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureDash</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Welcome to Our Next-Gen Project</h1>
+                <p>Delivering innovation and excellence for tomorrow's challenges. <br>Target Completion: <strong>2025-12-16</strong></p>
+                <a href="#about" class="cta-button">Learn More About the Project</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Project Highlights</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>Advanced Analytics</h3>
+                        <p>Leveraging cutting-edge AI and machine learning to provide deep insights and predictive capabilities.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Seamless Integration</h3>
+                        <p>Designed for effortless integration with existing systems, enhancing workflow without disruption.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Scalable Architecture</h3>
+                        <p>Built on a robust, scalable foundation ready to grow with your demands and future innovations.</p>
+                    </div>
+                    <div class="card">
+                        <h3>User-Centric Design</h3>
+                        <p>An intuitive and beautiful interface ensures a superior user experience across all devices.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About The Project</h2>
+                <div class="content-wrapper">
+                    <p>This ambitious project, slated for completion on <strong>2025-12-16</strong>, aims to redefine industry standards by integrating a suite of powerful tools and services into a unified, intelligent platform. Our team of experts is dedicated to pushing the boundaries of technology to deliver unparalleled value.</p>
+                    <p>We are focused on creating solutions that are not only technologically advanced but also sustainable and impactful. Our vision is to empower users with the tools they need to succeed in an ever-evolving digital landscape.</p>
+                    <ul>
+                        <li>Innovative Solutions for Complex Problems</li>
+                        <li>Dedicated Team of Industry Professionals</li>
+                        <li>Commitment to Quality and Performance</li>
+                        <li>Future-Proof Technology Stack</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <p>Have questions or want to learn more about our project and its progress towards 2025-12-16? Feel free to reach out!</p>
+                <a href="mailto:info@futuredash.com" class="cta-button">Contact Us Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FutureDash. All rights reserved. Project completion: 2025-12-16.</p>
+        </div>
+    </footer>
+</body>
+</html>
