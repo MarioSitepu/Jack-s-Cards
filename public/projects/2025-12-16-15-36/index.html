@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Phoenix - Future Forward</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset & Box-sizing */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #1f0147 0%, #3a007f 100%); /* Deep purple gradient */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        h1, h2, h3 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        h1 { font-size: 3.5em; }
+        h2 { font-size: 2.5em; }
+        h3 { font-size: 1.8em; }
+
+        p {
+            margin-bottom: 1em;
+            font-weight: 300;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            background: linear-gradient(45deg, #00c6ff, #0072ff); /* Bright blue gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00c6ff; /* Highlight color */
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            background-attachment: fixed;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+
+        .hero h1 {
+            font-size: 4.5em;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #00c6ff, #0072ff); /* Bright blue gradient */
+            color: #ffffff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 198, 255, 0.6);
+        }
+
+        .section-title {
+            font-size: 3em;
+            margin-bottom: 60px;
+            background: linear-gradient(45deg, #00c6ff, #0072ff); /* Bright blue gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* Features Section */
+        .features {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 100px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #a770ef, #cf8bf3, #fdbb2d); /* Multi-color gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .feature-card p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #c0c0c0;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #0072ff 0%, #00c6ff 100%); /* Bright blue gradient */
+            color: #ffffff;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+        }
+
+        .cta h2 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .cta p {
+            font-size: 1.3em;
+            max-width: 900px;
+            margin: 0 auto 50px auto;
+            font-weight: 300;
+        }
+
+        .cta .btn {
+            background: #ffffff;
+            color: #0072ff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta .btn:hover {
+            color: #004d99;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            color: #a0a0a0;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5em;
+            }
+            .hero p {
+                font-size: 1.3em;
+            }
+            .section-title {
+                font-size: 2.5em;
+            }
+            .feature-card {
+                padding: 30px;
+            }
+            .feature-card h3 {
+                font-size: 1.6em;
+            }
+            .cta h2 {
+                font-size: 3em;
+            }
+            .cta p {
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+                text-align: center;
+            }
+            nav a {
+                padding: 10px 0;
+                display: block;
+            }
+            .hero {
+                min-height: 60vh;
+                padding: 40px 20px;
+            }
+            .hero h1 {
+                font-size: 2.8em;
+            }
+            .hero p {
+                font-size: 1.1em;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+            section {
+                padding: 60px 0;
+            }
+            .section-title {
+                font-size: 2em;
+                margin-bottom: 40px;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .cta h2 {
+                font-size: 2.5em;
+            }
+            .cta p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5em;
+            }
+            .hero h1 {
+                font-size: 2.2em;
+            }
+            .hero p {
+                font-size: 0.9em;
+            }
+            .section-title {
+                font-size: 1.8em;
+            }
+            .feature-card {
+                padding: 25px;
+            }
+            .feature-card h3 {
+                font-size: 1.4em;
+            }
+            .cta h2 {
+                font-size: 2em;
+            }
+            .cta p {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Phoenix</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Unveiling the Future of Innovation</h1>
+                <p>Experience the next generation of possibilities with Project Phoenix. Our official launch is set for <span style="font-weight: 600; background: linear-gradient(45deg, #fdbb2d, #cf8bf3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent;">2025-12-16</span>.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Key Innovations</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Seamless Integration</h3>
+                        <p>Our platform is designed for effortless compatibility across all your existing systems, ensuring a smooth transition and enhanced workflow.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Intelligent Automation</h3>
+                        <p>Leverage cutting-edge AI to automate repetitive tasks, free up resources, and focus on what truly matters for your business growth.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Solutions</h3>
+                        <p>Built to grow with you, Project Phoenix offers flexible and robust solutions that adapt to your evolving needs, from startups to enterprises.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Advanced Security</h3>
+                        <p>Your data's safety is our top priority. We implement state-of-the-art encryption and security protocols to protect your valuable information.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Join us on this exciting journey. Project Phoenix is poised to redefine standards and empower your vision for tomorrow. Get ready for 2025-12-16!</p>
+                <a href="#contact" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project Phoenix. All rights reserved. | Launch Date: 2025-12-16</p>
+        </div>
+    </footer>
+</body>
+</html>
