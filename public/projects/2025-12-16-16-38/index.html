@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-color: #4A00E0; /* Deep Purple */
+            --secondary-color: #8E2DE2; /* Lighter Purple */
+            --accent-color: #00C6FF; /* Bright Blue */
+            --text-color: #e0e0e0; /* Light Gray for text on dark bg */
+            --dark-text-color: #333; /* Dark gray for text on light bg */
+            --background-dark: #1a1a2e; /* Dark background */
+            --background-light: #f4f7f6; /* Light background */
+            --card-background: #2a2a4a; /* Card background */
+            --gradient-hero: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-button: linear-gradient(45deg, var(--accent-color) 0%, #0072FF 100%);
+            --font-family-primary: 'Poppins', sans-serif;
+            --container-max-width: 1200px;
+            --spacing-unit: 1rem;
+        }
+
+        /* Global Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-primary);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-dark);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-color);
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-button);
+            color: #fff;
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 198, 255, 0.6);
+            color: #fff; /* Ensure text color remains white on hover */
+        }
+
+        .btn.secondary {
+            background: var(--gradient-hero);
+            box-shadow: 0 5px 15px rgba(74, 0, 224, 0.4);
+        }
+
+        .btn.secondary:hover {
+            box-shadow: 0 8px 20px rgba(74, 0, 224, 0.6);
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(26, 26, 46, 0.9);
+            padding: var(--spacing-unit) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.05rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        nav a {
+            color: var(--text-color);
+            font-weight: 400;
+            padding: var(--spacing-unit) 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-hero);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            padding: calc(var(--spacing-unit) * 4) 0;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: pulse 15s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .hero-section .container {
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: var(--spacing-unit);
+            line-height: 1.1;
+            font-weight: 700;
+        }
+
+        .hero-section p {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        /* General Section Styling */
+        section {
+            padding: calc(var(--spacing-unit) * 6) 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--background-dark);
+            color: var(--text-color);
+        }
+
+        section:nth-of-type(odd) {
+            background-color: var(--background-light);
+            color: var(--dark-text-color);
+        }
+
+        section h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto calc(var(--spacing-unit) * 3);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Features Section */
+        .features-section .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: calc(var(--spacing-unit) * 4);
+        }
+
+        .feature-item {
+            background-color: var(--card-background);
+            padding: calc(var(--spacing-unit) * 3);
+            border-radius: 15px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text-color);
+            border: 1px solid rgba(142, 45, 226, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(74, 0, 224, 0.1) 0%, rgba(142, 45, 226, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .feature-item:hover::before {
+            opacity: 1;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-item h3 {
+            font-size: 1.6rem;
+            margin-bottom: var(--spacing-unit);
+            color: var(--accent-color);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            margin-bottom: 0;
+            color: var(--text-color);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-button);
+            color: #fff;
+            padding: calc(var(--spacing-unit) * 5) 0;
+        }
+
+        .cta-section h2 {
+            color: #fff;
+        }
+
+        .cta-section h2::after {
+            background: #fff;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: rgba(255, 255, 255, 0.7);
+            padding: calc(var(--spacing-unit) * 3) 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-unit) / 2;
+                text-align: center;
+            }
+
+            nav a {
+                padding: var(--spacing-unit) 0;
+            }
+
+            .hero-section {
+                min-height: 60vh;
+                padding: calc(var(--spacing-unit) * 2) 0;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: calc(var(--spacing-unit) * 4) 0;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .features-section .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: var(--spacing-unit);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">ModernProject</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Future-Forward Solutions</h1>
+                <p>Innovating for a brighter tomorrow. Project dated: <strong>2025-12-16</strong></p>
+                <a href="#features" class="btn">Discover Our Vision</a>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>Our Vision</h2>
+                <p>We are dedicated to crafting cutting-edge solutions that redefine industry standards. Our approach integrates state-of-the-art technology with user-centric design principles to deliver unparalleled experiences across various platforms. We believe in innovation that empowers.</p>
+                <p>Our team comprises passionate experts committed to pushing boundaries and creating impactful digital products that stand the test of time and technology.</p>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <p>Explore the core functionalities that make our projects stand out and deliver exceptional value.</p>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h3>Responsive Design</h3>
+                        <p>Our solutions adapt seamlessly to any device or screen size, ensuring a consistent and optimal user experience, whether on desktop, tablet, or mobile.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Scalable Architecture</h3>
+                        <p>Built on a robust and flexible architecture, our projects are designed to grow with your needs, handling increased load and complexity with ease.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Intuitive Interface</h3>
+                        <p>We prioritize user experience, crafting interfaces that are not only visually appealing but also incredibly easy to navigate and understand for all users.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Cutting-Edge Technology</h3>
+                        <p>Leveraging the latest frameworks and development practices, we ensure our projects are modern, secure, and performant, ready for the future.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform?</h2>
+                <p>Connect with us to start your journey towards innovation and discover how our expertise can elevate your next project.</p>
+                <a href="mailto:info@modernproject.com" class="btn secondary">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Modern Project. All rights reserved.</p>
+            <p>Designed with passion for a future-forward world.</p>
+        </div>
+    </footer>
+</body>
+</html>
