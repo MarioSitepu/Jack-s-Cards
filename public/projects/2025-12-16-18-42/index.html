@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(to right, #4a00e0, #8e2de2);
+            --secondary-gradient: linear-gradient(to right, #00d2ff, #3a7bd5);
+            --dark-background: #1a1a2e;
+            --light-text: #e0e0e0;
+            --dark-text: #333;
+            --accent-color: #00d2ff;
+            --card-background: rgba(255, 255, 255, 0.08);
+            --border-radius: 12px;
+            --padding-section: 80px 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--light-text);
+            background-color: var(--dark-background);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: #fff;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #00d2ff, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.05rem;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            left: 0;
+            background: var(--accent-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            padding: 150px 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: rotateBackground 20s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: var(--light-text);
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-gradient);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: var(--padding-section);
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #1f1f3a;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            font-weight: 700;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .feature-item {
+            background: var(--card-background);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-color);
+        }
+
+        .feature-item h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: var(--light-text);
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .about-text, .about-image {
+            flex: 1 1 45%; /* Allow items to grow and shrink, minimum width 45% */
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--light-text);
+            opacity: 0.9;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* Call to Action */
+        .cta {
+            background: var(--secondary-gradient);
+            padding: var(--padding-section);
+            color: #fff;
+        }
+
+        .cta h2 {
+            color: #fff;
+            -webkit-text-fill-color: #fff;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111122;
+            color: var(--light-text);
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            opacity: 0.7;
+        }
+
+        .footer-links a {
+            margin: 0 10px;
+            color: var(--light-text);
+            opacity: 0.7;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            opacity: 1;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 10px 10px 10px;
+            }
+
+            .hero {
+                padding: 100px 20px;
+                min-height: 60vh;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-text, .about-image {
+                flex: 1 1 100%;
+            }
+            
+            .about-text h3 {
+                font-size: 1.8rem;
+            }
+
+            .cta p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul li {
+                margin: 0 8px 8px 8px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 60px 15px;
+            }
+
+            .feature-item {
+                padding: 25px;
+            }
+
+            .feature-item h3 {
+                font-size: 1.4rem;
+            }
+
+            .about-text h3 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Nova</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Unleash Your Potential with Project Nova</h1>
+                <p>A revolutionary platform designed for the future. Experience seamless integration and unparalleled efficiency.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3>Intuitive Design</h3>
+                        <p>Our user interface is crafted for simplicity and ease of use, ensuring a smooth experience from day one.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Powerful Performance</h3>
+                        <p>Built with cutting-edge technology, Project Nova delivers speed and reliability for all your tasks.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Scalable Solutions</h3>
+                        <p>Whether you're a small team or a large enterprise, our platform scales to meet your growing demands.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Secure & Private</h3>
+                        <p>Your data is protected with advanced encryption and robust security protocols, ensuring peace of mind.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Project Nova</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Innovating for a Brighter Future</h3>
+                        <p>Project Nova was born from a vision to simplify complex processes and empower users with tools that truly make a difference. We believe in continuous innovation, user-centric design, and building a community around shared success.</p>
+                        <p>Our dedicated team of experts works tirelessly to bring you a product that is not just functional, but also inspiring. We are committed to excellence and constantly strive to push the boundaries of what's possible in the digital realm.</p>
+                        <a href="#contact" class="btn">Get in Touch</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/8e2de2/00d2ff?text=Modern+Tech" alt="Modern Technology Interface">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p>Join the growing number of users who are revolutionizing their productivity with Project Nova. Contact us today to learn how we can help you achieve your goals.</p>
+                <a href="mailto:info@projectnova.com" class="btn">Contact Sales</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Project Nova. All rights reserved.</p>
+            <p>Project Date: 2025-12-16</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
