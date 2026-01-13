@@ -3,86 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Project Showcase</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Project Nova - Modern Dashboard</title>
     <style>
+        /* Modern CSS with Gradient Styling */
         :root {
-            --primary-color: #6a11cb;
-            --secondary-color: #2575fc;
-            --accent-color: #00f2fe;
-            --text-color: #333;
-            --light-text-color: #f8f8f8;
-            --bg-light: #f4f7fa;
-            --bg-dark: #1a202c;
+            --primary-dark: #1a202c; /* Dark charcoal */
+            --primary-light: #f7fafc; /* Off-white */
+            --accent-purple: #6b46c1; /* Deep purple */
+            --accent-blue: #4299e1; /* Sky blue */
+            --text-dark: #2d3748; /* Dark grey for text */
+            --text-light: #e2e8f0; /* Light grey for text on dark backgrounds */
+            --gradient-start: #6a11cb; /* Vibrant purple */
+            --gradient-end: #2575fc; /* Vibrant blue */
             --card-bg: #ffffff;
-            --shadow-light: rgba(0, 0, 0, 0.08);
-            --shadow-dark: rgba(0, 0, 0, 0.2);
-            --border-radius: 12px;
-            --spacing-sm: 1rem;
-            --spacing-md: 2rem;
-            --spacing-lg: 4rem;
+            --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            --border-radius: 0.75rem;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition-speed: 0.3s ease-in-out;
         }
 
-        /* Base Reset & Typography */
-        * {
+        /* Basic Reset & Body Styling */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-family);
             line-height: 1.6;
-            color: var(--text-color);
-            background: linear-gradient(135deg, var(--bg-light) 0%, #e0e6ed 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            color: var(--text-dark);
+            background-color: var(--primary-light);
+            scroll-behavior: smooth;
         }
 
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            color: var(--text-color);
-            margin-bottom: 1rem;
-        }
-
-        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
-        h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
-        h3 { font-size: clamp(1.75rem, 3.5vw, 2.75rem); }
-        p { margin-bottom: 1rem; }
-
-        a {
-            text-decoration: none;
-            color: var(--secondary-color);
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Layout & Containers */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--spacing-sm);
+            padding: 0 1.5rem;
         }
 
-        section {
-            padding: var(--spacing-lg) 0;
-            position: relative;
-            z-index: 1;
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: var(--accent-purple);
         }
 
         /* Header */
         header {
-            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: var(--light-text-color);
-            padding: var(--spacing-md) 0;
-            box-shadow: 0 4px 15px var(--shadow-dark);
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         header .container {
@@ -93,280 +72,397 @@
         }
 
         header h1 {
-            color: var(--light-text-color);
-            margin: 0;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: var(--spacing-md);
-            flex-wrap: wrap;
+            gap: 1.5rem;
         }
 
         nav a {
-            color: var(--light-text-color);
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            transition: background 0.3s ease, transform 0.2s ease;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
         }
 
-        nav a:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-            color: var(--accent-color);
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-blue);
+            left: 0;
+            bottom: 0;
+            transition: width var(--transition-speed);
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         /* Hero Section */
-        .hero {
-            background: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: var(--light-text-color);
+        .hero-section {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            color: var(--text-light);
+            padding: 8rem 0;
             text-align: center;
-            padding: var(--spacing-lg) 0;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             min-height: 70vh;
-            position: relative;
-            overflow: hidden;
-            box-shadow: inset 0 -5px 15px rgba(0,0,0,0.1);
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100"><defs><pattern id="diagonal-stripe-1" patternUnits="userSpaceOnUse" width="10" height="10"><path d="M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2" stroke="rgba(255,255,255,0.08)" stroke-width="1" /></pattern></defs><rect width="100%" height="100%" fill="url(%23diagonal-stripe-1)" /></svg>') repeat;
-            opacity: 0.6;
-            z-index: 0;
+        .hero-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
         }
 
-        .hero .container {
-            position: relative;
-            z-index: 1;
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
         }
 
-        .hero h2 {
-            color: var(--light-text-color);
-            margin-bottom: var(--spacing-sm);
-            text-shadow: 2px 2px 4px var(--shadow-dark);
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            margin-bottom: var(--spacing-md);
-            max-width: 800px;
-            text-shadow: 1px 1px 2px var(--shadow-dark);
-        }
-
+        /* Buttons */
         .btn {
             display: inline-block;
-            background: linear-gradient(45deg, var(--accent-color) 0%, #00c6ff 100%);
-            color: var(--bg-dark);
-            padding: 0.8rem 2.5rem;
-            border-radius: 50px;
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius);
             font-weight: 600;
             font-size: 1.1rem;
+            transition: all var(--transition-speed);
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px var(--shadow-dark);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.05em;
         }
 
-        .btn:hover {
-            background: linear-gradient(45deg, #00c6ff 0%, var(--accent-color) 100%);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            color: var(--text-color);
+        .btn.primary {
+            background-color: var(--accent-blue);
+            color: var(--primary-light);
+            box-shadow: 0 6px 15px rgba(66, 153, 225, 0.4);
         }
 
-        /* Features Section */
-        .features {
-            background-color: var(--bg-light);
+        .btn.primary:hover {
+            background-color: var(--accent-purple);
+            box-shadow: 0 6px 20px rgba(107, 70, 193, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background-color: var(--card-bg);
+            color: var(--accent-blue);
+            border: 2px solid var(--accent-blue);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn.secondary:hover {
+            background-color: var(--accent-blue);
+            color: var(--primary-light);
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 6rem 0;
             text-align: center;
-            padding: var(--spacing-lg) 0;
+            background-color: var(--primary-light);
         }
 
-        .features h3 {
-            margin-bottom: var(--spacing-lg);
-            color: var(--primary-color);
+        .content-section h3 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            position: relative;
+            display: inline-block;
         }
 
-        .feature-grid {
+        .content-section h3::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent-blue), var(--accent-purple));
+            left: 20%;
+            bottom: -10px;
+            border-radius: 2px;
+        }
+
+        .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--spacing-md);
-            margin-top: var(--spacing-md);
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .feature-card {
+        .card {
             background-color: var(--card-bg);
-            padding: var(--spacing-md);
+            padding: 2.5rem;
             border-radius: var(--border-radius);
-            box-shadow: 0 4px 15px var(--shadow-light);
+            box-shadow: var(--box-shadow);
             text-align: left;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            border-top: 5px solid transparent;
-            border-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            border-image-slice: 1;
+            transition: transform var(--transition-speed);
         }
 
-        .feature-card:hover {
+        .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px var(--shadow-dark);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .feature-card h4 {
-            color: var(--primary-color);
-            margin-bottom: 0.75rem;
+        .card h4 {
+            font-size: 1.5rem;
+            color: var(--accent-purple);
+            margin-bottom: 1rem;
         }
 
-        .feature-card p {
+        .card p {
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* Gradient Section (Features) */
+        .gradient-section {
+            background: linear-gradient(to right top, var(--gradient-end), var(--gradient-start));
+            color: var(--text-light);
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .gradient-section h3 {
+            color: var(--text-light);
+        }
+
+        .gradient-section h3::after {
+            background: var(--text-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: transform var(--transition-speed), background-color var(--transition-speed);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-item h4 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: transform var(--transition-speed);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid var(--accent-blue);
+        }
+
+        .team-member h4 {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: var(--text-dark);
             font-size: 0.95rem;
-            color: #555;
-            margin-bottom: 0;
+            opacity: 0.8;
         }
 
-        /* About Section */
-        .about {
-            background: linear-gradient(135deg, #f0f4f8 0%, var(--card-bg) 100%);
-            padding: var(--spacing-lg) 0;
+        /* Call to Action */
+        .call-to-action {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            padding: 5rem 0;
             text-align: center;
         }
 
-        .about h3 {
-            color: var(--secondary-color);
-            margin-bottom: var(--spacing-md);
+        .call-to-action h3 {
+            color: var(--text-light);
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
         }
 
-        .about p {
-            max-width: 800px;
-            margin: 0 auto 1.5rem auto;
-            color: #444;
-            font-size: 1.05rem;
-        }
-        
-        .about .date-highlight {
-            font-weight: 600;
-            color: var(--primary-color);
-            background-color: rgba(var(--accent-color), 0.1);
-            padding: 0.2rem 0.5rem;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 1rem;
+        .call-to-action h3::after {
+            background: var(--text-light);
         }
 
-        /* Call to Action Section */
-        .cta {
-            background: linear-gradient(90deg, var(--secondary-color) 0%, var(--accent-color) 100%);
-            color: var(--light-text-color);
-            text-align: center;
-            padding: var(--spacing-lg) 0;
-        }
-
-        .cta h3 {
-            color: var(--light-text-color);
-            margin-bottom: var(--spacing-md);
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-        }
-
-        .cta .btn {
-            background: var(--light-text-color);
-            color: var(--primary-color);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-
-        .cta .btn:hover {
-            background: var(--bg-light);
-            color: var(--secondary-color);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        .call-to-action p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
         }
 
         /* Footer */
         footer {
-            background-color: var(--bg-dark);
-            color: var(--light-text-color);
+            background-color: #111827; /* Even darker shade */
+            color: var(--text-light);
+            padding: 3rem 0;
             text-align: center;
-            padding: var(--spacing-md) 0;
-            margin-top: auto;
             font-size: 0.9rem;
-            box-shadow: inset 0 5px 15px rgba(0,0,0,0.2);
         }
 
         footer p {
-            margin: 0.5rem 0;
-            color: #bbb;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
         }
 
-        /* Responsive Adjustments */
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            margin: 0 0.8rem;
+            font-weight: 500;
+            opacity: 0.7;
+            transition: opacity var(--transition-speed);
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+            color: var(--accent-blue);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             header .container {
                 flex-direction: column;
-                text-align: center;
+                gap: 1rem;
             }
 
             nav ul {
-                margin-top: var(--spacing-sm);
+                flex-wrap: wrap;
                 justify-content: center;
-                gap: var(--spacing-sm);
+                gap: 1rem;
             }
 
-            .hero {
+            .hero-section {
+                padding: 6rem 0;
                 min-height: 60vh;
-                padding: var(--spacing-md) 0;
             }
 
-            .hero h2 {
-                font-size: clamp(1.8rem, 6vw, 2.5rem);
+            .hero-section h2 {
+                font-size: 2.5rem;
             }
 
-            .hero p {
-                font-size: clamp(0.9rem, 3vw, 1.1rem);
+            .hero-section p {
+                font-size: 1.2rem;
             }
 
-            .feature-grid {
+            .content-section, .gradient-section, .call-to-action {
+                padding: 4rem 0;
+            }
+
+            .content-section h3, .gradient-section h3, .call-to-action h3 {
+                font-size: 2rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .grid-container, .features-grid, .team-grid {
                 grid-template-columns: 1fr;
             }
 
-            .feature-card {
-                text-align: center;
-                align-items: center;
+            .card, .feature-item, .team-member {
+                padding: 2rem;
+            }
+
+            footer {
+                padding: 2rem 0;
             }
         }
 
         @media (max-width: 480px) {
-            nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
+            header h1 {
+                font-size: 1.5rem;
             }
 
             nav a {
-                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
             }
 
-            .btn {
-                padding: 0.7rem 2rem;
+            .hero-section h2 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
                 font-size: 1rem;
             }
 
-            h1 { font-size: clamp(2rem, 6vw, 3rem); }
-            h2 { font-size: clamp(1.5rem, 5vw, 2.5rem); }
-            h3 { font-size: clamp(1.4rem, 4vw, 2rem); }
+            .btn {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+            }
 
-            .container {
-                padding: 0 0.8rem;
+            .card h4, .feature-item h4 {
+                font-size: 1.3rem;
+            }
+
+            .team-member h4 {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -378,9 +474,9 @@
             <h1>Project Nova</h1>
             <nav>
                 <ul>
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="#overview">Overview</a></li>
                     <li><a href="#features">Features</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#team">Team</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -388,52 +484,95 @@
     </header>
 
     <main>
-        <section id="home" class="hero">
+        <section id="hero" class="hero-section">
             <div class="container">
-                <h2>Unleashing Tomorrow's Potential Today</h2>
-                <p>Innovative solutions crafted with precision and a vision for a brighter future. Discover how Project Nova redefines possibilities.</p>
-                <a href="#features" class="btn">Explore Solutions</a>
+                <h2>Innovate. Create. Elevate.</h2>
+                <p>Welcome to Project Nova, shaping the future with cutting-edge solutions.</p>
+                <a href="#overview" class="btn primary">Discover More</a>
             </div>
         </section>
 
-        <section id="features" class="features">
+        <section id="overview" class="content-section">
             <div class="container">
-                <h3>Key Differentiators</h3>
-                <div class="feature-grid">
-                    <article class="feature-card">
-                        <h4>Intuitive Design</h4>
-                        <p>Experience seamless interactions with our user-centric interfaces, built for efficiency and delight.</p>
-                    </article>
-                    <article class="feature-card">
-                        <h4>Scalable Architecture</h4>
-                        <p>Our robust systems are designed to grow with your needs, ensuring future-proof performance.</p>
-                    </article>
-                    <article class="feature-card">
-                        <h4>Advanced Analytics</h4>
-                        <p>Gain actionable insights with powerful data analytics, empowering smarter decision-making.</p>
-                    </article>
-                    <article class="feature-card">
-                        <h4>Secure & Reliable</h4>
-                        <p>Your data and operations are safeguarded with industry-leading security protocols and uptime guarantees.</p>
-                    </article>
+                <h3>Project Overview</h3>
+                <div class="grid-container">
+                    <div class="card">
+                        <h4>Vision</h4>
+                        <p>To deliver unparalleled technological advancements that redefine industry standards and user experiences globally.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Mission</h4>
+                        <p>Empowering businesses and individuals through innovative, reliable, and scalable platforms designed for tomorrow's challenges.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Key Milestones</h4>
+                        <p>Achieving alpha release by Q3 2025, public beta by Q1 2026, and full platform launch by Q3 2026.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="about">
+        <section id="features" class="gradient-section">
             <div class="container">
-                <h3>Our Vision for Innovation</h3>
-                <p>Project Nova was conceived to bridge the gap between complex technological challenges and elegant, practical solutions. Our team of dedicated innovators strives to push boundaries and create tools that truly make a difference.</p>
-                <p>This project was officially initialized and began its core development phases on <span class="date-highlight">2026-01-13</span>, marking a pivotal moment in our journey towards a digitally empowered world. We believe in transparency, continuous improvement, and the power of collaborative creation.</p>
-                <a href="#contact" class="btn">Join Our Journey</a>
+                <h3>Core Features</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="icon">🚀</i>
+                        <h4>Blazing Fast</h4>
+                        <p>Optimized performance and lightning-fast response times for a seamless user experience.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon">💡</i>
+                        <h4>Intuitive Design</h4>
+                        <p>User-centric interfaces crafted for ease of use and minimal learning curve.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon">🔒</i>
+                        <h4>Secure & Robust</h4>
+                        <p>Enterprise-grade security protocols and a robust architecture you can always trust.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon">📈</i>
+                        <h4>Scalable Growth</h4>
+                        <p>Built to expand effortlessly with your needs, from individual users to large enterprises.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="contact" class="cta">
+        <section id="team" class="content-section">
             <div class="container">
-                <h3>Ready to Transform Your Business?</h3>
-                <p>Connect with our experts to discuss how Project Nova can tailor solutions to your specific requirements.</p>
-                <a href="mailto:info@projectnova.com" class="btn">Get in Touch</a>
+                <h3>Our Visionary Team</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/100/007bff/ffffff?text=JD" alt="Jane Doe - Lead Architect">
+                        <h4>Jane Doe</h4>
+                        <p>Lead Architect</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/100/6f42c1/ffffff?text=MS" alt="Mark Smith - Product Manager">
+                        <h4>Mark Smith</h4>
+                        <p>Product Manager</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/100/28a745/ffffff?text=AL" alt="Alice Lee - UX Designer">
+                        <h4>Alice Lee</h4>
+                        <p>UX Designer</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/100/dc3545/ffffff?text=RJ" alt="Robert Johnson - Head of Operations">
+                        <h4>Robert Johnson</h4>
+                        <p>Head of Operations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="call-to-action">
+            <div class="container">
+                <h3>Ready to Transform Your Future?</h3>
+                <p>Get in touch with us to learn how Project Nova can revolutionize your workflow and amplify your success.</p>
+                <a href="mailto:info@projectnova.com" class="btn secondary">Contact Us</a>
             </div>
         </section>
     </main>
@@ -441,7 +580,12 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 Project Nova. All rights reserved.</p>
-            <p>Project date: 2026-01-13</p>
+            <p>Project Last Updated: <strong>2026-01-13</strong></p>
+            <div class="social-links">
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">GitHub</a>
+            </div>
         </div>
     </footer>
 </body>
