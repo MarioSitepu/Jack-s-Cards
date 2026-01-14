@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Project</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-gradient: linear-gradient(to right, #6a11cb 0%, #2577fc 100%);
+            --secondary-gradient: linear-gradient(to right, #00c6fb 0%, #005bea 100%);
+            --text-light: #f0f0f0;
+            --text-dark: #333;
+            --bg-light: #ffffff;
+            --bg-dark: #1a1a2e;
+            --card-bg: #f8f8f8;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-dark: rgba(0, 0, 0, 0.2);
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --transition-speed: 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px var(--shadow-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        header nav a {
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            font-weight: 500;
+        }
+
+        header nav a:hover,
+        header nav a:focus {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        section h2, section h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after, section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #555;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            padding: 6rem 2rem;
+            border-radius: var(--border-radius-md);
+            margin-top: 2rem;
+            box-shadow: 0 8px 30px var(--shadow-dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 450px;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        .hero h2::after {
+            background: #fff;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero button {
+            background-color: var(--text-light);
+            color: #2577fc;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-md);
+            padding: 4rem 2rem;
+            box-shadow: 0 4px 20px var(--shadow-light);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background-color: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 2px 10px var(--shadow-light);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            text-align: left;
+            border-top: 5px solid transparent;
+            border-image: var(--primary-gradient);
+            border-image-slice: 1;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-dark);
+        }
+
+        .feature-item h4 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #2577fc;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 0;
+            text-align: left;
+        }
+
+        /* About Section */
+        .about {
+            background-color: #eef4ff;
+            border-radius: var(--border-radius-md);
+            padding: 4rem 2rem;
+            box-shadow: 0 4px 20px var(--shadow-light);
+        }
+
+        .about h3 {
+            color: #333;
+        }
+
+        .about strong {
+            color: #6a11cb;
+            font-weight: bold;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 5rem 2rem;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 8px 30px var(--shadow-dark);
+        }
+
+        .cta h3 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+        .cta h3::after {
+            background: #fff;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta button {
+            background-color: var(--text-light);
+            color: #6a11cb;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2.5rem 2rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px var(--shadow-dark);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            margin: 0 0.8rem;
+            font-size: 1.3rem;
+            opacity: 0.7;
+            transition: opacity var(--transition-speed);
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            header nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                margin-top: 1rem;
+                align-items: center;
+            }
+
+            header nav a {
+                width: 100%;
+                text-align: center;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .hero {
+                padding: 4rem 1.5rem;
+                min-height: 350px;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            section h2, section h3 {
+                font-size: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item {
+                padding: 2rem;
+            }
+
+            .cta {
+                padding: 4rem 1.5rem;
+            }
+
+            .cta h3 {
+                font-size: 2.2rem;
+            }
+
+            .cta p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero button, .cta button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            section h2, section h3 {
+                font-size: 1.8rem;
+            }
+
+            .feature-item h4 {
+                font-size: 1.4rem;
+            }
+
+            .cta h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">FutureSphere</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h2>Innovate. Create. Elevate.</h2>
+            <p>Empowering the next generation of digital experiences with cutting-edge technology and design.</p>
+            <button>Discover More</button>
+        </section>
+
+        <section id="features" class="features">
+            <h3>Key Capabilities</h3>
+            <p>Our platform is built on a foundation of robust features designed to scale and adapt to your evolving needs.</p>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>Advanced Analytics</h4>
+                    <p>Gain deep insights with our powerful, real-time data processing and visualization tools.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Seamless Integration</h4>
+                    <p>Connect effortlessly with your existing systems and third-party applications.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Scalable Architecture</h4>
+                    <p>Designed for growth, our infrastructure ensures performance even at peak demand.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Intuitive UI/UX</h4>
+                    <p>Experience a user-friendly interface crafted for efficiency and delightful interaction.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <h3>Our Vision & Journey</h3>
+            <p>At FutureSphere, we believe in pushing boundaries and reimagining what's possible. Our dedicated team of innovators embarked on this exciting journey on <strong>2026-01-14</strong>, with a clear mission: to deliver transformative solutions that shape the future.</p>
+            <p>We combine passion with precision, leveraging the latest technologies to build products that are not just functional, but truly inspiring.</p>
+        </section>
+
+        <section id="contact" class="cta">
+            <h3>Ready to Transform Your Future?</h3>
+            <p>Join us and explore how FutureSphere can empower your projects and accelerate your success.</p>
+            <button>Get Started Today</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 FutureSphere. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#">Facebook</a> |
+            <a href="#">Twitter</a> |
+            <a href="#">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+</html>
