@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg-start: #1a2a6c; /* Dark Blue */
+            --primary-bg-end: #b21f1f;   /* Dark Red */
+            --accent-color-1: #fdbb2d;   /* Gold */
+            --accent-color-2: #22c1c3;   /* Teal */
+            --text-color-light: #e0e0e0;
+            --text-color-dark: #333;
+            --card-bg: rgba(255, 255, 255, 0.08); /* Slightly transparent white for dark theme */
+            --border-radius: 12px;
+            --spacing-unit: 1rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-light);
+            background: linear-gradient(135deg, var(--primary-bg-start) 0%, var(--primary-bg-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(2 * var(--spacing-unit));
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: var(--spacing-unit) 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: calc(2 * var(--spacing-unit));
+        }
+
+        nav ul li a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--accent-color-2);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color-1);
+            transform: translateY(-2px);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: calc(4 * var(--spacing-unit)) 0;
+            text-align: center;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7));
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            padding: calc(4 * var(--spacing-unit)) calc(2 * var(--spacing-unit));
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            background: linear-gradient(45deg, #e65c00, #f9d423); /* Warm gradient for title */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto calc(2 * var(--spacing-unit));
+            opacity: 0.9;
+        }
+
+        .hero .date-info {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color-2);
+            margin-top: var(--spacing-unit);
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent-color-2), var(--accent-color-1));
+            color: var(--text-color-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .features {
+            background: rgba(0, 0, 0, 0.15);
+            padding: calc(6 * var(--spacing-unit)) 0;
+        }
+
+        .features h2 {
+            font-size: 3rem;
+            margin-bottom: calc(3 * var(--spacing-unit));
+            color: #fff;
+            background: linear-gradient(90deg, #a18cd1, #fbc2eb); /* Soft gradient for section title */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(2 * var(--spacing-unit));
+            padding: 0 calc(2 * var(--spacing-unit));
+        }
+
+        .feature-item {
+            background: var(--card-bg);
+            padding: calc(3 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            text-align: left;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+            transform: rotate(45deg);
+            transition: transform 0.5s ease;
+            opacity: 0;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-item:hover::before {
+            transform: rotate(0deg);
+            opacity: 1;
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-unit);
+            color: var(--accent-color-1);
+            display: block;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-unit);
+            color: #fff;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: var(--text-color-light);
+            opacity: 0.8;
+        }
+
+        .call-to-action {
+            background: linear-gradient(135deg, #0f0c29, #3a3a60, #24243e); /* Dark gradient for CTA */
+            padding: calc(6 * var(--spacing-unit)) 0;
+            color: #fff;
+        }
+
+        .call-to-action h2 {
+            font-size: 3rem;
+            margin-bottom: calc(2 * var(--spacing-unit));
+            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Warm gradient for CTA title */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .call-to-action p {
+            font-size: 1.3rem;
+            margin-bottom: calc(3 * var(--spacing-unit));
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: calc(2 * var(--spacing-unit)) 0;
+            font-size: 0.9rem;
+            margin-top: auto;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: var(--spacing-unit);
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .features h2, .call-to-action h2 {
+                font-size: 2.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item {
+                padding: calc(2 * var(--spacing-unit));
+            }
+
+            .call-to-action p {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul li {
+                margin: 0.3rem 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero .date-info {
+                font-size: 1rem;
+                padding: 0.4rem 1rem;
+            }
+
+            .features h2, .call-to-action h2 {
+                font-size: 2rem;
+            }
+
+            .feature-item h3 {
+                font-size: 1.3rem;
+            }
+
+            .feature-item p {
+                font-size: 0.9rem;
+            }
+
+            .call-to-action p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Zenith</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Welcome to the Future of Project Management</h1>
+                <p>Streamline your workflows, enhance collaboration, and achieve unparalleled success with our innovative platform.</p>
+                <div class="date-info">
+                    Project Go-Live Date: 2026-01-15
+                </div>
+                <a href="#features" class="btn btn-primary">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Advanced Analytics</h3>
+                        <p>Gain deep insights into your project's performance with real-time data and customizable dashboards.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-users-cog"></i>
+                        <h3>Seamless Collaboration</h3>
+                        <p>Empower your team with intuitive tools for communication, task sharing, and document management.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Robust Security</h3>
+                        <p>Your data is protected with industry-leading encryption and multi-factor authentication protocols.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Cross-Platform Access</h3>
+                        <p>Work from anywhere, anytime, with our fully responsive design and dedicated mobile applications.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="call-to-action">
+            <div class="container">
+                <h2>Ready to Transform Your Projects?</h2>
+                <p>Join thousands of successful teams who are already leveraging Project Zenith to build, innovate, and deliver faster.</p>
+                <a href="#contact" class="btn btn-primary">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Zenith. All rights reserved.</p>
+            <p>Designed with passion for the future.</p>
+        </div>
+    </footer>
+</body>
+</html>
