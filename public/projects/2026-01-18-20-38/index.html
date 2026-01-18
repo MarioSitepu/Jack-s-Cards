@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #4facfe;
+            --primary-gradient-end: #00f2fe;
+            --secondary-gradient-start: #a18cd1;
+            --secondary-gradient-end: #fbc2eb;
+            --text-dark: #34495e;
+            --text-light: #ecf0f1;
+            --bg-light: #f4f7f6;
+            --card-bg: #ffffff;
+            --accent-color: #ff6b6b;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: var(--text-light);
+            padding: 1.2rem 0;
+            box-shadow: 0 2px 10px var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--text-light);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color); /* A subtle pop of color on hover */
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            background-color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, #8EC5FC 0%, #E0C3FC 100%);
+            color: var(--text-dark);
+            padding: 80px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(50px);
+            animation: float1 10s infinite ease-in-out;
+        }
+
+        #hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: float2 12s infinite ease-in-out;
+        }
+
+        @keyframes float1 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(20px, 20px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes float2 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-15px, -15px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        #hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        #hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: var(--text-light);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--bg-light);
+        }
+
+        section h3 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        #features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid transparent;
+            border-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            border-image-slice: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px var(--shadow-medium);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        /* About Section */
+        #about .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        #about .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        #about .about-text p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        #about .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        #about .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-medium);
+            transition: transform 0.3s ease;
+        }
+
+        #about .about-image img:hover {
+            transform: scale(1.02);
+        }
+
+        .project-date {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-top: 20px;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--text-light);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 10px var(--shadow-medium);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer .footer-links a {
+            color: var(--primary-gradient-end);
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            #hero {
+                padding: 60px 0;
+                min-height: 50vh;
+            }
+
+            #hero h2 {
+                font-size: 2.5rem;
+            }
+
+            #hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            section h3 {
+                font-size: 2rem;
+            }
+
+            #features .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #about .about-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+
+            #hero h2 {
+                font-size: 2rem;
+            }
+
+            #hero p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            section h3 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Modern Project</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Elevate Your Workflow</h2>
+                <p>Discover a sleek and intuitive platform designed for modern project management and collaboration. Achieve more, effortlessly.</p>
+                <a href="#features" class="btn">Learn More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h3>Key Features</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h4>Blazing Fast</h4>
+                        <p>Optimized for speed and efficiency, ensuring your tasks load instantly and run smoothly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">✨</div>
+                        <h4>Intuitive UI</h4>
+                        <p>A beautifully designed user interface that's easy to navigate and a joy to use daily.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💡</div>
+                        <h4>Smart Automation</h4>
+                        <p>Automate repetitive tasks and let the system work for you, freeing up valuable time.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🤝</div>
+                        <h4>Seamless Collaboration</h4>
+                        <p>Work together with your team in real-time, sharing ideas and making progress effortlessly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h3>About This Project</h3>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>This modern project dashboard is built with a focus on user experience and performance. Our goal is to provide a tool that not only helps you manage your projects but also inspires creativity and boosts productivity.</p>
+                        <p>We believe in clean design, powerful functionality, and a seamless integration into your daily workflow. Every element is crafted to be responsive, accessible, and visually appealing across all devices.</p>
+                        <p class="project-date">Project Initialized: 2026-01-18</p>
+                        <a href="#" class="btn" style="margin-top: 20px;">Get Started Now</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/8EC5FC/E0C3FC?text=Modern+Dashboard" alt="Modern Dashboard Screenshot">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" style="background-color: var(--card-bg);">
+            <div class="container">
+                <h3>Get In Touch</h3>
+                <p style="text-align: center; max-width: 600px; margin: 0 auto 40px;">Have questions or want to learn more about how our platform can help you? Reach out to us!</p>
+                <form action="#" method="POST" style="max-width: 500px; margin: 0 auto;">
+                    <div style="margin-bottom: 20px;">
+                        <input type="text" placeholder="Your Name" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <input type="email" placeholder="Your Email" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <textarea placeholder="Your Message" rows="6" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Modern Project. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
