@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nexus - Modern Launch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #2e2e4a;
+            --text-color: #e0e0e0;
+            --accent-color-start: #533483;
+            --accent-color-end: #eb4559;
+            --button-text: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --border-radius: 8px;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        header {
+            background-color: var(--secondary-bg);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--button-text);
+            text-decoration: none;
+            background: linear-gradient(90deg, var(--accent-color-start), var(--accent-color-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            padding: var(--spacing-unit) 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--accent-color-start), var(--accent-color-end));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--button-text);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--accent-color-start) 0%, var(--accent-color-end) 100%);
+            padding: calc(var(--spacing-unit) * 8) 0;
+            text-align: center;
+            color: var(--button-text);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 10s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-bg);
+            color: var(--button-text);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-color);
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 5) 0;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--accent-color-start), var(--accent-color-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .feature-card {
+            background-color: var(--secondary-bg);
+            padding: calc(var(--spacing-unit) * 2.5);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-unit);
+            background: linear-gradient(90deg, var(--accent-color-start), var(--accent-color-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-unit);
+            color: var(--button-text);
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 2);
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        footer {
+            background-color: var(--secondary-bg);
+            padding: calc(var(--spacing-unit) * 3) 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            box-shadow: 0 -2px 10px var(--shadow-color);
+        }
+
+        footer p {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        footer .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin: 0 var(--spacing-unit);
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--accent-color-end);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--spacing-unit);
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .nav-links {
+                display: none; /* Hide nav links on smaller screens by default */
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background-color: var(--secondary-bg);
+                position: absolute;
+                left: 0;
+                top: 70px; /* Adjust based on header height */
+                padding: var(--spacing-unit);
+                box-shadow: 0 4px 10px var(--shadow-color);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: var(--spacing-unit) 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 1.8rem;
+                cursor: pointer;
+                color: var(--button-text);
+            }
+
+            .hero {
+                padding: calc(var(--spacing-unit) * 5) 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Hamburger menu icon */
+        .menu-toggle {
+            display: none; /* Hidden on desktop */
+            cursor: pointer;
+            font-size: 2rem;
+            color: var(--button-text);
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Project Nexus</a>
+            <div class="menu-toggle" id="mobile-menu">
+                &#9776; <!-- Hamburger icon -->
+            </div>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Elevate Your Digital Experience</h1>
+                <p>Discover the next generation of web solutions, meticulously crafted for performance and beauty.</p>
+                <a href="#features" class="btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features" class="container">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-rocket"></i> <!-- Placeholder for icon -->
+                    <h3>Blazing Fast Performance</h3>
+                    <p>Optimized for speed, delivering content instantly to your users.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i> <!-- Placeholder for icon -->
+                    <h3>Fully Responsive Design</h3>
+                    <p>Flawless experience on any device, from desktops to smartphones.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-palette"></i> <!-- Placeholder for icon -->
+                    <h3>Stunning Modern UI</h3>
+                    <p>Visually captivating interfaces with a focus on user experience.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i> <!-- Placeholder for icon -->
+                    <h3>Robust Security</h3>
+                    <p>Built with best practices to keep your data safe and secure.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="container">
+            <h2>About Project Nexus</h2>
+            <div class="about-content">
+                <p>Project Nexus is a testament to modern web development, designed to push the boundaries of what's possible online. We believe in creating digital products that are not only functional but also a joy to interact with.</p>
+                <p>Our team comprises passionate developers and designers committed to delivering cutting-edge solutions. This page showcases our commitment to responsive design, elegant aesthetics, and robust performance, setting a new standard for web presence.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2>Get in Touch</h2>
+            <div class="about-content">
+                <p>Have questions or want to collaborate? We'd love to hear from you!</p>
+                <a href="mailto:info@projectnexus.com" class="btn">Send us an Email</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nexus. All rights reserved.</p>
+            <p>Project Date: 2026-01-18</p>
+            <div class="social-links">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a> <!-- Placeholder for icon -->
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a> <!-- Placeholder for icon -->
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a> <!-- Placeholder for icon -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons (optional, but used in CSS comments) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('mobile-menu').onclick = function() {
+            var navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        };
+    </script>
+</body>
+</html>
