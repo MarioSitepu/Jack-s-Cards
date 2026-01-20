@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Zenith - Modern Interface</title>
+    <style>
+        /* Modern Reset and Base Styling */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Color Palette */
+            --color-dark-bg: #0D1A2A;
+            --color-card-bg: rgba(255, 255, 255, 0.05);
+            --color-text-light: #E0E7FF;
+            --color-text-accent: #8A9AFF;
+            --gradient-primary: linear-gradient(45deg, #00C6FF 0%, #0072FF 100%);
+            --gradient-secondary: linear-gradient(135deg, #A742FF 0%, #FF42F6 100%);
+            --shadow-elevation: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--color-text-light);
+            line-height: 1.6;
+            /* Main Body Gradient */
+            background: var(--color-dark-bg);
+            background: linear-gradient(135deg, #0D1A2A 0%, #152B45 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: rgba(13, 26, 42, 0.95);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background-image: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            opacity: 0.8;
+            transition: opacity 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 1;
+            color: #00C6FF;
+        }
+
+        /* Hero Section (Main Focus Area) */
+        #hero {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 10px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        #hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--color-text-accent);
+            margin-bottom: 30px;
+        }
+
+        .date-stamp {
+            font-size: 0.9rem;
+            color: #FF42F6;
+            font-weight: 600;
+            margin-top: 20px;
+            display: block;
+        }
+
+        /* Button Styling (Gradient) */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text-light);
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
+            background: var(--gradient-primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
+        }
+
+        /* Card Section Layout */
+        #features {
+            padding: 40px 0 80px 0;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--color-card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--shadow-elevation);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #0072FF;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            background-image: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #00C6FF; /* Accent color for icons */
+        }
+
+        /* Status Section */
+        #status {
+            padding: 60px 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #status h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid #0072FF;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .metric-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .metric {
+            padding: 20px;
+            margin: 15px;
+            min-width: 200px;
+            border-radius: var(--border-radius);
+            background: var(--color-card-bg);
+            border-left: 5px solid #00C6FF;
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FF42F6;
+        }
+
+        /* Footer Styling */
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background-color: #050A10;
+            color: #8A9AFF;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+            }
+
+            nav {
+                margin-top: 15px;
+            }
+
+            nav a {
+                margin: 0 10px;
+                display: inline-block;
+            }
+
+            #hero {
+                padding: 60px 0 40px 0;
+            }
+
+            .metric-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .metric {
+                width: 90%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container nav-content">
+            <div class="logo">Project Zenith</div>
+            <nav>
+                <a href="#hero">Home</a>
+                <a href="#features">Services</a>
+                <a href="#status">Metrics</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="container">
+            <h1>The Future of Digital Integration</h1>
+            <p>A seamless, responsive interface designed for peak performance and clarity.</p>
+
+            <a href="#" class="btn">Explore Dashboard</a>
+
+            <span class="date-stamp">Project Baseline Established: 2026-01-20</span>
+        </section>
+
+        <section id="features" class="container">
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Real-time Data Streams</h3>
+                    <p>Experience zero-latency updates powered by our optimized WebSocket architecture. Always stay ahead of the curve.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h3>Modular Configuration</h3>
+                    <p>Customize every aspect of your workspace. Drag-and-drop components make personalization intuitive and fast.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔒</div>
+                    <h3>Zero-Trust Security</h3>
+                    <p>Industry-leading encryption and multi-factor authentication protect your assets 24/7 in a secure environment.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h3>Cross-Platform Ready</h3>
+                    <p>Optimized for all screen sizes, from mobile devices to ultrawide desktop monitors, ensuring consistency.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="status">
+            <div class="container">
+                <h2>System Metrics Overview</h2>
+                <div class="metric-container">
+                    <div class="metric">
+                        <strong>99.99%</strong>
+                        <span>Uptime Guarantee</span>
+                    </div>
+                    <div class="metric">
+                        <strong>32k</strong>
+                        <span>Active Users</span>
+                    </div>
+                    <div class="metric">
+                        <strong>4.5ms</strong>
+                        <span>Average Latency</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            &copy; 2026 Project Zenith. All rights reserved. | Designed with Modern Gradients.
+        </div>
+    </footer>
+
+</body>
+</html>
