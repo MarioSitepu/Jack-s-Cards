@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureScape Project - 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --accent-color: #00f2fe;
+            --text-light: #f0f0f0;
+            --text-dark: #333;
+            --bg-dark: #1a1a2e;
+            --bg-light: #ffffff;
+            --gradient-1: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-2: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            --gradient-3: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 100%);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+            --spacing-unit: 1rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: var(--gradient-1);
+            color: var(--text-light);
+            padding: var(--spacing-unit) calc(2 * var(--spacing-unit));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(1.5 * var(--spacing-unit));
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: calc(4 * var(--spacing-unit)) calc(2 * var(--spacing-unit));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section {
+            background: var(--gradient-2);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            padding: calc(6 * var(--spacing-unit)) calc(2 * var(--spacing-unit));
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2); /* Subtle overlay for text readability */
+            z-index: 1;
+        }
+
+        .hero-section > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin-bottom: calc(2 * var(--spacing-unit));
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-3);
+            color: var(--text-light);
+            padding: var(--spacing-unit) calc(2 * var(--spacing-unit));
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .features-section {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding-bottom: calc(6 * var(--spacing-unit));
+        }
+
+        .features-section h2, .about-section h2, .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: calc(3 * var(--spacing-unit));
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(3 * var(--spacing-unit));
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            background: var(--bg-light);
+            padding: calc(2 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-unit);
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: calc(0.5 * var(--spacing-unit));
+            color: var(--primary-color);
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .about-section {
+            background: linear-gradient(to top, var(--bg-light), #eef2f3);
+            color: var(--text-dark);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .about-content p {
+            margin-bottom: var(--spacing-unit);
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        .cta-section {
+            background: var(--gradient-1);
+            color: var(--text-light);
+            padding: calc(5 * var(--spacing-unit)) calc(2 * var(--spacing-unit));
+        }
+
+        .cta-section h2 {
+            color: var(--text-light);
+            margin-bottom: calc(2 * var(--spacing-unit));
+        }
+
+        footer {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            padding: calc(2 * var(--spacing-unit)) calc(2 * var(--spacing-unit));
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: calc(0.5 * var(--spacing-unit));
+                width: 100%;
+                text-align: left;
+            }
+
+            nav a {
+                padding: calc(0.5 * var(--spacing-unit)) 0;
+                display: block;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+
+            .features-section h2, .about-section h2, .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: calc(3 * var(--spacing-unit)) var(--spacing-unit);
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .features-section h2, .about-section h2, .cta-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-item h3 {
+                font-size: 1.3rem;
+            }
+
+            .feature-item p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">FutureScape</a>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h1>Innovate. Create. Inspire.</h1>
+            <p>Welcome to FutureScape, where cutting-edge technology meets visionary design. This project, initiated on <strong>2026-01-21</strong>, sets a new benchmark for digital excellence and user experience.</p>
+            <a href="#features" class="btn">Explore Our Vision</a>
+        </section>
+
+        <section id="features" class="features-section">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <span class="icon">&#9889;</span> <!-- Lightning bolt icon -->
+                    <h3>Blazing Fast Performance</h3>
+                    <p>Optimized for speed and efficiency, delivering a seamless experience across all devices.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="icon">&#128187;</span> <!-- Laptop icon -->
+                    <h3>Cross-Platform Compatibility</h3>
+                    <p>Designed to work flawlessly on desktop, tablet, and mobile browsers without compromise.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="icon">&#128293;</span> <!-- Fire icon -->
+                    <h3>Intuitive User Interface</h3>
+                    <p>A clean, modern, and user-friendly interface that prioritizes ease of use and accessibility.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="icon">&#128274;</span> <!-- Lock icon -->
+                    <h3>Robust Security Protocols</h3>
+                    <p>Your data and privacy are our top priority, secured with the latest encryption standards.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <h2>About FutureScape</h2>
+            <div class="about-content">
+                <p>FutureScape is more than just a project; it's a commitment to pushing the boundaries of what's possible in the digital realm. Conceived on <strong>2026-01-21</strong>, our team of dedicated innovators has meticulously crafted every detail to ensure a product that is not only functional but also aesthetically pleasing and deeply engaging.</p>
+                <p>Our philosophy revolves around creating solutions that are forward-thinking, scalable, and adaptable to future challenges. We believe in harnessing the power of modern web technologies to deliver experiences that resonate with users and drive meaningful impact.</p>
+                <p>Join us on this journey as we redefine the future, one elegant line of code at a time.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <h2>Ready to Transform Your Digital Presence?</h2>
+            <p>Connect with FutureScape today and let's build something extraordinary together.</p>
+            <a href="mailto:info@futurescape.com" class="btn">Get in Touch</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 FutureScape Project. All rights reserved.</p>
+    </footer>
+</body>
+</html>
