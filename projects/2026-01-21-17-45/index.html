@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Project Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #f8f9fa;
+            --secondary-bg: #ffffff;
+            --accent-color-1: #6a11cb; /* Purple */
+            --accent-color-2: #2575fc; /* Blue */
+            --text-color-dark: #343a40;
+            --text-color-light: #f8f9fa;
+            --card-shadow: rgba(0, 0, 0, 0.08);
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--primary-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--accent-color-1) 0%, var(--accent-color-2) 100%);
+            color: var(--text-color-light);
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 15px var(--card-shadow);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        header nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        header nav a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        header nav a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero {
+            background: linear-gradient(45deg, #1e3c72 0%, #2a5298 100%); /* Darker blue gradient */
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: var(--border-radius-lg);
+            border-bottom-right-radius: var(--border-radius-lg);
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px var(--card-shadow);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.05rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #00c6ff 0%, #0072ff 100%); /* Light blue to dark blue */
+            color: var(--text-color-light);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        section h3 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-color-dark);
+            font-weight: 700;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: var(--accent-color-2);
+            margin-bottom: 1rem;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color-2);
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color-dark);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .about-us {
+            background-color: var(--secondary-bg);
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 6rem 0;
+        }
+
+        .about-us p {
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+            font-size: 1.1rem;
+            text-align: center;
+            color: #495057;
+        }
+
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent-color-2) 0%, var(--accent-color-1) 100%);
+            color: var(--text-color-light);
+            padding: 6rem 0;
+            margin-top: 2rem;
+            border-top-left-radius: var(--border-radius-lg);
+            border-top-right-radius: var(--border-radius-lg);
+            box-shadow: 0 -4px 15px var(--card-shadow);
+        }
+
+        .cta-section h3 {
+            color: var(--text-color-light);
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-section .btn {
+            background: linear-gradient(45deg, #ff7e5f 0%, #feb47b 100%); /* Orange gradient */
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+        }
+
+        .cta-section .btn:hover {
+            box-shadow: 0 8px 20px rgba(255, 126, 95, 0.6);
+        }
+
+        footer {
+            background-color: var(--text-color-dark);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            section h3 {
+                font-size: 2rem;
+            }
+            .feature-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            header nav ul {
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 1rem;
+            }
+            .hero {
+                padding: 6rem 0;
+            }
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            section h3 {
+                font-size: 1.8rem;
+            }
+            .cta-section h3 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            header nav a {
+                font-size: 0.9rem;
+            }
+            .hero {
+                padding: 4rem 0;
+            }
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            .hero p {
+                font-size: 0.9rem;
+            }
+            section {
+                padding: 3rem 0;
+            }
+            section h3 {
+                font-size: 1.5rem;
+            }
+            .feature-card {
+                padding: 1.5rem;
+            }
+            .feature-card h4 {
+                font-size: 1.3rem;
+            }
+            .cta-section h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Catalyst</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Accelerate Your Vision into Reality</h2>
+                <p>Empowering innovation with cutting-edge solutions and a commitment to excellence. Discover the future of project management and development.</p>
+                <a href="#features" class="btn">Explore Our Solutions</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h3>Key Capabilities</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">✨</div>
+                        <h4>Intuitive Design</h4>
+                        <p>Experience seamless user interfaces crafted for clarity and efficiency, making complex tasks simple.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h4>Blazing Fast Performance</h4>
+                        <p>Optimized for speed and responsiveness, ensuring your workflows are always smooth and productive.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h4>Robust Security</h4>
+                        <p>Your data is our priority. Advanced encryption and security protocols keep your information safe and sound.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💡</div>
+                        <h4>Innovative Solutions</h4>
+                        <p>Leveraging the latest technologies to bring you forward-thinking tools and functionalities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-us">
+            <div class="container">
+                <h3>About Project Catalyst</h3>
+                <p>Project Catalyst was initiated with the vision to redefine modern project landscapes. Our team of dedicated professionals strives to deliver unparalleled quality and innovation in every aspect. We believe in creating tools that not only meet today's demands but also anticipate tomorrow's needs. This project was conceptualized and brought to fruition with a significant milestone dated <strong>2026-01-21</strong>, marking a new era of digital transformation.</p>
+                <p>We are committed to continuous improvement and user-centric development, ensuring our platform remains at the forefront of technological advancement.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h3>Ready to Transform Your Projects?</h3>
+                <p>Join the future of innovation. Contact us today to learn how Project Catalyst can elevate your work.</p>
+                <a href="#" class="btn">Get Started Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Catalyst. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
