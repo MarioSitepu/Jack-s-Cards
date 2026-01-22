@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles & Reset */
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --accent-color: #00f2fe;
+            --text-color-dark: #333;
+            --text-color-light: #f4f4f4;
+            --bg-light: #ffffff;
+            --bg-dark-alt: #1a1a2e;
+            --gradient-main: linear-gradient(to right, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-hero: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); /* More vibrant hero */
+            --gradient-button: linear-gradient(to right, #00c6fb 0%, #005bea 100%);
+            --border-radius-lg: 15px;
+            --border-radius-md: 8px;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background: var(--gradient-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll from gradients/shadows */
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            color: var(--text-color-light);
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+        }
+
+        h1 { font-size: 2.8rem; }
+        h2 { font-size: 2.2rem; }
+        h3 { font-size: 1.8rem; }
+        h4 { font-size: 1.4rem; }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Layout & Containers */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 2);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-dark-alt);
+            padding: 1rem 0;
+            color: var(--text-color-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-left: calc(var(--spacing-unit) * 2);
+            background: -webkit-linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin-right: calc(var(--spacing-unit) * 2);
+        }
+
+        nav ul li {
+            margin-left: calc(var(--spacing-unit) * 2);
+        }
+
+        nav ul li a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-md);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: var(--gradient-hero);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 8rem 2rem;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        #hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            z-index: 1;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-button);
+            color: var(--text-color-light);
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-lg);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+            opacity: 0.9;
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        .content-section {
+            padding: 4rem 0;
+            background-color: var(--bg-light);
+            margin-bottom: 0.5rem; /* Small gap between sections */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            color: var(--text-color-dark);
+        }
+
+        .content-section:nth-of-type(even) {
+            background-color: #f8f8f8;
+        }
+
+        .content-section h3 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-size: 2.5rem;
+            background: -webkit-linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Features Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-item h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            background: -webkit-linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Showcase Gallery */
+        .showcase-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .showcase-gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .showcase-gallery img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Contact Form */
+        #contact .container {
+            max-width: 700px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        form input,
+        form textarea {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        form input:focus,
+        form textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+            outline: none;
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        form .cta-button {
+            align-self: flex-start;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-dark-alt);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+            }
+
+            header .logo {
+                margin: 0 0 1rem 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin: 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            nav ul li a {
+                display: block;
+                width: 100%;
+            }
+
+            #hero {
+                padding: 6rem 1rem;
+                min-height: 60vh;
+            }
+
+            #hero h2 {
+                font-size: 2.5rem;
+            }
+
+            #hero p {
+                font-size: 1.1rem;
+            }
+
+            .content-section h3 {
+                font-size: 2rem;
+            }
+
+            .feature-grid,
+            .showcase-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.5rem; }
+            h4 { font-size: 1.2rem; }
+
+            #hero {
+                padding: 4rem 1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .content-section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Project Zenith</div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#showcase">Showcase</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Innovating Beyond Tomorrow's Horizon</h2>
+                <p>Welcome to the future of possibilities. This project was conceptualized on: <strong>2026-01-22</strong>.</p>
+                <a href="#about" class="cta-button">Explore Our Vision</a>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="container">
+                <h3>About Project Zenith</h3>
+                <p>Project Zenith is a groundbreaking initiative poised to revolutionize the way we interact with technology. Our mission is to blend cutting-edge research with practical applications, creating solutions that are not only powerful but also intuitive and accessible to everyone.</p>
+                <p>Driven by a passion for innovation, our dedicated team of engineers, designers, and strategists work tirelessly to push the boundaries of what's possible. We believe in a future where technology empowers individuals and organizations to achieve their full potential.</p>
+            </div>
+        </section>
+
+        <section id="features" class="content-section">
+            <div class="container">
+                <h3>Key Features</h3>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>Intuitive Interface</h4>
+                        <p>Experience seamless navigation and user-friendly designs that make complex tasks simple and enjoyable.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Scalable Architecture</h4>
+                        <p>Built on a robust and flexible architecture, Project Zenith grows with your needs, ensuring future-proof performance.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Advanced Analytics</h4>
+                        <p>Gain deeper insights with powerful data analytics tools, helping you make informed decisions faster.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Secure & Reliable</h4>
+                        <p>Your data and operations are protected by state-of-the-art security protocols and a highly reliable infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="showcase" class="content-section">
+            <div class="container">
+                <h3>Our Work in Action</h3>
+                <p style="text-align: center; color: var(--text-color-dark);">A glimpse into the diverse applications and powerful capabilities of Project Zenith.</p>
+                <div class="showcase-gallery">
+                    <img src="https://via.placeholder.com/400x250/5D5D81/FFFFFF?text=Concept+Design" alt="Concept Design">
+                    <img src="https://via.placeholder.com/400x250/8A2BE2/FFFFFF?text=System+Dashboard" alt="System Dashboard">
+                    <img src="https://via.placeholder.com/400x250/4682B4/FFFFFF?text=Mobile+Interface" alt="Mobile Interface">
+                    <img src="https://via.placeholder.com/400x250/6A5ACD/FFFFFF?text=Data+Visualization" alt="Data Visualization">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <div class="container">
+                <h3>Get in Touch</h3>
+                <p style="text-align: center; color: var(--text-color-dark);">We'd love to hear from you. Reach out with any questions or collaboration inquiries.</p>
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="6" required></textarea>
+                    <button type="submit" class="cta-button">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Zenith. All rights reserved. Built with passion for the future.</p>
+    </footer>
+</body>
+</html>
