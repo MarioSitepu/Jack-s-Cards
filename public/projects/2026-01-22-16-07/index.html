@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nexus: The 2026 Initiative</title>
+    <style>
+        /* BASE STYLES & RESET */
+        :root {
+            --color-dark: #1A1A2E;
+            --color-navy: #0F0F3D;
+            --color-light: #E0E0FF;
+            --gradient-primary: linear-gradient(45deg, #6A11CB 0%, #2575FC 100%);
+            --gradient-hover: linear-gradient(45deg, #2575FC 0%, #6A11CB 100%);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-navy) 100%);
+            color: var(--color-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        header {
+            background-color: rgba(15, 15, 61, 0.8);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav a {
+            color: var(--color-light);
+            text-decoration: none;
+            margin-left: 25px;
+            padding: 5px 10px;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            color: #FFFFFF;
+            background-color: rgba(106, 17, 203, 0.3);
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            color: #FFFFFF;
+            background: var(--gradient-primary);
+            box-shadow: 0 4px 15px rgba(37, 117, 252, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s, background 0.5s;
+        }
+
+        .btn:hover {
+            background: var(--gradient-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(106, 17, 203, 0.6);
+        }
+
+        /* MAIN CONTENT SECTIONS */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 150px 0;
+            background: radial-gradient(circle at center, rgba(37, 117, 252, 0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: #C0C0FF;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* FEATURES SECTION */
+        .features {
+            background-color: var(--color-dark);
+            border-top: 1px solid rgba(106, 17, 203, 0.2);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: rgba(30, 30, 60, 0.7);
+            padding: 30px;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(37, 117, 252, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(37, 117, 252, 0.2);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* UPDATE INFO SECTION */
+        .update-info {
+            text-align: center;
+            background-color: var(--color-navy);
+            padding: 100px 0;
+        }
+
+        .update-info h2 {
+            margin-bottom: 20px;
+        }
+
+        .date-stamp {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #FFFFFF;
+            margin: 20px 0;
+            padding: 15px;
+            background: linear-gradient(90deg, #6A11CB 0%, #2575FC 100%);
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 0 20px rgba(106, 17, 203, 0.5);
+        }
+        
+        /* FOOTER */
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            background-color: var(--color-dark);
+            border-top: 1px solid rgba(37, 117, 252, 0.1);
+            color: #A0A0CF;
+            margin-top: auto;
+        }
+
+        /* RESPONSIVENESS */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .date-stamp {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav {
+                margin-top: 10px;
+            }
+            nav a {
+                margin: 0 10px;
+                display: block;
+                padding: 8px 0;
+            }
+            .hero {
+                padding: 100px 0 80px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">Project Nexus</div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#updates">Updates</a>
+                <a href="#contact" class="btn">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>Unlocking Tomorrow's Potential Today.</h1>
+                <p>The Nexus platform integrates seamless data streams with AI-driven insights, setting the standard for future-proof digital infrastructure.</p>
+                <a href="#features" class="btn">Explore the Initiative</a>
+            </div>
+        </section>
+
+        <!-- FEATURES SECTION -->
+        <section class="features" id="features">
+            <div class="container">
+                <h2>Core Capabilities</h2>
+                <div class="features-grid">
+                    
+                    <div class="feature-card">
+                        <div class="icon">&#9889;</div>
+                        <h3>Quantum Efficiency</h3>
+                        <p>Optimized algorithms reduce processing time by 40%, delivering results instantly across distributed networks.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="icon">&#128187;</div>
+                        <h3>Adaptive Architecture</h3>
+                        <p>Scales effortlessly from small teams to enterprise deployment, adapting resources based on real-time demand.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="icon">&#128274;</div>
+                        <h3>Zero-Trust Security</h3>
+                        <p>Military-grade encryption and decentralized identity management ensures absolute data sovereignty and protection.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- UPDATE INFO SECTION -->
+        <section class="update-info" id="updates">
+            <div class="container">
+                <h2>Latest Project Milestone</h2>
+                <p>We are thrilled to announce the successful completion of Phase III testing, marking a major leap forward in deployment readiness. This milestone confirms system stability and integration across all primary modules.</p>
+                <div class="date-stamp">
+                    2026-01-22
+                </div>
+                <p style="margin-top: 20px;">The next phase focuses on public API documentation and partner integration rollout.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nexus. All Rights Reserved. Designed with modern gradients and future intent.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
