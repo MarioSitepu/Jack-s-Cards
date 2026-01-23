@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --background-light: #ffffff;
+            --background-section-odd: #f8f9fa;
+            --background-dark: #34495e;
+            --accent-color: #e74c3c; /* A contrasting red for buttons/highlights */
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-strong: rgba(0, 0, 0, 0.2);
+            --border-radius-sm: 8px;
+            --border-radius-lg: 15px;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+        }
+
+        /* General Body Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--background-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden; /* Prevent horizontal scroll due to potential overflows */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.2;
+        }
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); color: var(--text-light); }
+        h2 { font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-top: var(--spacing-md); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
+        p { margin-bottom: 1rem; }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            box-shadow: 0 4px 15px var(--shadow-strong);
+            position: relative;
+            z-index: 10;
+        }
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        nav a:hover, nav a:focus {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            outline: none; /* Remove default outline for better custom focus */
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            padding: var(--spacing-lg) 0;
+        }
+
+        /* Section Styling */
+        section {
+            padding: var(--spacing-md) 0;
+            margin-bottom: var(--spacing-md);
+        }
+        section:nth-of-type(odd) {
+            background: var(--background-section-odd);
+        }
+        section:nth-of-type(even) {
+            background: var(--background-light);
+        }
+
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+        .hero h1 {
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.9;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius-lg);
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+            box-shadow: 0 4px 10px var(--shadow-light);
+            border: none;
+            cursor: pointer;
+            -webkit-appearance: none; /* For button consistency */
+            -moz-appearance: none;
+            appearance: none;
+        }
+        .btn:hover, .btn:focus {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-strong);
+            filter: brightness(0.9); /* Simple way to darken without Sass */
+            outline: 2px solid var(--text-light); /* Focus for buttons */
+            outline-offset: 3px;
+        }
+        .btn-secondary {
+            background: var(--secondary-gradient);
+            color: var(--text-dark);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .btn-secondary:hover, .btn-secondary:focus {
+            filter: brightness(0.95);
+            outline: 2px solid var(--text-dark);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        .card {
+            background: var(--background-light);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 8px 25px var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px var(--shadow-strong);
+        }
+        .card h3 {
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background-image: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            display: block; /* Ensure gradient applies correctly */
+        }
+
+        .project-details {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            align-items: center;
+            margin-top: var(--spacing-lg);
+        }
+        .project-details:first-of-type {
+            margin-top: var(--spacing-md); /* Adjust first project spacing */
+        }
+        .project-details img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 30px var(--shadow-light);
+            object-fit: cover; /* Ensures images fill their space nicely */
+        }
+        .project-details .text-content {
+            max-width: 700px;
+        }
+        .project-details .date {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-top: 1rem;
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--background-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--spacing-sm) 0;
+            margin-top: auto; /* Pushes footer to bottom */
+            box-shadow: 0 -4px 15px var(--shadow-strong);
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (min-width: 768px) {
+            header .container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            nav ul {
+                gap: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 4rem;
+            }
+            .project-details {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+            .project-details.reverse {
+                flex-direction: row-reverse;
+            }
+            .project-details img {
+                flex-basis: 45%;
+            }
+            .project-details .text-content {
+                flex-basis: 50%;
+                text-align: left;
+            }
+            .project-details .text-content h3 {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hero {
+                padding: var(--spacing-md) 0;
+            }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                margin-top: 1rem;
+            }
+            nav a {
+                width: 100%;
+                text-align: center;
+            }
+            .project-details img {
+                margin-bottom: 1rem;
+            }
+            .project-details .text-content {
+                text-align: center;
+            }
+        }
+
+        /* Accessibility/Focus States for non-nav links */
+        a:not(nav a):focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 3px;
+            border-radius: var(--border-radius-sm);
+        }
+
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Moderna</a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="container">
+                <h1>Crafting the Future, Today.</h1>
+                <p>Innovative solutions for a connected world. Explore our latest advancements and discover how we're shaping tomorrow.</p>
+                <a href="#projects" class="btn">View Projects</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <span class="icon">&#9733;</span> <!-- Star icon -->
+                        <h3>Cutting-Edge Design</h3>
+                        <p>Beautiful interfaces built with modern aesthetics and user experience in mind.</p>
+                    </div>
+                    <div class="card">
+                        <span class="icon">&#9881;</span> <!-- Gear icon -->
+                        <h3>Robust Performance</h3>
+                        <p>Optimized for speed and efficiency, ensuring a smooth and reliable experience.</p>
+                    </div>
+                    <div class="card">
+                        <span class="icon">&#9974;</span> <!-- Globe icon -->
+                        <h3>Global Scalability</h3>
+                        <p>Designed to scale effortlessly, meeting demands from local to worldwide audiences.</
