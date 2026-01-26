@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6C5CE7; /* Muted Purple */
+            --secondary-color: #4A90E2; /* Muted Blue */
+            --accent-color: #50E3C2; /* Teal */
+            --dark-bg: #1A202C; /* Dark Slate Blue */
+            --light-text: #E0E0E0; /* Light Grey */
+            --dark-text: #333; /* Dark Grey */
+            --card-bg: rgba(255, 255, 255, 0.08); /* Slightly transparent white for cards */
+            --header-footer-bg: #1A202C; /* Darker background for header/footer */
+            --body-gradient-start: #0F172A; /* Even darker blue for body start */
+            --body-gradient-end: #1A202C; /* Dark slate blue for body end */
+            --hero-gradient-start: #1A202C;
+            --hero-gradient-end: #2D3748;
+            --section-bg-light: #2D3748; /* Slightly lighter for sections */
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--light-text);
+            background: linear-gradient(135deg, var(--body-gradient-start) 0%, var(--body-gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--header-footer-bg);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            color: var(--light-text);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(45deg, var(--hero-gradient-start) 0%, var(--hero-gradient-end) 100%);
+            padding: 120px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            text-shadow: 0 2px 4px var(--shadow-color);
+        }
+
+        .hero-section h1 {
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .hero-section p {
+            font-size: 1.4em;
+            color: var(--light-text);
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--light-text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .primary-btn {
+            background: linear-gradient(90deg, var(--accent-color) 0%, var(--primary-color) 100%);
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: var(--section-bg-light);
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px var(--shadow-color);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+
+        .feature-card p {
+            font-size: 1em;
+            color: var(--light-text);
+            margin-bottom: 0;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(135deg, var(--body-gradient-end) 0%, var(--body-gradient-start) 100%);
+        }
+
+        .about-section h2 {
+            color: var(--primary-color);
+        }
+
+        .about-section p {
+            color: var(--light-text);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(45deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            padding: 100px 0;
+            color: var(--light-text);
+            box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-section h2 {
+            color: var(--light-text);
+            margin-bottom: 25px;
+        }
+
+        .cta-section p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--header-footer-bg);
+            color: var(--light-text);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9em;
+            box-shadow: 0 -2px 10px var(--shadow-color);
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            color: var(--light-text);
+        }
+
+        .social-links {
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8em;
+            }
+            h2 {
+                font-size: 2.2em;
+            }
+            .hero-section p {
+                font-size: 1.2em;
+            }
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 0 10px 10px 10px;
+            }
+            .logo {
+                margin-bottom: 10px;
+            }
+            section {
+                padding: 60px 0;
+            }
+            h1 {
+                font-size: 2.2em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            h3 {
+                font-size: 1.5em;
+            }
+            .hero-section {
+                padding: 80px 0;
+                min-height: 50vh;
+            }
+            .hero-section p {
+                font-size: 1em;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+            .feature-card {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            .logo {
+                font-size: 1.5em;
+            }
+            nav ul li {
+                margin: 0 8px 8px 8px;
+            }
+            nav ul li a {
+                font-size: 0.9em;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+            p {
+                font-size: 0.95em;
+            }
+            .hero-section {
+                padding: 60px 0;
+            }
+            .hero-section p {
+                font-size: 0.9em;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            footer p {
+                font-size: 0.8em;
+            }
+            .social-links a {
+                margin: 0 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Nova</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#cta">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h1>Welcome to Project Nova</h1>
+                <p>Innovating the future, delivering excellence today.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Our Cutting-Edge Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Dashboard</h3>
+                        <p>A beautifully designed interface for effortless management and monitoring.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Real-time Analytics</h3>
+                        <p>Gain instant insights with powerful, customizable data visualizations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Cloud Integration</h3>
+                        <p>Seamlessly connect with your favorite cloud services and platforms.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Secure & Scalable</h3>
+                        <p>Enterprise-grade security with the flexibility to grow with your demands.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About Project Nova</h2>
+                <p>Project Nova is driven by a passion for innovation and a commitment to transforming how businesses operate. We specialize in creating robust, user-centric solutions that empower teams and streamline complex workflows.</p>
+                <p>Our dedicated team of engineers, designers, and strategists work collaboratively to bring you a product that is not just technologically advanced, but also a joy to use. We envision a future where technology is an enabler, not a barrier.</p>
+            </div>
+        </section>
+
+        <section id="cta" class="cta-section">
+            <div class="container">
+                <h2>Ready to Elevate Your Project?</h2>
+                <p>Join the future of innovation. Let's build something amazing together.</p>
+                <a href="#" class="btn primary-btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+            <p>Project Initiated: 2026-01-26</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
