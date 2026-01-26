@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Launch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff; /* Bright Blue */
+            --secondary-color: #00c6ff; /* Lighter Blue */
+            --accent-color: #6c757d; /* Grey */
+            --text-color: #343a40; /* Dark Grey */
+            --light-bg-color: #f8f9fa; /* Off-white */
+            --dark-bg-color: #212529; /* Dark Grey background */
+            --white-color: #ffffff;
+            --gradient-main: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-button: linear-gradient(90deg, #17a2b8 0%, #007bff 100%); /* Teal to Blue */
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-heavy: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --border-radius: 8px;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --spacing-xl: 96px;
+        }
+
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg-color);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--dark-bg-color);
+        }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-main);
+            color: var(--white-color);
+            padding: var(--spacing-md) 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--white-color);
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        header nav a {
+            color: var(--white-color);
+            font-weight: 600;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s ease;
+        }
+
+        header nav a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-main);
+            color: var(--white-color);
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            animation: pulse 10s infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            100% { transform: scale(1.1); opacity: 0.9; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: var(--spacing-sm);
+            color: var(--white-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: var(--spacing-md);
+            opacity: 0.9;
+        }
+
+        .btn {
+            background: var(--gradient-button);
+            color: var(--white-color);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        /* Main Content Sections */
+        section {
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--white-color);
+        }
+
+        section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-main);
+            margin: var(--spacing-xs) auto 0;
+            border-radius: 2px;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+            text-align: left;
+        }
+
+        .feature-card {
+            background-color: var(--white-color);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-xs);
+            color: var(--dark-bg-color);
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--accent-color);
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg-color);
+            color: var(--white-color);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: var(--spacing-xs);
+            opacity: 0.8;
+        }
+
+        footer .social-links a {
+            color: var(--white-color);
+            font-size: 1.5rem;
+            margin: 0 var(--spacing-xs);
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            header nav ul {
+                flex-direction: column;
+                gap: var(--spacing-xs);
+            }
+
+            .hero {
+                padding: var(--spacing-lg) var(--spacing-sm);
+            }
+
+            section {
+                padding: var(--spacing-lg) 0;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: var(--spacing-md);
+            }
+
+            .about-content {
+                padding: 0 var(--spacing-sm);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.5rem; }
+            .hero h2 { font-size: 2.2rem; }
+            .hero p { font-size: 0.9rem; }
+            .btn {
+                padding: var(--spacing-xs) var(--spacing-sm);
+                font-size: 0.9rem;
+            }
+            section h2 { font-size: 2rem; }
+            .feature-card h3 { font-size: 1.3rem; }
+            .feature-card .icon { font-size: 2.5rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Modern Solutions</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h2>Innovate. Create. Inspire.</h2>
+                <p>Welcome to the future of digital solutions. Our project, launched on <strong>2026-01-26</strong>, redefines possibilities.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed and efficiency, ensuring a seamless user experience across all devices.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">✨</div>
+                        <h3>Sleek, Intuitive Design</h3>
+                        <p>A user interface crafted with modern aesthetics and ease of use in mind, making interaction a delight.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h3>Robust Security</h3>
+                        <p>Cutting-edge security protocols to protect your data and ensure privacy at every level.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💡</div>
+                        <h3>Intelligent Analytics</h3>
+                        <p>Gain valuable insights with powerful, integrated analytics tools to drive informed decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <div class="about-content">
+                    <p>At Modern Solutions, we believe in pushing boundaries and challenging the status quo. Our journey began with a simple idea: to create digital experiences that are not only functional but truly inspiring. The project launched on <strong>January 26, 2026</strong>, represents years of dedicated research, innovative development, and a passion for excellence.</p>
+                    <p>We are a team of visionary designers, expert developers, and strategic thinkers committed to delivering products that stand out. Our goal is to empower businesses and individuals with tools that foster growth, enhance productivity, and open new avenues for creativity. We're excited about the future and invite you to be a part of our story.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" style="background-color: var(--light-bg-color);">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have questions or want to collaborate? We'd love to hear from you!</p>
+                <a href="mailto:info@modernsolutions.com" class="btn">Email Us</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Modern Solutions. All rights reserved.</p>
+            <p>Project launched: 2026-01-26</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">F</a>
+                <a href="#" aria-label="Twitter">T</a>
+                <a href="#" aria-label="LinkedIn">L</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
