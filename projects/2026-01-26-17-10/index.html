@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <style>
+        /* Basic Reset & Body */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #E6E6E6; /* Light gray text */
+            background: linear-gradient(135deg, #1A1A2E 0%, #0F3460 100%); /* Dark blue/purple gradient */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Container for content width */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(10, 25, 47, 0.9); /* Semi-transparent dark blue */
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: #00CED1; /* Turquoise accent */
+            text-shadow: 0 0 5px rgba(0, 206, 209, 0.5);
+        }
+
+        header nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 25px;
+        }
+
+        header nav ul li a {
+            color: #E6E6E6;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6A0DAD, #00CED1); /* Purple to Turquoise */
+            transition: width 0.3s ease;
+        }
+
+        header nav ul li a:hover::after {
+            width: 100%;
+        }
+        header nav ul li a:hover {
+            color: #00CED1;
+        }
+
+        /* Main Content Sections */
+        main {
+            flex: 1; /* Allows main to grow and push footer down */
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section h2, section h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #00CED1;
+            text-shadow: 0 0 8px rgba(0, 206, 209, 0.3);
+        }
+
+        section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(45deg, #6A0DAD 0%, #0F3460 100%); /* Purple to Dark Blue */
+            color: #E6E6E6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh; /* Make it tall */
+            padding: 100px 0;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-section h2 {
+            font-size: 3.5rem;
+            color: #E6E6E6;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            text-decoration: none;
+            color: #E6E6E6;
+            background: linear-gradient(90deg, #00CED1, #6A0DAD); /* Turquoise to Purple */
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 206, 209, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 206, 209, 0.5);
+            background: linear-gradient(90deg, #6A0DAD, #00CED1); /* Reverse gradient on hover */
+        }
+
+        .btn-secondary {
+            background: none;
+            border: 2px solid #00CED1;
+            color: #00CED1;
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(90deg, #00CED1, #6A0DAD);
+            color: #E6E6E6;
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(0, 206, 209, 0.3);
+        }
+
+
+        /* Features Section */
+        .features-section {
+            background-color: rgba(10, 25, 47, 0.7); /* Slightly lighter dark blue */
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            background-color: #1A1A2E; /* Darker background for cards */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 206, 209, 0.2);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 206, 209, 0.4);
+        }
+
+        .feature-item h4 {
+            font-size: 1.5rem;
+            color: #00CED1;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #B0B0B0;
+            margin-bottom: 0;
+        }
+
+        .feature-item .icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px auto;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00CED1, #6A0DAD);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #E6E6E6;
+            box-shadow: 0 0 15px rgba(0, 206, 209, 0.5);
+        }
+        /* Simple text as icons for demo */
+        .icon-responsive::before { content: '📱'; }
+        .icon-intuitive::before { content: '💡'; }
+        .icon-scalable::before { content: '📈'; }
+
+
+        /* About Section */
+        .about-section {
+            background-color: #0F3460;
+        }
+        .about-section p {
+            color: #B0B0B0;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        .about-section p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #6A0DAD 0%, #00CED1 100%); /* Purple to Turquoise */
+            color: #E6E6E6;
+            padding: 60px 0;
+        }
+        .cta-section h3 {
+            color: #E6E6E6;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        .cta-section p {
+            color: #E6E6E6;
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(10, 25, 47, 0.9);
+            color: #B0B0B0;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer p {
+            margin: 0 0 15px 0;
+            max-width: none;
+        }
+
+        .social-links a {
+            color: #00CED1;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #E6E6E6;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header nav ul {
+                flex-direction: column;
+                margin-top: 15px;
+            }
+
+            header nav ul li {
+                margin: 5px 0;
+            }
+
+            .hero-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            section h2, section h3 {
+                font-size: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-section p {
+                text-align: left; /* Adjust for better readability on small screens */
+            }
+
+            .cta-section h3 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-section h2 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            section h2, section h3 {
+                font-size: 1.8rem;
+            }
+
+            footer p {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Nova</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h2>Innovate. Create. Elevate.</h2>
+                <p>Welcome to the future of possibilities. Discover what's next.</p>
