@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future-Ready Project 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            --background-color-light: #f8f9fa;
+            --background-color-dark: #1c1c2e;
+            --text-color-dark: #333;
+            --text-color-light: #e0e0e0;
+            --card-background: #ffffff;
+            --card-shadow: rgba(0, 0, 0, 0.08);
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --font-family: 'Poppins', sans-serif;
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background: var(--background-color-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border-radius: var(--border-radius-md);
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .section.light-bg {
+            background-color: var(--background-color-dark);
+            color: var(--text-color-light);
+        }
+
+        .section.light-bg h2 {
+            color: var(--text-color-light);
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00f2fe, #4facfe); /* A subtle gradient for the logo */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support text-fill-color */
+            filter: drop-shadow(0 0 2px rgba(0,242,254,0.5));
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color var(--transition-speed);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--text-color-light);
+            transition: width var(--transition-speed);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color-light);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--secondary-gradient);
+            color: var(--text-color-light);
+            padding: 8rem 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 -5px 15px rgba(0,0,0,0.2);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse 10s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.1); opacity: 0.7; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-content p + p {
+            margin-top: 1rem;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-card {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px var(--card-shadow);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            color: var(--text-color-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--text-color-dark);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            background-color: var(--card-background);
+            padding: 3rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 30px var(--card-shadow);
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            color: var(--text-color-dark);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-md);
+            font-family: var(--font-family);
+            font-size: 1rem;
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--background-color-dark);
+            color: var(--text-color-light);
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: auto; /* Pushes footer to the bottom */
+            font-size: 0.9rem;
+            box-shadow: inset 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .footer a {
+            color: var(--accent-color);
+            transition: color var(--transition-speed);
+        }
+
+        .footer a:hover {
+            color: #ffffff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px; /* Adjust based on header height */
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                padding: 1rem 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                text-align: center;
+                margin: 0.8rem 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .burger.toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            .burger.toggle .line2 {
+                opacity: 0;
+            }
+            .burger.toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero {
+                padding: 6rem 0;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 3.5rem);
+            }
+
+            .hero p {
+                font-size: clamp(0.9rem, 3vw, 1.2rem);
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.4rem;
+            }
+
+            .feature-card p {
+                font-size: 0.9rem;
+            }
+
+            .footer {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container nav-bar">
+            <a href="#" class="logo">Project 2026</a>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="burger" id="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Crafting Tomorrow's Innovations, Today.</h1>
+                <p>Welcome to the future of project development. We build solutions that are scalable, efficient, and beautifully designed.</p>
+                <a href="#about" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2>Our Vision & Mission</h2>
+                <div class="about-content">
+                    <p>At Project 2026, we believe in pushing the boundaries of what's possible. Our dedicated team is committed to delivering cutting-edge solutions that not only meet but exceed expectations. We focus on user-centric design, robust architecture, and seamless integration to create products that truly make a difference.</p>
+                    <p>Since our inception, our mission has been clear: to empower businesses and individuals with technology that drives progress. We pride ourselves on our agile methodologies, collaborative spirit, and a relentless pursuit of excellence in every line of code and every design element.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section light-bg">
+            <div class="container">
+                <h2>Key Features & Benefits</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">&#9889;</div> <!-- Unicode for lightning bolt -->
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized algorithms and state-of-the-art infrastructure ensure unparalleled speed and responsiveness.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">&#128187;</div> <!-- Unicode for laptop -->
+                        <h3>Cross-Platform Compatibility</h3>
+                        <p>Seamless experience across all devices and operating systems, from desktop to mobile.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">&#128274;</div> <!-- Unicode for lock -->
+                        <h3>Enterprise-Grade Security</h3>
+                        <p>Your data is protected with advanced encryption and robust security protocols, ensuring peace of mind.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">&#128161;</div> <!-- Unicode for light bulb -->
+                        <h3>Intuitive User Experience</h3>
+                        <p>Designed with users in mind, our interfaces are clean, simple, and incredibly easy to navigate.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">&#128200;</div> <!-- Unicode for chart increasing -->
+                        <h3>Scalable Architecture</h3>
+                        <p>Built to grow with you, our solutions can effortlessly handle increasing demands and expanding data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">&#128172;</div> <!-- Unicode for speech bubble -->
+                        <h3>24/7 Dedicated Support</h3>
+                        <p>Our expert support team is always available to assist you, ensuring smooth operations around the clock.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have a question or want to collaborate? Reach out to us!</p>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Project Showcase. All rights reserved.</p>
+            <p>Designed and Developed for the future.</p>
+            <p>Project Date: <strong>2026-01-26</strong></p>
+        </div>
+    </footer>
+
+    <script>
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('navLinks');
+
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            burger.classList.toggle('toggle');
+        });
+
+        // Close nav when a link is clicked (for mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                burger.classList.remove('toggle');
+            });
+        });
+    </script>
+</body>
+</html>
