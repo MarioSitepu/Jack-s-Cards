@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Project Dashboard - 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset and Setup */
+        :root {
+            --color-primary: #5A189A; /* Deep Violet */
+            --color-secondary: #00B4D8; /* Bright Cyan */
+            --color-accent: #FFC300; /* Gold/Amber */
+            --color-background-dark: #0A0A1A;
+            --color-text-light: #E0E0FF;
+            --color-card-bg: rgba(25, 25, 45, 0.7);
+            --font-family-base: 'Inter', sans-serif;
+            --border-radius-base: 12px;
+            --spacing-unit: 1.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            color: var(--color-text-light);
+            background: var(--color-background-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+            background-image: radial-gradient(circle at top left, rgba(90, 24, 154, 0.2) 0%, transparent 40%),
+                              radial-gradient(circle at bottom right, rgba(0, 180, 216, 0.15) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: var(--spacing-unit);
+            color: var(--color-text-light);
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
+            border-radius: 5px;
+        }
+
+        /* Header Styling */
+        header {
+            background: rgba(10, 10, 26, 0.9);
+            padding: 1rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: var(--color-accent);
+            text-decoration: none;
+            cursor: default;
+        }
+
+        .nav-links a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            margin-left: var(--spacing-unit);
+            font-weight: 500;
+            transition: color 0.3s, text-shadow 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-secondary);
+            text-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(10, 10, 26, 0.8), rgba(10, 10, 26, 0.2));
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--color-secondary), var(--color-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(90, 24, 154, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-text-light);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+            color: var(--color-text-light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(90, 24, 154, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 180, 216, 0.6);
+        }
+
+        /* Main Content Sections */
+        main {
+            padding-bottom: 4rem;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-unit);
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--color-card-bg);
+            border-radius: var(--border-radius-base);
+            padding: var(--spacing-unit);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-secondary);
+        }
+
+        .card h3 {
+            color: var(--color-accent);
+            margin-bottom: 0.75rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 5px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: rgba(224, 224, 255, 0.8);
+        }
+
+        /* Status Section Specifics */
+        #status .card {
+            text-align: center;
+        }
+
+        .status-indicator {
+            font-size: 3rem;
+            font-weight: 900;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .status-indicator.complete {
+            color: #00FF7F; /* Bright Green */
+        }
+
+        .status-indicator.pending {
+            color: var(--color-accent);
+        }
+        
+        /* Date Highlight */
+        .date-highlight {
+            font-weight: 700;
+            color: var(--color-secondary);
+            background: rgba(0, 180, 216, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-background-dark);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
+            }
+
+            .nav-links a {
+                margin: 0 0.5rem;
+                display: inline-block;
+            }
+
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">NEXUS_2026</div>
+            <nav class="nav-links">
+                <a href="#dashboard">Dashboard</a>
+                <a href="#status">Status</a>
+                <a href="#timeline">Timeline</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>The Aurora Initiative</h1>
+                <p>Advanced system deployment and strategic planning for Q1 2026. Tracking progress as of <span class="date-highlight">2026-01-28</span>.</p>
+                <a href="#status" class="cta-button">View Project Status</a>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="container" style="margin-bottom: 4rem;">
+            <h2 class="section-title">Project Overview</h2>
+            <div class="grid-layout">
+                <div class="card">
+                    <h3>Current Phase</h3>
+                    <p>Alpha Testing & Integration</p>
+                    <p>Focus on module compatibility and stress testing environment stability.</p>
+                </div>
+                <div class="card">
+                    <h3>Key Metrics</h3>
+                    <p>92% Code Coverage</p>
+                    <p>12 Critical Bugs Remaining</p>
+                </div>
+                <div class="card">
+                    <h3>Next Milestone</h3>
+                    <p>Beta Release Candidate (RC1)</p>
+                    <p>Scheduled for February 15, 2026.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Status Section -->
+        <section id="status" class="container" style="margin-bottom: 4rem;">
+            <h2 class="section-title">Module Status Summary</h2>
+            <div class="grid-layout">
+                <!-- Status Card 1 -->
+                <div class="card">
+                    <h3>Core API Gateway</h3>
+                    <div class="status-indicator complete">Complete</div>
+                    <p>Initial deployment successful. Passing all unit tests.</p>
+                </div>
+                <!-- Status Card 2 -->
+                <div class="card">
+                    <h3>Frontend Interface</h3>
+                    <div class="status-indicator pending">Pending</div>
+                    <p>Design finalized, 75% implementation complete. Requires final responsiveness review.</p>
+                </div>
+                <!-- Status Card 3 -->
+                <div class="card">
+                    <h3>Database Migration</h3>
+                    <div class="status-indicator complete">Complete</div>
+                    <p>Data integrity checks passed with 100% accuracy.</p>
+                </div>
+                <!-- Status Card 4 -->
+                <div class="card">
+                    <h3>Security Audit</h3>
+                    <div class="status-indicator pending">Pending</div>
+                    <p>External audit scheduled to begin next week, post-RC1.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section id="timeline" class="container">
+            <h2 class="section-title">Upcoming Schedule</h2>
+            <div class="grid-layout">
+                <div class="card">
+                    <h3>Week 4 (Jan 26 - Jan 30)</h3>
+                    <p><strong>Current Date: <span class="date-highlight">2026-01-28</span></strong></p>
+                    <ul>
+                        <li>Finalize Alpha bug fixes.</li>
+                        <li>Prepare RC1 environment setup.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Week 6 (Feb 9 - Feb 13)</h3>
+                    <p>Internal Beta readiness review.</p>
+                    <p>Documentation freeze for core features.</p>
+                </div>
+                <div class="card">
+                    <h3>Week 8 (Feb 23 - Feb 27)</h3>
+                    <p>Security Penetration Testing Phase 1.</p>
+                    <p>Client UAT preparation.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2026 Nexus Systems Corp. | Project Aurora. All Rights Reserved.</p>
+            <p>Contact: ops@nexus.com</p>
+        </div>
+    </footer>
+
+</body>
+</html>
