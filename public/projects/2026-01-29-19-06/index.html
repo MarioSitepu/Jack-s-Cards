@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project - 2026-01-29</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-bg: #0d1117; /* Dark background */
+            --secondary-bg: #161b22; /* Slightly lighter dark */
+            --accent-gradient-1: linear-gradient(to right, #6a11cb, #2575fc); /* Purple to Blue */
+            --accent-gradient-2: linear-gradient(to right, #4facfe, #00f2fe); /* Light Blue to Cyan */
+            --text-color-light: #e6edf3;
+            --text-color-dark: #c9d1d9;
+            --border-color: #30363d;
+            --card-bg: #1f252c;
+        }
+
+        /* General Resets & Body Styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--primary-bg);
+            /* Subtle background gradients for depth */
+            background-image: radial-gradient(circle at top left, rgba(106, 17, 203, 0.1), transparent 50%),
+                              radial-gradient(circle at bottom right, rgba(37, 117, 252, 0.1), transparent 50%);
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            display: flex;
+            flex-direction: column; /* Stack header, main, footer vertically */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            color: var(--text-color-light);
+            background-image: var(--accent-gradient-1);
+            -webkit-background-clip: text; /* For gradient text effect */
+            -webkit-text-fill-color: transparent; /* For gradient text effect */
+            background-clip: text;
+            text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-color-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px; /* Space for underline effect */
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gradient-2);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--text-color-light);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%; /* Expand underline on hover */
+        }
+
+        /* Main Content Styling */
+        main {
+            flex-grow: 1; /* Allows main to take up available space */
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--secondary-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: var(--text-color-light);
+            background-image: var(--accent-gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: var(--text-color-light);
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: var(--text-color-dark);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Hero Section Specifics */
+        .hero {
+            padding: 120px 0;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(37, 117, 252, 0.08), transparent 70%); /* Subtle radial glow */
+        }
+
+        .hero h2 {
+            font-size: 4.5em;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            color: var(--text-color-light);
+        }
+
+        .project-date {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--text-color-light);
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+
+        /* Button Styling */
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text-color-light);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            font-size: 1.1em;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--accent-gradient-2);
+            z-index: -1;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover::before {
+            transform: scale(1.05); /* Slight scale on hover for button gradient */
+        }
+
+        /* Grid Layouts for Features and Projects */
+        .features-grid, .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-item, .project-card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover, .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-item h3, .project-card h3 {
+            margin-top: 15px;
+            margin-bottom: 10px;
+            background-image: var(--accent-gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .feature-item p, .project-card p {
+            font-size: 1em;
+            color: var(--text-color-dark);
+            max-width: none; /* Override general p max-width */
+        }
+
+        .icon {
+            font-size: 3em;
+            background-image: var(--accent-gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-color-dark);
+            text-align: center;
+            padding: 40px 0;
+            margin-top: auto; /* Pushes footer to bottom if content is short */
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+            color: var(--text-color-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero h2 {
+                font-size: 3em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            h2 {
+                font-size: 2.5em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .features-grid, .projects-grid {
+                grid-template-columns: 1fr; /* Stack cards on smaller screens */
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .hero h2 {
+                font-size: 2.2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            .feature-item, .project-card {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FutureSphere</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Innovating Tomorrow, Today.</h2>
+                <p>Welcome to FutureSphere, where groundbreaking ideas transform into reality. We build solutions for the next generation.</p>
+                <a href="#projects" class="btn">Explore Our Work</a>
+                <p class="project-date">Project Showcase Date: 2026-01-29</p>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About FutureSphere</h2>
+                <p>We are a dedicated team of innovators, designers, and developers passionate about creating impactful digital experiences. Our focus is on modern technologies, user-centric design, and scalable solutions that stand the test of time.</p>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="icon">🚀</div>
+                        <h3>Cutting-Edge Technology</h3>
+                        <p>Leveraging the latest frameworks and tools to build robust and efficient applications.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">✨</div>
+                        <h3>Intuitive Design</h3>
+                        <p>Crafting beautiful and user-friendly interfaces that provide seamless experiences.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">🌐</div>
+                        <h3>Scalable Solutions</h3>
+                        <p>Designing architectures that grow with your needs, ensuring long-term viability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2>Our Latest Projects</h2>
+                <p>Discover a selection of our recent work, showcasing our expertise across various domains.</p>
+                <div class="projects-grid">
+</body>
+</html>
