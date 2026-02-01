@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for consistent styling */
+        :root {
+            --color-primary-dark: #0A1128;
+            --color-primary-light: #1B2A41;
+            --color-secondary-dark: #2D4059;
+            --color-secondary-light: #4F647D;
+            --color-accent-start: #6A11CB; /* Purple */
+            --color-accent-end: #2575FC;   /* Blue */
+            --color-text-light: #E0FBFC;
+            --color-text-dark: #C0C0C0;
+            --color-background-gradient: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%);
+            --color-accent-gradient: linear-gradient(45deg, var(--color-accent-start) 0%, var(--color-accent-end) 100%);
+            --spacing-unit: 1rem;
+            --border-radius-soft: 8px;
+            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --box-shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.3);
+            --font-family-poppins: 'Poppins', sans-serif;
+        }
+
+        /* Global Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-poppins);
+            line-height: 1.6;
+            color: var(--color-text-light);
+            background: var(--color-background-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        a {
+            color: var(--color-accent-end);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-accent-start);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--color-text-light);
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--color-accent-gradient);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+            color: var(--color-text-dark);
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--color-accent-gradient);
+            color: var(--color-text-light);
+            border-radius: var(--border-radius-soft);
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--box-shadow-light);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-medium);
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(10, 17, 40, 0.9);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--box-shadow-light);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+            background: -webkit-linear-gradient(45deg, var(--color-accent-start), var(--color-accent-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--color-text-light);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 20px;
+        }
+
+        .burger div {
+            width: 30px;
+            height: 3px;
+            background-color: var(--color-text-light);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--color-background-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem;
+            min-height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><rect width="100%" height="100%" fill="transparent"/><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>') top left / 40px 40px repeat;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: -webkit-linear-gradient(45deg, var(--color-accent-end), var(--color-accent-start));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--color-text-dark);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features-section {
+            background-color: var(--color-primary-light);
+            padding-bottom: 8rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-primary-light) 100%);
+            border-radius: var(--border-radius-soft);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow-medium);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--color-text-light);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--color-text-dark);
+        }
+
+        .about-section {
+            background-color: var(--color-secondary-dark);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .update-section {
+            background: var(--color-primary-light);
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .update-section h2 {
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .update-section p {
+            font-size: 1.2rem;
+            color: var(--color-text-dark);
+        }
+
+        .project-date {
+            font-weight: 700;
+            color: var(--color-accent-end);
+            font-size: 1.3rem;
+            background: -webkit-linear-gradient(45deg, var(--color-accent-end), var(--color-accent-start));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-section {
+            background: var(--color-secondary-dark);
+            padding-bottom: 8rem;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-soft);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--color-text-light);
+            font-family: var(--font-family-poppins);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--color-accent-end);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form .btn {
+            align-self: flex-start;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-primary-dark);
+            color: var(--color-text-dark);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .social-links a {
+            color: var(--color-text-dark);
+            margin: 0 1rem;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--color-accent-end);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                right: 0;
+                top: 0;
+                height: 100vh;
+                width: 60%;
+                background-color: var(--color-primary-dark);
+                flex-direction: column;
+                align-items: center;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in-out;
+                padding-top: 5rem;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-links li {
+                opacity: 0;
+                margin: 1.5rem 0;
+            }
+
+            .nav-links.nav-active {
+                transform: translateX(0%);
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .burger.toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            .burger.toggle .line2 {
+                opacity: 0;
+            }
+            .burger.toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            @keyframes navLinkFade {
+                from {
+                    opacity: 0;
+                    transform: translateX(50px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0px);
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .about-content p, .update-section p {
+                font-size: 1rem;
+            }
+
+            .project-date {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero-section {
+                padding: 6rem 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content p {
+                font-size: 0.95rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .feature-card {
+                padding: 1.8rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .contact-form {
+                padding: 0 1.5rem;
+            }
+
+            footer {
+                padding: 2rem 1.5rem;
+            }
+
+            .social-links a {
+                margin: 0 0.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Project Nova</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1>Innovate. Create. Elevate.</h1>
+                <p>Welcome to the future of digital solutions. We craft experiences that matter, designed for tomorrow.</p>
+                <a href="#contact" class="btn">Get Started</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Sleek Design</h3>
+                    <p>Modern aesthetics combined with intuitive user interfaces for an unparalleled experience.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Responsive Layout</h3>
+                    <p>Optimized for all devices, ensuring a flawless view from desktops to smartphones.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Powerful Solutions</h3>
+                    <p>Robust backend systems powered by cutting-edge technology for seamless performance.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Scalable Architecture</h3>
+                    <p>Built to grow with your needs, effortlessly expanding alongside your evolving vision.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <h2>About Our Vision</h2>
+            <div class="about-content">
+                <p>At Project Nova, we believe in pushing boundaries and redefining what's possible. Our team of dedicated professionals is committed to delivering excellence, driven by passion and innovation. We leverage cutting-edge technologies to bring your ideas to life, ensuring every project is a masterpiece of functionality and design.</p>
+                <p>Our journey began with a simple goal: to make complex digital challenges simple and accessible. We pride ourselves on transparent communication, agile development, and a client-centric approach that guarantees satisfaction and measurable results.</p>
+            </div>
+        </section>
+
+        <section id="project-update" class="update-section">
+            <h2>Project Milestone</h2>
+            <p>Our latest major update was implemented on: <span class="project-date">2026-02-01</span>. This update includes enhanced performance, new feature integrations, and significant UI/UX improvements, marking a new era for our platform.</p>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2>Get In Touch</h2>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('.nav-links');
+        const navItems = document.querySelectorAll('.nav-links li');
+
+        burger.addEventListener('click', () => {
+            // Toggle Nav
+            navLinks.classList.toggle('nav-active');
+
+            // Animate Links
+            navItems.forEach((link, index) => {
+                if (link.style.animation) {
+                    link.style.animation = '';
+                } else {
+                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                }
+            });
+
+            // Burger Animation
+            burger.classList.toggle('toggle');
+        });
+
+        // Close nav when a link is clicked (for mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('nav-active')) {
+                    navLinks.classList.remove('nav-active');
+                    burger.classList.remove('toggle');
+                    navItems.forEach((item) => {
+                        item.style.animation = '';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
