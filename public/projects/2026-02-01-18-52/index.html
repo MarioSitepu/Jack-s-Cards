@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nexus - A Glimpse into the Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Resets & Body Styling */
+        :root {
+            --primary-bg-start: #0F2027; /* Dark Teal */
+            --primary-bg-end: #203A43;   /* Slightly Lighter Teal */
+            --secondary-bg-start: #2C5364; /* Mid Teal */
+            --secondary-bg-end: #0F2027;   /* Dark Teal */
+            --accent-color-1: #00C6FF;   /* Bright Blue */
+            --accent-color-2: #0072FF;   /* Deeper Blue */
+            --text-light: #E0E0E0;       /* Light Gray */
+            --text-dark: #A0A0A0;        /* Medium Gray */
+            --font-family-poppins: 'Poppins', sans-serif;
+            --max-width: 1200px;
+            --spacing-large: 6rem;
+            --spacing-medium: 3rem;
+            --spacing-small: 1.5rem;
+            --border-radius-large: 10px;
+            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --box-shadow-dark: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-poppins);
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--primary-bg-start), var(--primary-bg-end));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-small);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 32, 39, 0.8); /* Semi-transparent dark background */
+            padding: var(--spacing-small) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            box-shadow: var(--box-shadow-light);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color-1);
+            text-decoration: none;
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: var(--spacing-medium);
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color-1);
+            transform: translateY(-2px);
+        }
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: var(--spacing-large) 0;
+            position: relative;
+        }
+
+        section:nth-of-type(odd) {
+            background: linear-gradient(135deg, var(--secondary-bg-start), var(--secondary-bg-end));
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: var(--spacing-small);
+            line-height: 1.2;
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+        }
+
+        p {
+            margin-bottom: var(--spacing-small);
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0F2027, #203A43);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(0,198,255,0.15) 0%, transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(0,114,255,0.15) 0%, transparent 40%);
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: var(--spacing-small);
+            background: linear-gradient(45deg, #00C6FF, #0072FF, #00C6FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 5px rgba(0,198,255,0.5), 0 0 10px rgba(0,114,255,0.5); }
+            to { text-shadow: 0 0 10px rgba(0,198,255,0.8), 0 0 20px rgba(0,114,255,0.8); }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-medium);
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        .hero .project-date {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color-1);
+            margin-top: var(--spacing-medium);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius-large);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: var(--box-shadow-light);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-dark);
+            background: linear-gradient(90deg, var(--accent-color-2), var(--accent-color-1));
+        }
+
+        /* Features Section */
+        .features .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-medium);
+            margin-top: var(--spacing-large);
+        }
+
+        .feature-item {
+            background: rgba(44, 83, 100, 0.5); /* Semi-transparent background */
+            padding: var(--spacing-medium);
+            border-radius: var(--border-radius-large);
+            text-align: center;
+            box-shadow: var(--box-shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,198,255,0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,198,255,0.2);
+        }
+
+        .feature-item h3 {
+            margin-top: var(--spacing-small);
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            color: var(--accent-color-1);
+            margin-bottom: var(--spacing-small);
+            display: block;
+        }
+
+        /* About Section */
+        .about .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-medium);
+            margin-top: var(--spacing-medium);
+        }
+
+        .about .text-block {
+            background: rgba(15, 32, 39, 0.7);
+            padding: var(--spacing-medium);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--box-shadow-light);
+            border: 1px solid rgba(0,114,255,0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .about .text-block h3 {
+            margin-bottom: var(--spacing-small);
+        }
+
+        /* Call to Action Section */
+        .cta {
+            text-align: center;
+            padding: var(--spacing-large) 0;
+            background: linear-gradient(90deg, #00C6FF, #0072FF); /* Direct gradient for CTA */
+            color: white; /* Ensure text is white on this background */
+        }
+
+        .cta h2 {
+            color: white; /* Override gradient for h2 on this specific section */
+            -webkit-text-fill-color: white;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto var(--spacing-medium);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--accent-color-2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .cta .btn:hover {
+            background: #f0f0f0;
+            color: var(--accent-color-1);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-bg-start);
+            color: var(--text-dark);
+            text-align: center;
+            padding: var(--spacing-medium) 0;
+            border-top: 1px solid rgba(0,198,255,0.1);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .social-links {
+            margin-top: var(--spacing-small);
+        }
+
+        .social-links a {
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            margin: 0 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color-1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+            .hero p { font-size: 1.2rem; }
+            nav ul li { margin-left: var(--spacing-medium); }
+            .features .grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-small);
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: var(--spacing-small);
+            }
+            nav ul li {
+                margin: 0;
+            }
+            .hero {
+                min-height: 70vh;
+                padding: var(--spacing-large) 0;
+            }
+            .hero h1 { font-size: 2.8rem; }
+            .hero p { font-size: 1rem; }
+            .hero .project-date { font-size: 1rem; }
+            h2 { font-size: 1.8rem; }
+            section { padding: var(--spacing-medium) 0; }
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+            .about .content-wrapper {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo { font-size: 1.5rem; }
+            nav ul { flex-direction: column; align-items: center; }
+            nav ul li { margin-bottom: 0.5rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 0.9rem; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.3rem; }
+            .feature-item { padding: var(--spacing-small); }
+            .feature-item .icon { font-size: 2.5rem; }
+            p { font-size: 0.95rem; }
+            .cta h2 { font-size: 1.8rem; }
+            .cta p { font-size: 1rem; }
+        }
+
+        /* Icons (using Font Awesome via CDN for modern web) */
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Nexus</a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="container">
+                <h1>Unveiling Project Nexus</h1>
+                <p>A revolutionary leap into the future of decentralized intelligence and seamless integration.</p>
+                <a href="#features" class="btn">Discover More</a>
+                <p class="project-date">Launch Date: 2026-02-01</p>
+            </div>
+        </section>
+
+        <section id="features" class="features text-center">
+            <div class="container">
+                <h2>Core Capabilities</h2>
+                <p>Project Nexus is engineered with cutting-edge technologies to redefine interaction.</p>
+                <div class="grid">
+                    <div class="feature-item">
+                        <i class="icon fas fa-brain"></i>
+                        <h3>Intelligent Automation</h3>
+                        <p>Leveraging advanced AI for autonomous decision-making and optimized workflows.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon fas fa-network-wired"></i>
+                        <h3>Decentralized Network</h3>
+                        <p>Robust and secure peer-to-peer architecture ensuring data integrity and resilience.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon fas fa-shield-alt"></i>
+                        <h3>Enhanced Security</h3>
+                        <p>State-of-the-art encryption and blockchain principles for unparalleled data protection.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon fas fa-rocket"></i>
+                        <h3>Scalable Performance</h3>
+                        <p>Designed for massive scalability, handling high loads with consistent speed.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container text-center">
+                <h2>About Project Nexus</h2>
+                <p>Our vision is to build a connected future where technology serves humanity effortlessly.</p>
+                <div class="content-wrapper">
+                    <div class="text-block">
+                        <h3>The Vision Behind Nexus</h3>
+                        <p>Project Nexus began with a simple yet profound idea: to create a platform that adapts, learns, and grows with its users. We believe in empowering individuals and organizations with tools that are not just powerful, but also intuitive and inherently secure. Our team of innovators has dedicated years to meticulously crafting every aspect of this project, ensuring it meets the highest standards of performance and reliability.</p>
+                    </div>
+                    <div class="text-block">
+                        <h3>Our Commitment to Innovation</h3>
+                        <p>Innovation is at the heart of everything we do. We continuously explore new frontiers in AI, distributed ledger technologies, and user experience design. With Project Nexus, we're not just launching a product; we're launching a paradigm shift. Our commitment extends beyond the initial release, with a roadmap full of exciting updates and community-driven enhancements planned for the future.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Experience the Future?</h2>
+                <p>Join us on this exciting journey. Connect with our team and be part of the Nexus community.</p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nexus. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
