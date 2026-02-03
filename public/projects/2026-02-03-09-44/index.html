@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureScape Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Resets & Body Styling */
+        :root {
+            --primary-gradient: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(to right, #fc6767 0%, #ec008c 100%);
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --bg-light: #ffffff;
+            --bg-dark-section: #1a1a2e;
+            --card-bg: #f9f9f9;
+            --border-radius-lg: 15px;
+            --border-radius-md: 10px;
+            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --box-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: #eef2f3; /* Light subtle background */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-light);
+            padding: 15px 0;
+            box-shadow: var(--box-shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: #2575fc; /* Matching the gradient end color */
+        }
+
+        /* Hero Section */
+        #hero {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 120px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1; /* Allow hero to take available space */
+            min-height: 500px;
+        }
+
+        #hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            padding: 15px 35px;
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 25px rgba(236, 0, 140, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(236, 0, 140, 0.45);
+        }
+
+        /* Sections General Styling */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f4f7f6; /* Slightly darker light background */
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 700;
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Features Section */
+        #features .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--bg-dark-section);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        #about h2 {
+            color: var(--text-light); /* Override gradient for dark background */
+            -webkit-text-fill-color: var(--text-light);
+        }
+
+        #about p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        #contact .contact-content {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #contact p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        #contact .contact-info {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+        }
+
+        .contact-item i {
+            font-size: 2.5rem;
+            background-image: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .contact-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        .contact-item p {
+            font-size: 1rem;
+            color: #777;
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark-section);
+            color: var(--text-light);
+            text-align: center;
+            padding: 40px 0;
+            font-size: 0.9rem;
+            margin-top: auto; /* Push footer to the bottom */
+        }
+
+        footer .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: #2575fc;
+        }
+
+        footer p {
+            margin-top: 20px;
+            opacity: 0.8;
+        }
+
+        /* Utility classes for icons (Font Awesome) */
+        /* Note: For a real project, link Font Awesome CDN or host locally */
+        /* For this example, we assume these classes are available. */
+        .fa-rocket:before { content: "\f135"; }
+        .fa-cogs:before { content: "\f085"; }
+        .fa-lightbulb:before { content: "\f0eb"; }
+        .fa-chart-line:before { content: "\f201"; }
+        .fa-users:before { content: "\f0c0"; }
+        .fa-envelope:before { content: "\f0e0"; }
+        .fa-phone:before { content: "\f095"; }
+        .fa-map-marker-alt:before { content: "\f3c5"; }
+        .fa-facebook-f:before { content: "\f39e"; }
+        .fa-twitter:before { content: "\f099"; }
+        .fa-linkedin-in:before { content: "\f0e1"; }
+        .fa-instagram:before { content: "\f16d"; }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            #hero h1 {
+                font-size: 3rem;
+            }
+            #hero p {
+                font-size: 1.3rem;
+            }
+            h2 {
+                font-size: 2.2rem;
+            }
+            .feature-card {
+                padding: 25px;
+            }
+            .feature-card h3 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 0 15px 10px 15px;
+            }
+            #hero {
+                padding: 80px 0;
+                min-height: 400px;
+            }
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+            #hero p {
+                font-size: 1.1rem;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            section {
+                padding: 60px 0;
+            }
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 40px;
+            }
+            #features .features-grid {
+                grid-template-columns: 1fr;
+            }
+            #about p {
+                font-size: 1rem;
+            }
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .contact-item {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            nav ul li {
+                margin: 0 10px 10px 10px;
+            }
+            #hero h1 {
+                font-size: 2rem;
+            }
+            #hero p {
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 1.6rem;
+            }
+            .feature-card i {
+                font-size: 2.5rem;
+            }
+            .feature-card h3 {
+                font-size: 1.2rem;
+            }
+            footer .social-links a {
+                font-size: 1.2rem;
+                margin: 0 10px;
+            }
+        }
+    </style>
+    <!-- Font Awesome (for icons) - In a real project, link to CDN or host locally -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">FutureScape</a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Unleash Your Potential with FutureScape</h1>
+                <p>Revolutionizing the way you work, live, and connect. Discover the future, today.</p>
+                <a href="#features" class="btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Seamless Integration</h3>
+                        <p>Effortlessly connect with your existing tools and workflows for a smooth transition.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Intuitive Design</h3>
+                        <p>Experience a user interface crafted for simplicity and maximum productivity.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Powerful Analytics</h3>
+                        <p>Gain deep insights with advanced data analysis and reporting capabilities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Collaborative Environment</h3>
+                        <p>Foster team synergy with real-time collaboration tools and shared spaces.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <p>
+                    At FutureScape, we believe in building solutions that not only meet today's demands but also anticipate tomorrow's challenges. Our dedicated team of innovators is committed to pushing boundaries and creating a more connected, efficient, and inspiring world. We're proud to bring you this project, designed to empower individuals and organizations alike.
+                </p>
+                <p>
+                    This ambitious project was officially launched on <span style="font-weight: 700; color: #fc6767;">2026-02-03</span>, marking a new era of possibilities.
+                </p>
+                <a href="#contact" class="btn">Join Our Journey</a>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <div class="contact-content">
+                    <p>Have questions, feedback, or just want to say hello? Reach out to us!</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <h3>Email Us</h3>
+                            <p>info@futurescape.com</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <h3>Call Us</h3>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h3>Visit Us</h3>
+                            <p>123 Future Blvd, Innovation City, FC 98765</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2026 FutureScape Project. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
