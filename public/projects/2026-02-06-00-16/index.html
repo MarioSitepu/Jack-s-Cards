@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nova - Modern Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-bg: #1a1a2e; /* Very dark blue */
+            --secondary-bg: #16213e; /* Slightly lighter dark blue */
+            --accent-color: #e94560; /* Vibrant pinkish-red */
+            --text-color: #e0e0e0; /* Light grey */
+            --light-text: #ffffff; /* White */
+            --card-bg: #0f3460; /* Darker blue for cards */
+            --gradient-start: #0f3460;
+            --gradient-end: #1a1a2e;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--primary-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: var(--light-text);
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        h1 { font-size: 2.8rem; }
+        h2 { font-size: 2.2rem; }
+        h3 { font-size: 1.8rem; }
+        h4 { font-size: 1.4rem; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            background: var(--secondary-bg);
+            padding: 1.5rem 0;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--text-color);
+            font-weight: 400;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        nav a:hover {
+            background-color: var(--accent-color);
+            color: var(--light-text);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            padding: 6rem 0;
+            text-align: center;
+            color: var(--light-text);
+        }
+
+        .hero-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--light-text);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform var(--transition-speed), background-color var(--transition-speed);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: #ff6b8f; /* Slightly lighter accent */
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        .content-section {
+            padding: 4rem 0;
+            background-color: var(--primary-bg);
+        }
+
+        .content-section:nth-of-type(even) {
+            background-color: var(--secondary-bg);
+        }
+
+        .content-section h3 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .grid-container, .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card, .feature-item, .update-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover, .feature-item:hover, .update-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .card h4, .feature-item h4, .update-card h4 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .update-card .date {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-top: 1rem;
+            display: block;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+        }
+
+        .contact-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-section form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-section input,
+        .contact-section textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--card-bg);
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color var(--transition-speed), background-color var(--transition-speed);
+        }
+
+        .contact-section input:focus,
+        .contact-section textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background-color: var(--card-bg);
+        }
+
+        .contact-section textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-section .btn {
+            align-self: flex-end;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--card-bg);
+            color: var(--text-color);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-section h2 {
+                font-size: 3rem;
+            }
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+            .content-section h3 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                width: 100%;
+                justify-content: space-around;
+            }
+            nav a {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            .hero-section {
+                padding: 4rem 0;
+            }
+            .hero-section h2 {
+                font-size: 2.5rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .content-section {
+                padding: 3rem 0;
+            }
+            .grid-container, .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .card, .feature-item, .update-card {
+                margin: 0 1rem; /* Add some horizontal margin for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            nav a {
+                padding: 0.3rem 0.5rem;
+            }
+            .hero-section h2 {
+                font-size: 2rem;
+            }
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+            .content-section h3 {
+                font-size: 1.8rem;
+            }
+            .contact-section form {
+                margin: 0 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Nova</h1>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#updates">Updates</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h2>Innovating Tomorrow, Today</h2>
+                <p>Welcome to Project Nova, where cutting-edge technology meets visionary design to create unparalleled experiences.</p>
+                <a href="#features" class="btn">Explore Our Innovations</a>
+            </div>
+        </section>
+
+        <section id="overview" class="content-section">
+            <div class="container">
+                <h3>Project Overview</h3>
+                <div class="grid-container">
+                    <div class="card">
+                        <h4>Our Mission</h4>
+                        <p>To redefine industry standards through relentless innovation and a user-centric approach, building solutions that truly matter.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Our Vision</h4>
+                        <p>We envision a future where technology seamlessly integrates into daily life, empowering individuals and organizations worldwide.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Key Milestones</h4>
+                        <p>From initial concept to successful deployment, Project Nova has consistently met and exceeded its strategic objectives.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="content-section">
+            <div class="container">
+                <h3>Core Features</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h4>Intuitive Interface</h4>
+                        <p>Experience a sleek, modern, and easy-to-navigate design that puts user experience first.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Robust Security</h4>
+                        <p>State-of-the-art encryption and security protocols ensure your data is always protected.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Scalable Architecture</h4>
+                        <p>Designed to grow with your needs, our platform offers unparalleled scalability and performance.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Cross-Platform Compatibility</h4>
+                        <p>Access Project Nova seamlessly from any device, anywhere, anytime.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="updates" class="content-section">
+            <div class="container">
+                <h3>Latest Updates</h3>
+                <div class="grid-container">
+                    <article class="update-card">
+                        <h4>Phase 2 Development Complete</h4>
+                        <p>We are thrilled to announce the successful completion of Phase 2 development, bringing us closer to full public release!</p>
+                        <span class="date">Updated: 2026-02-06</span>
+                    </article>
+                    <article class="update-card">
+                        <h4>New Partnership Announced</h4>
+                        <p>Project Nova has officially partnered with Tech Innovations Inc. to integrate advanced AI capabilities.</p>
+                        <span class="date">Updated: 2026-01-20</span>
+                    </article>
+                    <article class="update-card">
+                        <h4>Public Beta Feedback Round</h4>
+                        <p>Thank you to all our beta testers! Your valuable feedback is helping us refine and perfect Project Nova.</p>
+                        <span class="date">Updated: 2025-12-15</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section contact-section">
+            <div class="container">
+                <h3>Get in Touch</h3>
+                <p>Have a question, feedback, or just want to say hello? We'd love to hear from you!</p>
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email Address" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
