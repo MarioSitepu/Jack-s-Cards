@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Horizon - Modern Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        :root {
+            --dark-blue: #1A293A;
+            --medium-blue: #2C3E50;
+            --light-gray: #ECF0F1;
+            --text-dark: #34495E;
+            --gradient-1-start: #00C9A7; /* Teal */
+            --gradient-1-end: #00BFFF;   /* Sky Blue */
+            --gradient-2-start: #8E44AD; /* Purple */
+            --gradient-2-end: #D645EF;   /* Brighter Purple */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-gray);
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, var(--dark-blue), var(--medium-blue));
+            color: var(--light-gray);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(to right, var(--gradient-1-start), var(--gradient-1-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin-top: 5px;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--light-gray);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--gradient-1-end);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, var(--gradient-1-start), var(--gradient-1-end));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+        }
+
+        .hero h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--gradient-2-start), var(--gradient-2-end));
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .features h3 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 60px;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .features h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--gradient-1-start), var(--gradient-1-end));
+            border-radius: 2px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-card .icon {
+            font-size: 3em;
+            color: var(--gradient-1-start);
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--gradient-1-start), var(--gradient-1-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: var(--medium-blue);
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: linear-gradient(to right, var(--gradient-2-start), var(--gradient-2-end));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+
+        .cta h3 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--dark-blue), var(--medium-blue));
+            color: var(--light-gray);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9em;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: var(--gradient-1-end);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--gradient-1-start);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin-top: 20px;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            .hero h2 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .features {
+                padding: 60px 0;
+            }
+
+            .features h3 {
+                font-size: 2em;
+                margin-bottom: 40px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                padding: 60px 0;
+            }
+
+            .cta h3 {
+                font-size: 2em;
+            }
+
+            .cta p {
+                font-size: 1em;
+            }
+
+            .btn {
+                padding: 12px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h2 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .features h3 {
+                font-size: 1.8em;
+            }
+
+            .cta h3 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Horizon</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <h2>Innovate. Create. Elevate.</h2>
+                <p>
+                    Your vision, powered by cutting-edge technology. Experience the future of project management.
+                    <br>This project was conceptualized on <strong>2026-02-05</strong>.
+                </p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <h3>Core Capabilities</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h4>Blazing Fast Performance</h4>
+                        <p>Optimized for speed and efficiency, ensuring your workflows are seamless and responsive.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💡</div>
+                        <h4>Intuitive User Interface</h4>
+                        <p>Designed with user experience in mind, making complex tasks simple and accessible.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h4>Enterprise-Grade Security</h4>
+                        <p>Protecting your data with advanced encryption and robust security protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📊</div>
+                        <h4>Advanced Analytics</h4>
+                        <p>Gain deep insights with powerful data visualization and customizable reports.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🌐</div>
+                        <h4>Seamless Cloud Integration</h4>
+                        <p>Connect effortlessly with your favorite cloud services and collaborate from anywhere.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">⚙️</div>
+                        <h4>Highly Customizable</h4>
+                        <p>Tailor every aspect of the platform to fit your unique project requirements and branding.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h3>Ready to Transform Your Workflow?</h3>
+                <p>Join thousands of innovators who are already leveraging Project Horizon to achieve their goals faster.</p>
+                <a href="#" class="btn">Request a Demo</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Horizon. All rights reserved. Designed with passion for the future.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+</body>
+</html>
