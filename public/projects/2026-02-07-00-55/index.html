@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-gradient: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Purple to Blue */
+            --secondary-gradient: linear-gradient(to right, #fc6076 0%, #ff9a44 100%); /* Pink to Orange */
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --bg-light: #f8f9fa;
+            --bg-dark-section: #e9ecef;
+            --button-hover-gradient: linear-gradient(to right, #2575fc 0%, #6a11cb 100%);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--text-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh; /* Occupy most of the viewport height */
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: var(--button-hover-gradient);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            /* Apply gradient to text */
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* Features Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4a4a4a;
+        }
+
+        .feature-item p {
+            color: #666;
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: var(--bg-dark-section);
+            padding: 5rem 2rem;
+        }
+
+        .about-section p {
+            max-width: 800px;
+            margin: 1.5rem auto;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .about-section strong {
+            /* Apply gradient to the date text */
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #f0f2f5;
+            padding: 5rem 2rem;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+            outline: none;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2.5rem 1rem;
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            margin: 0 0.8rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 1rem 2rem;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr; /* Stack features on small screens */
+            }
+
+            .contact-form {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .content-section {
+                padding: 3rem 1rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Project 2026</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h1>Future-Proof Solutions for Tomorrow</h1>
+                <p>Embrace innovation with our cutting-edge project, designed for the modern era.</p>
+                <button class="cta-button">Discover More</button>
+            </div>
+        </section>
+
+        <section id="features" class="content-section">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>Responsive Design</h3>
+                    <p>Adapts seamlessly to any device, ensuring a perfect user experience across all platforms.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Intuitive Interface</h3>
+                    <p>Effortless navigation and a clean layout for maximum usability and user satisfaction.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Scalable Architecture</h3>
+                    <p>Built to grow with your needs, ready for future expansions and evolving demands.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Robust Security</h3>
+                    <p>Your data is protected with the latest security protocols and encryption standards.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="content-section about-section">
+            <h2>About Our Vision</h2>
+            <p>Our project aims to redefine industry standards by integrating advanced technologies with user-centric design principles. We believe in creating solutions that are not only powerful but also delightful to use, fostering a new era of digital interaction.</p>
+            <p>This initiative was officially launched on <strong>2026-02-07</strong>, marking a significant milestone in our journey towards innovation and excellence. We're excited about the future and the impact we'll make.</p>
+        </section>
+
+        <section id="contact" class="content-section contact-section">
+            <h2>Get in Touch</h2>
+            <p>Have questions, ideas for collaboration, or just want to say hello? We'd love to hear from you!</p>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="6" required></textarea>
+                <button type="submit" class="cta-button">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Name. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+</html>
