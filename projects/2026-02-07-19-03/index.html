@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Zenith - 2026</title>
+    <style>
+        /* Modern CSS Reset & Variables */
+        :root {
+            --primary-bg-dark: #1A2A6C; /* Deep Blue */
+            --primary-bg-light: #B21F1F; /* Red */
+            --accent-color-1: #4A00E0; /* Purple */
+            --accent-color-2: #8E2DE2; /* Lighter Purple */
+            --text-light: #ECF0F1; /* Off-white */
+            --text-dark: #34495E; /* Dark slate */
+            --text-secondary: #BDC3C7; /* Light gray */
+            --gradient-1: linear-gradient(to right, var(--primary-bg-dark), var(--accent-color-1));
+            --gradient-2: linear-gradient(to bottom right, var(--accent-color-1), var(--accent-color-2));
+            --gradient-3: linear-gradient(to right, #00c6ff, #0072ff); /* Blueish gradient */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --border-radius: 0.75rem;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, #121212, #222222); /* Dark, subtle background */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-1);
+            padding: var(--spacing-sm) 0;
+            box-shadow: var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover, nav a:focus {
+            background: rgba(255, 255, 255, 0.15);
+            color: #FFF;
+            transform: translateY(-2px);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+
+        .primary-btn {
+            background: var(--gradient-3);
+            color: var(--text-light);
+            box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
+        }
+
+        .primary-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 114, 255, 0.6);
+        }
+
+        .secondary-btn {
+            background: var(--gradient-2);
+            color: var(--text-light);
+            box-shadow: 0 6px 20px rgba(142, 45, 226, 0.4);
+        }
+
+        .secondary-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(142, 45, 226, 0.6);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+
+        section h1, section h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: var(--spacing-md);
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #00c6ff, #92fe9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers not supporting text clip */
+        }
+
+        section p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a00e0 50%, #8e2de2 100%);
+            padding: var(--spacing-lg) 0 calc(var(--spacing-lg) * 1.5);
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 50% 20%;
+            border-bottom-right-radius: 50% 20%;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="10" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        .hero-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-section h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.1;
+        }
+
+        .hero-section p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            margin-bottom: var(--spacing-lg);
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .hero-section p span {
+            font-weight: 600;
+            color: #92fe9d;
+        }
+
+        /* Grid Container for Cards */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(142, 45, 226, 0.1), transparent 70%);
+            transform: rotate(45deg);
+            z-index: 0;
+            transition: transform 0.5s ease-out;
+        }
+
+        .card:hover::before {
+            transform: rotate(90deg);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: #92fe9d;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Feature List */
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--gradient-3);
+            color: var(--text-light);
+            margin-bottom: var(--spacing-sm);
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+        }
+        /* Simple icon placeholders using unicode characters */
+        .icon-data::before { content: '📊'; }
+        .icon-cloud::before { content: '☁️'; }
+        .icon-security::before { content: '🔒'; }
+
+
+        .feature-item h3 {
+            font-size: 1.6rem;
+            margin-bottom: var(--spacing-xs);
+            color: #00c6ff;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin: 0;
+            max-width: none; /* Override section p */
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-2);
+            padding: var(--spacing-lg) 0;
+            margin-top: var(--spacing-md);
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+            box-shadow: inset 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .cta-section h2 {
+            color: var(--text-light);
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gradient-1);
+            color: var(--text-secondary);
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            font-size: 0.9rem;
+            box-shadow: inset 0 8px 30px rgba(0,0,0,0.3);
+            margin-top: auto; /* Push footer to bottom */
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 var(--spacing-xs);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-xs);
+                width: 100%;
+            }
+
+            nav a {
+                padding: var(--spacing-xs) 0;
+                text-align: center;
+                width: 100%;
+            }
+
+            .hero-section {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+
+            section h1, section h2 {
+                font-size: clamp(1.8rem, 8vw, 2.8rem);
+            }
+
+            section p {
+                font-size: 1rem;
+            }
+
+            .grid-container, .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .card, .feature-item {
+                text-align: center;
+            }
+
+            .feature-item .icon {
+                margin: 0 auto var(--spacing-sm);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: var(--spacing-xs) var(--spacing-sm);
+            }
+
+            .hero-section {
+                min-height: 50vh;
+                border-bottom-left-radius: 30% 10%;
+                border-bottom-right-radius: 30% 10%;
+            }
+
+            .hero-section h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .hero-section p {
+                font-size: clamp(0.9rem, 3vw, 1.1rem);
+            }
+
+            footer .container {
+                gap: var(--spacing-xs);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Zenith</div>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h1>Future-Proofing Your Vision</h1>
+                <p>Unveiling cutting-edge solutions for tomorrow's challenges. Last updated: <span>2026-02-07</span></p>
+                <button class="btn primary-btn">Explore Solutions</button>
+            </div>
+        </section>
+
+        <section id="overview" class="overview-section">
+            <div class="container">
+                <h2>Our Mission</h2>
+                <div class="grid-container">
+                    <div class="card">
+                        <h3>Innovation</h3>
+                        <p>Driving forward with groundbreaking ideas and technologies to redefine possibilities.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Efficiency</h3>
+                        <p>Streamlining processes and optimizing performance for unparalleled productivity.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Impact</h3>
+                        <p>Creating lasting value and positive change across all industries and communities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <i class="icon icon-data"></i>
+                        <h3>Advanced Analytics</h3>
+                        <p>Gain deep insights with our powerful data analysis tools and interactive dashboards.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon icon-cloud"></i>
+                        <h3>Scalable Cloud Solutions</h3>
+                        <p>Seamlessly scale your operations with our robust and secure cloud infrastructure.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon icon-security"></i>
+                        <h3>Enterprise-Grade Security</h3>
+                        <p>Protect your assets with industry-leading security protocols and continuous monitoring.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform?</h2>
+                <p>Connect with our experts to start your journey towards a more efficient and innovative future.</p>
+                <button class="btn secondary-btn">Get in Touch</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Zenith. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
