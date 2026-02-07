@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nexus - Future Forward</title>
+    <style>
+        /* Modern CSS Reset & Base Styles */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(45deg, #00c6fb 0%, #005bea 100%);
+            --button-gradient: linear-gradient(90deg, #FF6B6B 0%, #FFD93D 100%);
+            --text-dark: #333;
+            --text-light: #f8f9fa;
+            --bg-light: #ffffff;
+            --bg-dark: #2c3e50;
+            --accent-color: #ffd700; /* Gold */
+            --spacing-unit: 1rem;
+            --border-radius: 8px;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: calc(2 * var(--spacing-unit));
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+            font-size: 1.1rem;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: calc(1.5 * var(--spacing-unit)) calc(2 * var(--spacing-unit));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(2 * var(--spacing-unit));
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+        }
+
+        section {
+            padding: calc(4 * var(--spacing-unit)) calc(2 * var(--spacing-unit));
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: calc(8 * var(--spacing-unit)) calc(2 * var(--spacing-unit));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 900;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            color: var(--text-light);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: calc(2 * var(--spacing-unit));
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero .project-date {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: calc(1 * var(--spacing-unit));
+            color: var(--accent-color);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--button-gradient);
+            color: var(--text-dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            margin-top: calc(4 * var(--spacing-unit));
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(2 * var(--spacing-unit));
+            margin-top: calc(3 * var(--spacing-unit));
+        }
+
+        .feature-item {
+            background-color: #fdfdfd;
+            padding: calc(2 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-item i {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-unit);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* About Section */
+        .about {
+            background-color: #fdfdfd;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            margin-top: calc(4 * var(--spacing-unit));
+            margin-bottom: calc(4 * var(--spacing-unit));
+            padding: calc(4 * var(--spacing-unit));
+        }
+
+        .about p {
+            max-width: 900px;
+            margin: var(--spacing-unit) auto;
+            text-align: justify;
+            color: #444;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: calc(2 * var(--spacing-unit));
+            margin-top: auto; /* Pushes footer to the bottom */
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            .hero p {
+                font-size: 1.3rem;
+            }
+            nav ul {
+                gap: var(--spacing-unit);
+            }
+            header .logo {
+                font-size: 1.6rem;
+            }
+            section {
+                padding: calc(3 * var(--spacing-unit)) calc(1.5 * var(--spacing-unit));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: calc(1.5 * var(--spacing-unit));
+                gap: var(--spacing-unit);
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+                width: 100%;
+            }
+            nav a {
+                padding: 0.5rem 1rem;
+                border-radius: var(--border-radius);
+                display: block;
+                width: fit-content;
+                margin: 0 auto;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+            nav a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: var(--accent-color);
+            }
+            nav a::after {
+                display: none; /* Hide underline on mobile nav */
+            }
+            .hero {
+                padding: calc(6 * var(--spacing-unit)) var(--spacing-unit);
+                min-height: 60vh;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.6rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .hero {
+                padding: calc(4 * var(--spacing-unit)) var(--spacing-unit);
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .hero .project-date {
+                font-size: 0.9rem;
+            }
+            .feature-item {
+                padding: calc(1.5 * var(--spacing-unit));
+            }
+            .feature-item h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons (optional, but good for modern design) -->
+    <!-- For this example, I'll assume it's linked or use placeholder text for icons -->
+    <!-- If external links are allowed, this would be <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+</head>
+<body>
+    <header>
+        <div class="logo">Project Nexus</div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1>Innovate. Create. Elevate.</h1>
+            <p>Unleashing the Future of Digital Experiences with Cutting-Edge Solutions.</p>
+            <p class="project-date">Project Initiated: <strong>2026-02-07</strong></p>
+            <a href="#features" class="btn">Discover Our Vision</a>
+        </section>
+
+        <section id="features" class="features">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <!-- <i class="fas fa-rocket"></i> -->🚀
+                    <h3>Blazing Fast Performance</h3>
+                    <p>Optimized for speed and efficiency, delivering lightning-fast user experiences.</p>
+                </div>
+                <div class="feature-item">
+                    <!-- <i class="fas fa-mobile-alt"></i> -->📱
+                    <h3>Fully Responsive Design</h3>
+                    <p>Flawless display across all devices, from desktops to smartphones.</p>
+                </div>
+                <div class="feature-item">
+                    <!-- <i class="fas fa-lock"></i> -->🔒
+                    <h3>Robust Security</h3>
+                    <p>State-of-the-art security protocols to protect your data and privacy.</p>
+                </div>
+                <div class="feature-item">
+                    <!-- <i class="fas fa-cogs"></i> -->⚙️
+                    <h3>Scalable Architecture</h3>
+                    <p>Built to grow with your needs, ensuring future-proof adaptability.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <h2>About Project Nexus</h2>
+            <p>
+                Project Nexus is an ambitious initiative launched on <strong>2026-02-07</strong>,
+                dedicated to revolutionizing how digital platforms are built and experienced.
+                Our team of visionary developers, designers, and strategists are committed to
+                pushing the boundaries of technology, creating solutions that are not only
+                powerful and efficient but also intuitive and delightful to use.
+            </p>
+            <p>
+                We believe in a future where technology seamlessly integrates into daily life,
+                empowering individuals and businesses alike. Through meticulous planning,
+                innovative design thinking, and agile development methodologies, Project Nexus
+                aims to set new industry standards and deliver unparalleled value.
+            </p>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Get in Touch</h2>
+            <p>Have questions or want to collaborate? Reach out to us!</p>
+            <a href="mailto:info@projectnexus.com" class="btn">Contact Us</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Nexus. All rights reserved.</p>
+    </footer>
+</body>
+</html>
