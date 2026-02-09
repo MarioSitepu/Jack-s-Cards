@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #2a2a72;
+            --primary-gradient-end: #009ffd;
+            --accent-gradient-start: #6a11cb;
+            --accent-gradient-end: #2575fc;
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-light: #f8f8f8;
+            --bg-white: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+            color: var(--text-light);
+            box-shadow: 0 2px 10px var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #a8ff78 0%, #78ffd6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--text-light);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .btn.primary {
+            background: linear-gradient(90deg, var(--accent-gradient-start) 0%, var(--accent-gradient-end) 100%);
+            color: var(--text-light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn.secondary {
+            background: var(--bg-white);
+            color: var(--text-dark);
+            border: 2px solid var(--primary-gradient-end);
+            box-shadow: 0 5px 15px var(--shadow-light);
+        }
+
+        .btn.secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-medium);
+        }
+
+        /* Sections */
+        main {
+            flex: 1;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        h1, h2 {
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: var(--text-light);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: var(--text-dark);
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            color: var(--text-light);
+            padding: 120px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            background-color: var(--bg-white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow-medium);
+        }
+
+        .feature-item h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            color: var(--primary-gradient-start);
+        }
+
+        .feature-item p {
+            font-size: 1em;
+            margin-bottom: 0;
+            color: #555;
+        }
+
+        /* About Us Section */
+        .about-us {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+        }
+
+        .about-us p {
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        /* Call to Action Section */
+        .call-to-action {
+            background: linear-gradient(135deg, var(--accent-gradient-start) 0%, var(--accent-gradient-end) 100%);
+            color: var(--text-light);
+            padding: 80px 0;
+        }
+
+        .call-to-action h2 {
+            color: var(--text-light);
+        }
+
+        .call-to-action p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #bbb;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8em;
+            }
+            h2 {
+                font-size: 2em;
+            }
+            .hero {
+                padding: 100px 0;
+            }
+            nav ul li {
+                margin-left: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            .logo {
+                margin-bottom: 15px;
+            }
+            nav ul {
+                width: 100%;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 0 10px;
+            }
+            section {
+                padding: 60px 0;
+            }
+            h1 {
+                font-size: 2.2em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.95em;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-item {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5em;
+            }
+            nav ul li {
+                margin: 0 5px;
+            }
+            nav ul li a {
+                font-size: 0.9em;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .hero p {
+                font-size: 1.1em;
+            }
+            .btn {
+                display: block;
+                width: 80%;
+                margin: 15px auto;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project 2026</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Innovate. Create. Elevate.</h1>
+                <p>Leading the future with cutting-edge solutions and a vision for tomorrow.</p>
+                <a href="#features" class="btn primary">Discover Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Our Core Strengths</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h3>Advanced Technology</h3>
+                        <p>Leveraging the latest technological advancements for unparalleled performance and scalability.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>User-Centric Design</h3>
+                        <p>Crafting intuitive and engaging experiences that delight users and foster strong connections.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Sustainable Solutions</h3>
+                        <p>Committed to developing environmentally responsible and long-lasting products and services.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Agile Development</h3>
+                        <p>Our adaptive and iterative approach ensures flexibility, rapid delivery, and continuous improvement.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-us">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <p>We are a dedicated team passionate about pushing boundaries and redefining possibilities. Our journey is driven by relentless innovation, a steadfast commitment to quality, and an unwavering desire to make a meaningful impact in the world.</p>
+                <p>This ambitious project, conceived with foresight and precision, aims to set new industry standards and inspire future generations. We believe in the power of collaboration and the potential of technology to solve complex challenges.</p>
+                <a href="#contact" class="btn secondary">Learn More About Us</a>
+            </div>
+        </section>
+
+        <section id="contact" class="call-to-action">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Connect with us today to explore how our innovative solutions can bring your ideas to life and drive your success.</p>
+                <a href="#" class="btn primary">Start Your Project Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project 2026. All rights reserved.</p>
+            <p>Project Initiative Date: 2026-02-09</p>
+        </div>
+    </footer>
+</body>
+</html>
