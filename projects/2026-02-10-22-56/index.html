@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Initiative</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #f5f7fa;
+            --secondary-bg: #ffffff;
+            --dark-text: #2c3e50;
+            --light-text: #ecf0f1;
+            --accent-color-start: #6a11cb; /* Deep Purple */
+            --accent-color-end: #2575fc;   /* Vibrant Blue */
+            --gradient-1: linear-gradient(135deg, var(--accent-color-start) 0%, var(--accent-color-end) 100%);
+            --gradient-2: linear-gradient(45deg, #FF6B6B 0%, #FFD166 100%); /* Warm gradient for contrast */
+            --shadow-light: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+            --shadow-hover: rgba(0, 0, 0, 0.15) 0px 8px 24px;
+            --border-radius: 12px;
+            --spacing-unit: 1rem;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--primary-bg);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: var(--spacing-unit);
+            color: var(--dark-text);
+        }
+
+        h1 { font-size: 2.8em; }
+        h2 { font-size: 2.2em; }
+        h3 { font-size: 1.8em; }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color-end);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color-start);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 1.5);
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-1);
+            color: var(--light-text);
+            padding: calc(var(--spacing-unit) * 1) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+            transition: background-color 0.3s ease;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            color: var(--light-text);
+            margin: 0;
+            font-size: 1.8em;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        nav a {
+            color: var(--light-text);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--light-text);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-1);
+            color: var(--light-text);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 6) 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -70px;
+            right: -70px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            animation: pulse 5s infinite reverse ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.8; }
+        }
+
+        .hero h2 {
+            font-size: 3.5em;
+            margin-bottom: var(--spacing-unit);
+            color: var(--light-text);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto calc(var(--spacing-unit) * 2);
+            color: var(--light-text);
+            opacity: 0.9;
+        }
+
+        .hero .project-date {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: calc(var(--spacing-unit) * 2.5);
+            letter-spacing: 0.5px;
+            color: var(--light-text);
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--light-text);
+            color: var(--accent-color-end);
+            padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 2);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn:hover {
+            background-color: #e0e0e0;
+            color: var(--accent-color-start);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Section Styling */
+        section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--secondary-bg);
+        }
+
+        section h3 {
+            margin-bottom: calc(var(--spacing-unit) * 2.5);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-1);
+            border-radius: 5px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+            text-align: left;
+        }
+
+        .feature-card {
+            background-color: var(--secondary-bg);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-card .icon {
+            font-size: 2.5em;
+            color: var(--accent-color-end);
+            margin-bottom: var(--spacing-unit);
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h4 {
+            font-size: 1.4em;
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            color: var(--dark-text);
+        }
+
+        .feature-card p {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            padding: 0 calc(var(--spacing-unit) * 1.5);
+        }
+
+        .about-content p {
+            margin-bottom: var(--spacing-unit);
+            color: #444;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: var(--gradient-2);
+            color: var(--light-text);
+            padding: calc(var(--spacing-unit) * 5) 0;
+        }
+
+        .cta h3 {
+            color: var(--light-text);
+            font-size: 2.5em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .cta h3::after {
+            background: var(--light-text);
+        }
+
+        .cta p {
+            font-size: 1.2em;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            opacity: 0.9;
+        }
+
+        .cta .btn {
+            background-color: var(--dark-text);
+            color: var(--light-text);
+        }
+
+        .cta .btn:hover {
+            background-color: #4a627a;
+            color: var(--light-text);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-text);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2) 0;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2em; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.5em; }
+
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-unit) * 0.5;
+                align-items: center;
+                width: 100%;
+            }
+
+            .hero {
+                min-height: 60vh;
+                padding: calc(var(--spacing-unit) * 4) 0;
+            }
+
+            .hero h2 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .btn {
+                padding: calc(var(--spacing-unit) * 0.6) calc(var(--spacing-unit) * 1.5);
+                font-size: 1em;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                text-align: center;
+                align-items: center;
+            }
+
+            .cta h3 {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.3em; }
+
+            .hero h2 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 0.9em;
+            }
+
+            .project-date {
+                font-size: 0.9em !important;
+            }
+
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
+
+            section {
+                padding: calc(var(--spacing-unit) * 3) 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Nova</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Innovating Tomorrow, Today</h2>
+                <p>Unlocking new possibilities with cutting-edge technology and creative solutions.</p>
+                <p class="project-date">Project Initiated: 2026-02-10</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h3>Key Capabilities</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="icon">&#9733;</span> <!-- Star icon -->
+                        <h4>Advanced Analytics</h4>
+                        <p>Leverage powerful data insights to make informed decisions and drive growth.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#9881;</span> <!-- Gear icon -->
+                        <h4>Seamless Integration</h4>
+                        <p>Our solutions integrate effortlessly with your existing workflows and systems.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#128161;</span> <!-- Lightbulb icon -->
+                        <h4>Intuitive Design</h4>
+                        <p>Experience user-friendly interfaces crafted for optimal productivity and ease of use.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#128736;</span> <!-- Wrench icon -->
+                        <h4>Robust Security</h4>
+                        <p>Protect your data with enterprise-grade security protocols and continuous monitoring.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h3>Our Vision</h3>
+                <div class="about-content">
+                    <p>At Project Nova, we believe in the power of innovation to transform industries and improve lives. Our dedicated team of experts is committed to pushing the boundaries of what's possible, delivering solutions that are not only effective but also sustainable and forward-thinking.</p>
+                    <p>Since our inception, we have focused on creating platforms that empower users, streamline operations, and provide unparalleled value. We pride ourselves on our agile development process, ensuring that we can adapt to evolving market needs and deliver high-quality products on time.</p>
+                    <p>Join us on this exciting journey as we build the future, one elegant solution at a time.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h3>Ready to Transform Your Business?</h3>
+                <p>Get in touch with our team today to discuss how Project Nova can help you achieve your goals.</p>
+                <a href="#" class="btn">Contact Us Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
