@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Vision 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Gradient Animation */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% -20%, #312e81, transparent),
+                        radial-gradient(circle at 0% 100%, #1e1b4b, transparent);
+            z-index: -1;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%236366f1" fill-opacity="0.05" d="M0,160L48,176C96,192,192,224,288,224C384,224,480,192,576,165.3C672,139,768,117,864,128C960,139,1056,181,1152,197.3C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .section {
+            padding: 100px 10%;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: #94a3b8;
+        }
+
+        .date-highlight {
+            text-align: center;
+            padding: 4rem;
+            background: linear-gradient(90deg, transparent, var(--glass), transparent);
+            border-radius: 30px;
+            margin: 4rem 0;
+        }
+
+        .date-highlight h2 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        footer {
+            padding: 4rem 10%;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
+            nav { display: none; }
+            .section { padding: 60px 5%; }
+            .hero h1 { font-size: 3rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">NEXUS.26</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#vision">Vision</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="badge">Next Generation Interface</div>
+            <h1>The Future of Digital Interaction</h1>
+            <p>Experience the seamless integration of spatial computing and neural interfaces designed for the next decade.</p>
+            <a href="#" class="btn btn-primary">Explore Platform</a>
+        </section>
+
+        <section class="section" id="features">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Core Technologies</h2>
+                <p style="color: #94a3b8;">Building the foundations of a connected tomorrow through advanced engineering and intuitive design.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Quantum Sync</h3>
+                    <p>Zero-latency data synchronization across all neural nodes, ensuring your workspace is always live.</p>
+                </div>
+                <div class="card">
+                    <h3>Spatial Flow</h3>
+                    <p>Adaptive UI that molds to your physical environment using advanced LiDAR mapping.</p>
+                </div>
+                <div class="card">
+                    <h3>Bio-Auth</h3>
+                    <p>Security redefined through multi-layered biological verification and encrypted DNA sequencing.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="date-highlight">
+                <p style="text-transform: uppercase; letter-spacing: 4px; color: #94a3b8;">Global Launch Event</p>
+                <h2>2026-02-10</h2>
+                <p>Join us as we redefine the boundaries of human-computer interaction.</p>
+            </div>
+        </section>
+
+        <section class="section" id="vision" style="background: var(--glass); border-radius: 40px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; align-items: center;">
+                <div>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">The 2026 Vision</h2>
+                    <p style="color: #94a3b8; margin-bottom: 2rem;">As we approach the mid-decade milestone, our commitment to ethical AI and human-centric design has never been stronger. Project Nexus represents four years of dedicated research into how technology can serve humanity without intruding upon it.</p>
+                    <ul style="list-style: none; color: #cbd5e1;">
+                        <li style="margin-bottom: 1rem;">✦ Carbon-neutral server infrastructure</li>
+                        <li style="margin-bottom: 1rem;">✦ Decentralized data governance</li>
+                        <li style="margin-bottom: 1rem;">✦ Open-source core protocols</li>
+                    </ul>
+                </div>
+                <div style="position: relative; height: 300px; background: linear-gradient(45deg, var(--primary), var(--accent)); border-radius: 20px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 5rem; opacity: 0.2; font-weight: 800;">NEXUS</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-info">
+            <div class="logo" style="margin-bottom: 1rem;">NEXUS.26</div>
+            <p>&copy; 2026 Nexus Systems International. All rights reserved.</p>
+            <p>Last Updated: February 10, 2026</p>
+        </div>
+        <div class="footer-links">
+            <nav style="display: flex; gap: 2rem;">
+                <a href="#" style="margin: 0;">Privacy</a>
+                <a href="#" style="margin: 0;">Terms</a>
+                <a href="#" style="margin: 0;">Intelligence Registry</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
