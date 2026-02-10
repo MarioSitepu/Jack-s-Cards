@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Future Horizon | 2026</title>
+    <title>Nexus Vision | 2026</title>
     <style>
         :root {
             --primary: #6366f1;
             --secondary: #a855f7;
-            --accent: #22d3ee;
-            --bg-dark: #0f172a;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -24,129 +23,157 @@
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+            color: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
+        /* Header & Nav */
         header {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
             position: fixed;
-            width: 100%;
             top: 0;
+            width: 100%;
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 800;
-            background: var(--gradient);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -1px;
         }
 
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
         nav a {
-            color: var(--text-main);
             text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.9rem;
+            color: var(--light);
             font-weight: 500;
+            font-size: 0.9rem;
             transition: color 0.3s;
+            opacity: 0.8;
         }
 
         nav a:hover {
-            color: var(--accent);
+            opacity: 1;
+            color: var(--primary);
         }
 
+        /* Hero Section */
         .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 12rem 10% 6rem;
             text-align: center;
-            padding: 0 10%;
-            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent),
-                        radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.15), transparent);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            filter: blur(150px);
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(5px);
         }
 
         .hero h1 {
             font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            font-weight: 800;
-        }
-
-        .hero h1 span {
-            background: var(--gradient);
+            background: linear-gradient(to bottom, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-muted);
             max-width: 600px;
-            margin-bottom: 2.5rem;
+            margin: 0 auto 2.5rem;
+            font-size: 1.2rem;
+            color: #94a3b8;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
         }
 
         .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
             font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: inline-block;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
         }
 
         .btn-primary {
-            background: var(--gradient);
+            background: var(--primary);
             color: white;
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            border: none;
+            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+            background: #4f46e5;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 5%;
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--glass-border);
         }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 4rem;
+        .btn-outline:hover {
+            background: var(--glass);
         }
 
-        .section-title h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .grid {
+        /* Features Section */
+        .features {
+            padding: 6rem 10%;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
         .card {
-            background: var(--card-bg);
+            background: var(--glass);
             padding: 2.5rem;
             border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s, border-color 0.3s;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.3s;
         }
 
         .card:hover {
@@ -156,36 +183,79 @@
 
         .card h3 {
             margin-bottom: 1rem;
-            color: var(--accent);
+            font-size: 1.5rem;
         }
 
         .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+            color: #94a3b8;
         }
 
-        .date-badge {
-            background: rgba(34, 211, 238, 0.1);
-            color: var(--accent);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: inline-block;
+        /* Content Section */
+        .content-split {
+            padding: 6rem 10%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
         }
 
+        .content-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .content-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-image::after {
+            content: '2026';
+            position: absolute;
+            font-size: 10rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.1);
+            bottom: -20px;
+            right: -20px;
+        }
+
+        /* Footer */
         footer {
-            padding: 4rem 5%;
+            padding: 4rem 10% 2rem;
+            border-top: 1px solid var(--glass-border);
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
             font-size: 0.9rem;
         }
 
+        .copyright {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
             nav { display: none; }
             .hero h1 { font-size: 3rem; }
+            .content-split { padding: 4rem 5%; }
+            .features { padding: 4rem 5%; }
         }
     </style>
     <link rel="stylesheet" href="style.css">
@@ -193,46 +263,63 @@
 <body>
 
     <header>
-        <div class="logo">NEO_GEN</div>
+        <div class="logo">NEXUS.26</div>
         <nav>
-            <a href="#">Innovation</a>
-            <a href="#">Ecosystem</a>
-            <a href="#">Vision</a>
-            <a href="#">Connect</a>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Innovation</a></li>
+                <li><a href="#">Ecosystem</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="date-badge">Project Update: 2026-02-10</div>
-        <h1>Defining the <span>Next Era</span> of Digital Design</h1>
-        <p>Experience the seamless integration of artificial intelligence and human creativity. Built for the future, delivered today.</p>
-        <a href="#" class="btn btn-primary">Explore Interface</a>
-    </section>
+    <main>
+        <section class="hero">
+            <div class="badge">Official Launch: February 10, 2026</div>
+            <h1>The Future of Digital<br>Architecture</h1>
+            <p>Experience the next generation of web performance and aesthetic precision. Built for the creators of tomorrow.</p>
+            <div class="cta-group">
+                <a href="#" class="btn btn-primary">Get Started</a>
+                <a href="#" class="btn btn-outline">View Roadmap</a>
+            </div>
+        </section>
 
-    <main class="container">
-        <div class="section-title">
-            <h2>Core Architecture</h2>
-            <p style="color: var(--text-muted)">Released and Validated on February 10, 2026</p>
-        </div>
+        <section class="features">
+            <div class="card">
+                <h3>Neural Interface</h3>
+                <p>Adaptive layouts that respond to user intent using advanced predictive modeling and real-time processing.</p>
+            </div>
+            <div class="card">
+                <h3>Quantum Speed</h3>
+                <p>Zero-latency interactions powered by our proprietary edge network, delivering content at the speed of thought.</p>
+            </div>
+            <div class="card">
+                <h3>Glass UI 4.0</h3>
+                <p>Sophisticated transparency effects and dynamic lighting engines that redefine modern visual standards.</p>
+            </div>
+        </section>
 
-        <div class="grid">
-            <div class="card">
-                <h3>Neural Layouts</h3>
-                <p>Adaptive grids that evolve based on user interaction patterns, ensuring perfect accessibility across all hardware paradigms.</p>
+        <section class="content-split">
+            <div class="content-text">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Project Milestone</h2>
+                <p style="color: #94a3b8; margin-bottom: 1.5rem;">As of <strong>2026-02-10</strong>, Nexus has reached full synchronization with the global decentralized cloud. Our commitment to high-fidelity design and seamless user experience remains our core directive.</p>
+                <p style="color: #94a3b8;">This version introduces enhanced responsive grid logic and automated color harmony systems that adjust to ambient device lighting.</p>
             </div>
-            <div class="card">
-                <h3>Quantum Motion</h3>
-                <p>Physics-based animations utilizing sub-millisecond latency for fluid, organic transitions that feel natural to the human eye.</p>
-            </div>
-            <div class="card">
-                <h3>Holographic Depth</h3>
-                <p>Next-generation CSS layers that support spatial computing and mixed-reality viewing environments natively.</p>
-            </div>
-        </div>
+            <div class="content-image"></div>
+        </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 NeoGen Systems. All rights reserved. <br> Last Synchronized: 2026-02-10</p>
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Security</a>
+            <a href="#">Status</a>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Nexus Visionary Labs. Current Date: 2026-02-10
+        </div>
     </footer>
 
 </body>
