@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4A00E0 0%, #8E2DE2 100%); /* Deep Purple to Lighter Purple */
+            --secondary-gradient: linear-gradient(135deg, #00D2FF 0%, #3A7BD5 100%); /* Vibrant Cyan to Blue */
+            --text-dark: #333;
+            --text-light: #f8f8f8;
+            --background-light: #ffffff;
+            --card-background: #ffffff;
+            --border-radius-lg: 12px;
+            --border-radius-sm: 8px;
+            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --box-shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.12);
+            --font-family: 'Montserrat', sans-serif;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 3rem;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f0f2f5; /* Light grey background */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: var(--spacing-md) var(--spacing-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--box-shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin: 0;
+            background: linear-gradient(45deg, #FFF 30%, #E0B0FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        nav a {
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--text-light);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a:focus::after {
+            width: 100%;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            color: #E0B0FF; /* Lighter accent on hover */
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-md) var(--spacing-sm);
+        }
+
+        section {
+            padding: var(--spacing-lg) 0;
+            margin-bottom: var(--spacing-md);
+            border-radius: var(--border-radius-lg);
+            background-color: var(--background-light);
+            box-shadow: var(--box-shadow-light);
+        }
+
+        section h2, section h3 {
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+            font-weight: 700;
+            font-size: 2.2rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        section h3 {
+            font-size: 1.8rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--spacing-lg) var(--spacing-sm);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-medium);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-section h2 {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+            background: linear-gradient(45deg, #FFF 30%, #E0B0FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-md);
+            max-width: 800px;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .hero-section .project-date {
+            font-size: 1.1rem;
+            margin-top: 0;
+            margin-bottom: var(--spacing-md);
+            color: #cfcfcf;
+        }
+
+        .hero-section .btn-primary {
+            display: inline-block;
+            background: linear-gradient(45deg, #FF6B6B 0%, #FFB347 100%); /* Warm gradient for button */
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .hero-section .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Features Section */
+        .features-section {
+            text-align: center;
+            background-color: var(--background-light);
+            padding: var(--spacing-lg) var(--spacing-sm);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .feature-card {
+            background-color: var(--card-background);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--box-shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eee;
+            text-align: left;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            color: #555;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(45deg, #1A2980 0%, #26D0CE 100%); /* Dark Blue to Teal */
+            color: var(--text-light);
+            padding: var(--spacing-lg) var(--spacing-sm);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-medium);
+            margin-bottom: 0; /* No margin-bottom for the last section before footer */
+        }
+
+        .cta-section h3 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-sm);
+            background: linear-gradient(45deg, #FFF 30%, #C0E8F0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-md);
+            color: #e0e0e0;
+        }
+
+        .cta-section .btn-secondary {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(74, 0, 224, 0.4);
+        }
+
+        .cta-section .btn-secondary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(74, 0, 224, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50; /* Dark grey */
+            color: #b0c4de;
+            text-align: center;
+            padding: var(--spacing-md) var(--spacing-sm);
+            margin-top: var(--spacing-lg);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding-top: var(--spacing-sm);
+                padding-bottom: var(--spacing-sm);
+            }
+
+            header h1 {
+                margin-bottom: var(--spacing-sm);
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+            }
+
+            nav a {
+                padding: 5px 0;
+            }
+
+            .hero-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            section h3 {
+                font-size: 1.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: var(--spacing-sm);
+            }
+
+            .cta-section h3 {
+                font-size: 2rem;
+            }
+
+            .cta-section p {
+                font-size: 1rem;
+            }
+
+            .hero-section .btn-primary,
+            .cta-section .btn-secondary {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.3rem;
+            }
+
+            nav ul {
+                gap: 0.5rem;
+            }
+
+            .hero-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: var(--spacing-md) 0;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            section h3 {
+                font-size: 1.3rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.2rem;
+            }
+
+            .feature-card p {
+                font-size: 0.9rem;
+            }
+
+            .cta-section h3 {
+                font-size: 1.8rem;
+            }
+
+            .cta-section p {
+                font-size: 0.9rem;
+            }
+
+            .hero-section .btn-primary,
+            .cta-section .btn-secondary {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Modern Project Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Team</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h2>Welcome to Our Innovative Platform</h2>
+            <p>Discover the future of project management and collaboration with our cutting-edge tools designed for modern teams.</p>
+            <p class="project-date">Project Date: <strong>2026-02-11</strong></p>
+            <a href="#" class="btn-primary">Learn More</a>
+        </section>
+
+        <section class="features-section">
+            <h3>Key Features</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Intuitive Design</h4>
+                    <p>Experience a sleek, user-friendly interface that makes navigation and task management effortless for everyone.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Real-time Updates</h4>
+                    <p>Stay informed with instant notifications and live data streams, ensuring you're always up-to-date on project progress.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Collaborative Tools</h4>
+                    <p>Empower your team with shared workspaces, integrated communication, and seamless file sharing capabilities.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Advanced Analytics</h4>
+                    <p>Gain valuable insights with powerful analytics dashboards to track performance and make data-driven decisions.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h3>Ready to Elevate Your Workflow?</h3>
+            <p>Join our growing community of innovators and transform the way your team works. Sign up today and start building the future.</p>
+            <a href="#" class="btn-secondary">Sign Up Now</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Modern Solutions. All rights reserved.</p>
+    </footer>
+</body>
+</html>
