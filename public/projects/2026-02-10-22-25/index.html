@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles & Reset */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Purple to Blue */
+            --secondary-gradient: linear-gradient(to right, #fc5c7d, #6a82fb); /* Pink to Purple-Blue */
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-light: #f0f2f5;
+            --bg-card: #ffffff;
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --box-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 50px;
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0.9;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--box-shadow-light);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--text-light);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 8rem 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            transform: rotate(20deg);
+            pointer-events: none;
+        }
+
+        .hero-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f8f9fa; /* Slightly off-white for contrast */
+        }
+
+        section h3 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .feature-item h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #6a82fb; /* A color from the secondary gradient */
+            font-weight: 600;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Showcase Section */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .project-card-content {
+            padding: 1.5rem;
+        }
+
+        .project-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 6rem 0;
+        }
+
+        .contact-section h3 {
+            color: var(--text-light);
+        }
+
+        .contact-section p {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-section form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contact-section form input,
+        .contact-section form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: var(--border-radius-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
+        }
+
+        .contact-section form input::placeholder,
+        .contact-section form textarea::placeholder {
+            color: #888;
+        }
+
+        .contact-section form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-section form .btn {
+            align-self: flex-start; /* Align button to the left within the form */
+            width: auto;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: #bbb;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            header h1 {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding-bottom: 1rem;
+            }
+
+            nav ul li {
+                margin-left: 0;
+            }
+
+            .hero-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            section h3 {
+                font-size: 2rem;
+            }
+
+            .feature-grid, .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item, .project-card {
+                margin: 0 1rem;
+            }
+
+            .contact-section form .btn {
+                align-self: stretch; /* Make button full width */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+
+            .hero-section h2 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            section h3 {
+                font-size: 1.8rem;
+            }
+
+            .feature-item h4 {
+                font-size: 1.3rem;
+            }
+
+            .project-card h4 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Zenith</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#showcase">Showcase</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h2>Welcome to Project Zenith</h2>
+                <p>Innovating the future, one elegant solution at a time. Discover what's possible with cutting-edge design and technology.</p>
+                <a href="#features" class="btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h3>Key Features</h3>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>Seamless Integration</h4>
+                        <p>Our platform connects effortlessly with your existing systems, ensuring a smooth transition and enhanced workflow efficiency.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Scalable Architecture</h4>
+                        <p>Designed to grow with your needs, Project Zenith offers a robust and flexible architecture that scales to any demand.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Intuitive UI/UX</h4>
+                        <p>Experience unparalleled ease of use with our meticulously crafted user interface, focusing on simplicity and user satisfaction.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Real-time Analytics</h4>
+                        <p>Gain instant insights with powerful real-time analytics dashboards, helping you make informed decisions quickly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="showcase">
+            <div class="container">
+                <h3>Our Latest Work</h3>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/400x250/6a11cb/ffffff?text=Project+Aurora" alt="Project Aurora">
+                        <div class="project-card-content">
+                            <h4>Project Aurora</h4>
+                            <p>A groundbreaking solution for data visualization and interactive reporting.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/400x250/2575fc/ffffff?text=Project+Nebula" alt="Project Nebula">
+                        <div class="project-card-content">
+                            <h4>Project Nebula</h4>
+                            <p>Revolutionizing communication platforms with AI-powered conversational agents.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/400x250/fc5c7d/ffffff?text=Project+Stellar" alt="Project Stellar">
+                        <div class="project-card-content">
+                            <h4>Project Stellar</h4>
+                            <p>Next-gen e-commerce platform enhancing user experience and conversion rates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h3>Get in Touch</h3>
+                <p>Have a question or a project in mind? We'd love to hear from you and explore how we can collaborate.</p>
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Zenith. All rights reserved. Last updated: 2026-02-10</p>
+        </div>
+    </footer>
+</body>
+</html>
