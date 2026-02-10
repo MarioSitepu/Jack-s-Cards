@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(to right, #00f2fe 0%, #4facfe 100%);
+            --dark-background: #1a1a2e;
+            --darker-background: #0f0f1a;
+            --light-text: #e0e0e0;
+            --white-text: #ffffff;
+            --accent-color: #00f2fe;
+            --card-background: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--darker-background);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            padding: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white-text);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--white-text);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--dark-background);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(37, 117, 252, 0.1) 0%, transparent 70%);
+            animation: rotateBackground 20s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--light-text);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .date-info {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-top: 30px;
+            padding: 10px 20px;
+            background: rgba(0, 242, 254, 0.1);
+            border-radius: 8px;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--secondary-gradient);
+            color: var(--white-text);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            filter: brightness(1.1);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            background: var(--dark-background);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        section:nth-child(even) {
+            background: var(--darker-background);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-background);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--card-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card h3 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--white-text);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card p {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: var(--light-text);
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--card-border);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: var(--primary-gradient);
+            color: var(--white-text);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--white-text);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker-background);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--card-border);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: rgba(224, 224, 224, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 15px 10px;
+            }
+
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-image {
+                margin-top: 30px;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .cta-section p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul li {
+                margin: 0 10px 10px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">ProjectFlow</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Elevate Your Projects to New Heights</h1>
+                <p>A modern platform designed for seamless collaboration, powerful insights, and efficient project management. Built for the future of work.</p>
+                <a href="#features" class="btn">Discover More</a>
+                <div class="date-info">Project Status Update: 2026-02-11</div>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2 class="section-title">Core Features & Capabilities</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h3>Intuitive Dashboard</h3>
+                        <p>Gain a comprehensive overview of all your projects at a glance with customizable widgets and real-time data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">✨</div>
+                        <h3>Smart Automation</h3>
+                        <p>Automate repetitive tasks, set up triggers, and streamline workflows to save time and reduce manual effort.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📊</div>
+                        <h3>Advanced Analytics</h3>
+                        <p>Deep dive into project performance with powerful analytics and reporting tools to make data-driven decisions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🤝</div>
+                        <h3>Seamless Collaboration</h3>
+                        <p>Facilitate effortless communication and teamwork with integrated chat, file sharing, and task assignment features.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About ProjectFlow</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Our Vision for the Future</h2>
+                        <p>At ProjectFlow, we believe that effective project management shouldn't be complex. Our mission is to empower teams and individuals with cutting-edge tools that simplify their work, foster creativity, and drive success.</p>
+                        <p>We are constantly evolving, integrating the latest technologies and user feedback to ensure ProjectFlow remains at the forefront of innovation. Join us in shaping the future of project management.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/00f2fe/1a1a2e?text=Innovation+at+Core" alt="Abstract representation of innovation and teamwork">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Projects?</h2>
+                <p>Join thousands of satisfied users who are already experiencing the benefits of ProjectFlow. Get started today and unlock your team's full potential.</p>
+                <a href="#" class="btn">Get Started Free</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ProjectFlow. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
