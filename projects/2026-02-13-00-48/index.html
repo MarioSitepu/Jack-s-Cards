@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(to right, #00c6ff 0%, #0072ff 100%);
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --bg-light: #f8f8f8;
+            --bg-white: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: #0072ff;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition-speed);
+            box-shadow: 0 4px 15px var(--shadow-light);
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+        }
+
+        .btn-secondary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-white);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            transition: width var(--transition-speed);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 100px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+
+        .hero h1 {
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            opacity: 0.9;
+        }
+
+        /* Sections General */
+        section {
+            padding: 80px 0;
+            background-color: var(--bg-white);
+            margin-bottom: 20px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 20px var(--shadow-light);
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--bg-light);
+            box-shadow: none;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            background-color: var(--bg-white);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            text-align: center;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-item i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 15px;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            text-align: center;
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            padding: 80px 0;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 20px;
+        }
+
+        .cta h2 {
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .cta .btn {
+            background-color: var(--bg-white);
+            color: #0072ff;
+            font-weight: 700;
+            padding: 16px 32px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: auto; /* Pushes footer to the bottom */
+            border-top-left-radius: var(--border-radius-lg);
+            border-top-right-radius: var(--border-radius-lg);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        footer p a {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        footer p a:hover {
+            color: #00c6ff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            nav a::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .hero {
+                padding: 80px 0;
+                min-height: 50vh;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 60px 0;
+                margin-bottom: 15px;
+            }
+
+            .section-title {
+                margin-bottom: 40px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 40px 0;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-item {
+                padding: 25px;
+            }
+
+            .feature-item i {
+                font-size: 2.5rem;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Font Awesome for Icons (if desired, not strictly required by prompt but good practice) */
+        /* To use Font Awesome, uncomment the line below and add <i> tags with appropriate classes */
+        /* @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'); */
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project 2026</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Revolutionizing Digital Experiences</h1>
+                <p>A cutting-edge platform designed for the future, bringing innovation and seamless interaction to your fingertips. Discover what's possible.</p>
+                <a href="#features" class="btn btn-primary">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features" class="container">
+            <h2 class="section-title">Key Innovations</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <!-- <i class="fas fa-rocket"></i> If using Font Awesome -->
+                    <h3>Blazing Fast Performance</h3>
+                    <p>Optimized for speed and efficiency, ensuring a smooth and responsive user experience on any device.</p>
+                </div>
+                <div class="feature-item">
+                    <!-- <i class="fas fa-mobile-alt"></i> If using Font Awesome -->
+                    <h3>Fully Responsive Design</h3>
+                    <p>Adapts flawlessly to desktops, tablets, and smartphones, providing an optimal view for all users.</p>
+                </div>
+                <div class="feature-item">
+                    <!-- <i class="fas fa-lock"></i> If using Font Awesome -->
+                    <h3>Enhanced Security</h3>
+                    <p>State-of-the-art encryption and security protocols protect your data and privacy at all times.</p>
+                </div>
+                <div class="feature-item">
+                    <!-- <i class="fas fa-chart-line"></i> If using Font Awesome -->
+                    <h3>Intuitive Analytics</h3>
+                    <p>Gain valuable insights with easy-to-understand data visualizations and comprehensive reporting tools.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="container">
+            <h2 class="section-title">Our Vision for Tomorrow</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: center;">
+                <div style="flex: 1; min-width: 300px;">
+                    <p>We believe in creating digital solutions that are not just functional, but also inspiring and delightful to use. Our team is dedicated to pushing the boundaries of technology to deliver products that truly make a difference.</p>
+                    <p>With a focus on user-centric design and robust engineering, we aim to set new standards in the industry. Join us on this journey to shape the future of digital interaction.</p>
+                    <a href="#contact" class="btn btn-secondary" style="margin-top: 20px;">Get in Touch</a>
+                </div>
+                <div style="flex: 1; min-width: 300px; text-align: center;">
+                    <img src="https://via.placeholder.com/400x300/6a11cb/ffffff?text=Modern+Design" alt="Modern Design Concept" style="max-width: 100%; height: auto; border-radius: var(--border-radius-lg); box-shadow: 0 8px 25px var(--shadow-light);">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Ideas?</h2>
+                <p>We're excited to collaborate on your next big project. Let's build something amazing together.</p>
+                <a href="mailto:info@project2026.com" class="btn">Contact Us Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Showcase. All rights reserved. <br> Project Date: 2026-02-13</p>
+            <p style="margin-top: 10px;">Designed with <a href="#">Passion</a> for the Future.</p>
+        </div>
+    </footer>
+</body>
+</html>
