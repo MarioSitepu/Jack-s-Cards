@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset & Font Setup */
+        :root {
+            --primary-bg: #1A1A2E;
+            --secondary-bg: #0F0F1A;
+            --text-color: #E0E0E0;
+            --accent-color-1: #6A11CB; /* Purple */
+            --accent-color-2: #2575FC; /* Blue */
+            --button-start: #FF6B6B; /* Reddish Orange */
+            --button-end: #FFD93D; /* Yellow */
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color-2);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(45deg, var(--accent-color-1) 0%, var(--accent-color-2) 100%);
+            padding: 6rem 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 10s infinite alternate;
+            opacity: 0.2;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.2; }
+            100% { transform: scale(1.2); opacity: 0.3; }
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--button-start) 0%, var(--button-end) 100%);
+            color: var(--primary-bg);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex: 1;
+            padding: 4rem 0;
+        }
+
+        section {
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        section h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--accent-color-2), var(--accent-color-1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card i { /* Placeholder for icon, if using Font Awesome */
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--button-start), var(--button-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .project-details {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .project-details h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--button-end), var(--button-start));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        .project-details p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .project-date {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--button-end);
+            background: linear-gradient(90deg, var(--button-start), var(--button-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+            margin-top: 2rem;
+            display: block; /* Ensures it takes full width for text-align */
+            text-align: center;
+        }
+
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+                width: 100%;
+            }
+
+            nav a {
+                padding: 0.5rem 0;
+                display: block;
+            }
+
+            .hero {
+                padding: 4rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .project-details {
+                padding: 2rem;
+            }
+
+            .project-details h3 {
+                font-size: 1.8rem;
+            }
+
+            .project-details p {
+                font-size: 1rem;
+            }
+            .project-date {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>ModernForge</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#project">Project Info</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Unleash Your Project's Potential</h2>
+                <p>A cutting-edge platform designed for seamless collaboration and unparalleled efficiency. Transform your ideas into reality.</p>
+                <a href="#project" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="container">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <!-- Placeholder for icon, e.g., <i class="fas fa-rocket"></i> -->
+                    <i>🚀</i>
+                    <h3>Blazing Fast Performance</h3>
+                    <p>Experience lightning-speed operations and a fluid user interface.</p>
+                </div>
+                <div class="feature-card">
+                    <!-- Placeholder for icon, e.g., <i class="fas fa-users"></i> -->
+                    <i>🤝</i>
+                    <h3>Collaborative Workspace</h3>
+                    <p>Work together in real-time with powerful team collaboration tools.</p>
+                </div>
+                <div class="feature-card">
+                    <!-- Placeholder for icon, e.g., <i class="fas fa-shield-alt"></i> -->
+                    <i>🔒</i>
+                    <h3>Ironclad Security</h3>
+                    <p>Your data is protected with industry-leading security protocols.</p>
+                </div>
+                <div class="feature-card">
+                    <!-- Placeholder for icon, e.g., <i class="fas fa-chart-line"></i> -->
+                    <i>📈</i>
+                    <h3>Insightful Analytics</h3>
+                    <p>Gain deep insights into your project's progress and performance.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="project" class="container">
+            <h2>Project Overview</h2>
+            <div class="project-details">
+                <h3>About ModernForge</h3>
+                <p>ModernForge is an innovative project management and collaboration platform engineered to meet the demands of future-forward teams. It streamlines workflows, enhances communication, and provides robust tools for every stage of your project lifecycle.</p>
+                <p>From initial concept to final deployment, ModernForge is built to adapt and scale with your needs, ensuring that your team remains agile and productive.</p>
+                <p class="project-date">Project Launch Date: 2026-02-13</p>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2>Get In Touch</h2>
+            <p style="text-align: center; font-size: 1.1rem; max-width: 600px; margin: 0 auto 3rem auto;">
+                Have questions or want to learn more about ModernForge? Reach out to us!
+            </p>
+            <div style="text-align: center;">
+                <a href="mailto:info@modernforge.com" class="btn">Email Us</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ModernForge. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
