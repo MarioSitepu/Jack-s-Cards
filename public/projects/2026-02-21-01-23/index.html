@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Nexus | 2026</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Gradient Animation */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% -20%, #312e81, transparent),
+                        radial-gradient(circle at 0% 100%, #1e1b4b, transparent);
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 10% 4rem;
+            text-align: center;
+        }
+
+        .date-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.1rem;
+            color: #94a3b8;
+        }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 0.5rem;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        /* Info Section */
+        .info-section {
+            padding: 6rem 10%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .info-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .info-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: linear-gradient(45deg, var(--dark), var(--primary));
+            border-radius: 2rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .info-image::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" opacity="0.1"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>') no-repeat center;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 10% 2rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
+            nav { display: none; }
+            .hero { padding: 6rem 5% 3rem; }
+            .features { padding: 2rem 5%; }
+            .info-section { padding: 3rem 5%; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">NEXUS.26</div>
+        <nav>
+            <a href="#">Vision</a>
+            <a href="#">Technology</a>
+            <a href="#">Ecosystem</a>
+            <a href="#" class="cta-button" style="padding: 0.6rem 1.5rem; margin-left: 2rem;">Join Portal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="date-badge">Release Cycle: 2026-02-21</div>
+            <h1>Architecting the<br>Digital Frontier.</h1>
+            <p>Experience the next evolution of integrated intelligence and seamless design. Built for the creators of tomorrow, arriving today.</p>
+            <div class="hero-btns">
+                <a href="#" class="cta-button">Explore Dashboard</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="card">
+                <div class="card-icon"></div>
+                <h3>Neural Interface</h3>
+                <p>Advanced synaptic processing that adapts to your workflow in real-time. Optimized for the 2026 hardware standard.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background: linear-gradient(135deg, var(--secondary), var(--accent));"></div>
+                <h3>Quantum Privacy</h3>
+                <p>End-to-end encryption backed by post-quantum cryptographic protocols, ensuring your data remains yours alone.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background: linear-gradient(135deg, var(--accent), #f43f5e);"></div>
+                <h3>Global Mesh</h3>
+                <p>Connect across the decentralized web with zero latency. A truly borderless digital experience for the modern era.</p>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="info-content">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Synchronized Performance</h2>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">As of <strong>February 21, 2026</strong>, our infrastructure has transitioned to a fully carbon-negative framework. We aren't just building faster tools; we're building a sustainable legacy for the global network.</p>
+                <ul style="list-style: none; color: #cbd5e1;">
+                    <li style="margin-bottom: 1rem;">✦ 99.99% Uptime SLA</li>
+                    <li style="margin-bottom: 1rem;">✦ Real-time Edge Computing</li>
+                    <li style="margin-bottom: 1rem;">✦ Adaptive AI Co-pilot</li>
+                </ul>
+            </div>
+            <div class="info-image"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 1.5rem;">NEXUS</div>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Redefining the boundaries of possibility through elegant design and robust engineering.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#">Core Engine</a></li>
+                    <li><a href="#">Developer API</a></li>
+                    <li><a href="#">Cloud Nodes</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Ethics Lab</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Status</h4>
+                <div style="font-size: 0.8rem; color: #10b981; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></span>
+                    All Systems Operational
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Horizon Nexus Systems. Last Updated: February 21, 2026.</p>
+        </div>
+    </footer>
+</body>
+</html>
