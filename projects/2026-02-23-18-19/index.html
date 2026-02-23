@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles & Reset */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            --background-color: #f0f2f5;
+            --text-color: #333;
+            --light-text-color: #f9f9f9;
+            --card-background: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
+            --spacing-unit: 1.5rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--light-text-color);
+            padding: var(--spacing-unit) 0;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-unit);
+        }
+
+        nav a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--light-text-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--secondary-gradient);
+            color: var(--light-text-color);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 4) 0;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(45deg);
+            animation: pulse 10s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1) rotate(45deg); opacity: 0.8; }
+            100% { transform: scale(1.1) rotate(45deg); opacity: 1; }
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-unit);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--card-background);
+            color: #2575fc; /* Matching primary gradient start color */
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 2) 0;
+        }
+
+        section h3 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            font-weight: 700;
+            color: #444;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .feature-card {
+            background: var(--card-background);
+            padding: calc(var(--spacing-unit) * 1.5);
+            border-radius: var(--border-radius);
+            box-shadow: 0 6px 20px var(--shadow-color);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-unit);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .project-overview {
+            background: linear-gradient(to right, #eef5ff, #f9f9f9);
+            padding: calc(var(--spacing-unit) * 2) 0;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .project-overview .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: var(--spacing-unit);
+        }
+
+        .project-overview h3 {
+            color: #2575fc;
+            margin-bottom: var(--spacing-unit);
+            font-size: 2.8rem;
+        }
+
+        .project-overview p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-overview strong {
+            color: #6a11cb;
+            font-weight: 700;
+        }
+
+        .project-overview .date {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: var(--spacing-unit);
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #ddd;
+            display: inline-block;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: #bbb;
+            text-align: center;
+            padding: var(--spacing-unit) 0;
+            margin-top: calc(var(--spacing-unit) * 2);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: calc(var(--spacing-unit) / 2);
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            section h3 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-overview h3 {
+                font-size: 2.2rem;
+            }
+
+            .project-overview p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero {
+                padding: calc(var(--spacing-unit) * 2) 0;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            section h3 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card .icon {
+                font-size: 2.5rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.3rem;
+            }
+
+            .project-overview h3 {
+                font-size: 1.8rem;
+            }
+
+            .project-overview .date {
+                font-size: 1.1rem;
+                padding: 0.6rem 1.2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Modern Project</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Innovate. Create. Elevate.</h2>
+                <p>Discover our groundbreaking project designed to revolutionize the way you work and connect. Experience seamless integration and unparalleled performance.</p>
+                <a href="#overview" class="btn">Learn More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h3>Key Features</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="icon">&#9733;</span> <!-- Star icon -->
+                        <h4>Intuitive Interface</h4>
+                        <p>Enjoy a user-friendly design that makes navigation effortless and enhances productivity.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#9889;</span> <!-- Lightning bolt icon -->
+                        <h4>Blazing Fast Performance</h4>
+                        <p>Optimized for speed, our solution delivers results instantly, keeping you ahead.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#128274;</span> <!-- Lock icon -->
+                        <h4>Robust Security</h4>
+                        <p>Your data is protected with state-of-the-art encryption and security protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#128187;</span> <!-- Computer icon -->
+                        <h4>Cross-Platform Compatibility</h4>
+                        <p>Access your project from any device, anywhere, with full responsiveness.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="overview" class="project-overview">
+            <div class="container content-wrapper">
+                <h3>Project Overview</h3>
+                <p>This initiative represents a significant leap forward in modern technology, focusing on creating sustainable, scalable, and user-centric solutions. Our team has dedicated countless hours to ensure every detail meets the highest standards of quality and innovation.</p>
+                <p>We are proud to present a platform that not only meets current demands but is also built to adapt to future challenges and opportunities.</p>
+                <p>Key Project Launch Date: <span class="date">2026-02-23</span></p>
+                <p>Stay tuned for more updates as we continue to push the boundaries of what's possible!</p>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2026 Modern Solutions. All rights reserved.</p>
+            <p>Contact us: info@modernsolutions.com</p>
+        </div>
+    </footer>
+</body>
+</html>
