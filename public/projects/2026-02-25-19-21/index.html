@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles & Reset */
+        :root {
+            --primary-color: #6a11cb; /* Deep Purple */
+            --secondary-color: #2575fc; /* Bright Blue */
+            --accent-color: #00bcd4; /* Cyan */
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --bg-light: #ffffff;
+            --bg-dark-gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --bg-section-gradient: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 100%);
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition-speed: 0.3s ease;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-dark-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3.5rem; color: var(--text-light); }
+        h2 { font-size: 2.5rem; color: var(--text-dark); }
+        h3 { font-size: 1.8rem; color: var(--text-dark); }
+        p { margin-bottom: 1rem; }
+
+        /* Links & Buttons */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+        a:hover {
+            color: #008c9c;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-light);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background var(--transition-speed), transform var(--transition-speed);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover {
+            background: #008c9c;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 188, 212, 0.3);
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 2.5rem;
+        }
+        nav ul li a {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1.05rem;
+            position: relative;
+            padding-bottom: 0.3rem;
+        }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width var(--transition-speed);
+        }
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        .hero {
+            background: var(--bg-dark-gradient);
+            padding: 8rem 0;
+            text-align: center;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+        }
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+            opacity: 0.9;
+        }
+
+        .content-section {
+            padding: 5rem 0;
+            text-align: center;
+            background: var(--bg-light);
+            margin-bottom: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-top: 2rem;
+        }
+        .content-section:first-of-type {
+            margin-top: -4rem; /* Overlap with hero for visual flow */
+            position: relative;
+            z-index: 1;
+        }
+        .content-section h2 {
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        .content-section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .alternate-bg {
+            background: var(--bg-section-gradient);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .feature-card {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: left;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2);
+        }
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a2e;
+            color: var(--text-light);
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            .hero p {
+                font-size: 1.25rem;
+            }
+            .content-section h2 {
+                font-size: 2rem;
+            }
+            nav ul li {
+                margin-left: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 0.5rem 1rem;
+            }
+            .hero {
+                padding: 6rem 0;
+                min-height: 60vh;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .content-section {
+                padding: 4rem 0;
+            }
+            .content-section h2 {
+                font-size: 1.8rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-card {
+                padding: 2rem;
+            }
+            .contact-form {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.6rem; }
+            h3 { font-size: 1.3rem; }
+            .logo { font-size: 1.5rem; }
+            nav ul li a { font-size: 0.95rem; }
+            .hero { padding: 4rem 0; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .content-section {
+                padding: 3rem 0;
+                margin-top: 1rem;
+            }
+            .content-section:first-of-type {
+                margin-top: -2rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Ascend</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Unlock Your Potential with Our Next-Gen Platform</h1>
+                <p>Experience seamless integration, powerful tools, and a future-proof architecture designed for success.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="content-section">
+            <div class="container">
+                <h2>Key Features That Set Us Apart</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Dashboard</h3>
+                        <p>Manage all your projects and data from a beautifully designed, easy-to-use interface.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Real-time Analytics</h3>
+                        <p>Gain actionable insights with live data tracking and comprehensive reporting tools.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Infrastructure</h3>
+                        <p>Our cloud-native solution grows with your demands, ensuring unparalleled performance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Advanced Security</h3>
+                        <p>Your data is protected with enterprise-grade encryption and robust access controls.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="content-section alternate-bg">
+            <div class="container">
+                <h2>Our Vision for the Future</h2>
+                <p>Project Ascend was born from a desire to simplify complexity and empower innovation. We are a team of passionate engineers, designers, and strategists committed to building tools that not only meet today's demands but also anticipate tomorrow's challenges.</p>
+                <p>Our commitment to excellence culminated in the official launch of this platform on <strong style="color: var(--primary-color);">2026-02-25</strong>. We continuously strive for improvement, with regular updates and new features planned to keep you ahead.</p>
+                <p>Join us on this journey as we redefine what's possible in the digital landscape.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have questions or want to learn more? Fill out the form below and our team will get back to you shortly.</p>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="6"></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Project Ascend. All rights reserved.</p>
+            <p>Crafted with innovation for a brighter digital future.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dynamically update the copyright year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
