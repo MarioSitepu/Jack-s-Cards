@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --accent-color: #00f2fe;
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --bg-light: #ffffff;
+            --bg-dark: #1a1a2e;
+            --gradient-main: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-secondary: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 100%);
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --border-radius: 12px;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-dark);
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.8rem; }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-light);
+            box-shadow: var(--shadow-light);
+            padding: var(--spacing-sm) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        nav a {
+            color: var(--text-dark);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-main);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: var(--gradient-main);
+            color: var(--text-light);
+            padding: var(--spacing-lg) 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(50px);
+        }
+
+        #hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        #hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-light);
+            line-height: 1.1;
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 242, 254, 0.4);
+            background: #00d4e0; /* Slightly darker accent */
+        }
+
+        /* Section Styling */
+        section {
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f9f9f9;
+        }
+
+        section h2 {
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-main);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        #features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: var(--spacing-sm);
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* About Section */
+        #about .about-content {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            text-align: left;
+            margin-top: var(--spacing-md);
+        }
+
+        #about .about-content > div {
+            flex: 1;
+        }
+
+        #about img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+        }
+
+        #about h3 {
+            color: var(--primary-color);
+        }
+
+        /* Call to Action Section */
+        #cta {
+            background: var(--gradient-main);
+            color: var(--text-light);
+            padding: var(--spacing-lg) 0;
+        }
+
+        #cta h2 {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-md);
+        }
+
+        #cta .btn {
+            background: var(--accent-color);
+            color: var(--text-dark);
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.3);
+        }
+
+        #cta .btn:hover {
+            background: #00d4e0;
+            box-shadow: 0 12px 25px rgba(0, 242, 254, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+            #hero h1 { font-size: 3.5rem; }
+            #hero p { font-size: 1.2rem; }
+
+            #about .about-content {
+                flex-direction: column;
+            }
+            #about img {
+                margin-bottom: var(--spacing-md);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 1.5rem; }
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                text-align: center;
+                margin-top: var(--spacing-sm);
+            }
+            header .container {
+                flex-direction: column;
+            }
+
+            #hero {
+                min-height: 70vh;
+                padding: var(--spacing-md) 0;
+            }
+            #hero h1 { font-size: 2.5rem; }
+            #hero p { font-size: 1rem; }
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: var(--spacing-md) 0;
+            }
+            section h2 {
+                font-size: 1.8rem;
+                margin-bottom: var(--spacing-md);
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-card {
+                text-align: center;
+            }
+            .feature-card i {
+                margin: 0 auto var(--spacing-sm) auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.5rem; }
+            #hero h1 { font-size: 2rem; }
+            #hero p { font-size: 0.9rem; }
+            .btn {
+                padding: 0.7rem 1.5rem;
+            }
+            nav a { font-size: 0.9rem; }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Horizon</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Welcome to Project Horizon</h1>
+                <p>Innovating the future, launching on <span style="font-weight: 600; color: var(--accent-color);">2026-02-26</span>.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Innovations</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-magic"></i>
+                        <h3>Seamless Integration</h3>
+                        <p>Effortlessly connect with your existing tools and workflows for a unified experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Blazing Performance</h3>
+                        <p>Experience lightning-fast speeds and optimized performance for all your tasks.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Intuitive Design</h3>
+                        <p>A user-friendly interface designed for clarity and ease of use, making complex simple.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Robust Security</h3>
+                        <p>Your data is protected with state-of-the-art encryption and security protocols.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>Our Vision</h2>
+                <div class="about-content">
+                    <div>
+                        <h3>Empowering Your Future</h3>
+                        <p>Project Horizon is built on the foundation of empowering individuals and businesses to achieve more. We envision a world where technology simplifies, rather than complicates, daily operations.</p>
+                        <p>Our dedicated team has poured countless hours into crafting a solution that is not only powerful but also a joy to use. We believe in continuous improvement and staying ahead of the curve to deliver unparalleled value.</p>
+                    </div>
+                    <div>
+                        <img src="https://via.placeholder.com/600x400/6a11cb/ffffff?text=Our+Vision" alt="Project Vision">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: var(--spacing-md);">Join us on this journey to redefine efficiency and innovation.</p>
+                <a href="#contact" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Horizon. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--accent-color);"></i> by Modern Devs</p>
+        </div>
+    </footer>
+</body>
+</html>
