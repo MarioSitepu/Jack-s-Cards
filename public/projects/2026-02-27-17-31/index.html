@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --accent-color: #00f2fe;
+            --text-light: #f0f4f8;
+            --text-dark: #2c3e50;
+            --bg-dark: #1a1a2e;
+            --bg-light: #ffffff;
+            --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-secondary: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-dark: 0 8px 25px rgba(0, 0, 0, 0.3);
+            --border-radius: 10px;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--bg-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-primary);
+            color: var(--text-light);
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin-top: 5px; /* Adjust for wrap */
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            padding: 40px 0;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(odd) {
+            background-color: #24243e; /* Slightly lighter dark background */
+        }
+
+        section h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--text-light);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        section h3 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--text-light);
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--bg-dark); /* Using dark background for contrast */
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(106, 17, 203, 0.2) 0%, transparent 70%);
+            animation: pulse 10s infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 900px;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-secondary);
+            color: var(--bg-dark);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-light);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0.9;
+        }
+
+        .cta-button.secondary {
+            background: var(--gradient-primary);
+            color: var(--text-light);
+        }
+        .cta-button.secondary:hover {
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-dark);
+            text-align: left;
+            transition: transform 0.3s ease, background 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-secondary);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease-out;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-item:hover::before {
+            transform: translateX(0);
+        }
+
+        .feature-item h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        /* Call to Action Banner */
+        .cta-banner {
+            background: var(--gradient-primary);
+            color: var(--text-light);
+            padding: 100px 0;
+            text-align: center;
+            box-shadow: inset 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-banner h3 {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--text-light); /* Override gradient for better readability on gradient background */
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+        }
+
+        .cta-banner p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            background: #11111f; /* Even darker for footer */
+            color: rgba(255, 255, 255, 0.6);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            box-shadow: inset 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-links {
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 15px;
+            }
+
+            nav ul {
+                justify-content: center;
+                margin-top: 0;
+            }
+
+            nav ul li {
+                margin: 0 15px;
+            }
+
+            .hero h2 {
+                font-size: 3rem;
+            }
+
+            .cta-banner h3 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+            }
+
+            section h2 {
+                font-size: 2.5rem;
+            }
+            
+            section h3 {
+                font-size: 1.8rem;
+            }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-banner {
+                padding: 80px 0;
+            }
+
+            .cta-banner h3 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 5px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            section p {
+                font-size: 1rem;
+            }
+
+            .feature-item h4 {
+                font-size: 1.3rem;
+            }
+
+            .cta-banner h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Nova</h1>
+            <nav>
+                <ul>
+                    <li><a href="#dashboard" class="active">Dashboard</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="dashboard" class="hero">
+            <div class="container">
+                <h2>Elevate Your Digital Presence</h2>
+                <p>Unlock the full potential of your projects with our cutting-edge platform. <br>Project dated: <strong>2026-02-27</strong></p>
+                <a href="#" class="cta-button">Start Your Journey</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Powerful Features, Seamless Experience</h2>
+                <p>Designed for efficiency and collaboration, our platform empowers your team to achieve more.</p>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h4>Intuitive Dashboard</h4>
+                        <p>Access all critical information at a glance with our user-friendly interface.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Real-time Analytics</h4>
+                        <p>Monitor your progress and make data-driven decisions with live updates.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Collaborative Workflows</h4>
+                        <p>Streamline communication and task management within your team.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Secure & Scalable</h4>
+                        <p>Your data is protected, and our platform grows with your needs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h3>Who We Are</h3>
+                <p>At Project Nova, we believe in crafting tools that not only look good but also deliver exceptional performance. Our mission is to simplify complex workflows and provide a delightful experience for every user.</p>
+                <p>We're a passionate team dedicated to innovation and excellence, constantly striving to push the boundaries of what's possible in project management.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-banner">
+            <div class="container">
+                <h3>Ready to Transform Your Workflow?</h3>
+                <p>Join thousands of satisfied users who are already benefiting from Project Nova.</p>
+                <a href="#" class="cta-button secondary">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
