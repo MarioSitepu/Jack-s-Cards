@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Horizon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(to right bottom, #5f2c82, #49a7ce); /* Purple to Blue */
+            --secondary-gradient: linear-gradient(to right, #ee9ca7, #ffdde1); /* Soft Pink */
+            --dark-bg: #1a1a2e;
+            --light-text: #e0e0e0;
+            --accent-color: #6a11cb;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-radius: 12px;
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><circle cx="25" cy="25" r="3" fill="%23e0e0e0"/><circle cx="75" cy="75" r="3" fill="%23e0e0e0"/><circle cx="75" cy="25" r="3" fill="%23e0e0e0"/><circle cx="25" cy="75" r="3" fill="%23e0e0e0"/></svg>');
+            background-size: 20px 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        header .logo:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 3rem 0;
+        }
+
+        section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero {
+            background: var(--primary-gradient);
+            color: #fff;
+            padding: 6rem 0;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin: 2rem auto;
+            max-width: 90%;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Orange gradient */
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #feb47b, #ff7e5f);
+        }
+
+        .date-highlight {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffcc00; /* Bright yellow for highlight */
+            margin-top: 1.5rem;
+            display: block;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            text-align: left;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+        }
+
+        .feature-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            text-align: left;
+            margin-bottom: 0;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .about-section {
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 5rem 0;
+        }
+
+        .about-section h2 {
+            margin-bottom: 2rem;
+        }
+
+        .about-section p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            max-width: 900px;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            header .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .date-highlight {
+                font-size: 1.5rem;
+            }
+
+            section h2 {
+                font-size: 2.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                text-align: center;
+            }
+
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .feature-card p {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 4rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            section p {
+                font-size: 1rem;
+            }
+
+            .date-highlight {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Horizon</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1>Innovate. Create. Elevate.</h1>
+            <p>Unleash the potential of your next big idea with our cutting-edge platform.</p>
+            <a href="#" class="cta-button">Get Started Today</a>
+            <span class="date-highlight">Next Major Milestone: 2026-02-28</span>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <p>Designed with precision and scalability in mind, Project Horizon offers a suite of powerful tools to streamline your workflow and amplify your results.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Modular Architecture</h3>
+                        <p>Build and expand with ease. Our modular design allows for seamless integration and customization, adapting to your evolving needs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Intuitive Interface</h3>
+                        <p>Experience unparalleled usability. A clean, modern UI ensures a smooth and productive journey for every user, regardless of expertise.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Real-time Analytics</h3>
+                        <p>Gain actionable insights instantly. Monitor performance, track progress, and make data-driven decisions with our robust analytics dashboard.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Secure & Scalable</h3>
+                        <p>Rest easy with enterprise-grade security and a scalable infrastructure ready to grow with your ambitions, from small projects to large enterprises.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>Our Vision</h2>
+                <p>At Project Horizon, we believe in empowering creators and innovators. Our mission is to provide a platform that not only meets the demands of tomorrow but anticipates them, fostering an environment where ideas flourish and projects reach their full potential. We are committed to continuous improvement, driven by community feedback and technological advancement, ensuring our users always stay ahead of the curve.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Horizon. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
