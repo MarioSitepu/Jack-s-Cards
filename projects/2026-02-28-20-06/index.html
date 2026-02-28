@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-family: 'Poppins', sans-serif;
+            --color-primary: #1A2980; /* Dark Blue */
+            --color-secondary: #26D0CE; /* Teal */
+            --color-accent: #FF6B6B; /* Coral */
+            --color-text-dark: #333;
+            --color-text-light: #ECF0F1;
+            --color-bg-light: #F8F9FA;
+            --color-bg-card: #FFFFFF;
+            --gradient-main-start: #1A2980;
+            --gradient-main-end: #26D0CE;
+            --gradient-button-start: #2ECC71; /* Emerald Green */
+            --gradient-button-end: #3498DB; /* Bright Blue */
+            --spacing-unit: 1rem;
+            --border-radius-sm: 0.5rem;
+            --border-radius-lg: 1rem;
+            --box-shadow-light: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --box-shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            background: linear-gradient(135deg, var(--gradient-main-start) 0%, var(--gradient-main-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--box-shadow-heavy);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        nav a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover, nav a:focus {
+            color: var(--color-secondary);
+            transform: translateY(-2px);
+        }
+
+        main {
+            flex-grow: 1;
+            padding: calc(var(--spacing-unit) * 2);
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        section {
+            background-color: var(--color-bg-card);
+            padding: calc(var(--spacing-unit) * 3);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            backdrop-filter: blur(5px);
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(45deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: var(--color-text-light);
+            padding: calc(var(--spacing-unit) * 5) calc(var(--spacing-unit) * 3);
+            border-radius: var(--border-radius-lg);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--box-shadow-heavy);
+        }
+
+        .hero h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--gradient-button-start) 0%, var(--gradient-button-end) 100%);
+            color: var(--color-text-light);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover, .btn:focus {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        h3 {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .features {
+            text-align: center;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-card {
+            background-color: var(--color-bg-light);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-heavy);
+        }
+
+        .feature-card h4 {
+            font-size: 1.4rem;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-unit);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--color-text-dark);
+        }
+
+        .project-info {
+            text-align: center;
+            background-color: var(--color-bg-card);
+            border-left: 5px solid var(--color-secondary);
+        }
+
+        .project-info p {
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .project-date {
+            font-weight: 700;
+            color: var(--color-accent);
+            font-size: 1.25rem;
+            margin-top: var(--spacing-unit);
+        }
+
+        .cta {
+            text-align: center;
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            padding: calc(var(--spacing-unit) * 4);
+        }
+
+        .cta h3 {
+            color: var(--color-text-light);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .cta .btn {
+            background: linear-gradient(45deg, var(--color-accent) 0%, #FFD700 100%); /* Gold accent */
+        }
+
+        footer {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            text-align: center;
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            margin-top: auto;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-unit) / 2;
+        }
+
+        .social-links a {
+            color: var(--color-text-light);
+            margin: 0 calc(var(--spacing-unit) / 2);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--color-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: var(--spacing-unit);
+            }
+
+            header h1 {
+                margin-bottom: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: calc(var(--spacing-unit) / 2);
+                width: 100%;
+                text-align: center;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                display: block;
+                padding: var(--spacing-unit) / 2;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: var(--border-radius-sm);
+            }
+
+            main {
+                padding: var(--spacing-unit);
+            }
+
+            section {
+                padding: calc(var(--spacing-unit) * 1.5);
+                margin-bottom: calc(var(--spacing-unit) * 2);
+            }
+
+            .hero {
+                padding: calc(var(--spacing-unit) * 3) var(--spacing-unit);
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            h3 {
+                font-size: 1.7rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.2rem;
+            }
+
+            .project-date {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Project Nebula</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#info">Project Info</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h2>Welcome to the Future of Project Management</h2>
+            <p>Innovate, collaborate, and succeed with our cutting-edge platform designed for modern teams.</p>
+            <a href="#contact" class="btn">Get Started Today</a>
+        </section>
+
+        <section id="features" class="features">
+            <h3>Unleash Your Team's Potential</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Intuitive Dashboard</h4>
+                    <p>Manage all your projects from a single, easy-to-use interface. Stay organized and focused on what matters.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Real-time Collaboration</h4>
+                    <p>Work together seamlessly with your team, no matter where they are. Instant updates and shared workspaces.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Advanced Analytics</h4>
+                    <p>Gain deep insights and make data-driven decisions with powerful, customizable reports and visualizations.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Secure & Scalable</h4>
+                    <p>Your data is safe with us. Our platform is built for security and scales effortlessly with your growing needs.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="info" class="project-info">
+            <h3>Project Status Update</h3>
+            <p>Our development team is making significant progress on the next generation of features. We're committed to delivering excellence.</p>
+            <p>Current project activities are on track. Next major milestone scheduled for Q3 2026.</p>
+            <p class="project-date">Project Date: 2026-02-28</p>
+            <p>Stay tuned for more exciting updates!</p>
+        </section>
+
+        <section id="contact" class="cta">
+            <h3>Ready to Transform Your Workflow?</h3>
+            <p>Join the future of project management. Let's build something amazing together.</p>
+            <a href="mailto:info@projectnebula.com" class="btn">Contact Our Sales Team</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Nebula. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#" aria-label="Twitter">Twitter</a> |
+            <a href="#" aria-label="LinkedIn">LinkedIn</a> |
+            <a href="#" aria-label="Facebook">Facebook</a>
+        </div>
+    </footer>
+</body>
+</html>
