@@ -3,57 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Stream | Innovation 2026</title>
+    <title>Nexus Vision 2026</title>
     <style>
         :root {
             --primary: #6366f1;
             --secondary: #a855f7;
-            --accent: #06b6d4;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent: #ec4899;
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --card-bg: rgba(30, 41, 59, 0.7);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background-color: var(--dark);
-            color: var(--light);
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Background Elements */
-        .bg-blob {
+        body::before {
+            content: '';
             position: fixed;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #0f172a 100%);
             z-index: -1;
-            filter: blur(60px);
         }
 
-        .blob-1 { top: -100px; right: -100px; }
-        .blob-2 { bottom: -100px; left: -100px; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
         header {
-            padding: 1.5rem 10%;
+            padding: 2rem 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--glass-border);
+            z-index: 100;
         }
 
         .logo {
@@ -66,7 +66,7 @@
         }
 
         nav a {
-            color: var(--light);
+            color: var(--text);
             text-decoration: none;
             margin-left: 2rem;
             font-size: 0.9rem;
@@ -75,38 +75,20 @@
         }
 
         nav a:hover {
-            color: var(--accent);
+            color: var(--primary);
         }
 
         .hero {
-            padding: 8rem 10% 4rem;
+            padding: 8rem 0 4rem;
             text-align: center;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
-        .date-badge {
-            display: inline-block;
-            padding: 0.5rem 1.2rem;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 2rem;
-            font-size: 0.85rem;
-            color: var(--accent);
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            font-weight: 800;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #fff 30%, var(--primary) 100%);
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -118,75 +100,36 @@
             margin: 0 auto 2.5rem;
         }
 
-        .cta-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 0.75rem;
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 99px;
+            color: var(--primary);
             font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            cursor: pointer;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.5);
-        }
-
-        .btn-secondary {
-            background: var(--glass);
-            color: white;
-            border: 1px solid var(--glass-border);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .features {
-            padding: 6rem 10%;
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            margin: 4rem 0;
         }
 
         .card {
-            background: var(--glass);
+            background: var(--card-bg);
             padding: 2.5rem;
-            border-radius: 1.5rem;
-            border: 1px solid var(--glass-border);
-            transition: transform 0.3s, background 0.3s;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, border-color 0.3s;
         }
 
         .card:hover {
             transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.05);
             border-color: var(--primary);
-        }
-
-        .card-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .card h3 {
@@ -198,106 +141,99 @@
             color: #94a3b8;
         }
 
-        footer {
-            padding: 4rem 10% 2rem;
-            border-top: 1px solid var(--glass-border);
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: opacity 0.3s, transform 0.2s;
+        }
+
+        .cta-button:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .date-section {
             text-align: center;
+            padding: 6rem 0;
+            background: linear-gradient(transparent, rgba(99, 102, 241, 0.05), transparent);
         }
 
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            text-align: left;
+        .date-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
         }
 
-        .footer-info {
-            max-width: 400px;
-        }
-
-        .copyright {
+        footer {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
             color: #64748b;
             font-size: 0.875rem;
         }
 
         @media (max-width: 768px) {
-            header { padding: 1rem 5%; }
             nav { display: none; }
-            .hero { padding: 5rem 5% 3rem; }
-            .cta-group { flex-direction: column; }
-            .footer-content { flex-direction: column; text-align: center; }
+            .hero { padding: 4rem 0 2rem; }
+            .date-display { font-size: 2rem; }
         }
     </style>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="bg-blob blob-1"></div>
-    <div class="bg-blob blob-2"></div>
 
-    <header>
-        <div class="logo">NEXUS.26</div>
-        <nav>
-            <a href="#">Solutions</a>
-            <a href="#">Architecture</a>
-            <a href="#">Ecosystem</a>
-            <a href="#">Contact</a>
-        </nav>
-        <a href="#" class="btn btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.8rem;">Launch Console</a>
-    </header>
+    <div class="container">
+        <header>
+            <div class="logo">NEXUS.26</div>
+            <nav>
+                <a href="#">Innovation</a>
+                <a href="#">Systems</a>
+                <a href="#">Network</a>
+                <a href="#">Contact</a>
+            </nav>
+        </header>
 
-    <main>
-        <section class="hero">
-            <div class="date-badge">Release Window: February 28, 2026</div>
-            <h1>The Future of <br><span class="gradient-text">Digital Intelligence</span></h1>
-            <p>Experience the next generation of neural computing and distributed systems. Built for the speed of 2026 and beyond.</p>
-            <div class="cta-group">
-                <a href="#" class="btn btn-primary">Get Early Access</a>
-                <a href="#" class="btn btn-secondary">View Documentation</a>
-            </div>
-        </section>
+        <main>
+            <section class="hero">
+                <span class="badge">Next Generation Interface</span>
+                <h1>Designing the Future of Digital Reality</h1>
+                <p>Experience a paradigm shift in computational design and immersive connectivity.</p>
+                <a href="#" class="cta-button">Explore Ecosystem</a>
+            </section>
 
-        <section class="features">
-            <div class="card">
-                <div class="card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            <section class="grid">
+                <div class="card">
+                    <h3>Neural Sync</h3>
+                    <p>Seamless integration between human intent and digital execution with sub-millisecond latency.</p>
                 </div>
-                <h3>Quantum Sync</h3>
-                <p>Synchronize your data across galactic clusters with sub-millisecond latency using our proprietary entanglement protocol.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <div class="card">
+                    <h3>Quantum Core</h3>
+                    <p>Powered by the latest architecture to ensure stability across decentralized nodes.</p>
                 </div>
-                <h3>Neural Security</h3>
-                <p>Biometric encryption that evolves with your unique neural signature. Impossible to spoof, easy to use.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                <div class="card">
+                    <h3>Eco-Fluid</h3>
+                    <p>Adaptive design systems that evolve based on user interaction patterns and environment.</p>
                 </div>
-                <h3>Active Scaling</h3>
-                <p>Compute resources that breathe with your demand. Auto-scaling that actually works in real-time environments.</p>
-            </div>
-        </section>
-    </main>
+            </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-info">
-                <div class="logo" style="margin-bottom: 1rem;">NEXUS.26</div>
-                <p style="color: #94a3b8;">Leading the transition into the next era of interconnected digital experiences. Innovation is not a destination, it's our baseline.</p>
-            </div>
-            <div class="footer-links">
-                <p style="margin-bottom: 1rem; font-weight: 600;">Platform Updates</p>
-                <p style="color: var(--accent);">Next Milestone: 2026-02-28</p>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2026 Nexus Stream Technologies. All rights reserved. Last updated: February 28, 2026.
-        </div>
-    </footer>
+            <section class="date-section">
+                <p style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; color: #94a3b8;">Official Deployment Date</p>
+                <div class="date-display">2026-02-28</div>
+                <p style="margin-top: 1rem;">Project Phase: Omega Release</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Nexus Visionary Labs. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">Built for the next decade.</p>
+        </footer>
+    </div>
+
 </body>
 </html>
