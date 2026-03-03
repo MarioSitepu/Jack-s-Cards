@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #1a2a6c; /* Dark Blue */
+            --secondary-bg: #b21f1f; /* Dark Red */
+            --accent-color-1: #00c6ff; /* Bright Sky Blue */
+            --accent-color-2: #92fe9d; /* Light Green */
+            --text-light: #e0e0e0;
+            --text-dark: #333;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-radius-lg: 15px;
+            --border-radius-sm: 8px;
+            --gradient-main: linear-gradient(135deg, var(--primary-bg), #2a5298, #4f345b); /* Deeper blue to purple */
+            --gradient-button: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            --shadow-light: rgba(0, 0, 0, 0.2);
+            --shadow-deep: rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--gradient-main);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            box-shadow: 0 4px 15px var(--shadow-deep);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color-2);
+            text-decoration: none;
+            text-shadow: 0 0 10px var(--accent-color-1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 10px;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%) scaleX(0);
+            width: 100%;
+            height: 2px;
+            background: var(--accent-color-1);
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color-1);
+            transform: translateY(-2px);
+        }
+
+        nav a:hover::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        main {
+            flex-grow: 1;
+            padding-top: 50px;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero {
+            background: radial-gradient(circle at top left, rgba(0, 198, 255, 0.1), transparent 50%),
+                        radial-gradient(circle at bottom right, rgba(146, 254, 157, 0.1), transparent 50%);
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: 0 0 20px rgba(0, 198, 255, 0.7);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-button);
+            color: var(--text-dark);
+            padding: 15px 35px;
+            border-radius: var(--border-radius-lg);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px var(--shadow-light);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 25px var(--shadow-deep);
+            opacity: 0.9;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 60px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color-1);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 8px 30px var(--shadow-deep);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            border-color: var(--accent-color-1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent-color-1);
+            text-shadow: 0 0 10px rgba(0, 198, 255, 0.4);
+        }
+
+        .feature-card p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            text-align: left;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 40px var(--shadow-deep);
+            border: 2px solid var(--accent-color-2);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 60px auto 0;
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 8px 30px var(--shadow-deep);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--accent-color-2);
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-sm);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent-color-1);
+            box-shadow: 0 0 15px rgba(0, 198, 255, 0.4);
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 80px;
+            box-shadow: 0 -4px 15px var(--shadow-deep);
+            backdrop-filter: blur(10px);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color-1);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                padding: 5px 0;
+            }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+            h2::after {
+                width: 60px;
+                bottom: -10px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 30px;
+            }
+
+            .about-content {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .about-text, .about-image {
+                min-width: unset;
+                width: 100%;
+            }
+
+            .contact-form {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Nova</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Unleash the Future of Innovation</h1>
+                <p>Discover cutting-edge solutions designed to redefine efficiency and transform your vision into reality. Built for tomorrow, available today.</p>
+                <a href="#features" class="btn">Explore Our Solutions</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Design</h3>
+                        <p>Experience a user interface crafted for simplicity and seamless navigation, making complex tasks feel effortless.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Robust Performance</h3>
+                        <p>Leverage a powerful backend engineered for speed, reliability, and scalability to handle your most demanding needs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Cross-Platform Compatibility</h3>
+                        <p>Access your projects from any device, anywhere. Our solutions are optimized for a consistent experience across all platforms.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Advanced Security</h3>
+                        <p>Your data's safety is our priority. We implement state-of-the-art encryption and security protocols to protect your information.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Project Nova</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Project Nova was conceived with a singular goal: to push the boundaries of what's possible in modern digital solutions. We are a team of passionate innovators dedicated to creating tools that are not only powerful but also a joy to use.</p>
+                        <p>Our philosophy centers on user-centric design, ensuring that every feature and interaction is carefully considered to enhance your productivity and creativity. We believe that technology should empower, simplify, and inspire.</p>
+                        <p>Since our inception, we've committed to continuous improvement and embracing the latest advancements to keep our offerings at the forefront of the industry. Join us on this journey to shape the future.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/00c6ff/92fe9d?text=Innovation+Visual" alt="Innovation and Technology">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <form class="contact-form">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+            <p>Project Date: 2026-03-03</p>
+            <div class="social-links">
+                <a href="#" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.594 0-6.49 2.906-6.49 6.49 0 .508.058 1.002.162 1.477-5.379-.27-10.157-2.868-13.34-6.815-.529.904-.83 1.956-.83 3.064 0 2.245 1.149 4.218 2.887 5.379-.847-.028-1.646-.263-2.345-.647-.007.027-.007.054-.007.081 0 3.155 2.24 5.797 5.204 6.4-1.07.293-2.206.45-3.36.45-.824 0-1.62-.078-2.394-.225.832 2.577 3.235 4.45 6.096 4.507-2.227 1.748-5.034 2.793-8.094 2.793-.523 0-1.04-.03-1.549-.091 2.905 1.861 6.356 2.949 10.07 2.949 12.071 0 18.67-9.988 18.67-18.688 0-.285-.008-.568-.02-.85z"/></svg></a>
+                <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                <a href="#" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.197-6.091 8.197-11.387 0-6.627-5.373-12-12-12z"/></svg></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
