@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureVision Project - 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Modern Reset & Base Styles */
+        :root {
+            --color-primary-dark: #1a2a3a;
+            --color-primary-light: #3a506b;
+            --color-accent-start: #6a11cb;
+            --color-accent-end: #2575fc;
+            --color-text-light: #e0e7eb;
+            --color-text-dark: #1a2a3a;
+            --color-bg-card: rgba(255, 255, 255, 0.08);
+            --color-border-card: rgba(255, 255, 255, 0.15);
+            --spacing-unit: 1rem;
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --font-family-heading: 'Montserrat', sans-serif;
+            --font-family-body: 'Roboto', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            line-height: 1.6;
+            color: var(--color-text-light);
+            background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-heading);
+            margin-bottom: var(--spacing-unit);
+            color: var(--color-text-light);
+            font-weight: 700;
+        }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2.2rem); }
+        p {
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 1.5);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            color: var(--color-text-light);
+            font-weight: 600;
+            background: linear-gradient(45deg, var(--color-accent-start) 0%, var(--color-accent-end) 100%);
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-family: var(--font-family-heading);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: var(--spacing-unit) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--color-text-light);
+            font-family: var(--font-family-heading);
+            background: linear-gradient(45deg, var(--color-accent-start), var(--color-accent-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: calc(var(--spacing-unit) * 2);
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--color-text-light);
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--color-accent-end);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%);
+            padding: calc(var(--spacing-unit) * 6) 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+        }
+
+        .hero h1 {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto calc(var(--spacing-unit) * 2) auto;
+            opacity: 0.9;
+        }
+
+        /* Main Content Sections */
+        main {
+            flex: 1;
+            padding: calc(var(--spacing-unit) * 4) 0;
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+        }
+
+        section:nth-of-type(even) {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            color: var(--color-text-light);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .feature-item {
+            background: var(--color-bg-card);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--color-border-card);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px); /* Glassmorphism effect */
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-item h3 {
+            margin-top: var(--spacing-unit);
+            color: var(--color-text-light);
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .icon {
+            font-size: 3rem;
+            color: var(--color-accent-end);
+            display: block;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 2);
+            align-items: center;
+            text-align: center;
+        }
+
+        .about-content p {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(90deg, var(--color-accent-start) 0%, var(--color-accent-end) 100%);
+            padding: calc(var(--spacing-unit) * 4) 0;
+            color: var(--color-text-light);
+        }
+
+        .cta-section h2 {
+            color: var(--color-text-light);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: calc(var(--spacing-unit) * 2) 0;
+            text-align: center;
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+            margin-top: auto; /* Pushes footer to bottom */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: var(--spacing-unit);
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 1rem;
+            }
+
+            .hero {
+                padding: calc(var(--spacing-unit) * 4) 0;
+                min-height: 60vh;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0.75rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">FutureVision</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Unlock Tomorrow's Potential Today</h1>
+                <p>Revolutionizing the way you interact with technology. Experience seamless integration and groundbreaking innovation with FutureVision.</p>
+                <a href="#features" class="btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2 class="section-title">Key Innovations</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="icon">✨</span>
+                        <h3>Intuitive Interface</h3>
+                        <p>Designed for ultimate user experience, our platform is simple, clean, and powerful.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">🚀</span>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed, enjoy lightning-fast operations and real-time data processing.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">🔒</span>
+                        <h3>Ironclad Security</h3>
+                        <p>Your data is our priority. We employ state-of-the-art encryption and security protocols.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">🌐</span>
+                        <h3>Global Accessibility</h3>
+                        <p>Access your projects from anywhere, on any device, with full responsiveness.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About FutureVision</h2>
+                <div class="about-content">
+                    <p>FutureVision is more than just a platform; it's a commitment to progress. Born from a vision to simplify complexity and enhance productivity, our team of dedicated innovators has crafted a solution that stands at the forefront of technological advancement. We believe in empowering individuals and businesses to achieve their maximum potential.</p>
+                    <p>Our journey began with a simple idea: to create tools that are not only powerful but also a joy to use. Through countless hours of development and rigorous testing, we've brought that idea to life. This iteration of our platform was finalized on <strong>2026-03-04</strong>, marking a significant milestone in our quest for digital excellence. We are constantly evolving, driven by feedback and the ever-changing landscape of technology, to ensure FutureVision remains your ultimate partner in innovation.</p>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p>Join the FutureVision revolution and step into a world of endless possibilities.</p>
+                <a href="#" class="btn">Start Your Free Trial</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 FutureVision. All rights reserved. Designed for the future, today.</p>
+        </div>
+    </footer>
+</body>
+</html>
