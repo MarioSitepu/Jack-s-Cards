@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-bg: #1a202c;
+            --secondary-bg: #2d3748;
+            --accent-color: #00c9b1; /* Teal */
+            --light-text: #e2e8f0;
+            --dark-text: #a0aec0;
+            --gradient-start: #00a89c; /* Slightly darker teal */
+            --gradient-end: #008f82; /* Even darker teal */
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --border-radius: 8px;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --font-family-heading: 'Montserrat', sans-serif;
+            --font-family-body: 'Open Sans', sans-serif;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            color: var(--light-text);
+            background-color: var(--primary-bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--gradient-start);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-heading);
+            color: var(--light-text);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 700;
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+            color: var(--dark-text);
+        }
+
+        button {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+            color: var(--light-text);
+            font-family: var(--font-family-heading);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--secondary-bg);
+            padding: var(--spacing-sm) 0;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: var(--spacing-md);
+        }
+
+        nav ul li a {
+            color: var(--light-text);
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            padding: var(--spacing-lg) var(--spacing-sm);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: var(--spacing-md);
+            color: var(--dark-text);
+        }
+
+        /* Sections General */
+        section {
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--secondary-bg);
+        }
+
+        section h2 {
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .feature-card {
+            background-color: var(--primary-bg);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px var(--shadow-color);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--secondary-bg);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        .feature-card h3 {
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--dark-text);
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: linear-gradient(135deg, var(--gradient-end) 0%, var(--gradient-start) 100%);
+            padding: var(--spacing-lg) var(--spacing-sm);
+        }
+
+        .cta h2 {
+            color: var(--light-text);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta button {
+            background: var(--primary-bg);
+            box-shadow: none;
+        }
+
+        .cta button:hover {
+            background: var(--secondary-bg);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--dark-text);
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header .logo {
+                margin-bottom: var(--spacing-sm);
+            }
+
+            nav ul {
+                margin-top: var(--spacing-sm);
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav ul li {
+                margin: 0;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 10px 0;
+            }
+
+            .hero {
+                min-height: 50vh;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: var(--spacing-md) 0;
+            }
+
+            section h2 {
+                margin-bottom: var(--spacing-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">ProjectX</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="container hero-content">
+                <h1>Unlock Your Potential with Our Modern Solutions</h1>
+                <p>Experience the future of innovation with cutting-edge technology and seamless user experience.</p>
+                <button>Discover More</button>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <h3>Intuitive Design</h3>
+                        <p>Enjoy a user interface that's both beautiful and incredibly easy to navigate. Designed with you in mind.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed, our platform ensures a smooth and responsive experience every time you interact.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Robust Security</h3>
+                        <p>Your data is our top priority. We implement industry-leading security measures to keep your information safe.</p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>Cross-Device Compatibility</h3>
+                        <p>Access your projects seamlessly from any device, whether it's a desktop, tablet, or smartphone.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container about-content">
+                <h2>About Our Vision</h2>
+                <p>At ProjectX, we believe in pushing the boundaries of what's possible. Our dedicated team of innovators is committed to delivering solutions that not only meet but exceed expectations.</p>
+                <p>We combine elegant design with powerful functionality to create products that empower our users. This project, dated <strong>2026-03-04</strong>, represents a significant step forward in our mission to revolutionize how you interact with technology.</p>
+                <p>Join us on this exciting journey as we continue to build the future, one innovative solution at a time.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p>Get in touch with us today and let's discuss how we can help you achieve your goals.</p>
+                <button>Contact Us Now</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ProjectX. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
