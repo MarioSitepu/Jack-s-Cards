@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Reset & Body Styling */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #ecf0f1; /* Light text for dark background */
+            background: linear-gradient(135deg, #2c3e50 0%, #4a69bd 100%); /* Blue-grey gradient */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header Styling */
+        header {
+            background: rgba(26, 36, 48, 0.9); /* Slightly transparent dark background */
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ecf0f1;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #2ed573; /* Accent color */
+            transition: width 0.3s ease;
+            -webkit-transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            left: 0;
+            background: #2ed573;
+        }
+
+        nav ul li a:hover {
+            color: #2ed573; /* Accent color */
+            transform: translateY(-2px);
+        }
+
+        /* Main Content Styling */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.08); /* Semi-transparent white background for sections */
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 3rem;
+            background: linear-gradient(45deg, rgba(46, 213, 115, 0.15) 0%, rgba(30, 144, 255, 0.15) 100%), rgba(255, 255, 255, 0.08);
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-section h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #dcdcdc;
+        }
+
+        .project-date {
+            font-weight: 600;
+            color: #2ed573; /* Accent color */
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #2ed573 0%, #1e90ff 100%); /* Green to blue gradient */
+            color: #ffffff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Features Section */
+        .features-section h3, .about-section h3 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: #ffffff;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2ed573; /* Accent color */
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #dcdcdc;
+        }
+
+        /* About Section */
+        .about-section p {
+            text-align: center;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #dcdcdc;
+        }
+
+        /* Footer Styling */
+        footer {
+            background: rgba(26, 36, 48, 0.9);
+            color: #bdc3c7;
+            text-align: center;
+            padding: 1.5rem 2rem;
+            margin-top: auto; /* Pushes footer to the bottom */
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            header h1 {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .features-section h3, .about-section h3 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 2rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+
+            .hero-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.3rem;
+            }
+
+            .feature-card p {
+                font-size: 0.85rem;
+            }
+
+            .about-section p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Project Alpha</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Tasks</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h2>Welcome to Your Modern Project Hub</h2>
+            <p>Stay organized and productive with our intuitive platform. Project updated on <span class="project-date">2026-03-04</span>.</p>
+            <a href="#" class="cta-button">Explore Features</a>
+        </section>
+
+        <section class="features-section">
+            <h3>Key Features</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Intuitive Task Management</h4>
+                    <p>Effortlessly create, assign, and track tasks to keep your project on schedule.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Real-time Progress Tracking</h4>
+                    <p>Monitor project milestones and team progress with dynamic, visual reports.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Seamless Team Collaboration</h4>
+                    <p>Communicate and collaborate effectively with built-in tools for shared success.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h3>About This Project</h3>
+            <p>This platform is meticulously designed to streamline your workflow and enhance team productivity. Built with cutting-edge web technologies, it offers a smooth, responsive, and visually appealing user experience, ensuring that your projects are managed with efficiency and clarity.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Alpha. All rights reserved.</p>
+    </footer>
+</body>
+</html>
