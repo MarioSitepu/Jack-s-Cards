@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-gradient-start: #6a11cb;
+            --primary-gradient-end: #2575fc;
+            --secondary-gradient-start: #00c6ff;
+            --secondary-gradient-end: #0072ff;
+            --text-color-light: #ffffff;
+            --text-color-dark: #333333;
+            --bg-light: #f4f7f6;
+            --card-bg: #ffffff;
+            --accent-color: #ff6b6b;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            background-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support -webkit-text-fill-color */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color-dark);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-gradient-end);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+        }
+
+        .btn-primary {
+            background-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: var(--text-color-light);
+            box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 117, 252, 0.6);
+        }
+
+        .btn-secondary {
+            background-image: linear-gradient(to right, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            color: var(--text-color-light);
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-image: linear-gradient(to right bottom, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 100px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero-section p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            font-weight: 300;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-section .project-date {
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        h2 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 700;
+            background-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow-medium);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: var(--primary-gradient-end);
+        }
+
+        .feature-card p {
+            font-size: 1em;
+            color: var(--text-color-dark);
+        }
+
+        /* About Section */
+        .about-section .container {
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .about-section p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: var(--text-color-dark);
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background-image: linear-gradient(to right, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .cta-section h2 {
+            color: var(--text-color-light);
+            -webkit-text-fill-color: var(--text-color-light); /* Override gradient for white text */
+            background-image: none; /* Override gradient for white text */
+            margin-bottom: 30px;
+        }
+
+        .cta-section p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-color-dark);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 15px 10px 15px;
+            }
+
+            .hero-section {
+                padding: 80px 20px;
+                min-height: 400px;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+
+            .hero-section p {
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 2em;
+                margin-bottom: 40px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5em;
+            }
+
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .hero-section {
+                padding: 60px 15px;
+                min-height: 350px;
+            }
+
+            .hero-section h1 {
+                font-size: 2em;
+            }
+
+            .hero-section p {
+                font-size: 0.9em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureForge</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Crafting Tomorrow's Solutions Today</h1>
+                <p>Experience the synergy of cutting-edge technology and beautiful design.</p>
+                <p class="project-date">Project Readiness: <strong>2026-03-06</strong></p>
+                <a href="#features" class="btn btn-primary">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Our Core Capabilities</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Design</h3>
+                        <p>User interfaces that are not just beautiful, but also incredibly easy to navigate.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Robust Performance</h3>
+                        <p>Optimized for speed and efficiency, ensuring a smooth experience for all users.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Architecture</h3>
+                        <p>Built with future growth in mind, our solutions adapt as your needs evolve.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Cross-Platform Compatibility</h3>
+                        <p>Seamless functionality across various devices and operating systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>Our Vision</h2>
+                <p>At FutureForge, we believe in the power of innovation to transform ideas into reality. Our dedicated team of creators and engineers are constantly pushing boundaries to deliver solutions that are not only functional but also inspiring.</p>
+                <p>We are committed to a future where technology enhances human potential, making complex tasks simple and accessible. Join us on this journey of discovery and creation.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Project?</h2>
+                <p>Let's collaborate and build something extraordinary together. Reach out to us for a personalized consultation.</p>
+                <a href="#" class="btn btn-secondary">Get Started Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 FutureForge. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
