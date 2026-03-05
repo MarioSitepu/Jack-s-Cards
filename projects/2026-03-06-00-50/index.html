@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --accent-color: #00f2fe;
+            --dark-text: #333;
+            --light-text: #f8f8f8;
+            --background-light: #ffffff;
+            --background-dark: #1a1a2e;
+            --card-background: #ffffff;
+            --gradient-1: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            --gradient-2: linear-gradient(to right, #4facfe, #00f2fe);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-dark: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--background-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll due to potential overflows */
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-1);
+            color: var(--light-text);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-dark);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--light-text);
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1; /* Allows main to grow and push footer down */
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background-color: var(--card-background);
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+        }
+
+        .hero {
+            background: var(--gradient-2);
+            color: var(--light-text);
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-dark);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero button {
+            background-color: var(--accent-color);
+            color: var(--dark-text);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero button:hover {
+            background-color: #00d0e0;
+            transform: translateY(-2px);
+        }
+
+        .features {
+            text-align: center;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--background-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            text-align: left;
+            border-left: 5px solid var(--secondary-color);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-card p {
+            color: #555;
+        }
+
+        .project-info {
+            text-align: center;
+        }
+
+        .project-info p {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: #444;
+        }
+
+        .project-info strong {
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--background-dark);
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            header h1 {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            nav a {
+                padding: 0.3rem 0;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.7rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero h2 {
+                font-size: 1.7rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .hero button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.2rem;
+            }
+
+            .project-info p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Project Alpha</h1>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Tasks</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Welcome to Your Modern Project Hub</h2>
+            <p>Efficiently manage your projects and collaborate with your team using our intuitive and powerful platform. Stay ahead with real-time insights.</p>
+            <button>Explore Features</button>
+        </section>
+
+        <section class="features">
+            <h3>Key Features</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Task Management</h4>
+                    <p>Organize, assign, and track tasks effortlessly. Set deadlines, priorities, and monitor progress with ease.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Real-time Analytics</h4>
+                    <p>Gain valuable insights with up-to-date project data. Visualize performance and make informed decisions.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Team Collaboration</h4>
+                    <p>Facilitate seamless communication and file sharing among team members for enhanced productivity.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Customizable Workflows</h4>
+                    <p>Adapt the platform to your unique project needs with flexible and customizable workflow options.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-info">
+            <h3>Project Status Overview</h3>
+            <p>Current project phase: <strong>Development & Testing</strong></p>
+            <p>Next key milestone: <strong>Public Beta Launch</strong></p>
+            <p>Last updated: <strong style="color: var(--secondary-color);">2026-03-06</strong></p>
+            <p>Estimated completion: Q3 2026</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Modern Solutions. All rights reserved.</p>
+        <p>Designed with passion for the future of project management.</p>
+    </footer>
+</body>
+</html>
