@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen Project Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-bg: #f8faff;
+            --secondary-bg: #ffffff;
+            --text-color: #333d51;
+            --light-text-color: #667085;
+            --accent-color: #6a0572; /* Darker purple */
+            --gradient-start: #8a2be2; /* Blue Violet */
+            --gradient-end: #ffa500;   /* Orange */
+            --border-color: #e0e6ed;
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --shadow-medium: rgba(0, 0, 0, 0.1);
+            --button-text-color: #ffffff;
+            --card-hover-shadow: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Base Styles & Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: var(--primary-bg);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--light-text-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            padding: 2rem 0;
+        }
+
+        section {
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+
+        section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--button-text-color);
+            border-radius: 15px;
+            margin-bottom: 4rem;
+            box-shadow: 0 10px 30px var(--shadow-medium);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            background: var(--button-text-color);
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-medium);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-medium);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 20px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px var(--card-hover-shadow);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--light-text-color);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--light-text-color);
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--shadow-medium);
+        }
+
+        .cta {
+            text-align: center;
+            background: linear-gradient(45deg, var(--gradient-end), var(--gradient-start));
+            color: var(--button-text-color);
+            padding: 5rem 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-medium);
+            margin-top: 4rem;
+        }
+
+        .cta h2 {
+            color: var(--button-text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta h2::after {
+            background: var(--button-text-color);
+        }
+
+        .cta .btn {
+            background: var(--button-text-color);
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-color);
+            color: var(--button-text-color);
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+                width: 100%;
+            }
+
+            .hero {
+                padding: 4rem 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            section {
+                padding: 2.5rem 0;
+            }
+
+            .about-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .cta {
+                padding: 3rem 1rem;
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">NextGen Project Hub</a>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Welcome to the Future of Project Management</h1>
+                <p>Revolutionizing the way teams collaborate and innovate. This project was conceptualized on <span style="font-weight: 600;">2026-03-06</span>.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Dashboard</h3>
+                        <p>Access real-time project progress, key metrics, and team performance at a glance with our user-friendly interface.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Seamless Collaboration</h3>
+                        <p>Empower your team with integrated communication tools, file sharing, and task assignment for effortless teamwork.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Advanced Analytics</h3>
+                        <p>Gain deeper insights with powerful analytics and reporting tools to make data-driven decisions and optimize workflows.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Solutions</h3>
+                        <p>Whether you're a small startup or a large enterprise, our platform scales with your needs, ensuring flexibility and growth.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Driving Innovation Forward</h3>
+                        <p>At NextGen Project Hub, we believe in building tools that not only streamline work but also inspire creativity and foster growth. Our platform is designed from the ground up to be adaptable, secure, and incredibly powerful, helping you tackle complex projects with ease.</p>
+                        <p>We are committed to continuous improvement, integrating the latest technologies and user feedback to ensure our product remains at the forefront of project management solutions. Join us in shaping the future of work.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/8a2be2/ffffff?text=Innovative+Solutions" alt="Innovative Solutions">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Projects?</h2>
+                <p>Experience the next generation of project management. Get started today!</p>
+                <a href="#" class="btn">Contact Sales</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 NextGen Project Hub. All rights reserved. Built with passion and future-forward thinking.</p>
+        </div>
+    </footer>
+</body>
+</html>
