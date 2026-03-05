@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --background-light: #fdfdfd;
+            --background-grey: #f4f7fa;
+            --accent-color: #2ecc71;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --spacing-xl: 96px;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-dark);
+        }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2.2rem); }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        a {
+            color: var(--primary-gradient);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-image: var(--primary-gradient);
+            color: var(--text-light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: var(--spacing-sm) var(--spacing-md);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--text-light);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--background-light);
+            padding: var(--spacing-md) 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.8rem;
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers not supporting text clipping */
+            padding: 5px 0;
+            margin-right: var(--spacing-md);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        nav a {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--text-dark);
+            padding: var(--spacing-xs) 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-image: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-image: var(--primary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse 10s infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        .hero-section h1 {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-sm);
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            line-height: 1.2;
+        }
+
+        .hero-section p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            max-width: 800px;
+            margin: 0 auto var(--spacing-lg);
+            opacity: 0.9;
+        }
+
+        .hero-date {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: var(--spacing-md);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: var(--border-radius);
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Section Styling */
+        section {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--background-light);
+            margin-bottom: 0; /* Remove default margin for sections */
+        }
+
+        .section-light {
+            background-color: var(--background-light);
+        }
+
+        .section-grey {
+            background-color: var(--background-grey);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-image: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .feature-card {
+            background-color: var(--background-light);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background-image: var(--secondary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+
+        .cta-section h2 {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-lg);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons .btn {
+            margin: 0 var(--spacing-xs);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            margin-top: auto; /* Pushes footer to the bottom */
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-xs);
+                width: 100%;
+                text-align: center;
+            }
+
+            nav a {
+                padding: var(--spacing-xs) 0;
+                display: block;
+            }
+
+            .hero-section {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+
+            .hero-section h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .hero-section p {
+                font-size: clamp(0.9rem, 3vw, 1.1rem);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons .btn {
+                display: block;
+                margin: var(--spacing-sm) auto;
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.3rem; }
+
+            .hero-date {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureTech</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Unlock the Future with Our Innovative Solutions</h1>
+                <p>
+                    Experience cutting-edge technology designed to streamline your workflow, empower your creativity, and drive unparalleled growth. We build for tomorrow, today.
+                </p>
+                <div class="hero-date">Project Date: 2026-03-06</div>
+                <div style="margin-top: var(--spacing-lg);">
+                    <a href="#features" class="btn btn-primary">Discover More</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section-grey">
+            <div class="container">
+                <h2 class="section-title">Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🚀</span>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed and efficiency, ensuring a seamless user experience across all devices.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">💡</span>
+                        <h3>Intuitive User Interface</h3>
+                        <p>Designed with user-friendliness in mind, making complex tasks simple and enjoyable.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🔒</span>
+                        <h3>Robust Security</h3>
+                        <p>Your data is protected with industry-leading encryption and security protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🌐</span>
+                        <h3>Scalable Cloud Infrastructure</h3>
+                        <p>Built on a flexible cloud architecture that grows with your needs, effortlessly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🎨</span>
+                        <h3>Customizable Themes</h3>
+                        <p>Tailor the look and feel to match your brand identity with extensive customization options.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🤝</span>
+                        <h3>24/7 Premium Support</h3>
+                        <p>Our dedicated team is always ready to assist you with any questions or issues.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section-light">
+            <div class="container">
+                <h2 class="section-title">About Our Vision</h2>
+                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <p>
+                        At FutureTech, we believe in the power of innovation to transform businesses and lives. Our mission is to create advanced, yet accessible, technological solutions that empower individuals and organizations to reach their full potential. With a focus on user-centric design and cutting-edge development, we are constantly pushing the boundaries of what's possible.
+                    </p>
+                    <p>
+                        Our team comprises passionate engineers, designers, and strategists dedicated to crafting products that are not only powerful but also beautiful and easy to use. We envision a future where technology serves as a seamless extension of human capability, fostering creativity and driving progress. Join us on this exciting journey into the future.
+                    </p>
+                    <a href="#contact" class="btn btn-secondary" style="margin-top: var(--spacing-md);">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Business?</h2>
+                <p>
+                    Connect with our experts today to discuss how our innovative solutions can be tailored to meet your unique challenges and objectives. Let's build the future together.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">Get Started Now</a>
+                    <a href="#" class="btn btn-secondary">Contact Sales</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 FutureTech. All rights reserved. Designed with passion for a better tomorrow.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+</body>
+</html>
