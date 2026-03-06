@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --background-light: #f8f9fa;
+            --card-background: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --border-radius-sm: 8px;
+            --border-radius-md: 15px;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: var(--spacing-md) 0;
+            box-shadow: 0 4px 15px var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: var(--spacing-md);
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--spacing-lg) var(--spacing-sm);
+            border-bottom-left-radius: var(--border-radius-md);
+            border-bottom-right-radius: var(--border-radius-md);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            text-shadow: 0 4px 8px var(--shadow-medium);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-md);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 25px rgba(37, 117, 252, 0.4);
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(37, 117, 252, 0.6);
+        }
+
+        section {
+            padding: var(--spacing-lg) 0;
+            background-color: var(--background-light);
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f0f2f5;
+        }
+
+        h3 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-dark);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            padding: 0 var(--spacing-sm);
+        }
+
+        .feature-card {
+            background-color: var(--card-background);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 5px 20px var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px var(--shadow-medium);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .about-us {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        .about-us p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #444;
+        }
+
+        .cta {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--spacing-lg) var(--spacing-sm);
+            border-top-left-radius: var(--border-radius-md);
+            border-top-right-radius: var(--border-radius-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .cta h3 {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta h3::after {
+            background: var(--secondary-gradient);
+        }
+
+        footer {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--spacing-md) 0;
+            font-size: 0.9rem;
+        }
+
+        /* --- Font Awesome Icons (Add CDN link in head if using) --- */
+        /* For demonstration, using placeholder for icons */
+        .icon-placeholder {
+            display: inline-block;
+            width: 3rem;
+            height: 3rem;
+            line-height: 3rem;
+            text-align: center;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: var(--spacing-sm);
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin-top: var(--spacing-sm);
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            h3 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: var(--spacing-sm) 0;
+            }
+            header h1 {
+                font-size: 1.8rem;
+            }
+            nav ul li a {
+                padding: 0.3rem 0.8rem;
+            }
+            .hero {
+                padding: var(--spacing-md) var(--spacing-sm);
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+            }
+            h3 {
+                font-size: 1.8rem;
+                margin-bottom: var(--spacing-md);
+            }
+            .feature-card {
+                padding: var(--spacing-sm);
+            }
+            .feature-card h4 {
+                font-size: 1.3rem;
+            }
+            section {
+                padding: var(--spacing-md) 0;
+            }
+        }
+    </style>
+    <!-- Optional: Link to Font Awesome for icons. If not used, icon-placeholder will render. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Modern Solutions</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Innovate. Create. Inspire.</h2>
+                <p>Delivering cutting-edge solutions for the future. This project was conceptualized on <strong>2026-03-06</strong>, pushing boundaries in digital innovation.</p>
+                <a href="#features" class="btn">Explore Our Work</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h3>Key Features</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <!-- Example Icon: Replace with Font Awesome if CDN is active -->
+                        <i class="fas fa-rocket"></i> 
+                        <h4>Blazing Fast Performance</h4>
+                        <p>Optimized for speed and efficiency, ensuring a seamless user experience across all devices.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Fully Responsive Design</h4>
+                        <p>Adapts beautifully to any screen size, from desktops to tablets and smartphones.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Robust Security</h4>
+                        <p>Built with the latest security protocols to protect your data and ensure privacy.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h4>Intuitive User Interface</h4>
+                        <p>Designed for ease of use, making complex tasks simple and accessible for everyone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h3>About Our Vision</h3>
+                <div class="about-us">
+                    <p>At Modern Solutions, we believe in the power of technology to transform businesses and lives. Our team of dedicated professionals works tirelessly to bring innovative ideas to life, creating products that are not only functional but also a joy to use.</p>
+                    <p>We are passionate about design, performance, and user satisfaction, constantly striving for excellence in every project we undertake. Our commitment to quality and forward-thinking solutions sets us apart.</p>
+                    <a href="#contact" class="btn">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h3>Ready to Start Your Next Project?</h3>
+                <p>Let's collaborate and turn your ideas into reality. Reach out to us today!</p>
+                <a href="mailto:info@modernsolutions.com" class="btn">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Modern Solutions. All rights reserved. Designed with passion for the future.</p>
+        </div>
+    </footer>
+</body>
+</html>
