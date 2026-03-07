@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase - 2026</title>
+    <style>
+        /* Modern CSS Reset & Variables */
+        :root {
+            --primary-gradient: linear-gradient(to right, #6A82FB, #FC5C7D); /* Light Indigo to Pinkish Red */
+            --secondary-gradient: linear-gradient(to right, #00CDAC, #00B19D); /* Turquoise to Darker Turquoise */
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-light: #f8f9fa;
+            --bg-dark: #2c3e50;
+            --accent-color: #6A82FB;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.2);
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Global Typography */
+        h1, h2, h3 {
+            margin-bottom: var(--spacing-sm);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--text-light);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            display: inline-block;
+            color: var(--text-dark);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #4a69bd;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border-radius: var(--border-radius-md);
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 15px var(--shadow-medium);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-medium);
+            color: var(--text-light); /* Ensure text color remains light on hover */
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow-medium);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support text fill color */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: var(--spacing-md);
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #hero h1 {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        #hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        /* Main Content Sections */
+        section {
+            padding: var(--spacing-lg) 0;
+            position: relative;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--bg-light);
+        }
+
+        section:nth-of-type(odd) {
+            background-color: #fff;
+        }
+
+        /* Feature Section */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-medium);
+        }
+
+        .feature-item h3 {
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+            margin-bottom: 0.5rem;
+        }
+
+        /* Showcase Section */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .showcase-item {
+            background-color: #fff;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .showcase-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-medium);
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .showcase-item .content {
+            padding: var(--spacing-sm);
+        }
+
+        .showcase-item h3 {
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+        }
+
+        .showcase-item p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+        }
+
+        #contact p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--spacing-md) 0;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: var(--spacing-sm);
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem var(--spacing-sm);
+            }
+
+            #hero {
+                min-height: 60vh;
+                padding: var(--spacing-md) 0;
+            }
+
+            #hero p {
+                font-size: 1.1rem;
+            }
+
+            .feature-grid, .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0.7rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project 2026</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#showcase">Showcase</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Future-Proof Digital Solutions</h1>
+                <p>Innovating with cutting-edge technology for a brighter tomorrow. <br> Project dated: <strong>2026-03-08</strong></p>
+                <a href="#features" class="btn">Discover Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h3>Responsive Design</h3>
+                        <p>Our solutions adapt flawlessly to any device, ensuring a consistent and optimal user experience across desktops, tablets, and smartphones.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Modern UI/UX</h3>
+                        <p>We craft intuitive, beautiful, and engaging user interfaces that are a delight to interact with, focusing on clarity and ease of use.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Scalable Architecture</h3>
+                        <p>Built on robust and flexible foundations, our projects are designed to grow with your needs, accommodating future expansions effortlessly.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Performance Optimized</h3>
+                        <p>Speed and efficiency are at our core. We ensure lightning-fast load times and smooth interactions for every user.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="showcase">
+            <div class="container">
+                <h2>Our Recent Work</h2>
+                <div class="showcase-grid">
+                    <div class="showcase-item">
+                        <img src="https://via.placeholder.com/400x250/6A82FB/FFFFFF?text=Project+Aurora" alt="Project Aurora">
+                        <div class="content">
+                            <h3>Project Aurora</h3>
+                            <p>A cutting-edge web platform leveraging AI for personalized user experiences.</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://via.placeholder.com/400x250/FC5C7D/FFFFFF?text=Project+Nebula" alt="Project Nebula">
+                        <div class="content">
+                            <h3>Project Nebula</h3>
+                            <p>An innovative mobile application designed for seamless cloud data management.</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://via.placeholder.com/400x250/00CDAC/FFFFFF?text=Project+Vortex" alt="Project Vortex">
+                        <div class="content">
+                            <h3>Project Vortex</h3>
+                            <p>An interactive data visualization dashboard for real-time analytics and insights.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>We're always excited to collaborate on new ideas and bring visions to life. Reach out to discuss your next project!</p>
+                <a href="mailto:info@modernproject.com" class="btn">Email Us Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Modern Project. All rights reserved.</p>
+            <p>Project Date: 2026-03-08</p>
+        </div>
+    </footer>
+</body>
+</html>
