@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nexus - 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Root Variables */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            --accent-color: #00e676; /* Bright green */
+            --text-color-dark: #2c3e50;
+            --text-color-light: #ecf0f1;
+            --bg-light: #f5f7fa;
+            --bg-dark: #2c3e50;
+            --card-bg: #ffffff;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --spacing-unit: 1rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(2 * var(--spacing-unit));
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: var(--spacing-unit) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--box-shadow);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-unit) calc(2 * var(--spacing-unit));
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: calc(2 * var(--spacing-unit));
+        }
+
+        nav ul li a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            left: 0;
+            background: var(--accent-color);
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: 8rem 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: calc(2 * var(--spacing-unit));
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-color-dark);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background 0.3s ease, transform 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 230, 118, 0.3);
+        }
+
+        .btn:hover {
+            background: #00c853; /* Darker accent */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 230, 118, 0.4);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 0;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--bg-light);
+        }
+        section:nth-of-type(odd) {
+            background-color: #fcfcfc;
+        }
+
+
+        section h3 {
+            font-size: 2.5rem;
+            margin-bottom: calc(3 * var(--spacing-unit));
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            color: var(--text-color-dark);
+        }
+
+        section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(3 * var(--spacing-unit));
+            margin-top: calc(4 * var(--spacing-unit));
+        }
+
+        .feature-item {
+            background: var(--card-bg);
+            padding: calc(3 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-unit);
+            display: inline-block;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-item h4 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 600;
+            color: var(--text-color-dark);
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: calc(4 * var(--spacing-unit));
+            margin-top: calc(4 * var(--spacing-unit));
+        }
+
+        .about-text, .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text p {
+            margin-bottom: var(--spacing-unit);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .about-text strong {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: var(--secondary-gradient);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .cta h3 {
+            color: var(--text-color-light);
+            font-size: 2.8rem;
+            margin-bottom: calc(2 * var(--spacing-unit));
+        }
+
+        .cta h3::after {
+            background: var(--accent-color);
+        }
+        
+        .cta .btn {
+            background: var(--accent-color);
+            color: var(--text-color-dark);
+            box-shadow: 0 5px 15px rgba(0, 230, 118, 0.3);
+        }
+
+        .cta .btn:hover {
+            background: #00c853;
+            box-shadow: 0 8px 20px rgba(0, 230, 118, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: var(--text-color-light);
+            padding: calc(3 * var(--spacing-unit)) 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer .social-links a {
+            color: var(--text-color-light);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        footer p {
+            margin-top: var(--spacing-unit);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            section h3 {
+                font-size: 2rem;
+            }
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            header h1 {
+                margin-bottom: var(--spacing-unit);
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 0.5rem 1rem;
+            }
+            .hero {
+                padding: 6rem 0;
+            }
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .about-content {
+                flex-direction: column;
+            }
+            .about-text, .about-image {
+                min-width: unset;
+                width: 100%;
+            }
+            .cta h3 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .container {
+                padding: var(--spacing-unit);
+            }
+            header h1 {
+                font-size: 1.5rem;
+            }
+            nav ul li {
+                margin: 0.5rem 0.5rem;
+            }
+            .hero {
+                padding: 4rem 0;
+            }
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            .hero p {
+                font-size: 0.9rem;
+            }
+            section {
+                padding: 4rem 0;
+            }
+            section h3 {
+                font-size: 1.8rem;
+            }
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+            }
+            .feature-item {
+                padding: calc(2 * var(--spacing-unit));
+            }
+            .feature-item h4 {
+                font-size: 1.3rem;
+            }
+            .cta h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Nexus</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>Welcome to the Future of Innovation</h2>
+                <p>Empowering tomorrow's solutions with cutting-edge technology and design.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="text-center">
+            <div class="container">
+                <h3>Key Features</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="icon">&#9889;</span> <!-- Lightning bolt icon -->
+                        <h4>Blazing Fast Performance</h4>
+                        <p>Experience unparalleled speed and efficiency with our optimized architecture.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128187;</span> <!-- Laptop icon -->
+                        <h4>Intuitive User Interface</h4>
+                        <p>Designed for simplicity and ease of use, ensuring a seamless experience for everyone.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128274;</span> <!-- Lock icon -->
+                        <h4>Robust Security</h4>
+                        <p>Your data is protected with the latest encryption and security protocols.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128241;</span> <!-- Mobile phone icon -->
+                        <h4>Cross-Platform Compatibility</h4>
+                        <p>Access your projects anytime, anywhere, on any device.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="text-center">
+            <div class="container">
+                <h3>About Our Vision</h3>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Project Nexus was born from a desire to bridge the gap between complex technology and everyday usability. Our team of passionate innovators and engineers embarked on a journey to create a platform that not only meets the demands of the future but also inspires creativity and collaboration.</p>
+                        <p>We believe in a world where technology serves humanity, making tasks simpler, connections stronger, and possibilities endless. Our commitment to excellence drives every line of code and every design decision.</p>
+                        <p>This project was officially launched on <strong style="color: var(--accent-color);">2026-03-10</strong>, marking a significant milestone in our quest for innovation. We are continuously evolving, pushing boundaries, and redefining what's possible.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1516110833957-e1c798eca005?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Abstract modern technology">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h3>Ready to Transform Your Workflow?</h3>
+                <p>Join Project Nexus today and step into the future of productivity.</p>
+                <a href="#" class="btn">Get Started Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">&#x1F4F1;</a> <!-- Placeholder for social icon, e.g., using emoji or font awesome -->
+                <a href="#" aria-label="Twitter">&#x1F426;</a>
+                <a href="#" aria-label="LinkedIn">&#x1F4BC;</a>
+            </div>
+            <p>&copy; 2026 Project Nexus. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
