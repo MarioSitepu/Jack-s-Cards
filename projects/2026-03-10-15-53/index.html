@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Catalyst - Innovation Unleashed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset & Font */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0; /* Light gray for general text */
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); /* Dark blue gradient background */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        a {
+            color: #8d9eff; /* Lighter blue for links */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #c0caff; /* Even lighter blue on hover */
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #ffffff; /* Pure white for headings */
+        }
+
+        section {
+            padding: 4rem 2rem;
+            margin-bottom: 0; /* Remove default margin */
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Vibrant gradient for header */
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            flex-wrap: wrap;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2.5rem;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 0.3rem;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #ffffff;
+            transition: width 0.3s ease, right 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            right: auto;
+            left: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(22, 33, 62, 0.8), rgba(26, 26, 46, 0.8)), url('https://images.unsplash.com/photo-1517032135090-e421008d58a5?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            color: #ffffff;
+            padding: 8rem 2rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        .hero h2 {
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b 0%, #ee9b00 100%); /* Warm gradient for buttons */
+            color: #ffffff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Features Section */
+        .features {
+            background: #1f2a4a; /* Slightly lighter dark blue */
+            padding: 6rem 2rem;
+        }
+
+        .features h2 {
+            font-size: 2.8rem;
+            margin-bottom: 4rem;
+            color: #ffffff;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-item {
+            background: linear-gradient(145deg, #2a3b5c 0%, #3e507b 100%); /* Gradient for feature cards */
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-item .icon {
+            font-size: 3.5rem;
+            color: #8d9eff;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #c0c0c0;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%); /* Reverse of body background */
+            padding: 6rem 2rem;
+            text-align: left;
+            position: relative;
+        }
+
+        .about .container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 2rem;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            text-align: center; /* Override specific text-align */
+        }
+        
+        .about-content h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #c0c0c0;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Same as header gradient */
+            padding: 5rem 2rem;
+            color: #ffffff;
+            text-align: center;
+            box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: #111122; /* Very dark blue for footer */
+            color: #a0a0a0;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: auto; /* Push footer to the bottom */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            header .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+
+            .about .container {
+                flex-direction: column;
+            }
+
+            .about-content {
+                padding-right: 0;
+                margin-bottom: 2rem;
+                text-align: center;
+            }
+
+            .about-image {
+                max-width: 100%;
+            }
+
+            .about-content h3 {
+                font-size: 2rem;
+            }
+
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul li {
+                margin: 0.5rem 0.8rem;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .features h2, .about h2, .cta h2 {
+                font-size: 2.2rem;
+            }
+
+            .feature-item {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .features h2, .about h2, .cta h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-item .icon {
+                font-size: 3rem;
+            }
+
+            .feature-item h3 {
+                font-size: 1.5rem;
+            }
+
+            .about-content h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Project Catalyst</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Innovation Unleashed</h2>
+                <p>Driving progress with cutting-edge solutions and a vision for a brighter future.</p>
+                <a href="#features" class="btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Capabilities</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <span class="icon">&#9889;</span> <!-- Lightning bolt icon -->
+                        <h3>High Performance</h3>
+                        <p>Optimized algorithms ensure lightning-fast processing and efficiency across all operations.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128187;</span> <!-- Laptop icon -->
+                        <h3>Seamless Integration</h3>
+                        <p>Designed for effortless integration with existing systems, enhancing workflow without disruption.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128736;</span> <!-- Gear icon -->
+                        <h3>Scalable Architecture</h3>
+                        <p>Built to grow with your needs, our flexible architecture supports expansion without compromising stability.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128274;</span> <!-- Lock icon -->
+                        <h3>Robust Security</h3>
+                        <p>State-of-the-art security protocols protect your data with multi-layered defense mechanisms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2>Our Vision</h2>
+                    <h3>Empowering the Future</h3>
+                    <p>At Project Catalyst, we believe in the transformative power of technology to solve complex challenges and create new opportunities. Our journey began with a simple idea: to build solutions that are not only powerful but also intuitive and accessible.</p>
+                    <p>We are a team of innovators, engineers, and dreamers dedicated to pushing the boundaries of what's possible. Our commitment to excellence drives every line of code, every design choice, and every strategic decision.</p>
+                    <p>This project was officially initiated on <strong>2026-03-10</strong>, marking the beginning of a new era in digital innovation.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1516321497487-e288ad7ab135?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Abstract tech background">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Operations?</h2>
+                <p>Join us and discover how Project Catalyst can elevate your capabilities and drive unprecedented growth.</p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Catalyst. All rights reserved. Designed with passion for the future.</p>
+        </div>
+    </footer>
+</body>
+</html>
