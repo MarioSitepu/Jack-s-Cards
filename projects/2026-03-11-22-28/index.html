@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a11cb; /* Deep Purple */
+            --secondary-color: #2575fc; /* Bright Blue */
+            --accent-color: #00bcd4; /* Cyan */
+            --text-color: #333;
+            --light-text-color: #f4f4f4;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --header-bg: #1a1a2e; /* Darker background for header */
+            --nav-link-color: #e0e0e0;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --border-radius: 10px;
+            --spacing-unit: 1rem;
+        }
+
+        /* Base Reset & Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--light-text-color);
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: calc(2 * var(--spacing-unit));
+            color: var(--primary-color);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(2 * var(--spacing-unit));
+        }
+
+        header {
+            background: var(--header-bg);
+            padding: calc(1.5 * var(--spacing-unit)) 0;
+            color: var(--light-text-color);
+            box-shadow: 0 4px 15px var(--shadow-medium);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(2 * var(--spacing-unit));
+        }
+
+        nav a {
+            color: var(--nav-link-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--light-text-color);
+            padding: calc(6 * var(--spacing-unit)) 0;
+            text-align: center;
+            margin-bottom: calc(4 * var(--spacing-unit));
+            box-shadow: inset 0 -5px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero-section h2 {
+            color: var(--light-text-color);
+            font-size: 3rem;
+            margin-bottom: var(--spacing-unit);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            margin-bottom: calc(3 * var(--spacing-unit));
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent-color) 0%, #007bff 100%);
+            color: var(--light-text-color);
+            padding: calc(1.2 * var(--spacing-unit)) calc(3 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Info Cards Section */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(2 * var(--spacing-unit));
+            padding: 0 calc(2 * var(--spacing-unit));
+            margin-bottom: calc(4 * var(--spacing-unit));
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: calc(2 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow-medium);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-unit);
+            color: var(--primary-color);
+        }
+
+        .card p {
+            margin-bottom: var(--spacing-unit);
+            flex-grow: 1;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: var(--spacing-unit);
+            flex-grow: 1;
+        }
+
+        .card ul li {
+            padding-left: calc(1.5 * var(--spacing-unit));
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .card ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .card .date-info {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-top: auto; /* Pushes to the bottom */
+        }
+
+        .card .read-more {
+            display: inline-block;
+            margin-top: auto; /* Pushes to the bottom */
+            align-self: flex-start;
+            font-weight: 600;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: calc(4 * var(--spacing-unit)) 0;
+            margin-bottom: calc(4 * var(--spacing-unit));
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(2 * var(--spacing-unit));
+            padding: 0 calc(2 * var(--spacing-unit));
+        }
+
+        .feature-item {
+            background-color: var(--card-bg);
+            padding: calc(2 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background-color: #f0f8ff; /* Light blue tint on hover */
+            transform: translateY(-5px);
+        }
+
+        .feature-item h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--header-bg);
+            color: var(--nav-link-color);
+            text-align: center;
+            padding: calc(2 * var(--spacing-unit)) 0;
+            margin-top: auto;
+            box-shadow: 0 -4px 15px var(--shadow-medium);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                text-align: center;
+                width: 100%;
+                margin-bottom: var(--spacing-unit);
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .hero-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            header .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul {
+                gap: var(--spacing-unit);
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: var(--spacing-unit);
+            }
+
+            nav a {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .info-cards, .feature-grid {
+                grid-template-columns: 1fr;
+                padding: 0 var(--spacing-unit);
+            }
+
+            .cta-button {
+                padding: var(--spacing-unit) calc(2 * var(--spacing-unit));
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-section h2 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+                padding: 0.8rem 0;
+            }
+
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Nebula</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Tasks</a></li>
+                    <li><a href="#">Reports</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h2>Welcome to Your Modern Workspace</h2>
+                <p>Stay organized and productive with our intuitive platform, designed for the future of work.</p>
+                <button class="cta-button">Explore Features</button>
+            </div>
+        </section>
+
+        <section class="info-cards">
+            <div class="card">
+                <h3>Project Status</h3>
+                <p>All core modules are operational and performing within expected parameters. Ready for final client review.</p>
+                <p class="date-info">Last Updated: <strong>2026-03-11</strong></p>
+            </div>
+            <div class="card">
+                <h3>Upcoming Milestones</h3>
+                <ul>
+                    <li>Phase 2 Deployment - March 25, 2026</li>
+                    <li>Client Feedback Session - April 01, 2026</li>
+                    <li>Feature Freeze - April 15, 2026</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Team Updates</h3>
+                <p>New collaborative tools integrated successfully. Performance optimizations deployed to production.</p>
+                <a href="#" class="read-more">View All Updates</a>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <h2>Key Features</h2>
+            <div class="feature-grid container">
+                <div class="feature-item">
+                    <h3>Intuitive Dashboard</h3>
+                    <p>Monitor progress, track deadlines, and visualize key metrics at a glance with our clean, customizable dashboard.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Collaborative Tools</h3>
+                    <p>Streamline communication and enhance teamwork with integrated chat, file sharing, and real-time document editing.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Advanced Analytics</h3>
+                    <p>Gain deep insights into your project performance with powerful, easy-to-understand reports and data visualizations.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Secure & Scalable</h3>
+                    <p>Our platform is built with enterprise-grade security and designed to scale seamlessly with your growing needs.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nebula. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
