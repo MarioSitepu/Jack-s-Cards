@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #4A90E2; /* Bright Blue */
+            --secondary-color: #8D4AD2; /* Deep Purple */
+            --accent-color: #4AD29E; /* Teal Green */
+            --dark-bg: #1A202C; /* Dark Slate */
+            --light-bg: #F0F4F8; /* Light Grey Blue */
+            --text-light: #E2E8F0; /* Off-white */
+            --text-dark: #2D3748; /* Dark Grey */
+            --gradient-main: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-card: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(141, 74, 210, 0.1) 100%);
+            --gradient-button: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            --shadow-light: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+            --shadow-dark: rgba(0, 0, 0, 0.3) 0px 8px 24px;
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--dark-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: radial-gradient(at 0% 0%, hsla(240,40%,10%,1) 0, transparent 50%),
+                              radial-gradient(at 100% 100%, hsla(280,40%,15%,1) 0, transparent 50%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+        p {
+            margin-bottom: var(--spacing-sm);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--text-light);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            background: var(--gradient-button);
+            color: var(--text-light);
+            border: none;
+            cursor: pointer;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 32, 44, 0.8);
+            backdrop-filter: blur(10px);
+            padding: var(--spacing-sm) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-dark);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support text-fill-color */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        nav a {
+            color: var(--text-light);
+            font-weight: 600;
+            padding: var(--spacing-xs) 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content Sections */
+        main {
+            flex: 1;
+            padding: var(--spacing-lg) 0;
+        }
+
+        section {
+            padding: var(--spacing-lg) 0;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: calc(var(--spacing-lg) * 2) 0;
+            background: var(--gradient-main);
+            border-radius: var(--border-radius-lg);
+            margin-top: var(--spacing-md);
+            box-shadow: var(--shadow-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+            animation: pulse 5s infinite ease-in-out;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(-45deg);
+            animation: pulse 5s infinite ease-in-out reverse;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8) rotate(45deg); opacity: 0.5; }
+            50% { transform: scale(1.1) rotate(45deg); opacity: 0.8; }
+            100% { transform: scale(0.8) rotate(45deg); opacity: 0.5; }
+        }
+
+
+        .hero-section h2 {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .hero-section p {
+            max-width: 700px;
+            margin: 0 auto var(--spacing-md);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            opacity: 0.9;
+        }
+
+        .hero-section time {
+            font-weight: 600;
+            color: var(--accent-color);
+            display: block;
+            margin-top: var(--spacing-xs);
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        /* Features Section */
+        .features-section h3 {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: var(--spacing-lg);
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05); /* Slightly transparent white for glass effect */
+            backdrop-filter: blur(5px);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-md);
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary-color);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-xs);
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .feature-card h4 {
+            color: var(--text-light);
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .feature-card p {
+            font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            text-align: center;
+            background: var(--gradient-main);
+            padding: var(--spacing-lg) var(--spacing-md);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-dark);
+            margin-top: var(--spacing-lg);
+        }
+
+        .cta-section h3 {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto var(--spacing-md);
+            font-size: clamp(1rem, 2vw, 1.1rem);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            color: var(--text-light);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: var(--spacing-lg);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-xs);
+            opacity: 0.7;
+        }
+
+        .social-links a {
+            margin: 0 var(--spacing-xs);
+            font-size: 1.5rem;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: var(--spacing-sm);
+            }
+
+            .hero-section {
+                padding: var(--spacing-lg) var(--spacing-sm);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: var(--spacing-md);
+            }
+
+            .cta-section {
+                padding: var(--spacing-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+            p { font-size: 0.9rem; }
+
+            header .logo {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: var(--spacing-xs) var(--spacing-sm);
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Zenith</div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#roadmap">Roadmap</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h2>Elevate Your Vision with Project Zenith</h2>
+                <p>
+                    A revolutionary platform designed for seamless collaboration and unparalleled efficiency.
+                    Experience the future of project management, today.
+                </p>
+                <p>Current Status: In Progress - Last Major Update: <time datetime="2026-03-11">March 11, 2026</time></p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h3>Key Capabilities</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h4>Intuitive Interface</h4>
+                        <p>Streamlined design for effortless navigation and a pleasant user experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💡</div>
+                        <h4>Smart Automation</h4>
+                        <p>Automate repetitive tasks and focus on what truly matters for your project.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🤝</div>
+                        <h4>Collaborative Tools</h4>
+                        <p>Real-time collaboration features to keep your team in perfect sync.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h4>Robust Security</h4>
+                        <p>Your data is protected with industry-leading security protocols and encryption.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="cta-section">
+            <div class="container">
+                <h3>Ready to Transform Your Workflow?</h3>
+                <p>Join the growing community of innovators leveraging Project Zenith for their success.</p>
+                <a href="#contact" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Zenith. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+                <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                <a href="#" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
