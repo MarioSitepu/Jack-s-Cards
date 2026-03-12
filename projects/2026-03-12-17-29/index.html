@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0572; /* Dark purple */
+            --secondary-color: #8c009b; /* Lighter purple */
+            --accent-color: #e53f71; /* Pinkish red */
+            --background-light: #f4f7f6;
+            --background-dark: #1a1a2e;
+            --text-light: #f4f7f6;
+            --text-dark: #333;
+            --gradient-start: #6a0572;
+            --gradient-end: #8c009b;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-dark: rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            scroll-behavior: smooth;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+            color: var(--text-light);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px var(--shadow-light);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-dark);
+            color: var(--text-light); /* Keep text color stable on hover */
+        }
+
+        .primary-btn {
+            background: linear-gradient(45deg, var(--accent-color), #ff6f9f); /* A different gradient for CTA */
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--text-light);
+            padding: 120px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--background-light);
+        }
+
+        .features h2, .about h2, .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* About Section */
+        .about {
+            background-color: #fff;
+            text-align: left;
+        }
+
+        .about .container {
+            max-width: 900px;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: linear-gradient(45deg, var(--gradient-end), var(--gradient-start));
+            color: var(--text-light);
+            padding: 100px 0;
+        }
+
+        .cta h2 {
+            color: var(--text-light);
+            font-size: 3rem;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            padding: 30px 0;
+            font-size: 0.9rem;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            margin-left: 20px;
+            opacity: 0.8;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 10px 10px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p, .cta p {
+                font-size: 1.1rem;
+            }
+
+            .features h2, .about h2, .cta h2 {
+                font-size: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about {
+                text-align: center;
+            }
+            
+            footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            footer p {
+                margin-bottom: 15px;
+            }
+
+            .footer-links {
+                margin-top: 15px;
+            }
+
+            .footer-links a {
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul li {
+                margin: 0 5px 10px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project 2026</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Welcome to Our Modern Project</h1>
+                <p>Innovating the future, one step at a time. This project was conceptualized for <strong>2026-03-12</strong>.</p>
+                <a href="#features" class="btn">Explore More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="icon fas fa-cogs"></i>
+                        <h3>Advanced Technology</h3>
+                        <p>Leveraging cutting-edge solutions for unparalleled performance and reliability.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon fas fa-mobile-alt"></i>
+                        <h3>Fully Responsive</h3>
+                        <p>Designed to look stunning and perform flawlessly on any device, big or small.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon fas fa-palette"></i>
+                        <h3>Sleek Design</h3>
+                        <p>A modern, intuitive, and visually appealing interface for an enhanced user experience.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About Us</h2>
+                <p>We are a passionate team dedicated to creating innovative solutions that push boundaries. Our journey began with a vision to simplify complexity and enhance daily lives through technology. With a focus on user-centric design and robust engineering, we strive to deliver products that not only meet but exceed expectations.</p>
+                <p>Our commitment to excellence drives us forward, constantly exploring new horizons and embracing challenges. We believe in collaboration, transparency, and continuous improvement, ensuring that every project we undertake is a testament to our dedication.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Start?</h2>
+                <p>Join us on this exciting journey. We'd love to hear from you!</p>
+                <a href="#" class="btn primary-btn">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Modern Project. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
