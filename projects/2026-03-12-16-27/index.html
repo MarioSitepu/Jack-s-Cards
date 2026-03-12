@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nova - Launching 2026-03-12</title>
+    <style>
+        /* CSS Variables for a clean, modern color scheme */
+        :root {
+            --primary-bg: hsl(210, 20%, 98%); /* Very light blue-grey */
+            --secondary-bg: #ffffff;
+            --text-color: hsl(210, 10%, 20%); /* Dark grey */
+            --light-text-color: hsl(210, 10%, 40%); /* Medium grey */
+            --accent-gradient: linear-gradient(45deg, hsl(240, 70%, 65%), hsl(280, 70%, 60%)); /* Blue-purple to purple */
+            --accent-color-start: hsl(240, 70%, 65%);
+            --accent-color-end: hsl(280, 70%, 60%);
+            --button-hover-gradient: linear-gradient(45deg, hsl(240, 75%, 70%), hsl(280, 75%, 65%));
+            --border-color: hsl(210, 15%, 90%);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Base styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Global container for content width */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styling */
+        header {
+            background: var(--secondary-bg);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text; /* For gradient text */
+            -webkit-text-fill-color: transparent; /* For gradient text */
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color-start);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-bg);
+            color: var(--accent-color-start);
+            padding: 15px 35px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: var(--button-hover-gradient);
+            color: white;
+        }
+
+        /* Main Content Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--secondary-bg);
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--secondary-bg);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-card .icon {
+            font-size: 3.5rem; /* Using emoji for simple icons */
+            display: block;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .feature-card h3 {
+            font-size: 1.9rem;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .feature-card p {
+            color: var(--light-text-color);
+            font-size: 1.05rem;
+        }
+
+        /* About Section specifics */
+        .about-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .about-content p {
+            font-size: 1.15rem;
+            color: var(--light-text-color);
+            margin-bottom: 20px;
+        }
+        .about-content strong {
+            color: var(--accent-color-start);
+        }
+
+
+        /* Call to Action Section */
+        .cta-section {
+            text-align: center;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 100px 0;
+        }
+
+        .cta-section h2 {
+            color: white; /* Override gradient for white text */
+            -webkit-text-fill-color: white; /* For white text */
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-section p {
+            font-size: 1.4rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+        }
+
+        /* Footer Styling */
+        footer {
+            background: hsl(210, 15%, 15%); /* Dark blue-grey */
+            color: hsl(210, 10%, 70%); /* Light grey text */
+            padding: 40px 0;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: hsl(210, 10%, 70%);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 0 12px 10px 12px;
+            }
+            .hero {
+                padding: 80px 0;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            h2 {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+            section {
+                padding: 60px 0;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-card {
+                padding: 30px;
+            }
+            .cta-section {
+                padding: 80px 0;
+            }
+            .cta-section p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.6rem;
+            }
+            nav ul li {
+                margin: 0 8px 8px 8px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            section {
+                padding: 40px 0;
+            }
+            .feature-card .icon {
+                font-size: 3rem;
+            }
+            .feature-card h3 {
+                font-size: 1.6rem;
+            }
+            .about-content p {
+                font-size: 1rem;
+            }
+            .cta-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Project Nova</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Revolutionizing Digital Experiences</h1>
+                <p>Unlocking the future of innovation with cutting-edge technology and seamless design. Project Nova is set to launch on <strong>2026-03-12</strong>.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features & Benefits</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="icon" role="img" aria-label="Sparkles">✨</span>
+                        <h3>Intuitive Interface</h3>
+                        <p>Experience a user interface designed for simplicity and efficiency, making complex tasks effortless.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon" role="img" aria-label="Rocket">🚀</span>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed, ensuring a smooth and responsive experience across all devices.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon" role="img" aria-label="Locked Padlock">🔒</span>
+                        <h3>Robust Security</h3>
+                        <p>Your data is protected with industry-leading encryption and security protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon" role="img" aria-label="Light Bulb">💡</span>
+                        <h3>Innovative Solutions</h3>
+                        <p>Stay ahead with features constantly updated to meet the demands of tomorrow's digital world.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container about-content">
+                <h2>Our Vision for 2026</h2>
+                <p>
+                    Project Nova was conceived with the ambition to redefine digital interaction. By <strong>2026</strong>, we aim to be a cornerstone for businesses and individuals seeking unparalleled digital tools. Our commitment to innovation, user-centric design, and robust security forms the bedrock of our development. We believe in creating platforms that not only perform but inspire.
+                </p>
+                <p>
+                    The official launch on <strong>2026-03-12</strong> marks the beginning of a new era. We're excited to share our progress and invite you to be a part of this transformative journey.
+                </p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p>Join us on this journey. Sign up for early access and exclusive updates before the launch!</p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved. Designed for the future.</p>
+            <p>
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
