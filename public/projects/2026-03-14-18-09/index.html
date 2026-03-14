@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #6a11cb;
+            --primary-gradient-end: #2575fc;
+            --secondary-gradient-start: #00c6ff;
+            --secondary-gradient-end: #0072ff;
+            --dark-bg: #1a1a2e;
+            --dark-card: #2c2c4d;
+            --light-text: #e0e0e0;
+            --accent-color: #00e676; /* Green accent */
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --spacing-unit: 1rem;
+        }
+
+        /* Base Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--light-text);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--light-text);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: var(--spacing-unit);
+            font-weight: 600;
+            color: var(--light-text);
+        }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 1.5);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            padding: calc(var(--spacing-unit) * 1.5) 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: #fff;
+            font-weight: 400;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-md);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            padding: calc(var(--spacing-unit) * 2) 0;
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: radial-gradient(circle at top left, #283c86, #45a247); /* Subtle radial gradient */
+            padding: calc(var(--spacing-unit) * 6) 0;
+            border-radius: var(--border-radius-lg);
+            margin: calc(var(--spacing-unit) * 2) auto;
+            max-width: 1000px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto calc(var(--spacing-unit) * 2);
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--dark-bg);
+            padding: calc(var(--spacing-unit) * 4) 0;
+        }
+
+        .features h2 {
+            font-size: 2.5rem;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-card {
+            background-color: var(--dark-card);
+            padding: calc(var(--spacing-unit) * 2.5);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-unit);
+            display: block;
+            text-align: center;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-unit);
+            text-align: center;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: linear-gradient(45deg, #1f4037, #99f2c8); /* Greenish gradient */
+            padding: calc(var(--spacing-unit) * 5) 0;
+            border-radius: var(--border-radius-lg);
+            margin: calc(var(--spacing-unit) * 4) auto;
+            max-width: 1000px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta h2 {
+            font-size: 2.8rem;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            color: #fff;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto calc(var(--spacing-unit) * 2.5);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta .date {
+            font-weight: 700;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-md);
+            display: inline-block;
+            margin-top: calc(var(--spacing-unit) * 1);
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--primary-gradient-end), var(--primary-gradient-start));
+            color: #fff;
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2) 0;
+            margin-top: auto;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .cta h2 {
+                font-size: 2.2rem;
+            }
+            .cta p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+            nav a {
+                display: block;
+                text-align: center;
+            }
+            .hero {
+                margin: var(--spacing-unit) auto;
+                padding: calc(var(--spacing-unit) * 4) 0;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .features h2, .cta h2 {
+                font-size: 2rem;
+            }
+            .cta {
+                margin: calc(var(--spacing-unit) * 2) auto;
+                padding: calc(var(--spacing-unit) * 3) 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 calc(var(--spacing-unit));
+            }
+            .logo {
+                font-size: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero p {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+            .features h2, .cta h2 {
+                font-size: 1.8rem;
+            }
+            .feature-card {
+                padding: calc(var(--spacing-unit) * 1.5);
+            }
+            .feature-card .icon {
+                font-size: 2.5rem;
+            }
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            .cta p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Nova</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Revolutionizing Your Workflow</h1>
+                <p>Experience seamless collaboration and unparalleled efficiency with Project Nova – the future of project management is here.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="icon">🚀</span>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed, ensuring your projects run smoothly without any lag or downtime.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">💡</span>
+                        <h3>Intuitive User Interface</h3>
+                        <p>Designed with user-friendliness in mind, making complex tasks simple and accessible for everyone.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🔒</span>
+                        <h3>Top-Tier Security</h3>
+                        <p>Your data is protected with advanced encryption and robust security protocols, keeping your information safe.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🔗</span>
+                        <h3>Seamless Integrations</h3>
+                        <p>Connect with your favorite tools and services effortlessly, enhancing your existing ecosystem.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Projects?</h2>
+                <p>Join countless teams already benefiting from Project Nova. Get started today and elevate your productivity to new heights.</p>
+                <p class="date">Planned Release Date: 2026-03-14</p>
+                <a href="#contact" class="btn">Get Started Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
