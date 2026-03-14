@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #fc6767 0%, #ec008c 100%);
+            --text-light: #f0f2f5;
+            --text-dark: #333;
+            --bg-card: rgba(255, 255, 255, 0.1);
+            --bg-card-hover: rgba(255, 255, 255, 0.2);
+            --shadow-light: rgba(0, 0, 0, 0.2);
+            --border-radius-lg: 12px;
+            --border-radius-sm: 8px;
+            --transition-speed: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            transition: color var(--transition-speed);
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--text-light);
+            left: 0;
+            bottom: -5px;
+            transition: width var(--transition-speed);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            flex: 1;
+            padding: 40px 0;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--text-light);
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            border-radius: 2px;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            opacity: 0.9;
+        }
+
+        .hero {
+            padding: 120px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: calc(100vh - 100px); /* Adjust based on header height */
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            text-align: left;
+            box-shadow: 0 8px 25px var(--shadow-light);
+            transition: background var(--transition-speed), transform var(--transition-speed);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-10px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-light);
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            text-align: left;
+            margin-top: 60px;
+        }
+
+        .about-content .text-block {
+            flex: 1;
+        }
+
+        .about-content .text-block h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .about-content .text-block p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: none;
+            margin-bottom: 20px;
+        }
+
+        .about-content .image-block {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-content .image-block img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 15px 40px var(--shadow-light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cta {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 80px 0;
+            border-radius: var(--border-radius-lg);
+            margin: 80px auto;
+            max-width: 1000px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .cta h2 {
+            margin-bottom: 30px;
+            font-size: 2.8rem;
+        }
+
+        .cta p {
+            margin-bottom: 50px;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: auto;
+            box-shadow: 0 -4px 15px var(--shadow-light);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin: 0;
+        }
+
+        footer .social-links {
+            margin-top: 15px;
+        }
+
+        footer .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        footer .social-links a:hover {
+            color: var(--secondary-gradient);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            section h2 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-content .image-block {
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav {
+                margin-top: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 30px;
+            }
+
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .cta {
+                padding: 60px 20px;
+                margin: 60px 20px;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            .cta p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Nova</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <h1>Unleash Your Potential with Project Nova</h1>
+                <p>A revolutionary platform designed for the future. Experience innovation like never before.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <p>Explore the powerful capabilities that make Project Nova stand out from the crowd.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Design</h3>
+                        <p>Our user interface is crafted for simplicity and efficiency, ensuring a seamless experience for all users.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Robust Performance</h3>
+                        <p>Built on cutting-edge technology, Project Nova delivers lightning-fast performance and unwavering reliability.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Solutions</h3>
+                        <p>Whether you're an individual or a large enterprise, our platform scales to meet your growing demands effortlessly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Secure & Private</h3>
+                        <p>Your data security and privacy are our top priorities, protected with advanced encryption and protocols.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Project Nova</h2>
+                <div class="about-content">
+                    <div class="text-block">
+                        <h3>Pioneering the Future</h3>
+                        <p>Project Nova was conceived with a vision to redefine digital experiences. We believe in creating tools that are not just functional but also inspiring and transformative.</p>
+                        <p>Our dedicated team of innovators has poured countless hours into developing a platform that embodies modern design, robust functionality, and forward-thinking solutions. We are committed to continuous improvement and evolving with the needs of our global community.</p>
+                        <p>This project officially commenced on <span style="font-weight: 600; color: var(--secondary-gradient);">2026-03-15</span>, marking a new era of digital excellence.</p>
+                    </div>
+                    <div class="image-block">
+                        <img src="https://via.placeholder.com/500x350/6a11cb/f0f2f5?text=Future+Vision" alt="Abstract future vision">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Start Your Journey?</h2>
+                <p>Join the future of innovation today. Get in touch with us to learn more or to get started.</p>
+                <a href="mailto:info@projectnova.com" class="btn">Contact Us</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+            <p>Built with passion for a better tomorrow.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmMGYyZjUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29uLXRhYmxlci1mYWNlYm9vayI+PHBhdGggZD0iTTE4IDZjMC0xLjY1Ny0xLjM0My0zLTMtM2gtMTJjLTEuNjU3IDAtMyAxLjM0My0zIDN2MTJjMCAxLjY1NyAxLjM0MyAzIDMgM2g2di03aC0zdi0zLjVoM3YtMmMwLTIuNDg5IDEuNDgzLTQuNSAzLjk4NC00LjVsMy4wMTYtLjAwMXYzaC0ydy0yLjAxNCAzLjV2MmgzdjdoNXYtMTJ6IiBzdHJva2Utd2lkdGg9IjIiPjwvcGF0aD48L3N2Zz4=" alt="Facebook Icon" width="24" height="24"></a>
+                <a href="#" aria-label="Twitter"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmMGYyZjUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29uLXRhYmxlci10d2l0dGVyLXhiIj48cGF0aCBkPSJNMjIgNGwtMi40MyAxLjE2NGMtLjQ2NC0uNTU2LTEuMjg2LS45MjgtMi4xNDUtLjk2NGMtMS42NDMgMC0yLjk4MyAxLjI3MS0yLjk4MyAyLjg0NWMwIC4yODguMDI5IC41NjguMDg4IC44MzJjLTQuNjE5LS4yMjktOC42ODEtMi4zNjUtMTEuNDExLTUuMzY3Yy0uNDc3IC44LS43NCAxLjc5Ny0uNzQgMi44MjNjMCAxLjk3IDEuMDI5IDMuNzAxIDIuNTkyIDQuNzMxYy0uOTU5LS4wMzgtMS44NTMtLjI4OC0yLjY0Ny0uNzE4bDBgLjAyOGMwIDIuOTkyIDIuMTg1IDUuNDY5IDUuMDk3IDYuMDRjLS40NTguMTI1LS45NDUuMTgyLTEuNDQzLjE4MmMtLjM1MyAwLS42OTctLjAzNC0xLjAzMi0uMDk5Yy44MDcgMi40NTggMy4xNTUgNC4yMzQgNS45MzggNC4yODZjLTIuMTg0IDEuNzY2LTQuOTQyIDIuODI0LTcuOTY1IDIuODI0Yy0uNTI5IDAtMS4wNTEtLjAzMS0xLjU2Mi0uMDkyYzIuODI3IDEuODgyIDYuMTY1IDIuOTgyIDkuODAxIDIuOTgyYzExLjgwNyAwIDE4LjI0My05LjQ0OSA2LjY0Ny0xNi42OTZjLS4xOC0uMTczLS4zNjktLjM0OS0uNTYyLS41MTJjMS4yMDYtLjg2NiAyLjI2NC0xLjk2IDEuMjQ2LTMuNjYyeiIgc3Ryb2tlLXdpZHRoPSIyIj48L3BhdGthdGg+PC9zdmc+"></a>
+                <a href="#" aria-label="LinkedIn"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmMGYyZjUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29uLXRhYmxlci1saW5rZWRpbiI+PHBhdGggZD0iTTQgNG0tMSAwYTMgMyAwIDEgMCA2IDAgMyAzIDAgMSAwLTYgMHoiPjwvcGF0aD48cGF0aCBkPSJNMTIgMTJoLTB2NmgydjdoLTJ2LTdoLTR2N2gtNHYtNyBoLTR2N2gydjhoLTR2LTd6IiBzdHJva2Utd2lkdGg9IjIiPjwvcGF0aD48L3N2Zz4=" alt="LinkedIn Icon" width="24" height="24"></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
