@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --accent-color: #28a745;
+            --dark-bg: #1a202c;
+            --light-text: #f8f9fa;
+            --dark-text: #343a40;
+            --gradient-start: #6a11cb;
+            --gradient-end: #2575fc;
+            --button-gradient-start: #00c6ff;
+            --button-gradient-end: #0072ff;
+            --font-family: 'Poppins', sans-serif;
+            --container-max-width: 1200px;
+            --spacing-unit: 1rem; /* 16px */
+            --border-radius-lg: 10px;
+            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-dark: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-text);
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: calc(2 * var(--spacing-unit));
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-unit);
+            color: var(--dark-text);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-top: calc(3 * var(--spacing-unit));
+            margin-bottom: calc(2 * var(--spacing-unit));
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--gradient-end);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border-radius: var(--border-radius-lg);
+            background-image: linear-gradient(45deg, var(--button-gradient-start) 0%, var(--button-gradient-end) 100%);
+            color: var(--light-text);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.3);
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.4);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            padding: calc(1.5 * var(--spacing-unit)) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--box-shadow-dark);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            color: var(--light-text);
+            margin: 0;
+            font-size: 1.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        header h1 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(2 * var(--spacing-unit));
+        }
+
+        nav a {
+            color: var(--light-text);
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            color: var(--light-text);
+            padding: 8rem 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            min-height: 70vh; /* Ensure it takes a good portion of the viewport height */
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            z-index: 1;
+            animation: rotateBackground 20s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        #hero h2 {
+            color: var(--light-text);
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: calc(1.5 * var(--spacing-unit));
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #hero p {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            margin-bottom: calc(3 * var(--spacing-unit));
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* Feature Section */
+        #features {
+            padding: calc(5 * var(--spacing-unit)) 0;
+            background-color: var(--light-text);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(3 * var(--spacing-unit));
+            margin-top: calc(4 * var(--spacing-unit));
+        }
+
+        .feature-item {
+            background-color: #ffffff;
+            padding: calc(2.5 * var(--spacing-unit));
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-item .icon {
+            font-size: 3.5rem;
+            color: var(--gradient-end);
+            margin-bottom: var(--spacing-unit);
+            display: block;
+        }
+
+        .feature-item h3 {
+            color: var(--dark-text);
+            font-size: 1.6rem;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: var(--secondary-color);
+        }
+
+        /* About Section */
+        #about {
+            background-color: #f0f4f8;
+            padding: calc(5 * var(--spacing-unit)) 0;
+        }
+
+        #about h2 {
+            color: var(--gradient-start);
+        }
+
+        #about p {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--dark-text);
+            font-size: 1.15rem;
+        }
+
+        /* Call to Action Section */
+        #cta {
+            background: linear-gradient(90deg, var(--gradient-end) 0%, var(--gradient-start) 100%);
+            color: var(--light-text);
+            padding: calc(6 * var(--spacing-unit)) 0;
+            text-align: center;
+        }
+
+        #cta h2 {
+            color: var(--light-text);
+            margin-bottom: calc(2 * var(--spacing-unit));
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+        }
+
+        #cta p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: calc(3 * var(--spacing-unit));
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--secondary-color);
+            padding: calc(3 * var(--spacing-unit)) 0;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid #2d3748;
+        }
+
+        footer p {
+            margin: 0;
+            color: var(--secondary-color);
+        }
+
+        footer a {
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+                width: 100%;
+                text-align: center;
+                margin-top: var(--spacing-unit);
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                display: block;
+                padding: 0.5rem 0;
+                border-radius: var(--border-radius-lg);
+            }
+
+            nav a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            #hero {
+                padding: 6rem 0;
+                min-height: 60vh;
+            }
+
+            #hero h2 {
+                font-size: 2.5rem;
+            }
+
+            #hero p {
+                font-size: 1.1rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item {
+                margin-bottom: calc(2 * var(--spacing-unit));
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: var(--spacing-unit);
+            }
+
+            #hero {
+                padding: 4rem 0;
+            }
+
+            #hero h2 {
+                font-size: 2rem;
+            }
+
+            #hero p {
+                font-size: 0.95rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="#">Project 2026</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#cta">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Innovate. Create. Inspire.</h2>
+                <p>Welcome to the future of project management and collaboration. Our platform is designed to streamline your workflows and ignite creativity.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="text-center">
+            <div class="container">
+                <h2>Key Features & Benefits</h2>
+                <p>Experience a new era of productivity with our cutting-edge tools and intuitive design.</p>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <span class="icon">🚀</span>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed, our platform ensures a smooth and responsive experience, even with complex projects.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">💡</span>
+                        <h3>Intuitive User Interface</h3>
+                        <p>Designed with user experience in mind, making complex tasks simple and accessible for everyone.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">🔗</span>
+                        <h3>Seamless Integrations</h3>
+                        <p>Connect with your favorite tools and services to create a truly unified workspace.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">🔒</span>
+                        <h3>Enterprise-Grade Security</h3>
+                        <p>Your data is protected with the latest security protocols and encryption standards.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="text-center">
+            <div class="container">
+                <h2>Our Vision for the Future</h2>
+                <p>At Project 2026, we believe in empowering teams to achieve their greatest potential. Our journey began with a simple idea: to build a platform that not only manages tasks but inspires innovation.</p>
+                <p>We are constantly evolving, integrating feedback, and pushing the boundaries of what's possible in digital collaboration. Our dedicated team is committed to providing a robust, scalable, and user-friendly solution for businesses of all sizes.</p>
+                <p>Join us as we redefine the future of work, one project at a time.</p>
+            </div>
+        </section>
+
+        <section id="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p>Join thousands of satisfied users who are already benefiting from Project 2026. Start your journey towards efficiency and innovation today.</p>
+                <a href="#" class="btn">Get Started Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project 2026. All rights reserved. | Last Updated: 2026-03-15</p>
+            <p>Designed with <span style="color: #e25555;">&hearts;</span> for a modern world.</p>
+        </div>
+    </footer>
+</body>
+</html>
