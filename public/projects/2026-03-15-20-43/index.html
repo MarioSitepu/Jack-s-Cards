@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --primary-color: #6A00FF; /* Deep Purple */
+            --secondary-color: #00C9FF; /* Bright Blue */
+            --accent-color: #92FE9D; /* Light Green */
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --bg-light: #f4f7f6;
+            --bg-dark: #34495e;
+            --gradient-main: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            --gradient-button: linear-gradient(to right, var(--accent-color), var(--secondary-color));
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-dark: 0 8px 25px rgba(0, 0, 0, 0.2);
+            --border-radius: 10px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+        }
+
+        /* General Styling */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        h1 { font-size: 2.8em; }
+        h2 { font-size: 2.2em; }
+        h3 { font-size: 1.8em; }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 50px;
+            background: var(--gradient-button);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-light);
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            padding: 20px 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-right: 20px;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        header nav ul li {
+            margin-left: 30px;
+        }
+
+        header nav ul li a {
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        header nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: var(--gradient-main);
+            color: var(--text-light);
+            text-align: center;
+            padding: 100px 20px;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #hero .hero-content {
+            max-width: 800px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        #hero h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            animation: slideInUp 1s ease-out;
+        }
+
+        #hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            animation: slideInUp 1.2s ease-out;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--bg-light);
+        }
+
+        section h2 {
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        #features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .feature-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-item p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        /* About Section */
+        #about {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        #about h2 {
+            color: var(--text-light);
+        }
+
+        #about p {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            opacity: 0.9;
+        }
+
+        #about .date-highlight {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 1.2em;
+            margin-top: 30px;
+            display: block;
+        }
+
+        /* Contact Section */
+        #contact .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            text-align: left;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form .button {
+            width: auto;
+            display: block; /* Make button fill width for better mobile experience */
+            margin-top: 20px;
+            text-align: center;
+        }
+
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9em;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2em; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.5em; }
+
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header .logo {
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
+
+            header nav ul {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+
+            header nav ul li {
+                margin: 10px 0;
+            }
+
+            #hero {
+                padding: 80px 20px;
+            }
+
+            #hero h2 {
+                font-size: 2.5em;
+            }
+
+            #hero p {
+                font-size: 1.1em;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            header nav ul li {
+                margin: 5px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Nova</a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h2>Innovate. Create. Inspire.</h2>
+                <p>Delivering cutting-edge solutions for a brighter future.</p>
+                <a href="#features" class="button">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Core Capabilities</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h3>Advanced Analytics</h3>
+                        <p>Leverage powerful data insights to drive informed decisions and optimize performance across all sectors.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Seamless Integration</h3>
+                        <p>Our solutions are designed for effortless integration with your existing systems, ensuring smooth transitions.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Scalable Infrastructure</h3>
+                        <p>Built to grow with your needs, our infrastructure provides robust and flexible scalability for future demands.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>User-Centric Design</h3>
+                        <p>Intuitive interfaces and exceptional user experience are at the heart of everything we develop.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>Our Vision</h2>
+                <p>Project Nova is dedicated to pushing the boundaries of technology, creating innovative products that empower businesses and individuals alike. We believe in crafting solutions that are not only functional but also beautiful and intuitive, making complex tasks simple and accessible.</p>
+                <p>Our journey began with a simple idea: to build a platform that truly understands and adapts to its users. Today, we stand on the cusp of realizing that vision, continuously evolving and refining our offerings based on feedback and emerging trends.</p>
+                <p class="date-highlight">Project Launch Date: 2026-03-15</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have a question or want to collaborate? Reach out to us!</p>
+                <div class="contact-form">
+                    <form action="#" method="POST">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" required></textarea>
+
+                        <button type="submit" class="button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+            <p>Designed with passion and code.</p>
+        </div>
+    </footer>
+</body>
+</html>
