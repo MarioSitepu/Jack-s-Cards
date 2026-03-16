@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Vision | 2026</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #22d3ee;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Nav */
+        header {
+            height: 100vh;
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent),
+                        radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.15), transparent);
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        /* Hero Section */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+        }
+
+        .date-badge {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInDown 1s ease;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 600px;
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -10px rgba(99, 102, 241, 0.6);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            background: #0a0f1c;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 3rem;
+            border-radius: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: #64748b;
+        }
+
+        /* Content Section */
+        .content-split {
+            padding: 100px 5%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .content-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .content-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: var(--gradient);
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=2000') center/cover;
+            mix-blend-mode: overlay;
+            opacity: 0.6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 5%;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #64748b;
+        }
+
+        .footer-date {
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            h1 { font-size: 3rem; }
+            .content-split { flex-direction: column; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">NEXUS.26</div>
+            <div class="nav-links">
+                <a href="#">Solutions</a>
+                <a href="#">Technology</a>
+                <a href="#">Ecosystem</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="date-badge">Release Cycle: March 2026</div>
+            <h1>The Future of <br>Digital Integration.</h1>
+            <p>Experience the next generation of interconnected systems designed for the speed of 2026. Seamless, secure, and infinitely scalable.</p>
+            <div class="cta-group">
+                <a href="#" class="btn btn-primary">Get Started</a>
+            </div>
+        </section>
+    </header>
+
+    <section class="features">
+        <div class="card">
+            <div class="icon"></div>
+            <h3>Quantum Security</h3>
+            <p>End-to-end encryption protocols updated for the post-quantum era, ensuring your data remains yours alone.</p>
+        </div>
+        <div class="card">
+            <div class="icon"></div>
+            <h3>Neural Interface</h3>
+            <p>Intuitive UI/UX patterns that adapt to user behavior using advanced predictive modeling and AI.</p>
+        </div>
+        <div class="card">
+            <div class="icon"></div>
+            <h3>Global Sync</h3>
+            <p>Real-time synchronization across all devices with sub-millisecond latency using 6G infrastructure.</p>
+        </div>
+    </section>
+
+    <section class="content-split">
+        <div class="content-text">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Engineered for 2026-03-16</h2>
+            <p style="color: #94a3b8; margin-bottom: 2rem;">Our milestone release scheduled for March 16th, 2026, marks a turning point in how we interact with the web. We are building a foundation that prioritizes speed, privacy, and aesthetic excellence.</p>
+            <ul style="list-style: none; color: var(--accent);">
+                <li style="margin-bottom: 0.5rem;">✓ Decentralized Architecture</li>
+                <li style="margin-bottom: 0.5rem;">✓ AI-Native Components</li>
+                <li style="margin-bottom: 0.5rem;">✓ Carbon-Neutral Hosting</li>
+            </ul>
+        </div>
+        <div class="content-image"></div>
+    </section>
+
+    <footer>
+        <span class="footer-date">ESTABLISHED MARCH 16, 2026</span>
+        <p>&copy; 2026 Nexus Vision International. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
