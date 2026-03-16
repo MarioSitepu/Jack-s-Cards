@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureScape Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            --secondary-gradient: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
+            --accent-color: #00bcd4;
+            --text-light: #e0e0e0;
+            --text-dark: #333;
+            --bg-dark: #121212;
+            --card-bg: #1e1e1e;
+            --border-radius: 10px;
+            --spacing-unit: 1rem;
+            --font-primary: 'Montserrat', sans-serif;
+            --font-secondary: 'Roboto', sans-serif;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #4dd0e1; /* Lighter accent */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-primary);
+            margin-bottom: var(--spacing-unit);
+            color: var(--text-light);
+        }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.4);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo {
+            font-family: var(--font-primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        nav a {
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(var(--accent-color), 0.2);
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 2);
+            background: linear-gradient(rgba(15, 52, 96, 0.7), rgba(22, 33, 62, 0.7)), url('https://source.unsplash.com/random/1600x900/?futuristic,technology') no-repeat center center/cover;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1; /* Allows hero to take available space */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(0, 188, 212, 0.1) 0%, transparent 70%);
+            animation: pulse 10s infinite alternate;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h2 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 188, 212, 0.6);
+        }
+
+        /* Key Features Section */
+        .features {
+            background: var(--bg-dark);
+            padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+            text-align: center;
+        }
+
+        .features h3 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(var(--accent-color), 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 188, 212, 0.2);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-unit);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-unit);
+            color: var(--text-light);
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        .about {
+            padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+            background: var(--primary-gradient);
+            text-align: center;
+        }
+
+        .about h3 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.4);
+            color: var(--text-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2);
+            margin-top: auto; /* Pushes footer to the bottom */
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(var(--accent-color), 0.1);
+        }
+
+        /* Utility classes for icons (simulated) */
+        .icon-rocket::before { content: '🚀'; }
+        .icon-lightbulb::before { content: '💡'; }
+        .icon-shield::before { content: '🛡️'; }
+
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: calc(var(--spacing-unit) * 0.5);
+                width: 100%;
+                text-align: center;
+            }
+
+            nav a {
+                padding: 0.8rem;
+                display: block;
+            }
+
+            .hero h2 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: var(--spacing-unit);
+            }
+
+            .hero {
+                padding: calc(var(--spacing-unit) * 4) var(--spacing-unit);
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+
+            .features, .about {
+                padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
+            }
+            
+            .feature-card {
+                padding: var(--spacing-unit);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">FutureScape</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>Shaping Tomorrow, Today.</h2>
+                <p>
+                    Unleashing groundbreaking innovations for a sustainable future.
+                    Project initiated on <strong style="color: var(--accent-color);">2026-03-16</strong>,
+                    we are committed to pushing the boundaries of what's possible.
+                </p>
+                <button class="btn">Discover Our Vision</button>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h3>Our Core Strengths</h3>
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <div class="icon icon-rocket"></div>
+                        <h4>Rapid Prototyping</h4>
+                        <p>Accelerating development cycles with agile methodologies and cutting-edge tools.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="icon icon-lightbulb"></div>
+                        <h4>Innovative Solutions</h4>
+                        <p>Crafting unique and effective solutions to complex challenges with creative thinking.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="icon icon-shield"></div>
+                        <h4>Robust Security</h4>
+                        <p>Ensuring data integrity and system resilience with advanced security protocols.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h3>About FutureScape Project</h3>
+                <div class="about-content">
+                    <p>
+                        FutureScape is a visionary project launched on 2026-03-16, aiming to redefine technological landscapes.
+                        Our mission is to integrate advanced AI, sustainable energy solutions, and intuitive user experiences
+                        to create systems that not only perform exceptionally but also contribute positively to global well-being.
+                    </p>
+                    <p>
+                        We believe in a collaborative future, where technology serves humanity by simplifying complexities and opening new avenues for growth and discovery. Our dedicated team of engineers, designers, and strategists are working tirelessly to bring this vision to life, focusing on ethical development and long-term impact.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <p>&copy; 2026 FutureScape Project. All rights reserved.</p>
+        <p>Contact us: <a href="mailto:info@futurescape.com">info@futurescape.com</a></p>
+    </footer>
+</body>
+</html>
