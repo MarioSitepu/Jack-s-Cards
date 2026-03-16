@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project - 2026-03-16</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumFlow Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a11cb; /* Deep Purple */
+            --secondary-color: #2575fc; /* Bright Blue */
+            --accent-color: #00e0ff; /* Electric Cyan */
+            --text-color: #e0e0e0;
+            --bg-gradient-start: #1a2a6c; /* Darker blue */
+            --bg-gradient-end: #b21f1f; /* Reddish */
+            --card-bg: rgba(255, 255, 255, 0.08); /* Semi-transparent white for cards */
+            --border-radius: 10px;
+            --box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem 0;
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            transform: rotate(45deg);
+            pointer-events: none;
+            animation: pulse-effect 10s infinite alternate;
+        }
+
+        @keyframes pulse-effect {
+            0% { transform: scale(1) rotate(45deg); opacity: 1; }
+            50% { transform: scale(1.1) rotate(45deg); opacity: 0.8; }
+            100% { transform: scale(1) rotate(45deg); opacity: 1; }
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-shadow: 0 0 8px rgba(0, 224, 255, 0.4);
+            font-weight: 700;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 3rem;
+            background: linear-gradient(45deg, rgba(106, 17, 203, 0.5) 0%, rgba(37, 117, 252, 0.5) 100%), var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            color: #f0f0f0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card h3 {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: #ccc;
+        }
+
+        .cta {
+            text-align: center;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #f0f0f0;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            margin-top: 2rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 2rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav ul li a {
+                font-size: 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>QuantumFlow</h1>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="overview" class="section hero">
+            <h2>Welcome to the Future of Project Management!</h2>
+            <p>QuantumFlow is designed to streamline your workflows, enhance collaboration, and bring your visionary projects to life with unparalleled efficiency. Dive into a new era of productivity.</p>
+            <p><strong>Project Launch Date: 2026-03-16</strong></p>
+            <a href="#features" class="btn">Explore Features</a>
+        </section>
+
+        <section id="features" class="section">
+            <h2>Core Capabilities</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Intuitive Dashboard</h3>
+                    <p>Gain a clear, real-time overview of all your projects, tasks, and team performance at a glance.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Seamless Collaboration</h3>
+                    <p>Facilitate effortless communication and file sharing among team members, no matter where they are.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Advanced Analytics</h3>
+                    <p>Leverage powerful data insights to make informed decisions and optimize project outcomes.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Automated Workflows</h3>
+                    <p>Set up automated tasks and notifications to reduce manual effort and prevent bottlenecks.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section cta">
+            <h2>Ready to Transform Your Projects?</h2>
+            <p>Join the
+</body>
+</html>
