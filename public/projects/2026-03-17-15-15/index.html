@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureTech Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #2a2a4a;
+            --header-gradient-start: #0f2027;
+            --header-gradient-end: #2c5364;
+            --hero-gradient-start: #4CAF50; /* Green */
+            --hero-gradient-end: #2193b0;   /* Blue */
+            --card-bg: #3e3e60;
+            --text-light: #e0e0e0;
+            --text-accent: #ffdd4a; /* Yellow */
+            --button-gradient-start: #a1c4fd;
+            --button-gradient-end: #c2e9fb;
+            --button-text: #1a1a2e;
+            --border-radius: 12px;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(90deg, var(--header-gradient-start), var(--header-gradient-end));
+            padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            letter-spacing: 0.05em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: var(--spacing-unit) * 2;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        main {
+            flex: 1;
+            padding: var(--spacing-unit) * 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        section {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-unit) * 2;
+            margin-bottom: var(--spacing-unit) * 2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--hero-gradient-start), var(--hero-gradient-end));
+            color: #ffffff;
+            text-align: center;
+            padding: var(--spacing-unit) * 3 var(--spacing-unit) * 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 10%, transparent 70%);
+            animation: rotateBackground 20s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-unit) * 1.5;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p span {
+            color: var(--text-accent);
+            font-weight: 600;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, var(--button-gradient-start), var(--button-gradient-end));
+            color: var(--button-text);
+            padding: var(--spacing-unit) 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            filter: brightness(1.1);
+        }
+
+        h3 {
+            font-size: 2rem;
+            color: var(--text-accent);
+            margin-bottom: var(--spacing-unit) * 1.5;
+            text-align: center;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-unit) * 2;
+            margin-top: var(--spacing-unit) * 2;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-unit) * 1.5;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: var(--spacing-unit);
+            flex-grow: 1;
+        }
+
+        .feature-card .status {
+            font-weight: 700;
+            color: var(--text-accent);
+            font-size: 0.95rem;
+            margin-top: var(--spacing-unit);
+        }
+
+        .call-to-action {
+            text-align: center;
+            background: var(--card-bg); /* Use card background for consistency */
+            padding: var(--spacing-unit) * 3 var(--spacing-unit) * 2;
+        }
+
+        .call-to-action h3 {
+            color: #ffffff; /* White for contrast on card-bg */
+            margin-bottom: var(--spacing-unit) * 1.5;
+        }
+
+        footer {
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--spacing-unit) * 1.5 var(--spacing-unit);
+            margin-top: auto; /* Pushes footer to the bottom */
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: var(--spacing-unit) * 1.5;
+            }
+
+            header h1 {
+                margin-bottom: var(--spacing-unit);
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+            }
+
+            nav ul li {
+                margin: var(--spacing-unit) 0;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 0.8rem 0;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            h3 {
+                font-size: 1.7rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav ul li a {
+                font-size: 1rem;
+            }
+
+            .hero {
+                padding: var(--spacing-unit) * 2 var(--spacing-unit);
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            section {
+                padding: var(--spacing-unit);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>FutureTech Project Nova</h1>
+        <nav>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#milestones">Milestones</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Accelerating Innovation</h2>
+            <p>Welcome to the central hub for Project Nova.</p>
+            <p>Project Status: <span style="color: #90ee90;">Active & On Track</span></p>
+            <p>Last Update: <span>2026-03-17</span></p>
+            <a href="#details" class="btn">Explore Project</a>
+        </section>
+
+        <section id="dashboard">
+            <h3>Project Overview</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Current Phase</h4>
+                    <p>Development & Testing</p>
+                    <span class="status">Phase 3 of 5</span>
+                </div>
+                <div class="feature-card">
+                    <h4>Budget Utilization</h4>
+                    <p>85% consumed, within limits.</p>
+                    <span class="status">Good</span>
+                </div>
+                <div class="feature-card">
+                    <h4>Upcoming Deadline</h4>
+                    <p>Feature Freeze for Alpha Release.</p>
+                    <span class="status">2026-04-05</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="milestones">
+            <h3>Key Milestones & Progress</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Phase 1: Research & Design</h4>
+                    <p>Completed foundational research and initial system architecture.</p>
+                    <span class="status" style="color: #90ee90;">Completed (2025-10-20)</span>
+                </div>
+                <div class="feature-card">
+                    <h4>Phase 2: Core Development</h4>
+                    <p>Implemented core functionalities and backend infrastructure.</p>
+                    <span class="status" style="color: #90ee90;">Completed (2026-01-15)</span>
+                </div>
+                <div class="feature-card">
+                    <h4>Phase 3: Integration & Testing</h4>
+                    <p>Integrating modules and conducting comprehensive testing cycles.</p>
+                    <span class="status" style="color: #ffdd4a;">In Progress</span>
+                </div>
+                <div class="feature-card">
+                    <h4>Phase 4: Beta Release</h4>
+                    <p>Preparing for external beta testing with select partners.</p>
+                    <span class="status" style="color: #c2e9fb;">Planned (2026-05-01)</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="call-to-action">
+            <h3>Have Questions or Feedback?</h3>
+            <p>Your input is crucial for Project Nova's success.</p>
+            <a href="#contact" class="btn">Contact the Team</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 FutureTech Innovations. All rights reserved.</p>
+    </footer>
+</body>
+</html>
