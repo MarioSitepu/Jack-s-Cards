@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <style>
+        /* CSS Variables for a consistent theme */
+        :root {
+            --primary-bg: #1a202c; /* Dark charcoal */
+            --secondary-bg: #2d3748; /* Slightly lighter charcoal */
+            --accent-color-1: #667eea; /* Indigo */
+            --accent-color-2: #805ad5; /* Deep Purple */
+            --text-color-light: #e2e8f0; /* Light gray */
+            --text-color-dark: #a0aec0; /* Medium gray */
+            --gradient-main: linear-gradient(135deg, var(--accent-color-1) 0%, var(--accent-color-2) 100%);
+            --gradient-button: linear-gradient(45deg, #667eea 0%, #805ad5 100%);
+            --box-shadow-light: 0 4px 10px rgba(0, 0, 0, 0.2);
+            --box-shadow-heavy: 0 8px 20px rgba(0, 0, 0, 0.3);
+            --border-radius-sm: 0.375rem; /* 6px */
+            --border-radius-md: 0.5rem; /* 8px */
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-light);
+            background-color: var(--primary-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 1rem 0;
+            box-shadow: var(--box-shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background-image: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support background-clip */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-image: var(--gradient-main);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-image: var(--gradient-main);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 4rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: pulse-effect 10s infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes pulse-effect {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.1); opacity: 0.7; }
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-image: var(--gradient-button);
+            color: white;
+            padding: 0.9rem 2.2rem;
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--box-shadow-light);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-heavy);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 5rem 0;
+            background-color: var(--primary-bg);
+        }
+
+        .content-section:nth-of-type(even) {
+            background-color: var(--secondary-bg);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--text-color-light);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-image: var(--gradient-main);
+            border-radius: 2px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--box-shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-heavy);
+            border-color: var(--accent-color-1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.7rem;
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+            background-image: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        .feature-card p {
+            color: var(--text-color-dark);
+            font-size: 1rem;
+        }
+
+        /* About Section (Gradient Background) */
+        .gradient-section {
+            background-image: var(--gradient-main);
+            padding: 6rem 0;
+            color: white;
+            text-align: center;
+        }
+
+        .gradient-section h2 {
+            color: white;
+        }
+
+        .gradient-section h2::after {
+            background-color: white; /* White line for contrast */
+        }
+
+        .gradient-section p {
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-color-dark);
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-color-dark);
+            text-decoration: none;
+            margin: 0 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color-1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 1rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section, .gradient-section {
+                padding: 3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .gradient-section p {
+                font-size: 1rem;
+            }
+
+            footer {
+                padding: 2rem 0;
+            }
+
+            .social-links a {
+                margin: 0 0.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Zenith</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Unlock Your Potential with Project Zenith</h1>
+                <p>Revolutionizing the way you work, learn, and create.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="content-section">
+            <div class="container">
+                <h2>Key Features & Benefits</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Interface</h3>
+                        <p>Experience a seamless and user-friendly design that makes complex tasks simple.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Powerful Analytics</h3>
+                        <p>Gain deep insights with real-time data and customizable reporting tools.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Solutions</h3>
+                        <p>Grow without limits. Our platform is built to expand with your needs, big or small.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Secure & Reliable</h3>
+                        <p>Your data is protected with industry-leading security protocols and robust infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="gradient-section">
+            <div class="container">
+                <h2>Our Vision</h2>
+                <p>At Project Zenith, we believe in pushing the boundaries of what's possible. Our mission is to empower individuals and organizations with tools that foster innovation, efficiency, and growth. We are committed to creating a future where technology serves humanity's highest aspirations.</p>
+                <p>Join us on this exciting journey as we redefine the future, one elegant solution at a time.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem auto; color: var(--text-color-dark);">Have questions or want to learn more about Project Zenith? We'd love to hear from you. Reach out to our team!</p>
+                <div style="text-align: center;">
+                    <a href="mailto:info@projectzenith.com" class="btn">Email Us</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Zenith. All rights reserved.</p>
+            <p>Project Date: 2026-03-18</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
