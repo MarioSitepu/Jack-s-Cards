@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #1A1A2E;
+            --secondary-bg: #0F3460;
+            --accent-color: #E94560;
+            --text-color: #E0E0E0;
+            --light-text-color: #F0F0F0;
+            --gradient-start: #16213E;
+            --gradient-end: #0F3460;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --spacing-unit: 1rem;
+        }
+
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(2 * var(--spacing-unit));
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-bg);
+            padding: var(--spacing-unit) 0;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            color: var(--light-text-color);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+        }
+
+        section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--light-text-color);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(45deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            color: var(--light-text-color);
+            padding: 8rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #hero h2 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: 1.5rem;
+            color: var(--light-text-color);
+        }
+        #hero h2::after {
+            background-color: var(--light-text-color);
+        }
+
+        #hero p {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 2.5rem;
+            max-width: 900px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent-color) 0%, #FF6B6B 100%);
+            color: var(--light-text-color);
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+
+        /* Features Section */
+        #features {
+            background-color: var(--primary-bg);
+            padding: 6rem 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 8px 20px var(--shadow-color);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card h3 {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 0;
+            text-align: left;
+        }
+
+        /* Project Status Section */
+        #project-status {
+            background: linear-gradient(135deg, var(--gradient-end) 0%, var(--gradient-start) 100%);
+            color: var(--light-text-color);
+            padding: 6rem 0;
+        }
+
+        #project-status p {
+            font-size: 1.2rem;
+            color: var(--light-text-color);
+        }
+
+        #project-status strong {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        /* CTA Section */
+        #cta {
+            background-color: var(--primary-bg);
+            padding: 6rem 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+            box-shadow: 0 -4px 8px var(--shadow-color);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
+            }
+
+            nav a {
+                padding: 0.5rem 1rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            #hero {
+                padding: 6rem 0;
+            }
+
+            h2 {
+                font-size: clamp(1.8rem, 7vw, 2.5rem);
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Nova</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#project-status">Status</a></li>
+                    <li><a href="#cta">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Shaping Tomorrow's Digital Landscape</h2>
+                <p>Empowering innovation with cutting-edge solutions and a vision for the future. Join us on this exciting journey.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Highlights</h2>
+                <p>Our commitment to excellence drives us to deliver outstanding results in every aspect of our work.</p>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Design</h3>
+                        <p>Experience a seamless and user-friendly interface crafted for optimal engagement and ease of use.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Robust Performance</h3>
+                        <p>Built with efficiency in mind, ensuring lightning-fast speeds and reliable operations around the clock.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Architecture</h3>
+                        <p>Designed to grow with your needs, our flexible architecture adapts to future demands effortlessly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Secure & Private</h3>
+                        <p>Your data security and privacy are paramount. We implement industry-leading protocols to protect your information.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project-status">
+            <div class="container">
+                <h2>Project Update</h2>
+                <p>Latest status as of: <strong>2026-03-19</strong></p>
+                <p>Our development teams are making significant progress, with the core framework nearing completion. We are on track for the next major release, focusing on integration and performance enhancements.</p>
+                <a href="#" class="btn">View Roadmap</a>
+            </div>
+        </section>
+
+        <section id="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Vision?</h2>
+                <p>Let's collaborate and build something extraordinary together. Reach out to our team today.</p>
+                <a href="#" class="btn">Get Started</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+            <p>Designed with passion for a better tomorrow.</p>
+        </div>
+    </footer>
+</body>
+</html>
