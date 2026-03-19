@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project - 2026-03-19</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nova - Modern Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40jDgQat5z/DgRdnxPpnU4tC8d8pA7Qj8s+xVbF/W2M0s8x2E0+C+O7i7g/7t0x7w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-gradient-start: #6a11cb; /* Deep Purple */
+            --primary-gradient-end: #2575fc;   /* Bright Blue */
+            --secondary-gradient-start: #00c6ff; /* Cyan Blue */
+            --secondary-gradient-end: #0072ff;   /* Darker Blue */
+            --text-light: #f4f4f4;
+            --text-dark: #2c3e50;
+            --bg-dark-overlay: rgba(0, 0, 0, 0.2);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-radius: 10px;
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.2);
+            --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --transition-speed: 0.3s;
+        }
+
+        /* Basic Reset & Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-gradient-start); /* Fallback for browsers without gradient support */
+            background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin: 0;
+            /* Gradient text for the title */
+            background: linear-gradient(45deg, #a7bfe8, #e0eafc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-gradient-start);
+            transition: width var(--transition-speed) ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+        nav a:hover {
+            color: var(--secondary-gradient-start);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 8rem 0;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1; /* Occupy remaining space */
+        }
+
+        .hero h2 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            /* Gradient text for the hero heading */
+            background: linear-gradient(45deg, #e0eafc, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--secondary-gradient-start); /* Fallback */
+            background: linear-gradient(45deg, var(--secondary-gradient-start) 0%, var(--secondary-gradient-end) 100%);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.4);
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 114, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: none;
+            border: 2px solid var(--secondary-gradient-start);
+            color: var(--secondary-gradient-start);
+            box-shadow: none;
+            transition: background var(--transition-speed) ease, color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(45deg, var(--secondary-gradient-start) 0%, var(--secondary-gradient-end) 100%);
+            color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.4);
+        }
+
+        /* Main Content Sections */
+        section {
+</body>
+</html>
