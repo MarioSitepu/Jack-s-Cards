@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Project 2026</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Gradient Orbs */
+        .blob {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(40px);
+        }
+
+        .blob-1 { top: -100px; right: -100px; }
+        .blob-2 { bottom: -100px; left: -100px; }
+
+        header {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            padding: 8rem 10% 4rem;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+        }
+
+        .date-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 30px -10px rgba(99, 102, 241, 0.5);
+        }
+
+        .features {
+            padding: 4rem 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: #94a3b8;
+        }
+
+        .content-section {
+            padding: 6rem 10%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .content-image {
+            flex: 1;
+            height: 400px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000') center/cover;
+            opacity: 0.6;
+            mix-blend-mode: overlay;
+        }
+
+        .content-text {
+            flex: 1;
+        }
+
+        footer {
+            padding: 4rem 10%;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            color: #64748b;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
+            nav { display: none; }
+            .hero { padding-top: 5rem; }
+            .content-section { flex-direction: column; text-align: center; }
+            .content-image { width: 100%; height: 250px; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <header>
+        <div class="logo">NEBULA.CORE</div>
+        <nav>
+            <a href="#">Vision</a>
+            <a href="#">Systems</a>
+            <a href="#">Network</a>
+            <a href="#" class="btn" style="padding: 0.6rem 1.2rem; margin-left: 1rem;">Connect</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="date-badge">Release Date: 2026-03-22</div>
+            <h1>The Next Evolution of Digital Architecture</h1>
+            <p>Experience a seamless integration of intelligent systems and human-centric design. Built for the future, arriving on March 22, 2026.</p>
+            <a href="#explore" class="btn">Explore the Ecosystem</a>
+        </section>
+
+        <section class="features" id="explore">
+            <div class="card">
+                <h3>Adaptive Neural Core</h3>
+                <p>Systems that learn and evolve with your workflow, providing real-time optimization and predictive insights.</p>
+            </div>
+            <div class="card">
+                <h3>Quantum Encryption</h3>
+                <p>Security protocols designed for the post-quantum era, ensuring your data remains private and immutable.</p>
+            </div>
+            <div class="card">
+                <h3>Global Mesh Sync</h3>
+                <p>Instantaneous synchronization across all edge nodes with zero-latency architecture.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="content-text">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Pioneering the March 2026 Milestone</h2>
+                <p style="margin-bottom: 1.5rem; color: #94a3b8;">On <strong>2026-03-22</strong>, we launch the most ambitious update to our global infrastructure. This release marks the transition from static cloud computing to dynamic, distributed intelligence.</p>
+                <p style="color: #94a3b8;">Join thousands of pioneers who are already shaping the landscape of the next decade. Our platform provides the tools; you provide the vision.</p>
+            </div>
+            <div class="content-image"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nebula Systems International. Last updated: March 22, 2026.</p>
+        <div style="margin-top: 1rem;">
+            <a href="#" style="color: #64748b; margin: 0 10px; text-decoration: none;">Privacy</a>
+            <a href="#" style="color: #64748b; margin: 0 10px; text-decoration: none;">Terms</a>
+            <a href="#" style="color: #64748b; margin: 0 10px; text-decoration: none;">Status</a>
+        </div>
+    </footer>
+</body>
+</html>
