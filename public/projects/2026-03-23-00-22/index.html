@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(to right, #00c6ff 0%, #0072ff 100%);
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --bg-card: rgba(255, 255, 255, 0.95);
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --padding-section: 60px 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px var(--shadow-light);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 30px;
+        }
+
+        header nav ul li a {
+            color: var(--text-light);
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #a0dfff; /* Lighter blue for hover */
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--padding-section);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            animation: rotateGradient 20s linear infinite;
+        }
+
+        @keyframes rotateGradient {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            padding: 15px 30px;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            opacity: 0.95;
+        }
+
+        /* Main Sections */
+        main {
+            flex: 1;
+        }
+
+        section {
+            padding: var(--padding-section);
+            text-align: center;
+            background-color: var(--bg-card);
+            margin-bottom: 20px; /* Space between sections */
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 5px 20px var(--shadow-light);
+            transform: translateY(0);
+            transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
+            opacity: 0.98; /* Slight transparency */
+        }
+
+        section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        section h3 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #4a4a4a;
+            font-weight: 700;
+            position: relative;
+        }
+
+        section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-section .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 2px 10px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary-gradient);
+            transition: transform 0.3s ease-out;
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            display: inline-block;
+            color: #2575fc; /* Accent color for icons */
+        }
+
+        .feature-card h4 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #4a4a4a;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 1em;
+        }
+
+        /* About Section */
+        .about-section p {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact-section form {
+            max-width: 600px;
+            margin: 40px auto 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .contact-section form input[type="text"],
+        .contact-section form input[type="email"],
+        .contact-section form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-section form input:focus,
+        .contact-section form textarea:focus {
+            outline: none;
+            border-color: #2575fc;
+            box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2);
+        }
+
+        .contact-section form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-section .btn {
+            align-self: flex-start;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a2e; /* Darker background for footer */
+            color: #bbb;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 20px; /* Space above footer */
+            border-top-left-radius: var(--border-radius-lg);
+            border-top-right-radius: var(--border-radius-lg);
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 3em;
+            }
+            .hero p {
+                font-size: 1.2em;
+            }
+            section h3 {
+                font-size: 2em;
+            }
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            header h1 {
+                margin-bottom: 15px;
+            }
+            header nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            header nav ul li {
+                margin: 0 15px 10px 15px;
+            }
+            .hero {
+                min-height: 60vh;
+                padding: 40px 20px;
+            }
+            .hero h2 {
+                font-size: 2.5em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9em;
+            }
+            section {
+                padding: 40px 15px;
+                margin-bottom: 15px;
+            }
+            section h3 {
+                font-size: 1.8em;
+                margin-bottom: 30px;
+            }
+            .feature-card {
+                padding: 25px;
+            }
+            .feature-card .icon {
+                font-size: 2em;
+            }
+            .feature-card h4 {
+                font-size: 1.3em;
+            }
+            .about-section p {
+                font-size: 1em;
+            }
+            .contact-section form {
+                gap: 15px;
+            }
+            footer {
+                padding: 20px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header nav ul li {
+                margin: 0 10px 10px 10px;
+            }
+            .hero h2 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 0.9em;
+            }
+            section h3 {
+                font-size: 1.5em;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-card {
+                text-align: center;
+            }
+            .feature-card .icon {
+                margin: 0 auto 15px auto;
+            }
+            .contact-section .btn {
+                align-self: stretch;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Delta</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Innovate. Create. Elevate.</h2>
+                <p>Leading the future with cutting-edge solutions and design excellence.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h3>Key Features</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="icon">💡</span>
+                        <h4>Intuitive Design</h4>
+                        <p>Streamlined user experience crafted for effortless interaction and visual delight.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">⚡</span>
+                        <h4>Blazing Performance</h4>
+                        <p>Engineered for speed and efficiency, ensuring a seamless and responsive experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🔒</span>
+                        <h4>Robust Security</h4>
+                        <p>Advanced security protocols to protect your data with the highest industry standards.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🚀</span>
+                        <h4>Scalable Architecture</h4>
+                        <p>Built to grow with your needs, our architecture supports future expansion effortlessly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h3>Our Vision</h3>
+                <p>At Project Delta, we are driven by a passion for innovation and a commitment to excellence. Our team of dedicated professionals strives to transform complex challenges into elegant, user-friendly solutions.</p>
+                <p>We believe in a future where technology empowers everyone, and we work tirelessly to create products that are not only powerful but also accessible and inspiring. Join us on our journey to redefine the digital landscape.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h3>Get in Touch</h3>
+                <p>Have a question, feedback, or just want to chat about your next big idea? We'd love to hear from you!</p>
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Delta. All rights reserved.</p>
+            <p>Project Date: 2026-03-23</p>
+        </div>
+    </footer>
+</body>
+</html>
