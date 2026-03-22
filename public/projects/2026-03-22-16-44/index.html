@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6A0DAD 0%, #8A2BE2 100%); /* Dark Violet to Blue Violet */
+            --secondary-gradient: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%); /* Sky Blue to Royal Blue */
+            --background-color-light: #f4f7f6;
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --accent-color: #FFD700; /* Gold */
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --border-radius-lg: 15px;
+            --border-radius-md: 8px;
+            --font-family-body: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--background-color-light);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color-light);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: var(--secondary-gradient);
+            color: var(--text-color-light);
+            padding: 8rem 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-color-dark);
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #FFEB3B; /* Lighter gold */
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #e9eff1;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            color: #444;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: var(--primary-gradient);
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -15px;
+            border-radius: 5px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-item {
+            background-color: var(--text-color-light);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            text-align: left;
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .about-text, .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-medium);
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.03);
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #444;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .call-to-action {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: 6rem 0;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+
+        .call-to-action h2 {
+            color: var(--text-color-light);
+            margin-bottom: 2rem;
+        }
+
+        .call-to-action h2::after {
+            background: var(--accent-color);
+        }
+
+        .call-to-action p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .call-to-action .btn {
+            background: var(--accent-color);
+            color: var(--text-color-dark);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .call-to-action .btn:hover {
+            background: #FFEB3B;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            background-color: #222;
+            color: #bbb;
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            h2 {
+                font-size: 2.2rem;
+            }
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-image {
+                order: -1; /* Image first on mobile */
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                padding: 0 15px;
+            }
+            .logo {
+                margin-bottom: 1rem;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            .hero {
+                padding: 6rem 0;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            section {
+                padding: 4rem 0;
+            }
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 2.5rem;
+            }
+            .feature-item {
+                padding: 2rem;
+            }
+            .about-text h3 {
+                font-size: 1.8rem;
+            }
+            .about-text p {
+                font-size: 1rem;
+            }
+            .call-to-action {
+                padding: 4rem 0;
+            }
+            .call-to-action p {
+                font-size: 1.1rem;
+            }
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .feature-item {
+                padding: 1.5rem;
+            }
+            .feature-item .icon {
+                font-size: 2.5rem;
+            }
+            .feature-item h3 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Nova</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Revolutionize Your Workflow.</h1>
+                <p>Discover the next-generation solution designed to streamline your processes and elevate your productivity to unprecedented levels.</p>
+                <a href="#features" class="btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="icon">&#9889;</span>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Experience unparalleled speed and responsiveness. Our optimized architecture ensures your tasks are completed in record time.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128274;</span>
+                        <h3>Ironclad Security</h3>
+                        <p>Your data is our top priority. We implement advanced encryption and robust security protocols to keep your information safe.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128172;</span>
+                        <h3>Intuitive User Interface</h3>
+                        <p>Designed with you in mind. Our clean, modern, and easy-to-navigate interface makes complex tasks simple and enjoyable.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128241;</span>
+                        <h3>Seamless Cross-Device Sync</h3>
+                        <p>Work from anywhere, on any device. Your progress is always synchronized, providing a truly flexible work environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Empowering Innovation for Tomorrow</h3>
+                        <p>At Project Nova, we believe in crafting solutions that not only meet today's demands but also anticipate tomorrow's challenges. Our team of dedicated innovators works tirelessly to bring you technology that is both powerful and user-friendly.</p>
+                        <p>We are committed to continuous improvement, integrating feedback, and staying at the forefront of technological advancements to ensure our users always have the best tools at their disposal.</p>
+                        <a href="#contact" class="btn">Get in Touch</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/8A2BE2/FFFFFF?text=Modern+Workspace" alt="Modern Workspace">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="call-to-action">
+            <div class="container">
+                <h2>Ready to Transform?</h2>
+                <p>Join the future of productivity. Contact us today to learn how Project Nova can benefit your organization.</p>
+                <a href="mailto:info@projectnova.com" class="btn">Start Your Journey</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+            <p>Project Date: 2026-03-22</p>
+            <p>Designed with <a href="https://www.w3.org/html/" target="_blank">HTML5</a> & <a href="https://www.w3.org/Style/CSS/" target="_blank">CSS3</a>.</p>
+        </div>
+    </footer>
+</body>
+</html>
