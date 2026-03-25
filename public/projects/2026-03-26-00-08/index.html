@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Project</title>
+    <!-- Google Fonts: Poppins for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuatDLsD+CejJJtfdYqg1/J7b53xP+Q8Lq6+0Qv6W+z+j+A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --primary-gradient-start: #6a11cb; /* Deep Purple */
+            --primary-gradient-end: #2575fc;   /* Bright Blue */
+            --secondary-gradient-start: #fc6076; /* Coral Pink */
+            --secondary-gradient-end: #ff9a44;   /* Orange */
+            --dark-background: #1a1a2e; /* Very Dark Blue/Purple */
+            --light-text: #e0e0e0;      /* Off-white */
+            --dark-text: #333;          /* Dark Gray */
+            --card-background: rgba(255, 255, 255, 0.08); /* Semi-transparent white */
+            --card-border: rgba(255, 255, 255, 0.15);     /* Lighter semi-transparent white */
+            --button-hover-gradient-start: #833ab4; /* Instagram-like purple */
+            --button-hover-gradient-end: #fd1d1d;   /* Instagram-like red */
+            --box-shadow-color: rgba(0, 0, 0, 0.2);  /* Subtle shadow */
+            --border-radius-lg: 15px;
+            --border-radius-md: 10px;
+        }
+
+        /* Universal Box-Sizing and Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Body and Base Typography */
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--light-text);
+            background-color: var(--dark-background);
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+
+        /* Anchor Link Styling */
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* List Styling */
+        ul {
+            list-style: none;
+        }
+
+        /* Container for Centering Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(to right, #2c3e50, #4ca1af); /* Subtle header gradient */
+            padding: 1rem 0;
+            position: sticky; /* Sticky header on scroll */
+            top: 0;
+            z-index: 1000; /* Ensure header stays on top */
+            box-shadow: 0 2px 10px var(--box-shadow-color);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            /* Gradient text for the logo */
+            background: linear-gradient(45deg, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--secondary-gradient-start); /* Fallback color */
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem; /* Space between nav items */
+        }
+
+        nav a {
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            padding-bottom: 5px; /* Space for underline effect */
+        }
+
+        /* Underline effect for navigation links */
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px); /* Slight lift on hover */
+            color: var(--light-text);
+        }
+        nav a:hover::after, nav a.active::after {
+            width: 100%; /* Expand underline on hover/active */
+        }
+
+        /* Hero Section Styling */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            min-height: 80vh; /* Full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 20px;
+            position: relative;
+            overflow: hidden; /* Hide overflow for pseudo-elements */
+        }
+
+        /* Subtle background patterns for the hero */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2; /* Ensure content is above pseudo-elements */
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            font-weight: 700;
+            /* Gradient text for the main heading */
+            background: linear-gradient(45deg, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--secondary-gradient-start); /* Fallback */
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: var(--light-text);
+            opacity: 0.9;
+        }
+
+        /* General Button Styling */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-md);
+            background: linear-gradient(45deg, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            color: var(--light-text);
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: 0 5px 15px var(--box-shadow-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02
