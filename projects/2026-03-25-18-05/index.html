@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset & Body Styling */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f8f8;
+            scroll-behavior: smooth;
+        }
+
+        /* Container for main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styling */
+        header {
+            background: #2c3e50; /* Dark blue-grey */
+            color: #ecf0f1;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 25px;
+        }
+
+        header nav ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.05rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        header nav ul li a:hover,
+        header nav ul li a:focus {
+            color: #3498db; /* Bright blue */
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(to right, #6DD5FA, #2980B9); /* Gradient blue */
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse-light 10s infinite alternate;
+        }
+
+        @keyframes pulse-light {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        #hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            max-width: 800px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative; /* Ensure text is above ::before */
+        }
+
+        #hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .button {
+            display: inline-block;
+            background: linear-gradient(to right, #2ECC71, #27AE60); /* Green gradient */
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #27AE60, #2ECC71);
+        }
+
+        .button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease-out, height 0.4s ease-out, opacity 0.4s ease-out;
+        }
+
+        .button:hover::after {
+            width: 200px;
+            height: 200px;
+            opacity: 1;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #eef1f5;
+        }
+
+        section h3 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: #3498db;
+            border-radius: 2px;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h4 {
+            font-size: 1.6rem;
+            color: #3498db;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* About Section */
+        #about p {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        #about strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        #contact form {
+            max-width: 600px;
+            margin: 50px auto 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            text-align: left;
+        }
+
+        #contact form input,
+        #contact form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #contact form input:focus,
+        #contact form textarea:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+
+        #contact form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        #contact form .button {
+            align-self: flex-start;
+            margin-top: 10px;
+        }
+
+        /* Footer Styling */
+        footer {
+            background: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+            margin-top: 50px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            header h1 {
+                margin-bottom: 15px;
+            }
+
+            header nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            header nav ul li {
+                margin: 10px 0;
+            }
+
+            #hero {
+                padding: 80px 20px;
+                min-height: 60vh;
+            }
+
+            #hero h2 {
+                font-size: 2.5rem;
+            }
+
+            #hero p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            section h3 {
+                font-size: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #contact form {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            #hero h2 {
+                font-size: 2rem;
+            }
+
+            #hero p {
+                font-size: 1rem;
+            }
+
+            .button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            section h3 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Alpha</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Welcome to the Future of Innovation</h2>
+                <p>Discover cutting-edge solutions designed for tomorrow's challenges.</p>
+                <a href="#features" class="button">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h3>Key Features</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Intuitive Design</h4>
+                        <p>User-friendly interfaces crafted for seamless navigation and a delightful user experience across all devices.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Robust Performance</h4>
+                        <p>Optimized for speed and efficiency, ensuring your operations run smoothly and without interruption.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Scalable Architecture</h4>
+                        <p>Built on a flexible foundation that allows for easy expansion and adaptation to your evolving needs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Secure & Reliable</h4>
+                        <p>Industry-leading security protocols protect your data, providing peace of mind and unwavering reliability.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Cross-Platform Compatibility</h4>
+                        <p>Access your project from any device, anywhere, with consistent performance and a unified experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Dedicated Support</h4>
+                        <p>Our expert team is always ready to assist you, ensuring you get the most out of our innovative solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h3>About Our Vision</h3>
+                <p>We are dedicated to crafting innovative solutions that empower businesses and individuals alike. Our journey began with a simple idea: to make advanced technology accessible and impactful for everyone.</p>
+                <p>This project, Project Alpha, was conceptualized and developed with a target release date of <strong>2026-03-25</strong>. It embodies the latest advancements in technology and future-proof design principles, setting a new standard for innovation.</p>
+                <p>Our team comprises passionate engineers, designers, and strategists committed to pushing boundaries and delivering exceptional value. We believe in transparency, collaboration, and continuous improvement.</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h3>Get in Touch</h3>
+                <p>Have questions, feedback, or want to explore collaboration opportunities? Reach out to us!</p>
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit" class="button">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Alpha. All rights reserved.</p>
+            <p>Designed with passion for the future.</p>
+        </div>
+    </footer>
+</body>
+</html>
