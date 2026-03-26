@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Horizon - Modern Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset & Body Styling */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f7fa;
+            background-image: linear-gradient(135deg, #f4f7fa 0%, #e0eafc 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            color: #fff;
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background-color: #00c6ff;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+        nav a:hover {
+            color: #00c6ff;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+            color: #fff;
+            padding: 8rem 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
+
+        .hero-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #00c6ff 0%, #0072ff 100%);
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 198, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 198, 255, 0.4);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+            padding: 4rem 0;
+        }
+
+        section {
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+
+        section:nth-child(even) {
+            background-color: #f0f4f8;
+        }
+
+        section h3 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2575fc;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #6a11cb 0%, #00c6ff 100%);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid transparent;
+            border-image: linear-gradient(45deg, #6a11cb, #2575fc) 1;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            color: #6a11cb;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-item h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* About Section */
+        .about-section .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .about-section .text-content {
+            flex: 2;
+            min-width: 300px;
+            max-width: 700px;
+        }
+        
+        .about-section .text-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+
+        .about-section img {
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 250px;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: linear-gradient(45deg, #00c6ff 0%, #0072ff 100%);
+            color: #fff;
+            text-align: center;
+            padding: 6rem 0;
+            margin-bottom: 0; /* No margin-bottom for the last section before footer */
+        }
+
+        .cta-section h3 {
+            color: #fff;
+            margin-bottom: 2rem;
+            font-size: 2.8rem;
+        }
+
+        .cta-section h3::after {
+            background: #fff;
+        }
+
+        .cta-section .btn {
+            background: #fff;
+            color: #0072ff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-section .btn:hover {
+            color: #6a11cb;
+            transform: translateY(-7px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer Styling */
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto; /* Pushes footer to the bottom */
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            nav a {
+                padding: 0.5rem 0;
+            }
+
+            .hero-section {
+                padding: 6rem 0;
+            }
+
+            .hero-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.2rem;
+            }
+
+            section h3 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-section .content {
+                flex-direction: column;
+            }
+            .about-section img {
+                order: -1; /* Image appears above text on mobile */
+                margin-bottom: 1.5rem;
+            }
+            .about-section .text-content {
+                text-align: center;
+            }
+
+            .cta-section h3 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 4rem 0;
+            }
+
+            .hero-section h2 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            section h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Horizon</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h2>Innovating for a Brighter Future</h2>
+                <p>Delivering cutting-edge solutions since <span style="font-weight: 600;">2026-03-26</span></p>
+                <a href="#features" class="btn">Discover Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h3>Our Core Capabilities</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="icon">&#9733;</span> <!-- Star icon -->
+                        <h4>Advanced Analytics</h4>
+                        <p>Leverage data-driven insights to make informed decisions and optimize performance.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#9889;</span> <!-- Lightning bolt icon -->
+                        <h4>Seamless Integration</h4>
+                        <p>Effortlessly connect with your existing systems for a unified operational workflow.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128187;</span> <!-- Laptop icon -->
+                        <h4>Scalable Architecture</h4>
+                        <p>Grow without limits, our platform is built to expand with your evolving needs.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">&#128274;</span> <!-- Lock icon -->
+                        <h4>Robust Security</h4>
+                        <p>Your data's safety is our priority, protected by industry-leading security protocols.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h3>About Project Horizon</h3>
+                <div class="content">
+                    <div class="text-content">
+                        <p>Project Horizon was founded with a singular mission: to redefine the technological landscape through innovation and excellence. Since its inception on <span style="font-weight: 600;">March 26, 2026</span>, we have been committed to developing solutions that are not only powerful and efficient but also intuitive and user-centric.</p>
+                        <p>Our team of visionary engineers and creative minds works tirelessly to push the boundaries of what's possible, ensuring that our clients are always one step ahead in a rapidly evolving digital world. We believe in building lasting partnerships and empowering businesses to achieve their full potential.</p>
+                    </div>
+                    <img src="https://via.placeholder.com/300x300/6a11cb/ffffff?text=Our+Team" alt="About Us Image">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h3>Ready to Transform Your Business?</h3>
+                <p>Join us on the horizon of innovation. Let's create something extraordinary together.</p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Horizon. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
