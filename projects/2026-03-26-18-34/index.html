@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            --background-light: #f4f7f6;
+            --text-dark: #333;
+            --text-light: #fff;
+            --card-background: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --transition-speed: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--background-light);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: -webkit-linear-gradient(45deg, #f6d365, #fda085);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color var(--transition-speed);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-gradient);
+            transition: width var(--transition-speed);
+        }
+
+        .nav-links a:hover {
+            color: #e0e0e0;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: 8rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 8px 20px rgba(253, 160, 133, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(253, 160, 133, 0.5);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-background);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            transition: transform var(--transition-speed);
+        }
+
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: 6rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .cta-section h2 {
+            color: var(--text-light);
+        }
+
+        .cta-section h2::after {
+            background: var(--text-light);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: var(--primary-gradient);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.4);
+        }
+
+        .cta-button:hover {
+            box-shadow: 0 12px 25px rgba(106, 17, 203, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: #bbb;
+            text-align: center;
+            padding: 3rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer .footer-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        footer .footer-links a {
+            color: #bbb;
+            transition: color var(--transition-speed);
+        }
+
+        footer .footer-links a:hover {
+            color: var(--text-light);
+        }
+
+        footer p {
+            margin-top: 1.5rem;
+            color: #888;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .about-text, .about-image {
+                min-width: unset;
+                max-width: 100%;
+            }
+
+            .cta-section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">ProjectFlow</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Revolutionize Your Workflow</h1>
+                <p>Empower your team with cutting-edge solutions designed for the modern era. Experience seamless collaboration and unparalleled efficiency.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2>Core Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="icon">&#9733;</span> <!-- Star icon -->
+                    <h3>Intuitive Dashboard</h3>
+                    <p>Access all your vital information at a glance with our user-friendly interface.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">&#9889;</span> <!-- Lightning icon -->
+                    <h3>Blazing Fast Performance</h3>
+                    <p>Experience lightning-fast speeds and zero lag, optimized for peak productivity.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">&#128274;</span> <!-- Lock icon -->
+                    <h3>Ironclad Security</h3>
+                    <p>Your data is protected with state-of-the-art encryption and robust security protocols.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">&#128172;</span> <!-- Chat bubble icon -->
+                    <h3>Seamless Collaboration</h3>
+                    <p>Connect and collaborate with your team effortlessly, no matter where they are.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <h2>About Our Vision</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>At ProjectFlow, we believe in building tools that not only streamline processes but also inspire creativity and foster growth. Our journey began with a simple idea: to create a platform that adapts to your needs, not the other way around.</p>
+                    <p>We are a passionate team dedicated to innovation, constantly pushing the boundaries of what's possible in digital project management. Our commitment is to deliver excellence and ensure our users always have the best experience.</p>
+                    <p>This project was conceptualized and developed with a forward-looking perspective, with its official launch date set for <strong>2026-03-26</strong>. We're excited for what the future holds!</p>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/450x300/6a11cb/ffffff?text=Modern+Teamwork" alt="Team working collaboratively on a project">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <h2>Ready to Transform Your Projects?</h2>
+            <p>Join thousands of satisfied users who have elevated their project management with ProjectFlow. Don't get left behind.</p>
+            <a href="#" class="btn cta-button">Start Your Free Trial Today</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ProjectFlow. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Support</a></li>
+        </ul>
+        <p>Project Date: 2026-03-26</p>
+    </footer>
+</body>
+</html>
