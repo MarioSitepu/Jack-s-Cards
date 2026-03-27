@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Innovations - Project 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg-start: #2a003f; /* Dark Purple */
+            --primary-bg-end: #00002a;   /* Dark Blue */
+            --secondary-bg: #1e1e3f;     /* Slightly lighter dark */
+            --accent-color-1: #00bcd4;   /* Cyan */
+            --accent-color-2: #ff4081;   /* Pink */
+            --text-light: #f0f0f0;
+            --text-dark: #cccccc;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --header-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--primary-bg-start) 0%, var(--primary-bg-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(90deg, var(--primary-bg-start), var(--secondary-bg));
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color-1);
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color-2);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color-2);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        section {
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section:nth-child(even) {
+            background: linear-gradient(135deg, var(--secondary-bg), var(--primary-bg-end));
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--accent-color-1) 0%, transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
+            animation: pulse 4s infinite alternate;
+        }
+
+        section:nth-child(even)::before {
+            background: radial-gradient(circle, var(--accent-color-2) 0%, transparent 70%);
+            top: auto;
+            bottom: -50px;
+            left: auto;
+            right: -50px;
+            animation: pulse-reverse 4s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.1; }
+            100% { transform: scale(1.5); opacity: 0.2; }
+        }
+
+        @keyframes pulse-reverse {
+            0% { transform: scale(1.5); opacity: 0.2; }
+            100% { transform: scale(1); opacity: 0.1; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1, h2, h3 {
+            color: var(--accent-color-1);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 8px rgba(0, 188, 212, 0.3);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color-2);
+            text-shadow: 0 0 15px rgba(255, 64, 129, 0.5);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--text-light);
+            text-shadow: none;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(45deg, var(--primary-bg-end), var(--secondary-bg));
+            border-radius: 20px;
+            margin-top: 2rem;
+            box-shadow: 0 10px 40px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before, .hero::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--accent-color-1) 0%, transparent 70%);
+            opacity: 0.15;
+            border-radius: 50%;
+            filter: blur(20px);
+        }
+
+        .hero::before {
+            top: -75px;
+            left: -75px;
+        }
+
+        .hero::after {
+            bottom: -75px;
+            right: -75px;
+            background: radial-gradient(circle, var(--accent-color-2) 0%, transparent 70%);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 1.5rem auto 2.5rem auto;
+            color: var(--text-light);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            color: var(--text-light);
+            padding: 0.9rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 188, 212, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 188, 212, 0.6);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-out;
+        }
+
+        .feature-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-card h3 {
+            color: var(--accent-color-1);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .feature-card p {
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color-2);
+            display: block;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .about-content p {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color-1);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.3);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form .btn {
+            align-self: flex-start;
+            margin-top: 1rem;
+        }
+
+        footer {
+            background: var(--primary-bg-end);
+            color: var(--text-dark);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -4px 15px var(--shadow-color);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin: 0 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color-1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            header {
+                padding: 1rem;
+            }
+            nav ul li {
+                margin-left: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            h3 {
+                font-size: 1.6rem;
+            }
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem 0;
+            }
+            .logo {
+                margin-bottom: 1rem;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            main {
+                padding: 1rem;
+            }
+            section {
+                padding: 3rem 0;
+                margin-bottom: 2rem;
+            }
+            .hero {
+                padding: 4rem 1rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+                max-width: 90%;
+            }
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            h3 {
+                font-size: 1.4rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-form {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero p {
+                font-size: 0.9rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            h3 {
+                font-size: 1.2rem;
+            }
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+            .btn {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+            }
+            footer {
+                padding: 1.5rem;
+            }
+            footer p {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Future Innovations</a>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1>Revolutionizing Tomorrow, Today.</h1>
+            <p>At Future Innovations, we are dedicated to pushing the boundaries of technology and design to create solutions that empower and inspire. Join us on a journey to the cutting edge.</p>
+            <a href="#features" class="btn">Discover Our Vision</a>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features & Services</h2>
+                <p>Explore the core offerings that make our project stand out.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-brain feature-icon"></i>
+                        <h3>Advanced AI Integration</h3>
+                        <p>Leveraging state-of-the-art artificial intelligence for intelligent automation and data insights.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cube feature-icon"></i>
+                        <h3>Seamless Scalability</h3>
+                        <p>Designed for growth, our platform scales effortlessly to meet your evolving demands.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <h3>Robust Security</h3>
+                        <p>Your data is our priority. We implement industry-leading security protocols to protect your assets.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-palette feature-icon"></i>
+                        <h3>Intuitive User Experience</h3>
+                        <p>Beautifully crafted interfaces ensure a delightful and efficient interaction for all users.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Our Project</h2>
+                <div class="about-content">
+                    <p>This project, initiated with a vision to redefine digital interaction, brings together a team of passionate engineers, designers, and strategists. We believe in creating technology that is not only powerful but also accessible and meaningful.</p>
+                    <p>Our methodology focuses on agile development, user-centric design, and continuous innovation. We are committed to delivering excellence and pushing the boundaries of what's possible in the digital realm.</p>
+                    <p>Mark your calendars: this pivotal development milestone is proudly dated <strong>2026-03-27</strong>, signifying a new era of innovation and progress.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have questions or want to collaborate? Reach out to us!</p>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Future Innovations. All rights reserved.</p>
+        <p>Project Date: <strong>2026-03-27</strong></p>
+        <div class="social-links">
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+</body>
+</html>
