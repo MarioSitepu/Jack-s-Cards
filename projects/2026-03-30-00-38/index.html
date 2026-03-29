@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Project Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4A00E0; /* Deep Violet */
+            --secondary-color: #8E2DE2; /* Lighter Violet */
+            --accent-color: #00C2BA; /* Teal */
+            --text-light: #f0f0f0;
+            --text-dark: #333333;
+            --bg-gradient-start: #4A00E0;
+            --bg-gradient-end: #8E2DE2;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-radius-lg: 12px;
+            --border-radius-sm: 8px;
+            --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.2);
+            --shadow-deep: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Basic Reset & Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.8rem; }
+
+        p {
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: var(--text-light);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius-sm);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-deep);
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo span {
+            color: var(--accent-color);
+            margin-left: 5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2.5rem;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            font-weight: 400;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width var(--transition-speed);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 4rem 0;
+        }
+
+        section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        section:nth-child(even) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(0, 194, 186, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        /* Features Section */
+        .features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            text-align: left;
+            box-shadow: var(--shadow-light);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-deep);
+        }
+
+        .feature-item h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            font-size: 1.6rem;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        /* About Section */
+        .about .container {
+            max-width: 900px;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .about strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            padding: 6rem 0;
+            background: linear-gradient(90deg, var(--accent-color) 0%, var(--primary-color) 100%);
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: auto;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            transition: color var(--transition-speed);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 2rem; }
+            .hero h1 { font-size: 3.5rem; }
+            .hero p { font-size: 1.2rem; }
+            nav ul li { margin-left: 1.5rem; }
+            .feature-item { padding: 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            header .logo {
+                margin-bottom: 1.5rem;
+            }
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            nav ul li a {
+                padding: 10px 0;
+                display: block;
+            }
+            .hero {
+                padding: 6rem 0;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .features .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            section {
+                padding: 3rem 0;
+            }
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            footer p { font-size: 0.8rem; }
+            .social-links a { font-size: 1.2rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Futuristic<span>Hub</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Unlock Your Project's Full Potential</h1>
+                <p>Experience seamless collaboration and intelligent insights with our cutting-edge platform.</p>
+                <a href="#features" class="btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Innovative Solutions for Modern Teams</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h3>Smart Analytics</h3>
+                        <p>Gain deep insights into your project's performance with AI-powered data visualization and predictive analytics.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Real-time Collaboration</h3>
+                        <p>Work together effortlessly, no matter where you are. Shared workspaces, instant messaging, and live document editing.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Secure & Scalable</h3>
+                        <p>Your data is protected with enterprise-grade security. Scale your operations with confidence as your team grows.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Automated Workflows</h3>
+                        <p>Streamline repetitive tasks and focus on what truly matters. Our platform handles the busywork for you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>Our Vision for the Future</h2>
+                <p>At FuturisticHub, we believe in empowering innovators and creators. Our platform is designed to break down barriers, foster creativity, and drive efficiency in an ever-evolving digital landscape.</p>
+                <p>We are constantly evolving, pushing the boundaries of what's possible in project management and team collaboration. Our commitment to excellence ensures you're always ahead of the curve.</p>
+                <p>This project was initiated with a vision for the future, and we are proud to state its official launch date is set for: <strong>2026-03-30</strong>.</p>
+                <a href="#contact" class="btn">Learn More</a>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p>Join thousands of successful teams who are already leveraging FuturisticHub.</p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 FuturisticHub. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">FB</a>
+                <a href="#" aria-label="Twitter">TW</a>
+                <a href="#" aria-label="LinkedIn">LN</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
