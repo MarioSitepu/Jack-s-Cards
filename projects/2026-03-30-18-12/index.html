@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nexus - Future Forward</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #fc6767 0%, #ec008c 100%);
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --background-light: #f9fbfd;
+            --card-background: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --spacing-unit: 1rem;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 1.5);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-background);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support -webkit-text-fill-color */
+        }
+
+        nav ul {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        nav a {
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background-image: var(--primary-gradient);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-image: var(--primary-gradient);
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 8) 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+            border-bottom-left-radius: var(--border-radius-lg);
+            border-bottom-right-radius: var(--border-radius-lg);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            opacity: 0.9;
+        }
+
+        .btn {
+            background-image: var(--secondary-gradient);
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 2);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Section Styling */
+        section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            font-weight: 700;
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .feature-card {
+            background-color: var(--card-background);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-unit);
+            background-image: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* About Section */
+        .about-section .content {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 4);
+            flex-wrap: wrap;
+        }
+
+        .about-section .text-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-section .text-content h3 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-unit);
+            background-image: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        .about-section .text-content p {
+            margin-bottom: var(--spacing-unit);
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .about-section .image-mockup {
+            flex: 1;
+            min-width: 300px;
+            background-image: var(--primary-gradient);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            font-weight: 600;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-image: var(--secondary-gradient);
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 5) 0;
+            text-align: center;
+            border-radius: var(--border-radius-lg);
+            margin-top: calc(var(--spacing-unit) * 4);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-section h2 {
+            color: var(--text-light);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            font-size: 2.8rem;
+        }
+
+        .cta-section .btn {
+            background-image: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            color: #ec008c;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-section .btn:hover {
+            color: #6a11cb;
+            transform: translateY(-3px) scale(1.02);
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2) 0;
+            font-size: 0.9rem;
+            border-top-left-radius: var(--border-radius-lg);
+            border-top-right-radius: var(--border-radius-lg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-section h1 {
+                font-size: 2.8rem;
+            }
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+            section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-unit);
+            }
+            nav ul {
+                width: 100%;
+                justify-content: space-around;
+                gap: 0;
+            }
+            nav a {
+                padding: var(--spacing-unit) 0;
+            }
+            .hero-section {
+                padding: calc(var(--spacing-unit) * 5) 0;
+                min-height: 50vh;
+            }
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            .about-section .content {
+                flex-direction: column;
+            }
+            .about-section .image-mockup {
+                width: 100%;
+                min-height: 200px;
+            }
+            .cta-section h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
+            header .logo {
+                font-size: 1.5rem;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav li {
+                margin: 0 calc(var(--spacing-unit) * 0.5);
+            }
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: calc(var(--spacing-unit) * 0.6) calc(var(--spacing-unit) * 1.5);
+                font-size: 1rem;
+            }
+            section h2 {
+                font-size: 1.8rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project Nexus</div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Unlock the Future with Project Nexus</h1>
+                <p>Revolutionizing digital experiences with cutting-edge technology and intuitive design. Join us on this journey!</p>
+                <button class="btn">Discover More</button>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Powerful Features Designed for You</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">&#9733;</div> <!-- Star icon -->
+                        <h3>Seamless Integration</h3>
+                        <p>Effortlessly connect with your existing tools and workflows for maximum productivity.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">&#9889;</div> <!-- Bolt icon -->
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Experience unparalleled speed and responsiveness across all devices and platforms.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">&#128274;</div> <!-- Lock icon -->
+                        <h3>Robust Security</h3>
+                        <p>Your data is protected with advanced encryption and industry-leading security protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">&#128161;</div> <!-- Lightbulb icon -->
+                        <h3>Innovative Solutions</h3>
+                        <p>Stay ahead with AI-powered insights and smart automation tailored to your needs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>Our Vision for Tomorrow</h2>
+                <div class="content">
+                    <div class="text-content">
+                        <h3>Driving Innovation Forward</h3>
+                        <p>At Project Nexus, we believe in building the tools of tomorrow, today. Our dedicated team of innovators is committed to creating solutions that not only meet current demands but also anticipate future challenges.</p>
+                        <p>Since our inception, we've focused on user-centric design and scalable architecture, ensuring our products are both delightful to use and powerful under the hood. We are proud to announce our next major milestone, set for release on <strong style="background-image: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent;">2026-03-30</strong>, which promises to redefine industry standards.</p>
+                        <p>Join us as we continue to push boundaries and shape the future of technology.</p>
+                    </div>
+                    <div class="image-mockup">
+                        Future Ready Platform
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p>Get in touch with our team to learn how Project Nexus can empower your business.</p>
+                <button class="btn">Contact Us Today</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nexus. All rights reserved. Designed with passion for the future.</p>
+        </div>
+    </footer>
+</body>
+</html>
