@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FuturaSync Project Overview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6A00FF 0%, #00C6FF 100%);
+            --secondary-gradient: linear-gradient(135deg, #4A00B7 0%, #007bff 100%);
+            --background-dark: #1A1A2E;
+            --text-light: #E0E0E0;
+            --text-accent: #00C6FF;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --button-hover: #00A3D9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--background-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: radial-gradient(circle at top left, #300060 0%, transparent 50%),
+                              radial-gradient(circle at bottom right, #003060 0%, transparent 50%);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        header {
+            background: var(--primary-gradient);
+            color: #fff;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #E0E0E0;
+            transform: translateY(-2px);
+        }
+
+        main {
+            flex: 1;
+            padding: 3rem 0;
+        }
+
+        section {
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-light);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 6rem 0;
+            background: none; /* No extra background for hero, uses body bg */
+            border: none;
+            box-shadow: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .hero h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            max-width: 900px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            background: var(--secondary-gradient);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-accent);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: left;
+            margin-top: 2rem;
+        }
+
+        .about-content p {
+            text-align: left;
+            margin-left: 0;
+            margin-right: 0;
+            max-width: none;
+        }
+
+        footer {
+            background: var(--background-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2.5rem 0;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: var(--text-accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--button-hover);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            nav a {
+                font-size: 1rem;
+            }
+
+            .hero h2 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                padding: 5px 0;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            main {
+                padding: 2rem 0;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            footer {
+                padding: 1.5rem 0;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FuturaSync</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Innovate. Sync. Elevate.</h2>
+                <p>Unlock the future of project management with seamless collaboration and cutting-edge insights. Designed for tomorrow, available today.</p>
+                <a href="#" class="btn">Get Started</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Core Capabilities</h2>
+                <p>FuturaSync brings powerful features to streamline your workflow and boost productivity across your teams.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Real-time Collaboration</h3>
+                        <p>Work together on documents, tasks, and discussions without missing a beat, no matter where your team is located.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Advanced Analytics</h3>
+                        <p>Gain deep insights into project performance, resource allocation, and team efficiency with intuitive dashboards.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>AI-Powered Automation</h3>
+                        <p>Automate repetitive tasks, smart suggestions, and predictive scheduling to keep your projects on track.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Secure Cloud Storage</h3>
+                        <p>Store and share all your project assets securely in the cloud, with robust encryption and access controls.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>Our Vision</h2>
+                <div class="about-content">
+                    <p>At FuturaSync, we believe that the right tools can transform how teams work. Our platform is built on the principles of simplicity, power, and future-readiness. We aim to empower businesses to achieve their goals with unparalleled efficiency and innovation.</p>
+                    <p>This project, envisioned to redefine modern project management, is set to launch its next major phase on <strong>2026-03-30</strong>. We are continuously evolving, integrating the latest technologies to ensure our users always have an edge.</p>
+                    <p>Join us on this journey to a more connected and productive future.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have questions or want to learn more about how FuturaSync can benefit your organization? Contact our team today!</p>
+                <a href="mailto:info@futurasync.com" class="btn">Email Us</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 FuturaSync. All rights reserved.</p>
+            <p>Designed with passion for the future of work.</p>
+        </div>
+    </footer>
+</body>
+</html>
