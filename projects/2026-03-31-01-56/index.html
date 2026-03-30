@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Horizon | 2026</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+        }
+
+        /* Animated Background Blobs */
+        .blob {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.15;
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(20%, 20%); }
+        }
+
+        header {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            padding: 8rem 10% 4rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .date-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .features {
+            padding: 6rem 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: #94a3b8;
+        }
+
+        .info-section {
+            padding: 6rem 10%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .info-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .info-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: linear-gradient(45deg, var(--glass-border), transparent);
+            border-radius: 32px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        footer {
+            padding: 4rem 10%;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            color: #64748b;
+        }
+
+        .footer-links {
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
+            .hero { padding: 5rem 5% 3rem; }
+            .features { padding: 3rem 5%; }
+            .info-section { padding: 3rem 5%; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blob"></div>
+    
+    <header>
+        <div class="logo">NEXUS.26</div>
+        <nav>
+            <a href="#">Vision</a>
+            <a href="#">Technology</a>
+            <a href="#">Network</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="date-badge">Release Event: 2026-03-31</div>
+            <h1>The Future of Digital <br><span style="color: var(--primary)">Intelligence.</span></h1>
+            <p>On March 31, 2026, we redefine the boundaries of connection. Join the next generation of decentralized infrastructure.</p>
+            <button class="cta-button">Reserve Access</button>
+        </section>
+
+        <section class="features">
+            <div class="card">
+                <h3>Quantum Sync</h3>
+                <p>Instantaneous data synchronization across global nodes with zero latency architecture.</p>
+            </div>
+            <div class="card">
+                <h3>Neural Core</h3>
+                <p>Adaptive AI processing integrated directly into the network layer for real-time optimization.</p>
+            </div>
+            <div class="card">
+                <h3>Eco-Grid</h3>
+                <p>Sustainable computing powered by 100% renewable energy credits and carbon-neutral protocols.</p>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="info-content">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">A New Era Begins</h2>
+                <p style="margin-bottom: 1.5rem; color: #94a3b8;">Our mission is to democratize high-performance computing. By <strong>2026-03-31</strong>, Nexus Horizon will deploy the first fully autonomous edge network, providing unparalleled speed to users worldwide.</p>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.5rem;">✦ End-to-end encrypted tunnels</li>
+                    <li style="margin-bottom: 0.5rem;">✦ Dynamic bandwidth allocation</li>
+                    <li style="margin-bottom: 0.5rem;">✦ Multi-cloud interoperability</li>
+                </ul>
+            </div>
+            <div class="info-image">
+                💠
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Whitepaper</a>
+            <a href="#">Github</a>
+        </div>
+        <p>&copy; 2026 Nexus Horizon Systems. Launch Date: March 31, 2026.</p>
+    </footer>
+</body>
+</html>
