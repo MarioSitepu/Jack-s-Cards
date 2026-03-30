@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureForge Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a05ad 0%, #007bff 100%);
+            --secondary-gradient: linear-gradient(45deg, #00bcd4 0%, #007bff 100%);
+            --bg-color-light: #f0f2f5;
+            --bg-color-dark: #1a1a2e;
+            --text-color-dark: #333;
+            --text-color-light: #f4f4f4;
+            --accent-color: #00bcd4;
+            --card-bg: #ffffff;
+            --border-radius-lg: 15px;
+            --border-radius-md: 8px;
+            --spacing-unit: 1rem;
+            --font-family-primary: 'Poppins', sans-serif;
+        }
+
+        /* Base Reset & Typography */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-primary);
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--bg-color-light);
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-color-dark);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #007bff; /* A lighter blue for hover */
+        }
+
+        /* Layout & Components */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-color-dark);
+            color: var(--text-color-light);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0; /* Override container padding for header */
+        }
+
+        .logo {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support background-clip: text */
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        nav a {
+            color: var(--text-color-light);
+            font-weight: 600;
+            padding: var(--spacing-unit) 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+            border-bottom-left-radius: var(--border-radius-lg);
+            border-bottom-right-radius: var(--border-radius-lg);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            color: var(--text-color-light);
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            font-size: clamp(3rem, 7vw, 5rem);
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+            max-width: 800px;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-color-light);
+            padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background: #008c9e; /* A slightly darker teal */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Sections */
+        section {
+            padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        section:nth-of-type(even) {
+            background-color: #e5e8ed; /* Slightly darker background for even sections */
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            position: relative;
+            padding-bottom: var(--spacing-unit);
+            font-size: clamp(2rem, 4vw, 3rem);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 250px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-unit);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        .feature-card h3 {
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            color: var(--text-color-dark);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: calc(var(--spacing-unit) * 3);
+            align-items: center;
+        }
+
+        .about-text, .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background: var(--secondary-gradient);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-lg);
+            margin: calc(var(--spacing-unit) * 4) auto;
+            max-width: 1000px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-section h2 {
+            color: var(--text-color-light);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .cta-section p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            margin-bottom: calc(var(--spacing-unit) * 2.5);
+            opacity: 0.9;
+        }
+
+        .cta-section .btn {
+            background: var(--bg-color-dark); /* Dark button on gradient background */
+            color: var(--text-color-light);
+        }
+
+        .cta-section .btn:hover {
+            background: #333; /* Slightly lighter dark on hover */
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-color-dark);
+            color: var(--text-color-light);
+            padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 2);
+            text-align: center;
+            border-top-left-radius: var(--border-radius-lg);
+            border-top-right-radius: var(--border-radius-lg);
+            margin-top: calc(var(--spacing-unit) * 4);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                gap: calc(var(--spacing-unit) * 0.5);
+            }
+
+            nav a {
+                padding: calc(var(--spacing-unit) * 0.5) 0;
+            }
+
+            .hero {
+                padding: calc(var(--spacing-unit) * 4) var(--spacing-unit);
+                min-height: 50vh;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.5rem, 8vw, 3.5rem);
+            }
+
+            .hero p {
+                font-size: clamp(1rem, 3vw, 1.25rem);
+            }
+
+            .section-title {
+                font-size: clamp(1.8rem, 6vw, 2.5rem);
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-text, .about-image {
+                min-width: unset;
+                width: 100%;
+            }
+
+            .cta-section {
+                padding: calc(var(--spacing-unit) * 4) var(--spacing-unit);
+                margin: calc(var(--spacing-unit) * 2) auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: var(--spacing-unit);
+            }
+
+            section {
+                padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Font Awesome (for icons) */
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureForge</div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1>Innovate the Future. Today.</h1>
+            <p>Empowering your vision with cutting-edge solutions and seamless experiences. Project initiated on <time datetime="2026-03-30">March 30, 2026</time>.</p>
+            <a href="#features" class="btn">Discover More</a>
+        </section>
+
+        <section id="features" class="container">
+            <h2 class="section-title">Our Core Capabilities</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Rapid Development</h3>
+                    <p>Accelerated deployment cycles to bring your ideas to life faster than ever before.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cube"></i>
+                    <h3>Scalable Architecture</h3>
+                    <p>Building robust systems that grow with your needs, ensuring future-proof solutions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Enhanced Security</h3>
+                    <p>Prioritizing data integrity and user privacy with state-of-the-art security protocols.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Performance Optimization</h3>
+                    <p>Delivering lightning-fast experiences with highly optimized code and infrastructure.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="container">
+            <h2 class="section-title">About FutureForge</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>At FutureForge, we believe in crafting digital experiences that are not just functional, but truly transformative. Our team of passionate innovators and developers are dedicated to pushing the boundaries of technology to create solutions that solve real-world problems.</p>
+                    <p>From concept to deployment, we partner with our clients to ensure every detail aligns with their vision and objectives. We are committed to transparency, excellence, and continuous improvement, making us the ideal partner for your next groundbreaking project.</p>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/600x400/007bff/FFFFFF?text=Modern+Tech" alt="Modern Technology">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <h2>Ready to Forge Your Future?</h2>
+            <p>Join us on a journey to redefine possibilities. Let's create something extraordinary together.</p>
+            <a href="mailto:info@futureforge.com" class="btn">Start a Project</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 FutureForge. All rights reserved. Designed with passion on <time datetime="2026-03-30">March 30, 2026</time>.</p>
+        </div>
+    </footer>
+</body>
+</html>
