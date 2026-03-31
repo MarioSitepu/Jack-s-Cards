@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #6a11cb; /* Deep Purple */
+            --secondary-color: #2575fc; /* Bright Blue */
+            --accent-color: #00d4ff; /* Cyan */
+            --text-dark: #2c3e50; /* Dark Slate Blue */
+            --text-light: #ecf0f1; /* Light Grey */
+            --bg-light: #f8f9fa; /* Off White */
+            --bg-dark: #34495e; /* Dark Grey Blue */
+            --gradient-main: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-hero: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-dark: 0 8px 25px rgba(0, 0, 0, 0.2);
+            --border-radius: 10px;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: linear-gradient(135deg, #f0f4f8 0%, #e0e7ee 100%); /* Subtle background gradient */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn.primary {
+            background: var(--gradient-main);
+            color: var(--text-light);
+            border: none;
+        }
+
+        .btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .btn.secondary {
+            background: var(--bg-light);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn.secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-dark);
+            background: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-light);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-dark);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.3rem;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-hero);
+            color: var(--text-light);
+            padding: 6rem 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f0f4f8; /* Lighter background for alternating sections */
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-section .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            display: inline-block; /* Ensure gradient works */
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* About Section */
+        .about-section p {
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-main);
+            color: var(--text-light);
+            padding: 4rem 0;
+        }
+
+        .cta-section h2 {
+            color: var(--text-light);
+            font-size: 2.2rem;
+        }
+
+        .cta-section h2::after {
+            background: var(--accent-color);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            padding: 2.5rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            margin: 0 0.8rem;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none; /* Hide navigation by default on small screens */
+                flex-direction: column;
+                position: absolute;
+                top: 70px; /* Adjust based on header height */
+                left: 0;
+                width: 100%;
+                background: var(--bg-light);
+                box-shadow: var(--shadow-dark);
+                padding: 1rem 0;
+                border-top: 1px solid #eee;
+            }
+
+            nav.active {
+                display: flex; /* Show navigation when active */
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.8rem 0;
+            }
+
+            .hero {
+                padding: 4rem 0;
+                min-height: 60vh;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .features-section .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-section p, .cta-section p {
+                font-size: 1rem;
+            }
+
+            footer .container {
+                flex-direction: column;
+            }
+
+            .social-links {
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project 2026</div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="toggle navigation">&#9776;</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Future-Forward Solutions for a Modern World</h1>
+                <p>Innovating with precision and passion, delivering excellence by <strong style="color: var(--accent-color);">2026-03-31</strong>.</p>
+                <a href="#features" class="btn primary">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="icon">🚀</i>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed and efficiency, ensuring a seamless user experience across all devices.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon">💡</i>
+                        <h3>Intuitive Design</h3>
+                        <p>User-centric interfaces that are easy to navigate, beautiful to look at, and a joy to use.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon">🔒</i>
+                        <h3>Robust Security</h3>
+                        <p>Enterprise-grade security measures to protect your data, privacy, and ensure peace of mind.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon">🌍</i>
+                        <h3>Global Scalability</h3>
+                        <p>Built to scale with your needs, our solution is ready for international deployment and growth.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <p>We are a team of dedicated innovators pushing the boundaries of technology. Our mission is to create impactful solutions that redefine industry standards. This project, set for completion by <strong>March 31, 2026</strong>, embodies our commitment to future-proof development and cutting-edge design. We believe in transparency, collaboration, and delivering products that truly make a difference in the modern landscape.</p>
+                <a href="#contact" class="btn secondary">Get in Touch</a>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Join us on this exciting journey. Contact us today to learn more about our upcoming solutions and how they can benefit you.</p>
+                <a href="mailto:info@project2026.com" class="btn primary">Contact Us Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project 2026. All rights reserved. Project Completion Date: 2026-03-31.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for mobile navigation toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const mainNav = document.getElementById('main-nav');
+
+            navToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+
+            // Close nav when a link is clicked (for single-page navigation)
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
