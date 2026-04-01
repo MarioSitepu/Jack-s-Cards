@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Zenith - Modern Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary-start: #6a11cb; /* Deep Purple */
+            --color-primary-end: #2575fc;   /* Bright Blue */
+            --color-secondary-start: #00c6ff; /* Cyan */
+            --color-secondary-end: #0072ff;   /* Darker Blue */
+            --color-dark-bg: #1a1a2e;
+            --color-light-text: #f0f0f0;
+            --color-dark-text: #333;
+            --color-accent-blue: #00aaff;
+            --color-bg-light-grey: #f8f9fa;
+            --color-bg-medium-grey: #e9ecef;
+
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 4rem;
+
+            --border-radius: 8px;
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--color-dark-text);
+            background: linear-gradient(to right bottom, var(--color-bg-light-grey), var(--color-bg-medium-grey));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, var(--color-dark-bg) 0%, #2a2a3e 100%);
+            color: var(--color-light-text);
+            padding: var(--spacing-md) 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        header h1 a {
+            color: var(--color-light-text);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        header h1 a:hover {
+            color: var(--color-accent-blue);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+
+        nav a {
+            color: var(--color-light-text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: var(--spacing-sm) 0;
+            position: relative;
+            transition: color var(--transition-speed);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-accent-blue);
+            transition: width var(--transition-speed);
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--color-accent-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
+            color: var(--color-light-text);
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            flex-grow: 1; /* Allow hero to take available space */
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-md);
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-lg);
+            font-weight: 300;
+        }
+
+        .hero .project-date {
+            font-weight: 600;
+            color: var(--color-secondary-start);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--color-secondary-start) 0%, var(--color-secondary-end) 100%);
+            color: var(--color-light-text);
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Content Sections */
+        main {
+            padding: var(--spacing-xl) 0;
+        }
+
+        section {
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--color-bg-light-grey);
+        }
+
+        section h3 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-primary-start);
+            position: relative;
+            display: inline-block;
+        }
+
+        section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-secondary-start), var(--color-secondary-end));
+            border-radius: 2px;
+        }
+
+        section p {
+            max-width: 800px;
+            margin: 0 auto var(--spacing-lg);
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .feature-card {
+            background-color: #fff;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: left;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border-top: 5px solid transparent;
+            border-image: linear-gradient(45deg, var(--color-primary-start), var(--color-primary-end)) 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: var(--color-accent-blue);
+            margin-bottom: var(--spacing-md);
+            display: inline-block;
+            background: linear-gradient(45deg, var(--color-primary-start), var(--color-primary-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-dark-text);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 0;
+            text-align: left;
+        }
+
+        /* About Section */
+        .about .container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--color-secondary-start) 0%, var(--color-secondary-end) 100%);
+            color: var(--color-light-text);
+            padding: var(--spacing-xl) 0;
+        }
+
+        .cta h3 {
+            color: var(--color-light-text);
+        }
+
+        .cta h3::after {
+            background: var(--color-light-text);
+        }
+
+        .cta p {
+            color: var(--color-light-text);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-dark-bg);
+            color: var(--color-light-text);
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            margin-top: auto; /* Pushes footer to the bottom */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--color-light-text);
+        }
+
+        .social-links {
+            margin-top: var(--spacing-md);
+        }
+
+        .social-links a {
+            color: var(--color-light-text);
+            font-size: 1.5rem;
+            margin: 0 var(--spacing-sm);
+            transition: color var(--transition-speed);
+        }
+
+        .social-links a:hover {
+            color: var(--color-accent-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: var(--spacing-md);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            section h3 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                text-align: center;
+            }
+
+            .feature-card .icon {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .feature-card p {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: var(--spacing-sm) var(--spacing-md);
+                font-size: 0.9rem;
+            }
+
+            section h3 {
+                font-size: 1.8rem;
+            }
+
+            section p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="#hero">Project Zenith</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h2>Innovative Solutions for Tomorrow's Challenges</h2>
+                <p>Empowering your vision with cutting-edge technology. Launching on <span class="project-date">2026-04-02</span>.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h3>Unleash Your Potential</h3>
+                <p>Our platform offers a suite of powerful features designed to streamline your workflow and amplify productivity.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="icon">&#9733;</span> <!-- Star icon -->
+                        <h4>Seamless Integration</h4>
+                        <p>Connect with your existing tools effortlessly, creating a unified and efficient ecosystem.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#9889;</span> <!-- Lightning bolt icon -->
+                        <h4>Blazing Fast Performance</h4>
+                        <p>Experience unparalleled speed and responsiveness, ensuring your work never slows down.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#128274;</span> <!-- Lock icon -->
+                        <h4>Robust Security</h4>
+                        <p>Your data is protected with state-of-the-art encryption and security protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#128172;</span> <!-- Speech bubble icon -->
+                        <h4>Intuitive Interface</h4>
+                        <p>Designed for ease of use, our platform ensures a smooth and enjoyable user experience.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h3>Our Vision</h3>
+                <p>At Project Zenith, we believe in pushing the boundaries of what's possible. Our dedicated team of innovators is committed to crafting solutions that not only meet today's needs but anticipate tomorrow's demands.</p>
+                <img src="https://via.placeholder.com/600x400/6a11cb/2575fc?text=Our+Team+Working" alt="Team working collaboratively" class="about-image">
+                <p>We're passionate about creating technology that makes a real difference, helping businesses and individuals thrive in an ever-evolving digital landscape.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h3>Ready to Transform Your Future?</h3>
+                <p>Join us on this journey. Get in touch to learn how Project Zenith can empower your next big idea.</p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Zenith. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">&#x1F4F1;</a> <!-- Placeholder for social icon, e.g., using emoji or font awesome -->
+                <a href="#" aria-label="Twitter">&#x1F4F1;</a>
+                <a href="#" aria-label="LinkedIn">&#x1F4F1;</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
