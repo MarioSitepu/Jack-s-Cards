@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #ff6a00 0%, #ee0979 100%);
+            --text-color-light: #f0f0f0;
+            --text-color-dark: #333;
+            --bg-color-light: #ffffff;
+            --bg-color-dark: #2c3e50;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --border-radius-sm: 8px;
+            --border-radius-md: 15px;
+            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: var(--bg-color-light);
+            padding: 1rem 2rem;
+            box-shadow: var(--box-shadow-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #2575fc;
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color-dark);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #6a11cb;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero-section {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: 6rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            opacity: 0.9;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section button {
+            background: var(--bg-color-light);
+            color: #2575fc;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: var(--border-radius-md);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--box-shadow-medium);
+        }
+
+        .hero-section button:hover {
+            background: #e0e0e0;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .content-section {
+            background: var(--bg-color-light);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--box-shadow-medium);
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .content-section:nth-of-type(odd) {
+            background: var(--card-bg);
+        }
+
+        .content-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            color: #6a11cb;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .card-grid, .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card, .team-member {
+            background: #fdfdfd;
+            padding: 2rem;
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--box-shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before, .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease-out;
+        }
+
+        .card:hover::before, .team-member:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover, .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h4, .team-member h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #2575fc;
+            margin-bottom: 0.8rem;
+        }
+
+        .card p, .team-member p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .feature-list li {
+            background: #f0f8ff;
+            padding: 1rem 1.5rem;
+            border-left: 5px solid #6a11cb;
+            border-radius: var(--border-radius-sm);
+            font-size: 1.1rem;
+            font-weight: 400;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .feature-list li:hover {
+            background-color: #e6f0ff;
+            transform: translateX(5px);
+        }
+
+        footer {
+            background: var(--bg-color-dark);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            opacity: 0.8;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero-section {
+                padding: 4rem 1rem;
+                min-height: 60vh;
+            }
+
+            .hero-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            .hero-section button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            main {
+                padding: 2rem 1rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.8rem;
+            }
+
+            .card-grid, .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.3rem;
+            }
+
+            nav ul {
+                gap: 0.8rem;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+            }
+
+            .hero-section h2 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .hero-section button {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.6rem;
+            }
+
+            .card h4, .team-member h4 {
+                font-size: 1.3rem;
+            }
+
+            .card p, .team-member p {
+                font-size: 0.9rem;
+            }
+
+            .feature-list li {
+                font-size: 1rem;
+                padding: 0.8rem 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Project Nova</h1>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <h2>Transforming Ideas into Reality</h2>
+            <p>Our innovative solutions are shaping the future. Project dated: <strong>2026-04-02</strong></p>
+            <button>Discover More</button>
+        </section>
+
+        <section id="overview" class="content-section">
+            <h3>Project Overview</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Vision & Mission</h4>
+                    <p>To deliver cutting-edge technology that empowers users and simplifies complex tasks.</p>
+                </div>
+                <div class="card">
+                    <h4>Current Progress</h4>
+                    <p>Successfully completed alpha testing with positive feedback. Moving to public beta.</p>
+                </div>
+                <div class="card">
+                    <h4>Next Milestones</h4>
+                    <p>Launch of version 1.0, expanding user base, and continuous feature development.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="content-section">
+            <h3>Key Features</h3>
+            <ul class="feature-list">
+                <li>Seamless User Experience</li>
+                <li>Advanced AI Integration</li>
+                <li>Robust Data Security</li>
+                <li>Cross-Platform Compatibility</li>
+                <li>Real-time Collaboration Tools</li>
+                <li>Scalable Architecture</li>
+            </ul>
+        </section>
+
+        <section id="team" class="content-section">
+            <h3>Meet Our Dedicated Team</h3>
+            <div class="team-grid">
+                <div class="team-member">
+                    <h4>Alice Johnson</h4>
+                    <p>Chief Product Officer</p>
+                </div>
+                <div class="team-member">
+                    <h4>Mark Chen</h4>
+                    <p>Lead Software Engineer</p>
+                </div>
+                <div class="team-member">
+                    <h4>Sarah Lee</h4>
+                    <p>UI/UX Design Lead</p>
+                </div>
+                <div class="team-member">
+                    <h4>David Kim</h4>
+                    <p>Head of Marketing</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <h3>Get in Touch</h3>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto;">Have questions or want to collaborate? Reach out to us!</p>
+            <p style="text-align: center; margin-top: 1rem;"><a href="mailto:info@projectnova.com" style="color: #2575fc; text-decoration: none; font-weight: 600;">info@projectnova.com</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Nova. All rights reserved.</p>
+        <p>Last Updated: 2026-04-02</p>
+    </footer>
+</body>
+</html>
