@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nexus - Modern Web Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #6a11cb;
+            --primary-gradient-end: #2575fc;
+            --secondary-gradient-start: #00c6ff;
+            --secondary-gradient-end: #0072ff;
+            --background-start: #f0f4f8;
+            --background-end: #e0e7ee;
+            --text-dark: #333;
+            --text-light: #f9f9f9;
+            --card-bg: #ffffff;
+            --accent-color: #007bff;
+            --button-hover-start: #1cb5e0;
+            --button-hover-end: #000046;
+        }
+
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(to right bottom, var(--background-start), var(--background-end));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #ffeb3b, #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: var(--text-light);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            left: 0;
+            background: #ffeb3b;
+        }
+
+        nav ul li a:hover {
+            color: #ffeb3b;
+            transform: translateY(-2px);
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            color: var(--text-light);
+            padding: 6rem 2rem;
+            border-radius: 15px;
+            margin: 2rem auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 10%, transparent 70%);
+            animation: rotateBackground 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 114, 255, 0.4);
+            background: linear-gradient(45deg, var(--button-hover-start), var(--button-hover-end));
+        }
+
+        /* Features Section */
+        #features {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            margin-top: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--background-start);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-gradient-end);
+            background: -webkit-linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* About Section */
+        #about {
+            background: linear-gradient(135deg, var(--background-start), var(--background-end));
+            padding: 5rem 2rem;
+        }
+
+        #about p {
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin: 1.5rem auto 0;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: #ffeb3b;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            #hero {
+                padding: 4rem 1.5rem;
+                margin: 1rem auto;
+            }
+
+            #hero h1 {
+                font-size: 2.8rem;
+            }
+
+            #hero p {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            section h2 {
+                font-size: 2.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .logo {
+                font-size: 1.5rem;
+            }
+
+            #hero h1 {
+                font-size: 2rem;
+            }
+
+            #hero p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .feature-card .icon {
+                font-size: 3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Project Nexus</div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1>Elevate Your Digital Presence</h1>
+            <p>Innovative solutions for a connected world. Experience the future of web development today.</p>
+            <a href="#features" class="cta-button">Discover Our Services</a>
+        </section>
+
+        <section id="features">
+            <h2>Core Capabilities</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="icon">&#9881;</span> <!-- Gear icon -->
+                    <h3>Cutting-Edge Design</h3>
+                    <p>Crafting visually stunning and intuitive interfaces that captivate your audience.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">&#128187;</span> <!-- Laptop icon -->
+                    <h3>Responsive Development</h3>
+                    <p>Ensuring seamless experience across all devices, from desktops to smartphones.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">&#128640;</span> <!-- Rocket icon -->
+                    <h3>Optimized Performance</h3>
+                    <p>Building fast, efficient, and scalable web applications for superior user engagement.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">&#128274;</span> <!-- Lock icon -->
+                    <h3>Robust Security</h3>
+                    <p>Implementing advanced security measures to protect your data and user privacy.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>About Project Nexus</h2>
+            <p>
+                Project Nexus is dedicated to delivering state-of-the-art web solutions that push the boundaries of technology and design.
+                Our team of passionate experts combines creativity with technical prowess to build platforms that are not only beautiful
+                but also highly functional and impactful. We believe in a collaborative approach, working closely with our clients
+                to bring their visions to life and achieve their strategic goals in the ever-evolving digital landscape.
+                Join us in shaping the future of the web.
+            </p>
+        </section>
+
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <p>Have a project in mind or just want to say hello? We'd love to hear from you!</p>
+            <a href="mailto:info@projectnexus.com" class="cta-button">Contact Us Now</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Nexus. All rights reserved.</p>
+        <p>Last updated: 2026-04-02</p>
+        <p>Made with &hearts; for a better web.</p>
+    </footer>
+</body>
+</html>
