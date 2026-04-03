@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #0f3460;
+            --card-bg: #16213e;
+            --text-light: #e0e0e0;
+            --text-dark: #333;
+            --accent-gradient-start: #e94560;
+            --accent-gradient-end: #533483;
+            --button-hover-start: #ff7f50;
+            --button-hover-end: #ffa500;
+            --border-radius-lg: 12px;
+            --border-radius-sm: 8px;
+            --shadow-elevation: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Basic Reset & Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-elevation);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color var(--transition-speed);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            transition: width var(--transition-speed);
+        }
+
+        nav a:hover {
+            color: var(--accent-gradient-start); /* A subtle color change for hover */
+        }
+        
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content Styling */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            padding: 4rem 2rem;
+            margin-bottom: 3rem;
+            border-radius: var(--border-radius-lg);
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow-elevation);
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--secondary-bg);
+        }
+
+        h2, h3 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 2.2rem;
+        }
+
+        p {
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-elevation);
+        }
+
+        #hero h2 {
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+            color: var(--text-light);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-light);
+            background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            border: none;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .button:hover {
+            background: linear-gradient(45deg, var(--button-hover-start), var(--button-hover-end));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Features Section */
+        #features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--primary-bg);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-elevation);
+            text-align: left;
+            transition: transform var(--transition-speed);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card h4 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #a7d9ff, #6096ba);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        /* About Section */
+        #about p {
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #about strong {
+            background: linear-gradient(45deg, #a7d9ff, #6096ba);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(90deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            box-shadow: var(--shadow-elevation);
+        }
+
+        footer p {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1.5rem 1rem;
+            }
+
+            header h1 {
+                margin-bottom: 1rem;
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            nav a {
+                font-size: 1rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            h3 {
+                font-size: 1.8rem;
+            }
+
+            #hero {
+                padding: 4rem 1.5rem;
+            }
+
+            #hero h2 {
+                font-size: 3rem;
+            }
+
+            #hero p {
+                font-size: 1.2rem;
+            }
+
+            .button {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            #hero h2 {
+                font-size: 2.5rem;
+            }
+
+            #hero p {
+                font-size: 1rem;
+            }
+
+            .button {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Project "Nexus"</h1>
+        <nav>
+            <ul>
+                <li><a href="#hero" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h2>Welcome to the Future of Project Management</h2>
+            <p>Innovate, collaborate, and achieve your goals with unparalleled efficiency and a touch of modern elegance.</p>
+            <a href="#features" class="button">Explore Features</a>
+        </section>
+
+        <section id="features">
+            <h3>Core Features</h3>
+            <p>Discover the powerful tools designed to streamline your workflow and elevate your team's productivity.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Intuitive Dashboard</h4>
+                    <p>Gain a clear overview of all your projects, tasks, and team progress at a glance with our beautifully designed interface.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Real-time Collaboration</h4>
+                    <p>Communicate seamlessly with your team, share files, and track changes in real-time, no matter where you are.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Advanced Analytics</h4>
+                    <p>Leverage data-driven insights to make informed decisions, identify bottlenecks, and optimize your project strategies.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Customizable Workflows</h4>
+                    <p>Tailor project workflows to fit your unique needs, ensuring maximum flexibility and efficiency for every task.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Secure Cloud Storage</h4>
+                    <p>Keep all your important documents and files safe and accessible with our robust, encrypted cloud storage solutions.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Automated Reporting</h4>
+                    <p>Generate comprehensive project reports with ease, saving time and providing critical information for stakeholders.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <h3>About Our Vision</h3>
+            <p>Our journey began with a simple idea: to make complex projects manageable and enjoyable. We're committed to delivering cutting-edge solutions that empower teams to achieve more with less effort. Project Nexus is built on the principles of innovation, user-centric design, and unwavering reliability.</p>
+            <p>We continuously evolve our platform to meet the dynamic needs of modern businesses. Our latest updates and improvements are live as of: <strong>2026-04-03</strong>. We're excited for you to experience the difference!</p>
+        </section>
+
+        <section id="contact">
+            <h3>Ready to Transform Your Workflow?</h3>
+            <p>Join the growing number of teams who are accelerating their projects with Project Nexus. Get started today and experience the future of project management.</p>
+            <a href="#" class="button">Get Started Now</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Nexus. All rights reserved. Designed with passion for productivity.</p>
+    </footer>
+</body>
+</html>
