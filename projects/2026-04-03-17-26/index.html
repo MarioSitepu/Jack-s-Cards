@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureForge - Modern Web Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --bg-dark: #121212;
+            --bg-medium: #1e1e1e;
+            --bg-light: #2c2c2c;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --gradient-start: #6a11cb; /* Deep Purple */
+            --gradient-end: #2575fc;   /* Bright Blue */
+            --accent-color: #00bcd4;   /* Cyan */
+            --border-radius-sm: 8px;
+            --border-radius-lg: 16px;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.3);
+            --box-shadow-deep: 0 8px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.75rem; }
+        p { margin-bottom: var(--spacing-sm); color: var(--text-secondary); }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support background-clip */
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            font-size: 3rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            margin: var(--spacing-xs) auto 0;
+            border-radius: 2px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            color: var(--text-primary);
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--box-shadow-light);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-deep);
+            opacity: 0.9;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-medium);
+            padding: var(--spacing-sm) var(--spacing-md);
+            box-shadow: var(--box-shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo h1 {
+            font-size: 2rem;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: var(--spacing-md);
+        }
+
+        nav ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: var(--spacing-xs) 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--text-primary);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            padding: var(--spacing-lg) var(--spacing-md);
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: var(--border-radius-lg);
+            border-bottom-right-radius: var(--border-radius-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            transform: rotate(45deg);
+            z-index: 0;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -70px;
+            right: -70px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+            z-index: 0;
+        }
+
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-content h2 {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Main Sections */
+        section {
+            padding: var(--spacing-lg) 0;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--bg-medium);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .feature-item {
+            background-color: var(--bg-light);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-deep);
+        }
+
+        .feature-item .icon-bg {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-sm);
+            font-size: 2rem;
+            color: var(--text-primary);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-item h3 {
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            align-items: center;
+            text-align: center;
+        }
+        .about-content p {
+            max-width: 800px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+        .about-content strong {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--bg-light);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-deep);
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: var(--spacing-xs);
+            border: 1px solid var(--bg-medium);
+            border-radius: var(--border-radius-sm);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.3);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form .btn {
+            align-self: flex-start;
+            margin-top: var(--spacing-sm);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-medium);
+            padding: var(--spacing-md) var(--spacing-md);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: var(--spacing-lg);
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .hero-content h2 { font-size: 3rem; }
+            .hero-content p { font-size: 1.2rem; }
+            .section-title { font-size: 2.2rem; }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--spacing-sm) var(--spacing-md);
+            }
+            header .logo {
+                margin-bottom: var(--spacing-sm);
+            }
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+            }
+            nav ul li {
+                margin: var(--spacing-xs) 0;
+            }
+            nav ul li a {
+                font-size: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-content {
+                padding: 0 var(--spacing-sm);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            .hero-content h2 { font-size: 2.2rem; }
+            .hero-content p { font-size: 1rem; }
+            .section-title { font-size: 1.8rem; }
+
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+            .btn {
+                padding: 0.75rem 1.25rem;
+                font-size: 1rem;
+            }
+            .hero {
+                min-height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1><span class="gradient-text">Future</span>Forge</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>Innovate. <span class="gradient-text">Create.</span> Inspire.</h2>
+                <p>Building the next generation of web experiences with modern design and cutting-edge technology.</p>
+                <a href="#features" class="btn">Explore Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2 class="section-title">Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="icon-bg"><i class="fas fa-rocket"></i></div>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed and efficiency, ensuring a seamless user experience on all devices.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon-bg"><i class="fas fa-mobile-alt"></i></div>
+                        <h3>Fully Responsive Design</h3>
+                        <p>Adapts flawlessly to any screen size, from desktops to tablets and smartphones.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon-bg"><i class="fas fa-palette"></i></div>
+                        <h3>Stunning Visuals</h3>
+                        <p>Modern aesthetics with vibrant gradients and a clean, intuitive interface.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon-bg"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Robust Security</h3>
+                        <p>Built with best practices to protect your data and ensure a secure environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About FutureForge</h2>
+                <div class="about-content">
+                    <p>FutureForge is a conceptual project designed to demonstrate the power of modern web development. It integrates responsive design principles, sophisticated CSS techniques including gradients and shadows, and a clean, user-focused layout.</p>
+                    <p>Our goal is to inspire and provide a foundation for creating visually appealing and highly functional web applications that stand out in today's digital landscape.</p>
+                    <p>This project was conceptualized and developed with a forward-looking mindset, aligning with future web standards and user expectations.</p>
+                    <p><strong>Project Date: 2026-04-03</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-form">
+                    <form action="#" method="POST">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 FutureForge. All rights reserved. | Project Date: 2026-04-03</p>
+    </footer>
+</body>
+</html>
