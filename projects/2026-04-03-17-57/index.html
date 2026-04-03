@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureVision Project - 2026-04-03</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            --background-dark: #1a1a2e;
+            --text-light: #e0e0e0;
+            --text-dark: #333;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.15);
+            --accent-color: #00e4ff;
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.3);
+            --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--background-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #7b00ff; /* A lighter purple from the gradient */
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            padding: 20px 0;
+            box-shadow: var(--shadow-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+        }
+
+        section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section:nth-of-type(even) {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--background-dark);
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0.6;
+            z-index: 1;
+            clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            background: linear-gradient(45deg, #ffffff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--secondary-gradient);
+            color: #fff;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        /* Features Section */
+        .features .container {
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* About Section */
+        .about .container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: var(--shadow-dark);
+            border: 2px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+
+        .about-content {
+            flex: 2;
+            min-width: 400px;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .about-content strong {
+            color: var(--accent-color);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--primary-gradient);
+            text-align: center;
+            padding: 100px 0;
+            clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
+            margin-top: -80px; /* Overlap with previous section */
+            padding-top: 180px; /* Adjust padding for clip-path */
+            padding-bottom: 180px;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .cta p {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0d0d1a;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        footer .social-links a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        footer .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .about .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-content, .about-image {
+                min-width: unset;
+                width: 100%;
+            }
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+            .cta p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 0 15px 10px;
+            }
+            .hero {
+                padding: 80px 0;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 60px 0;
+            }
+            .features h2, .about-content h2 {
+                font-size: 2rem;
+            }
+            .feature-card {
+                padding: 30px;
+            }
+            .cta {
+                padding: 120px 0; /* Adjust for smaller clip-path effect */
+                clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+            }
+            .cta h2 {
+                font-size: 2rem;
+            }
+            .cta p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            nav ul li {
+                margin: 0 10px 10px;
+                font-size: 0.9rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            .features h2, .about-content h2 {
+                font-size: 1.8rem;
+            }
+            .feature-card h3 {
+                font-size: 1.4rem;
+            }
+            .cta h2 {
+                font-size: 1.8rem;
+            }
+            .cta p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureVision</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="container hero-content">
+                <h1>Revolutionizing Tomorrow, Today.</h1>
+                <p>Empowering your future with cutting-edge technology and innovative solutions. Discover the next generation of possibilities.</p>
+                <a href="#features" class="btn">Learn More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features & Benefits</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="icon">&#9889;</div> <!-- Unicode for high voltage sign -->
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Experience unparalleled speed and efficiency with our optimized architecture, designed for the demands of 2026.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">&#128187;</div> <!-- Unicode for personal computer -->
+                        <h3>Seamless Integration</h3>
+                        <p>Our platform effortlessly connects with your existing systems, ensuring a smooth transition and enhanced workflow.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">&#128274;</div> <!-- Unicode for locked with pen -->
+                        <h3>Robust Security</h3>
+                        <p>Your data is our priority. Advanced encryption and multi-factor authentication protect your assets around the clock.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">&#128161;</div> <!-- Unicode for light bulb -->
+                        <h3>Intuitive Design</h3>
+                        <p>A user experience crafted for simplicity and power, making complex tasks feel effortless and enjoyable.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/600x400/0072ff/e0e0e0?text=FutureTech+Vision" alt="Abstract future technology">
+                </div>
+                <div class="about-content">
+                    <h2>About FutureVision Project</h2>
+                    <p>The FutureVision Project is a groundbreaking initiative launched to redefine the standards of digital interaction and innovation. Our team of visionary engineers and designers have meticulously crafted a solution that addresses the challenges of tomorrow, today.</p>
+                    <p>We believe in creating technology that not only performs but inspires. Our commitment to excellence and forward-thinking design ensures that you are always a step ahead.</p>
+                    <p>This project was officially launched on <strong>2026-04-03</strong>, marking a significant milestone in our journey towards a more connected and efficient future.</p>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Join the FutureVision movement and unlock a world of possibilities. Contact us today to learn how we can empower your next big idea.</p>
+                <a href="mailto:info@futurevision.com" class="btn">Contact Us Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 FutureVision. All rights reserved. Project launched: 2026-04-03.</p>
+            <div class="social-links">
+                <!-- Placeholder for social media icons -->
+                <a href="#" aria-label="Facebook">&#xF09A;</a> <!-- Font Awesome pseudo-icon -->
+                <a href="#" aria-label="Twitter">&#xF099;</a>
+                <a href="#" aria-label="LinkedIn">&#xF0E1;</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
