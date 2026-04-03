@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Project - 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0F0F0F;
+            --secondary-bg: #1A1A1A;
+            --accent-color-1: #00C6FF; /* Bright Blue */
+            --accent-color-2: #0072FF; /* Deeper Blue */
+            --text-color-light: #E0E0E0;
+            --text-color-dark: #A0A0A0;
+            --gradient-start: #0F3443; /* Darker teal/blue */
+            --gradient-end: #1A2935; /* Darker slate */
+            --card-bg: #222222;
+            --border-radius: 8px;
+            --shadow-light: rgba(0, 0, 0, 0.2);
+            --shadow-dark: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-light);
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px var(--shadow-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color-1);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color-1);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(45deg, #1A2935 0%, #0F3443 100%);
+            color: var(--text-color-light);
+            padding: 100px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 5px solid var(--accent-color-1);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(0,198,255,0.1) 0%, transparent 70%);
+            animation: rotateBackground 20s infinite linear;
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-color-dark);
+        }
+
+        .hero .project-date {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-color-1);
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 198, 255, 0.5);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex: 1;
+            padding: 60px 0;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--secondary-bg);
+        }
+
+        section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            font-weight: 700;
+            color: var(--accent-color-1);
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -15px;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px var(--shadow-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border-left: 5px solid var(--accent-color-1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: var(--accent-color-1);
+            margin-bottom: 20px;
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--text-color-light);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-color-dark);
+            font-size: 0.95rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            text-align: left;
+            margin-top: 60px;
+        }
+
+        .about-text {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            color: var(--accent-color-1);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--text-color-dark);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            border: 3px solid var(--accent-color-2);
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: linear-gradient(90deg, var(--accent-color-2) 0%, var(--accent-color-1) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .cta h2::after {
+            background: white;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255,255,255,0.8);
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-color-dark);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 3px solid var(--accent-color-1);
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            color: var(--accent-color-1);
+            margin-bottom: 20px;
+        }
+
+        .footer-section p, .footer-section ul li {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: var(--text-color-dark);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-color-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent-color-1);
+        }
+
+        .social-links a {
+            color: var(--text-color-dark);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color-1);
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            color: var(--text-color-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            section h2 {
+                font-size: 2.2rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-image {
+                order: -1; /* Image appears before text on small screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            nav ul li {
+                margin: 0;
+            }
+
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero .project-date {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+                margin-bottom: 40px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 30px;
+            }
+
+            .feature-card h3 {
+                font-size: 1.4rem;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            .cta p {
+                font-size: 1rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-section {
+                min-width: unset;
+                width: 100%;
+            }
+
+            .footer-section h4 {
+                text-align: center;
+            }
+
+            .social-links {
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">FutureSphere</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Unleash the Future with FutureSphere</h1>
+                <p>Revolutionizing digital experiences with cutting-edge technology and seamless design.</p>
+                <div class="project-date">Project Launch: 2026-04-03</div>
+                <a href="#features" class="btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="icon">&#9889;</span>
+                        <h3>Advanced AI Integration</h3>
+                        <p>Leverage intelligent algorithms for personalized user experiences and predictive analytics.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#128187;</span>
+                        <h3>Cross-Platform Compatibility</h3>
+                        <p>Enjoy a consistent and fluid experience across all your devices, from desktop to mobile.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#128274;</span>
+                        <h3>Robust Security Protocols</h3>
+                        <p>Your data is protected with state-of-the-art encryption and multi-layered security measures.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#128640;</span>
+                        <h3>Scalable Cloud Infrastructure</h3>
+                        <p>Built on a flexible cloud architecture, ensuring high performance and effortless scalability.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#128161;</span>
+                        <h3>Intuitive User Interface</h3>
+                        <p>Designed for simplicity and efficiency, making complex tasks feel effortless for every user.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">&#128172;</span>
+                        <h3>Real-time Collaboration</h3>
+                        <p>Seamlessly collaborate with your team and clients with integrated real-time communication tools.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About FutureSphere</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Our Vision for Tomorrow</h3>
+                        <p>FutureSphere was conceived with a singular vision: to bridge the gap between imagination and technological reality. We believe in creating tools that not only meet today's demands but also anticipate tomorrow's needs, empowering individuals and businesses to achieve unprecedented levels of innovation and efficiency.</p>
+                        <p>Our team comprises visionary engineers, creative designers, and strategic thinkers, all united by a passion for pushing the boundaries of what's possible. We are committed to delivering products that are not just functional, but also inspiring, secure, and truly transformative.</p>
+                        <a href="#contact" class="btn">Get in Touch</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/400x300/0F3443/00C6FF?text=FutureVision" alt="Abstract future vision">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your World?</h2>
+                <p>Join the FutureSphere revolution today and step into an era of unparalleled digital innovation. Our team is ready to assist you.</p>
+                <a href="mailto:info@futuresphere.com" class="btn">Contact Us Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>FutureSphere</h4>
+                <p>Innovating for a brighter digital future. Empowering progress, one solution at a time.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p>Email: info@futuresphere.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Future Tech St, Innovation City, 90210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 FutureSphere. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
