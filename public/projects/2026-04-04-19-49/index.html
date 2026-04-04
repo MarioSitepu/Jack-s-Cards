@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase - 2026-04-04</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #6A11CB; /* Deep Purple */
+            --primary-gradient-end: #2575FC;   /* Vibrant Blue */
+            --secondary-gradient-start: #00C9FF; /* Bright Sky Blue */
+            --secondary-gradient-end: #92FE9D; /* Light Green */
+            --text-dark: #333333;
+            --text-light: #f0f0f0;
+            --background-light: #ffffff;
+            --background-dark: #1e293b;
+            --card-background: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            color: var(--primary-gradient-end);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: var(--primary-gradient-start);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header .logo {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: var(--text-light);
+            margin-right: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-gradient-start);
+            transition: width var(--transition-speed);
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, var(--secondary-gradient-start) 0%, var(--secondary-gradient-end) 100%);
+            color: var(--text-light);
+            padding: 80px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            min-height: 60vh;
+        }
+
+        #hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        #hero p {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--background-light);
+            color: var(--primary-gradient-end);
+            padding: 15px 30px;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px var(--shadow-medium);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-medium);
+            color: var(--primary-gradient-start);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+            background-color: var(--background-light);
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f8faff;
+        }
+
+        section h2, section h3 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--text-dark);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        section h2::after, section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        #features .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            text-align: center;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border: 1px solid #eee;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-medium);
+            border-color: var(--primary-gradient-start);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-gradient-end);
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* About Section */
+        #about .content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        #about .content > div {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        #about img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 8px 20px var(--shadow-medium);
+        }
+
+        #about p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+            background-color: var(--background-dark);
+            color: var(--text-light);
+        }
+
+        #contact h2 {
+            color: var(--text-light);
+        }
+
+        #contact h2::after {
+            background: linear-gradient(90deg, var(--secondary-gradient-start), var(--secondary-gradient-end));
+        }
+
+        #contact p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header .logo {
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 1rem;
+            }
+
+            #hero {
+                padding: 60px 0;
+                min-height: 50vh;
+            }
+
+            #hero h1 {
+                font-size: clamp(2rem, 5vw, 3.5rem);
+            }
+
+            #hero p {
+                font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            section h2, section h3 {
+                font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+                margin-bottom: 30px;
+            }
+
+            #features .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 25px;
+            }
+
+            #about .content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            #hero {
+                padding: 40px 0;
+            }
+
+            #hero h1 {
+                font-size: clamp(1.8rem, 7vw, 2.8rem);
+            }
+
+            #hero p {
+                font-size: clamp(0.85rem, 2.5vw, 1rem);
+            }
+
+            section h2, section h3 {
+                font-size: clamp(1.6rem, 6vw, 2.2rem);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureTech Solutions</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Innovate. Create. Elevate.</h1>
+                <p>Welcome to our latest project, designed to revolutionize how you interact with technology. Launched on <strong>2026-04-04</strong>, we're setting new standards for efficiency and user experience.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <span class="icon">&#9889;</span> <!-- Lightning bolt -->
+                        <h4>Blazing Fast Performance</h4>
+                        <p>Experience unparalleled speed and responsiveness with our optimized architecture and cutting-edge algorithms.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span class="icon">&#128187;</span> <!-- Laptop -->
+                        <h4>Intuitive User Interface</h4>
+                        <p>A beautifully designed, user-friendly interface ensures a seamless and enjoyable experience for everyone.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span class="icon">&#128241;</span> <!-- Mobile phone -->
+                        <h4>Cross-Platform Compatibility</h4>
+                        <p>Access your work from anywhere, on any device. Fully responsive and optimized for all screen sizes.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span class="icon">&#128274;</span> <!-- Lock -->
+                        <h4>Robust Security Measures</h4>
+                        <p>Your data is our priority. We employ industry-leading encryption and security protocols to keep it safe.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <div class="content">
+                    <div>
+                        <p>At FutureTech Solutions, we believe in pushing the boundaries of what's possible. This project, born from months of dedicated research and development, represents our commitment to innovation and excellence.</p>
+                        <p>Our team of passionate engineers, designers, and strategists collaborated to bring this vision to life. We focused on creating a solution that not only meets current demands but also anticipates future needs, ensuring longevity and adaptability.</p>
+                        <p>We're excited for you to explore the possibilities and see how our hard work translates into tangible benefits for our users.</p>
+                    </div>
+                    <div>
+                        <img src="https://via.placeholder.com/600x400/2575FC/FFFFFF?text=Modern+Design" alt="About Us Image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p>Join us on this journey of innovation. Whether you have questions, feedback, or just want to say hello, we'd love to hear from you.</p>
+                <a href="mailto:info@futuretech.com" class="btn">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 FutureTech Solutions. All rights reserved.</p>
+            <p>Project Date: 2026-04-04</p>
+        </div>
+    </footer>
+</body>
+</html>
