@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --accent-color: #00f2fe;
+            --text-color: #e0e0e0;
+            --dark-bg-color: #1a1a2e;
+            --card-bg-color: rgba(255, 255, 255, 0.08);
+            --gradient-1: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            --gradient-2: linear-gradient(to right, #4facfe, #00f2fe);
+            --gradient-3: linear-gradient(to right, #ff7e5f, #feb47b);
+            --box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --border-radius: 15px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+
+        header {
+            background: var(--gradient-1);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2.5rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            background: var(--gradient-2);
+            padding: 8rem 5%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: pulse 15s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .hero h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            font-weight: 700;
+            max-width: 900px;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+        }
+
+        .hero .project-date {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .btn {
+            background: var(--accent-color);
+            color: var(--dark-bg-color);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 242, 254, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.6);
+            background: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            margin-top: 5rem;
+            color: #fff;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            border-radius: 2px;
+        }
+
+        .features, .showcase {
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg-color);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.45);
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .cta {
+            background: var(--gradient-3);
+            padding: 6rem 5%;
+            text-align: center;
+            margin-top: 5rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .cta h2 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 2rem;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background: var(--dark-bg-color);
+            padding: 3rem 5%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem 5%;
+            }
+
+            header h1 {
+                margin-bottom: 1rem;
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            nav ul li a {
+                font-size: 1rem;
+                padding: 0.5rem 0;
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 5% 4rem;
+                min-height: unset;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+                margin-top: 3rem;
+                margin-bottom: 2rem;
+            }
+
+            .features, .showcase {
+                padding: 3rem 5%;
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .card {
+                padding: 2rem;
+            }
+
+            .card h3 {
+                font-size: 1.5rem;
+            }
+
+            .card p {
+                font-size: 1rem;
+            }
+
+            .cta {
+                padding: 4rem 5%;
+            }
+
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+
+            .cta p {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .cta h2 {
+                font-size: 2rem;
+            }
+            .cta p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Project Nova</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#showcase">Showcase</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h2>Unleash the Future of Project Management</h2>
+            <p>Experience seamless collaboration, intelligent insights, and unparalleled efficiency with Project Nova.</p>
+            <p class="project-date">Project Launch Date: 2026-04-05</p>
+            <a href="#" class="btn">Get Started Today</a>
+        </section>
+
+        <h2 class="section-title">Key Features</h2>
+        <section id="features" class="features">
+            <div class="card">
+                <h3>Intuitive Dashboard</h3>
+                <p>Visualize your project's progress at a glance with customizable widgets and real-time data.</p>
+            </div>
+            <div class="card">
+                <h3>AI-Powered Insights</h3>
+                <p>Leverage machine learning to predict potential bottlenecks and optimize resource allocation.</p>
+            </div>
+            <div class="card">
+                <h3>Seamless Collaboration</h3>
+                <p>Communicate effortlessly with your team through integrated chat, file sharing, and task assignments.</p>
+            </div>
+            <div class="card">
+                <h3>Robust Security</h3>
+                <p>Your data is protected with enterprise-grade encryption and advanced security protocols.</p>
+            </div>
+        </section>
+
+        <h2 class="section-title">Our Showcase</h2>
+        <section id="showcase" class="showcase">
+            <div class="card">
+                <h3>Agile Sprints</h3>
+                <p>Manage your agile workflows with drag-and-drop ease and powerful sprint tracking.</p>
+            </div>
+            <div class="card">
+                <h3>Budget Tracking</h3>
+                <p>Keep a close eye on your finances with detailed budget reports and expense management.</p>
+            </div>
+            <div class="card">
+                <h3>Client Portals</h3>
+                <p>Provide clients with secure access to project updates, documents, and progress reports.</p>
+            </div>
+            <div class="card">
+                <h3>Customizable Reports</h3>
+                <p>Generate insightful reports tailored to your specific needs and share them with stakeholders.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <h2>Ready to Transform Your Projects?</h2>
+            <p>Join thousands of innovative teams already using Project Nova to achieve their goals faster.</p>
+            <a href="#" class="btn">Request a Demo</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Nova. All rights reserved. Designed for the future.</p>
+    </footer>
+</body>
+</html>
