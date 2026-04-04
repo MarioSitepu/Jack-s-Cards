@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #fce043 0%, #fb724b 100%);
+            --accent-color: #2575fc;
+            --text-color-dark: #343a40;
+            --text-color-light: #ffffff;
+            --bg-light: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --box-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background: var(--bg-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: 20px 0;
+            box-shadow: var(--box-shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-color-light);
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.05em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--text-color-light);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: 100px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--text-color-light);
+            color: var(--accent-color);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .features {
+            background: var(--bg-light);
+            padding-top: 60px;
+        }
+
+        .features h2, .about h2, .cta h2 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--text-color-dark);
+        }
+
+        .features p.subtitle, .about p.subtitle, .cta p.subtitle {
+            font-size: 1.2em;
+            margin-bottom: 60px;
+            color: #6c757d;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .feature-card .icon {
+            font-size: 2.5em;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: inline-block;
+            background: linear-gradient(45deg, #e0c3fc 0%, #8ec5fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--text-color-dark);
+        }
+
+        .feature-card p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        .about {
+            background: linear-gradient(to bottom, #ffffff 0%, #f0f2f5 100%);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+
+        .about-text h3 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .about-text p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-light);
+        }
+
+        .cta {
+            background: var(--secondary-gradient);
+            color: var(--text-color-light);
+            padding: 100px 0;
+        }
+
+        .cta h2 {
+            color: var(--text-color-light);
+        }
+        .cta p.subtitle {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta .btn {
+            background: var(--text-color-light);
+            color: #fb724b; /* A color from the secondary gradient */
+        }
+
+        .cta .btn:hover {
+            color: #e04a23;
+        }
+
+
+        footer {
+            background: var(--text-color-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero {
+                padding: 80px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .features h2, .about h2, .cta h2 {
+                font-size: 2.2em;
+            }
+            .features p.subtitle, .about p.subtitle, .cta p.subtitle {
+                font-size: 1em;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                text-align: center;
+            }
+
+            .feature-card .icon {
+                margin-bottom: 15px;
+            }
+
+            .about-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .about-text, .about-image {
+                min-width: unset;
+                max-width: 100%;
+            }
+            .about-text {
+                text-align: center;
+            }
+            .about-text h3 {
+                font-size: 1.8em;
+            }
+            .about-text p {
+                font-size: 1em;
+            }
+
+            .cta {
+                padding: 80px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+            .features h2, .about h2, .cta h2 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">ProjectFlow</a>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Revolutionize Your Workflow with ProjectFlow</h1>
+                <p>Seamlessly manage tasks, collaborate with your team, and achieve your goals faster. Project Status as of <strong>2026-04-05</strong>.</p>
+                <a href="#features" class="btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Powerful Features for Modern Teams</h2>
+                <p class="subtitle">Designed to streamline every aspect of your project management, from ideation to delivery.</p>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h3>Intuitive Dashboard</h3>
+                        <p>Get a clear overview of all your projects, tasks, and team progress at a glance. Customizable widgets keep you informed.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💬</div>
+                        <h3>Real-time Collaboration</h3>
+                        <p>Communicate effortlessly with built-in chat, file sharing, and comment sections directly on tasks and projects.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📊</div>
+                        <h3>Advanced Analytics</h3>
+                        <p>Track performance, identify bottlenecks, and make data-driven decisions with comprehensive reporting tools.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">⚙️</div>
+                        <h3>Customizable Workflows</h3>
+                        <p>Adapt ProjectFlow to your unique processes with flexible task boards, custom fields, and automation rules.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h3>Secure & Reliable</h3>
+                        <p>Your data is protected with enterprise-grade security measures and regular backups, ensuring peace of mind.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📱</div>
+                        <h3>Mobile Accessibility</h3>
+                        <p>Manage projects on the go with our fully responsive design, accessible from any device, anywhere.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About ProjectFlow</h2>
+                <p class="subtitle">We are passionate about creating tools that empower teams to do their best work.</p>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Our Vision</h3>
+                        <p>At ProjectFlow, we believe that great ideas deserve great execution. Our mission is to provide an intelligent, flexible, and enjoyable platform that simplifies complex project management, fostering creativity and productivity within teams of all sizes.</p>
+                        <p>We're constantly evolving, listening to our users, and integrating the latest technologies to ensure ProjectFlow remains at the forefront of modern collaboration tools.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/8ec5fc/ffffff?text=Team+Collaboration" alt="Team collaborating on a project">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Projects?</h2>
+                <p class="subtitle">Join thousands of teams who are already experiencing the ProjectFlow difference.</p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ProjectFlow. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
