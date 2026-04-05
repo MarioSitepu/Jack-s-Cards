@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2026 - Modern Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-bg: #0A1128; /* Dark Blue */
+            --secondary-bg: #1B2A41; /* Slightly lighter dark blue */
+            --accent-color-1: #007bff; /* Blue */
+            --accent-color-2: #00c6ff; /* Lighter Blue */
+            --text-light: #E0E1DD;
+            --text-dark: #0A1128;
+            --gradient-1: linear-gradient(45deg, #00c6ff, #0072ff); /* Teal to Blue */
+            --gradient-2: linear-gradient(45deg, #FF6B6B, #FFD93D); /* Red-Orange to Yellow */
+            --gradient-3: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%); /* Purple to Blue */
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --shadow-dark: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+        }
+
+        /* Base Styles & Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background-color: var(--primary-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            color: var(--accent-color-2);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color-1);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--secondary-bg);
+            box-shadow: var(--shadow-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background-image: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            padding: 0.5rem 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .primary-btn {
+            background: var(--gradient-1);
+            color: var(--text-light);
+            box-shadow: var(--shadow-light);
+        }
+
+        .primary-btn:hover {
+            box-shadow: var(--shadow-dark);
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background: var(--gradient-3);
+            color: var(--text-light);
+            box-shadow: var(--shadow-light);
+        }
+
+        .secondary-btn:hover {
+            box-shadow: var(--shadow-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-bg);
+            background-image: var(--gradient-3);
+            min-height: 80vh; /* Adjusted for better mobile experience */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 70%);
+            animation: rotateBackground 20s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background-image: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: var(--secondary-bg);
+            padding: 8rem 0;
+        }
+
+        .features-section h2 {
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            background-image: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--primary-bg);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-dark);
+            background: var(--gradient-3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background-image: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: var(--primary-bg);
+            padding: 8rem 0;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .about-section h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background-image: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem auto;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background-image: var(--gradient-3);
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .cta-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-light);
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: auto;
+            box-shadow: inset 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        footer p {
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+            color: var(--accent-color-2);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .features-section h2, .about-section h2, .cta-section h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 1.5rem;
+            }
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                max-height: 0; /* Hidden by default */
+                overflow: hidden;
+                background-color: var(--secondary-bg);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                box-shadow: var(--shadow-dark);
+                padding: 0;
+                transition: max-height 0.5s ease-in-out;
+            }
+
+            nav ul.active {
+                max-height: 300px; /* Adjust based on content */
+                padding: 1rem 0;
+            }
+
+            nav ul li {
+                text-align: center;
+                padding: 0.8rem 0;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 0.5rem 0;
+                font-size: 1.2rem;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .hero {
+                min-height: 70vh;
+                padding: 4rem 0;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .features-section h2, .about-section h2, .cta-section h2 {
+                font-size: 2rem;
+            }
+            .feature-card {
+                padding: 2rem;
+            }
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+            .about-section p, .cta-section p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 0.9rem;
+            }
+            .features-section h2, .about-section h2, .cta-section h2 {
+                font-size: 1.8rem;
+            }
+            .feature-card {
+                padding: 1.5rem;
+            }
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            .btn {
+                padding: 0.7rem 1.8rem;
+            }
+            footer p {
+                font-size: 0.8rem;
+            }
+            .social-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home" class="logo">Project 2026</a>
+            <button class="nav-toggle" aria-label="toggle navigation" aria-expanded="false">☰</button>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Innovate. Create. Elevate.</h1>
+                <p>Welcome to the future of possibilities. Discover our cutting-edge solutions designed for tomorrow, available now.</p>
+                <a href="#features" class="btn primary-btn">Explore Solutions</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Seamless Integration</h3>
+                        <p>Effortlessly connect with your existing workflows and systems for maximum efficiency.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Architecture</h3>
+                        <p>Grow without limits. Our robust platform adapts dynamically to your evolving needs and demands.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Intuitive Design</h3>
+                        <p>Experience unparalleled ease of use with our meticulously crafted, user-centric interface.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Robust Security</h3>
+                        <p>Your data is protected with industry-leading security protocols and continuous monitoring.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Real-time Analytics</h3>
+                        <p>Gain instant insights with powerful, real-time data analytics and reporting tools.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>24/7 Support</h3>
+                        <p>Our dedicated support team is always available to assist you, day or night.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container about-content">
+                <h2>About Our Vision</h2>
+                <p>At Project 2026, we believe in pushing boundaries and redefining what's possible. Our team of visionary innovators is dedicated to crafting solutions that are not just functional, but truly transformative for individuals and businesses alike.</p>
+                <p>We are committed to delivering excellence, fostering innovation, and empowering our users with tools that drive progress, spark creativity, and shape a better future. Our journey began with a simple idea: to make advanced technology accessible and impactful.</p>
+                <a href="#contact" class="btn secondary-btn">Learn More About Us</a>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Join us on this journey. Explore our solutions today and unlock new potentials for unparalleled growth and innovation.</p>
+                <a href="#" class="btn primary-btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Project 2026. All rights reserved.</p>
+            <p>Project Date: 2026-04-05</p>
+            <div class="social-links">
+                <a href="#" aria-label="Twitter">Twitter</a>
+                <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                <a href="#" aria-label="GitHub">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('nav ul');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', !isExpanded);
+                    navMenu.classList.toggle('active');
+                });
+
+                // Close nav menu when a link is clicked (for single page apps)
+                navMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                        navToggle.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
