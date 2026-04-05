@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Vision 2026</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Gradient Elements */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.15) 0%, transparent 50%);
+        }
+
+        header {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            opacity: 0.8;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .hero {
+            padding: 8rem 10% 4rem;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff 30%, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -10px rgba(99, 102, 241, 0.6);
+        }
+
+        .features {
+            padding: 4rem 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .info-section {
+            padding: 6rem 10%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .info-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .info-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 32px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-image::after {
+            content: "2026.04.06";
+            font-size: 4rem;
+            font-weight: 900;
+            opacity: 0.05;
+            transform: rotate(-45deg);
+        }
+
+        .date-highlight {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        footer {
+            padding: 4rem 10% 2rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .copyright {
+            color: #475569;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1.5rem 5%; }
+            nav { display: none; }
+            .hero { padding: 6rem 5% 3rem; }
+            .info-section { padding: 3rem 5%; }
+            .features { padding: 2rem 5%; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">NEO•GEN</div>
+        <nav>
+            <ul>
+                <li><a href="#">Platform</a></li>
+                <li><a href="#">Ecosystem</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="btn btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.8rem;">Launch App</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">Next Generation Release</div>
+            <h1>The Future of Digital Integration</h1>
+            <p>Experience a seamless interface designed for the next era of connectivity. Built for performance, designed for you.</p>
+            <div class="cta-group">
+                <a href="#" class="btn btn-primary">Get Started</a>
+                <a href="#" class="btn" style="border: 1px solid var(--glass-border);">View Roadmap</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="card">
+                <div class="card-icon">✦</div>
+                <h3>Neural Speed</h3>
+                <p>Optimized algorithms that process data at the speed of thought, ensuring no latency in your workflow.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">◈</div>
+                <h3>Secure Core</h3>
+                <p>Quantum-resistant encryption protocols protecting every byte of your digital footprint.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">❈</div>
+                <h3>Fluid Design</h3>
+                <p>Adaptive components that evolve based on your usage patterns for an intuitive experience.</p>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="info-content">
+                <div class="badge">Milestone Event</div>
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Mark Your Calendar</h2>
+                <p style="color: #94a3b8; margin-bottom: 1.5rem;">Our flagship project deployment is scheduled for completion. We are pushing the boundaries of what's possible in modern web architecture.</p>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Official Launch Date: <span class="date-highlight">April 06, 2026</span></p>
+                <a href="#" class="btn" style="color: var(--accent); padding-left: 0;">Learn about the rollout →</a>
+            </div>
+            <div class="info-image">
+                <div style="position: absolute; width: 150px; height: 150px; background: var(--primary); filter: blur(80px); opacity: 0.3;"></div>
+                <div style="z-index: 1; text-align: center;">
+                    <div style="font-size: 5rem; margin-bottom: -10px;">🚀</div>
+                    <div style="font-weight: 800; letter-spacing: 5px; color: var(--accent);">PHASE FOUR</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Twitter</a>
+            <a href="#">GitHub</a>
+            <a href="#">Discord</a>
+            <a href="#">Privacy</a>
+        </div>
+        <p class="copyright">© 2026 NeoGen Systems. Established for the future. Last updated: 2026-04-06</p>
+    </footer>
+</body>
+</html>
