@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Vision Project - 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Reset & Base Styles */
+        :root {
+            --color-primary-start: #6a11cb;
+            --color-primary-end: #2575fc;
+            --color-secondary-start: #00c6ff;
+            --color-secondary-end: #0072ff;
+            --color-dark-bg: #1a1a2e;
+            --color-light-text: #e0e0e0;
+            --color-white: #ffffff;
+            --color-gray-text: #a0a0b0;
+            --color-card-bg: #2a2a4a;
+            --color-border: #4a4a6a;
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Roboto Mono', monospace;
+            --spacing-unit: 1rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--color-light-text);
+            background: linear-gradient(135deg, #120a2e 0%, #0a0e2a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2);
+            width: 100%;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: var(--spacing-unit);
+            color: var(--color-white);
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.8rem; }
+        p { margin-bottom: var(--spacing-unit); color: var(--color-gray-text); }
+
+        a {
+            color: var(--color-secondary-start);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-secondary-end);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--color-secondary-start) 0%, var(--color-secondary-end) 100%);
+            color: var(--color-white);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.4);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(90deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
+            padding: var(--spacing-unit) 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-secondary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-white);
+            letter-spacing: -1px;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .nav-list a {
+            color: var(--color-white);
+            font-weight: 600;
+            padding: calc(var(--spacing-unit) * 0.5) 0;
+            position: relative;
+        }
+
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-white);
+            transition: width 0.3s ease;
+        }
+
+        .nav-list a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--color-dark-bg) 0%, #0c0c1c 100%);
+            padding: calc(var(--spacing-unit) * 8) 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(37, 117, 252, 0.1) 0%, transparent 70%);
+            animation: rotateBackground 20s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: var(--spacing-unit);
+            background: linear-gradient(45deg, #e0e0e0 0%, #ffffff 50%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            color: var(--color-light-text);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: calc(var(--spacing-unit) * 6) 0;
+            background-color: var(--color-dark-bg);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .section:nth-of-type(even) {
+            background-color: #151525;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            font-size: 3rem;
+            color: var(--color-white);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            text-align: center;
+        }
+
+        .feature-card {
+            background-color: var(--color-card-bg);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--color-border);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-unit);
+            background: linear-gradient(45deg, var(--color-secondary-start), var(--color-secondary-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            color: var(--color-white);
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--color-gray-text);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .project-card {
+            background-color: var(--color-card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--color-border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-content {
+            padding: calc(var(--spacing-unit) * 1.5);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        .project-content p {
+            font-size: 0.95rem;
+            color: var(--color-gray-text);
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            margin-top: var(--spacing-unit);
+            display: flex;
+            flex-wrap: wrap;
+            gap: calc(var(--spacing-unit) * 0.5);
+        }
+
+        .tag {
+            background-color: #3a3a5a;
+            color: var(--color-light-text);
+            padding: 0.4em 0.8em;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, var(--color-primary-end) 0%, var(--color-primary-start) 100%);
+            padding: calc(var(--spacing-unit) * 6) 0;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            color: var(--color-white);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            color: var(--color-white);
+            margin-bottom: calc(var(--spacing-unit) * 2.5);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #0d0d1a;
+            padding: calc(var(--spacing-unit) * 3) 0;
+            text-align: center;
+            color: var(--color-gray-text);
+            font-size: 0.9rem;
+            border-top: 1px solid #2a2a4a;
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-unit);
+        }
+
+        .social-links {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-unit);
+        }
+
+        .social-links a {
+            color: var(--color-gray-text);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--color-secondary-start);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+            .section-title { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+            .nav-list {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-list a {
+                padding: calc(var(--spacing-unit) * 0.5) var(--spacing-unit);
+            }
+            .hero {
+                min-height: 70vh;
+                padding: calc(var(--spacing-unit) * 6) 0;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .section {
+                padding: calc(var(--spacing-unit) * 4) 0;
+            }
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: calc(var(--spacing-unit) * 3);
+            }
+            .features-grid, .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .cta h2 {
+                font-size: 2.2rem;
+            }
+            .cta p {
+                font-size: 1rem;
+            }
+            .container {
+                padding: var(--spacing-unit);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            .nav-list {
+                gap: calc(var(--spacing-unit) * 0.8);
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.5);
+                font-size: 0.9rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            .project-content h3 {
+                font-size: 1.3rem;
+            }
+            .cta h2 {
+                font-size: 1.8rem;
+            }
+            .cta p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* FontAwesome for Icons (Optional, but good for modern appeal) */
+        /* To use this, you'd typically link to the CDN or host it yourself. */
+        /* For this example, we'll assume a basic icon font is available or use placeholders. */
+        /* If not using FontAwesome, replace <i> tags with SVGs or simple text. */
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">Future Vision</a>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Unlock the Future of Innovation</h1>
+                <p>Leading the way in groundbreaking technology and design. Discover solutions crafted for tomorrow's challenges, today.</p>
+                <a href="#projects" class="btn">Explore Our Work</a>
+            </div>
+        </section>
+
+        <section id="features" class="section">
+            <div class="container">
+                <h2 class="section-title">Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Blazing Performance</h3>
+                        <p>Experience unparalleled speed and efficiency with our optimized systems and algorithms.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Robust Security</h3>
+                        <p>Your data is protected with state-of-the-art encryption and advanced security protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-palette"></i>
+                        <h3>Intuitive Design</h3>
+                        <p>Beautifully crafted interfaces ensure a seamless and enjoyable user experience across all platforms.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Scalable Architecture</h3>
+                        <p>Built to grow with you, our solutions are designed for flexibility and future expansion.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title">Our Latest Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <img src="https://picsum.photos/id/237/400/200" alt="Project Nova">
+                        <div class="project-content">
+                            <div>
+                                <h3>Project Nova</h3>
+                                <p>A revolutionary AI platform integrating machine learning for predictive analytics across various industries.</p>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">AI</span>
+                                <span class="tag">Machine Learning</span>
+                                <span class="tag">Analytics</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://picsum.photos/id/238/400/200" alt="Quantum Leap">
+                        <div class="project-content">
+                            <div>
+                                <h3>Quantum Leap</h3>
+                                <p>Developing next-generation quantum computing simulations for complex scientific research.</p>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">Quantum Computing</span>
+                                <span class="tag">Simulation</span>
+                                <span class="tag">Research</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://picsum.photos/id/239/400/200" alt="EcoConnect">
+                        <div class="project-content">
+                            <div>
+                                <h3>EcoConnect</h3>
+                                <p>An IoT-enabled smart city solution focused on sustainable energy management and resource optimization.</p>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">IoT</span>
+                                <span class="tag">Smart City</span>
+                                <span class="tag">Sustainability</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Vision?</h2>
+                <p>Join us in shaping the future. Our team is eager to discuss how we can bring your next big idea to life.</p>
+                <a href="#" class="btn">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Future Vision. All rights reserved.</p>
+            <p>Project date: 2026-04-07</p>
+            <ul class="social-links">
+                <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
