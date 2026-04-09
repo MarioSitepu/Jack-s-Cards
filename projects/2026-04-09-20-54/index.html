@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Leap Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-color-1: #0f3460;
+            --accent-color-2: #e94560;
+            --text-light: #e0e0e0;
+            --text-dark: #cccccc;
+            --gradient-1: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            --gradient-2: linear-gradient(135deg, #e94560 0%, #ff7e5f 100%);
+            --gradient-3: linear-gradient(45deg, #1a1a2e 0%, #0f3460 100%);
+            --border-radius: 8px;
+            --spacing-unit: 1rem;
+            --max-width: 1200px;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--primary-bg);
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--accent-color-2);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ff7e5f;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-light);
+            margin-bottom: var(--spacing-unit);
+            font-weight: 600;
+        }
+
+        h1 { font-size: 2.8rem; }
+        h2 { font-size: 2.2rem; }
+        h3 { font-size: 1.8rem; }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 1.5);
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-3);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            font-weight: 700;
+            background: linear-gradient(45deg, #e94560, #ff7e5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        nav a {
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            transition: background 0.3s ease, color 0.3s ease;
+            border-radius: var(--border-radius);
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-color-2);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: var(--gradient-1);
+            padding: calc(var(--spacing-unit) * 6) 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(233, 69, 96, 0.1) 0%, transparent 70%);
+            animation: rotateBackground 20s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #hero .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            background: linear-gradient(45deg, #e0e0e0, #cccccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        #hero p {
+            font-size: 1.3rem;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            color: var(--text-dark);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-2);
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(233, 69, 96, 0.6);
+        }
+
+        /* Main Sections */
+        main section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+        }
+
+        main section:nth-child(even) {
+            background: var(--secondary-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #e0e0e0, #cccccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Features Section */
+        #features .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-card {
+            background: var(--accent-color-1);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, rgba(233, 69, 96, 0.1), rgba(15, 52, 96, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card h3 {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-unit);
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        /* About Section */
+        #about .about-content {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 3);
+        }
+
+        #about .about-text {
+            flex: 1;
+        }
+
+        #about .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        #about img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        #about img:hover {
+            transform: scale(1.02);
+        }
+
+        .highlight-date {
+            font-weight: 700;
+            color: var(--accent-color-2);
+            background: linear-gradient(45deg, #e94560, #ff7e5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.1em;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--accent-color-1);
+            color: var(--text-dark);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2) 0;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            color: var(--text-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            nav ul {
+                gap: var(--spacing-unit);
+            }
+            #hero h2 {
+                font-size: 2.8rem;
+            }
+            #hero p {
+                font-size: 1.1rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            #about .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            #about .about-image {
+                order: -1; /* Image appears above text on mobile */
+                margin-bottom: calc(var(--spacing-unit) * 2);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            header h1 {
+                margin-bottom: var(--spacing-unit);
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+            }
+            nav a {
+                display: block;
+                padding: 0.8rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            nav a:last-child {
+                border-bottom: none;
+            }
+            #hero {
+                padding: calc(var(--spacing-unit) * 4) 0;
+                min-height: 50vh;
+            }
+            #hero h2 {
+                font-size: 2.2rem;
+            }
+            #hero p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+            main section {
+                padding: calc(var(--spacing-unit) * 3) 0;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.3rem; }
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
+            #hero h2 {
+                font-size: 1.8rem;
+            }
+            #hero p {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Quantum Leap</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h2>Unlocking Tomorrow's Potential Today</h2>
+                <p>Revolutionary solutions for a smarter, more connected future. Experience innovation at its peak.</p>
+                <a href="#features" class="btn">Explore Our Vision</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2 class="section-title">Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Advanced Analytics</h3>
+                        <p>Leverage cutting-edge AI to gain deep insights and make data-driven decisions with confidence.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Seamless Integration</h3>
+                        <p>Effortlessly connect with your existing systems for a unified and efficient workflow.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Architecture</h3>
+                        <p>Designed to grow with your needs, ensuring future-proof performance and reliability.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Intuitive Interface</h3>
+                        <p>A user-friendly design that makes complex tasks simple and accessible to everyone.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Robust Security</h3>
+                        <p>State-of-the-art encryption and protocols protect your data around the clock.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Global Accessibility</h3>
+                        <p>Access your project from anywhere, on any device, ensuring continuous productivity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About Quantum Leap</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Our Mission for the Future</h3>
+                        <p>At Quantum Leap, we are committed to pushing the boundaries of what's possible. Our team of visionaries and engineers are dedicated to crafting solutions that not only solve today's challenges but also anticipate tomorrow's needs.</p>
+                        <p>This project officially commenced on <span class="highlight-date">2026-04-09</span>, marking a significant milestone in our journey towards technological excellence. We believe in innovation that empowers, connects, and transforms.</p>
+                        <p>Join us as we embark on this exciting journey to redefine the future.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/500x350/0f3460/e0e0e0?text=Innovation+Ahead" alt="Abstract representation of technology and innovation">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Quantum Leap. All rights reserved.</p>
+            <p>Project Initiated: <span class="highlight-date">2026-04-09</span></p>
+        </div>
+    </footer>
+</body>
+</html>
