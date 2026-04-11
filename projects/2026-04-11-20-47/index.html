@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-gradient-start: #6a11cb;
+            --primary-gradient-end: #2575fc;
+            --secondary-gradient-start: #ff7e5f;
+            --secondary-gradient-end: #feb47b;
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --accent-color: #00c6ff;
+            --bg-light: #f4f7f6;
+            --bg-dark: #2d3436;
+            --font-primary: 'Poppins', sans-serif;
+            --border-radius: 12px;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-gradient-end);
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-speed);
+            box-shadow: var(--shadow-light);
+            border: none;
+            cursor: pointer;
+        }
+
+        .primary-btn {
+            background-image: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: var(--text-light);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+            background-image: linear-gradient(45deg, var(--primary-gradient-end), var(--primary-gradient-start));
+        }
+
+        .secondary-btn {
+            background-image: linear-gradient(45deg, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            color: var(--text-light);
+        }
+
+        .secondary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+            background-image: linear-gradient(45deg, var(--secondary-gradient-end), var(--secondary-gradient-start));
+        }
+
+        .section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            border-radius: 2px;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-light);
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background-image: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            bottom: -5px;
+            left: 0;
+            border-radius: 2px;
+            transition: width var(--transition-speed);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+        }
+
+        .burger div {
+            width: 30px;
+            height: 3px;
+            background-color: var(--text-dark);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            color: var(--text-light);
+            padding: 8rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 60vh;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            background: var(--text-light);
+            padding: 2.5rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-item .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background-image: linear-gradient(45deg, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* About Section */
+        .about-section {
+            background: var(--bg-light);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            padding: 8rem 0;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            margin-right: 3rem;
+            padding: 0 2rem;
+        }
+        
+        .about-content h2 {
+            text-align: left;
+        }
+
+        .about-content h2::after {
+            left: 0;
+            transform: translateX(0);
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            height: 350px; /* Fixed height for placeholder */
+            background-image: linear-gradient(135deg, var(--secondary-gradient-start) 0%, var(--secondary-gradient-end) 100%);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin: 0 2rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-image: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            color: var(--text-light);
+            padding: 6rem 0;
+        }
+
+        .cta-section h2 {
+            color: var(--text-light);
+            font-size: 3rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .project-date {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 900px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 80px; /* Adjust based on header height */
+                height: calc(100vh - 80px); /* Full height minus header */
+                background-color: var(--bg-dark);
+                flex-direction: column;
+                align-items: center;
+                width: 70%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                padding-top: 2rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+                opacity: 0;
+            }
+
+            .nav-links a {
+                color: var(--text-light);
+                font-size: 1.2rem;
+            }
+
+            .nav-links a::after {
+                background-image: linear-gradient(to right, var(--accent-color), var(--primary-gradient-end));
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .nav-active {
+                transform: translateX(0%);
+            }
+
+            .nav-active li {
+                opacity: 1;
+                transition: opacity 0.5s ease-in forwards;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .about-section {
+                flex-direction: column;
+            }
+
+            .about-content {
+                margin-right: 0;
+                margin-bottom: 3rem;
+                max-width: 100%;
+            }
+
+            .about-content h2 {
+                text-align: center;
+            }
+
+            .about-content h2::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .about-image {
+                margin: 0 auto;
+                width: 90%;
+            }
+
+            .cta-section h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 0 1.5rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item {
+                padding: 2rem 1rem;
+            }
+
+            .about-content, .about-image {
+                padding: 0 1.5rem;
+            }
+        }
+
+        /* Nav Animation for individual links */
+        @keyframes navLinkFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+
+        .nav-active li:nth-child(1) { animation: navLinkFade 0.5s ease forwards 0.3s; }
+        .nav-active li:nth-child(2) { animation: navLinkFade 0.5s ease forwards 0.4s; }
+        .nav-active li:nth-child(3) { animation: navLinkFade 0.5s ease forwards 0.5s; }
+        .nav-active li:nth-child(4) { animation: navLinkFade 0.5s ease forwards 0.6s; }
+
+        /* Burger Animation */
+        .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+        .toggle .line2 { opacity: 0; }
+        .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Project 2026</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Future-Proof Your Vision</h1>
+                <p>Innovative solutions for tomorrow's challenges, designed with precision and passion. Launching on <span class="project-date">2026-04-11</span>.</p>
+                <a href="#features" class="btn primary-btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="section features-section">
+            <div class="container">
+                <h2>Core Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="icon fas fa-rocket"></i>
+                        <h3>Blazing Fast</h3>
+                        <p>Optimized performance ensuring lightning-fast load times and smooth user experience.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon fas fa-shield-alt"></i>
+                        <h3>Secure & Reliable</h3>
+                        <p>Robust security measures to protect your data and ensure unwavering reliability.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon fas fa-lightbulb"></i>
+                        <h3>Intuitive Design</h3>
+                        <p>User-centric design that makes complex tasks simple and enjoyable for everyone.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon fas fa-mobile-alt"></i>
+                        <h3>Fully Responsive</h3>
+                        <p>Flawless experience across all devices, from desktops to tablets and smartphones.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section about-section">
+            <div class="about-content">
+                <h2>Our Mission</h2>
+                <p>We are dedicated to building cutting-edge digital experiences that empower businesses and individuals alike. Our team of experts combines creativity with technical prowess to deliver solutions that are not just functional, but truly inspiring.</p>
+                <p>With a focus on innovation and user satisfaction, we strive to exceed expectations and set new industry standards. This project, initiated for release on <span class="project-date">2026-04-11</span>, exemplifies our commitment to excellence.</p>
+            </div>
+            <div class="about-image">
+                <p>Innovation in Action</p>
+            </div>
+        </section>
+
+        <section id="contact" class="section cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Ideas?</h2>
+                <p>Let's collaborate and bring your next big project to life. Get in touch with us today!</p>
+                <a href="#" class="btn secondary-btn">Contact Us</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Showcase. All rights reserved.</p>
+        <p><span class="project-date">Project Date: 2026-04-11</span></p>
+    </footer>
+
+    <script>
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        const navLinks = document.querySelectorAll('.nav-links li');
+
+        burger.addEventListener('click', () => {
+            // Toggle Nav
+            nav.classList.toggle('nav-active');
+
+            // Animate Links
+            navLinks.forEach((link, index) => {
+                if (link.style.animation) {
+                    link.style.animation = '';
+                } else {
+                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                }
+            });
+
+            // Burger Animation
+            burger.classList.toggle('toggle');
+        });
+
+        // Close nav when a link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (nav.classList.contains('nav-active')) {
+                    nav.classList.remove('nav-active');
+                    burger.classList.remove('toggle');
+                    navLinks.forEach(item => item.style.animation = ''); // Reset animation
+                }
+            });
+        });
+    </script>
+</body>
+</html>
