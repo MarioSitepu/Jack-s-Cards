@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Horizon | 2026</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #22d3ee;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.15) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            padding: 8rem 5% 4rem;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .date-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 20px -10px var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -10px var(--primary);
+        }
+
+        .features {
+            padding: 6rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+            transform: translateY(-10px);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: #94a3b8;
+        }
+
+        .main-content {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .visual-element {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .visual-element::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23FFFFFF' d='M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,90,-16.3,88.5,-0.9C87,14.6,81.4,29.1,73.1,42.4C64.8,55.6,53.8,67.6,40.4,74.9C27,82.2,13.5,84.8,-0.2,85.2C-13.9,85.5,-27.8,83.6,-40.8,77.2C-53.8,70.8,-65.9,59.9,-73.4,46.8C-80.9,33.7,-83.8,18.4,-83.4,3.3C-82.9,-11.8,-79.1,-26.7,-71.4,-39.6C-63.7,-52.5,-52.1,-63.4,-39,-71.2C-25.9,-79.1,-12.9,-83.9,0.8,-85.3C14.5,-86.7,29.1,-84.7,44.7,-76.4Z' transform='translate(100 100)' /%3E%3C/svg%3E") no-repeat center;
+            opacity: 0.2;
+            transform: scale(1.5);
+        }
+
+        footer {
+            padding: 4rem 5%;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 0.9rem;
+        }
+
+        .copyright {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero {
+                padding-top: 4rem;
+            }
+            nav {
+                display: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">HORIZON</div>
+        <nav>
+            <a href="#">Innovation</a>
+            <a href="#">Systems</a>
+            <a href="#">Future</a>
+            <a href="#">Connect</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="date-badge">Release Date: 2026-04-12</div>
+            <h1>The Next Evolution of Digital Architecture</h1>
+            <p>Experience a paradigm shift in how we build, interact, and scale in the modern ecosystem. Built for the challenges of tomorrow.</p>
+            <div class="cta-group">
+                <a href="#" class="btn btn-primary">Get Started</a>
+                <a href="#" class="btn" style="border: 1px solid var(--glass-border)">Documentation</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="card">
+                <h3>Quantum Sync</h3>
+                <p>Real-time data synchronization across distributed nodes with sub-millisecond latency and end-to-end encryption.</p>
+            </div>
+            <div class="card">
+                <h3>Neural Core</h3>
+                <p>Adaptive AI processing that learns from environment patterns to optimize performance and resource allocation.</p>
+            </div>
+            <div class="card">
+                <h3>Glass UI</h3>
+                <p>A revolutionary design system focusing on depth, translucency, and organic motion for the 2026 web standard.</p>
+            </div>
+        </section>
+
+        <section class="main-content">
+            <div class="content-grid">
+                <div class="text-content">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Engineered for 2026</h2>
+                    <p style="color: #94a3b8; margin-bottom: 1.5rem;">As we approach the mid-decade milestone, the requirements for digital infrastructure have evolved. This project, finalized on <strong>April 12, 2026</strong>, represents the culmination of three years of research into decentralized systems and human-centric design.</p>
+                    <p style="color: #94a3b8;">Our architecture ensures that your data remains yours, while providing the speed and accessibility required by the next generation of global applications.</p>
+                </div>
+                <div class="visual-element"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Security</a>
+            <a href="#">Status</a>
+        </div>
+        <p class="copyright">&copy; 2026 Horizon Systems. All rights reserved. Last updated: 2026-04-12</p>
+    </footer>
+
+</body>
+</html>
