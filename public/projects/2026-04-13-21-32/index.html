@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Project | 2026</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Gradient Orbs */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+        }
+
+        header {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            padding: 8rem 10% 5rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .date-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .features {
+            padding: 5rem 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .info-section {
+            padding: 5rem 10%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-content {
+            flex: 1;
+        }
+
+        .info-image {
+            flex: 1;
+            height: 400px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000') center/cover;
+            opacity: 0.5;
+            mix-blend-mode: overlay;
+        }
+
+        footer {
+            padding: 4rem 10% 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            color: #64748b;
+        }
+
+        .footer-links {
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
+            nav { display: none; }
+            .info-section { flex-direction: column; text-align: center; }
+            .hero { padding-top: 5rem; }
+            .info-image { width: 100%; height: 250px; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">HORIZON.CORE</div>
+        <nav>
+            <a href="#">Vision</a>
+            <a href="#">Technology</a>
+            <a href="#">Ecosystem</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="date-badge">Scheduled Release: April 13, 2026</div>
+            <h1>The Future of <span class="gradient-text">Digital Intelligence</span></h1>
+            <p>Experience the next evolution of integrated systems. Faster, smarter, and more intuitive than ever before.</p>
+            <button class="cta-button">Reserve Access</button>
+        </section>
+
+        <section class="features">
+            <div class="card">
+                <h3>Neural Interface</h3>
+                <p>Seamlessly connect with your workspace using advanced adaptive learning algorithms designed for 2026.</p>
+            </div>
+            <div class="card">
+                <h3>Quantum Security</h3>
+                <p>Unbreakable encryption protocols ensuring your data remains private in an increasingly connected world.</p>
+            </div>
+            <div class="card">
+                <h3>Unified Cloud</h3>
+                <p>Access your entire digital life from any point in the globe with zero latency and infinite scaling.</p>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="info-content">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">A New Era Begins</h2>
+                <p style="margin-bottom: 1.5rem; color: #94a3b8;">On <strong>April 13, 2026</strong>, we are transitioning from traditional computing to a holistic intelligence model. This project represents four years of dedicated research into human-centric design and automated efficiency.</p>
+                <p style="color: #94a3b8;">Join thousands of early adopters who are already preparing for the shift. The horizon is closer than you think.</p>
+            </div>
+            <div class="info-image"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Documentation</a>
+            <a href="#">Changelog</a>
+        </div>
+        <p>&copy; 2026 Horizon Core Technologies. All rights reserved. Last updated: 2026-04-13</p>
+    </footer>
+</body>
+</html>
