@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Horizon | April 2026</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #22d3ee;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.05);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        header {
+            height: 100vh;
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent),
+                        radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.15), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .date-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        section {
+            padding: 100px 10%;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: #94a3b8;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            padding: 50px 10%;
+            border-top: 1px solid var(--glass);
+            text-align: center;
+            color: #64748b;
+        }
+
+        .footer-links {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 5%;
+            }
+            nav {
+                padding: 1rem 5%;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 1s ease forwards;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">NOVA.26</div>
+        <div class="nav-links">
+            <a href="#" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem; border: 1px solid var(--glass);">Launch Console</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="animate">
+            <span class="date-badge">Release Date: 2026-04-13</span>
+            <div class="hero-content">
+                <h1>The Future of<br>Digital Architecture</h1>
+                <p>Welcome to the next evolution of the web. Built for the high-performance demands of 2026 and beyond.</p>
+                <a href="#discover" class="btn btn-primary">Experience the Vision</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="discover">
+        <span class="subtitle">Capabilities</span>
+        <h2 class="section-title">Engineered for Tomorrow</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Quantum Speed</h3>
+                <p>Optimized for the sub-millisecond response times expected in the modern era of 2026 technology.</p>
+            </div>
+            <div class="card">
+                <h3>Neural Design</h3>
+                <p>Adaptive interfaces that learn from user behavior to provide a truly bespoke digital experience.</p>
+            </div>
+            <div class="card">
+                <h3>Global Mesh</h3>
+                <p>Deployed across a decentralized network ensuring 100% uptime and localized latency reduction.</p>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: rgba(99, 102, 241, 0.03);">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <span class="subtitle">Timeline</span>
+            <h2 class="section-title">Milestone 2026-04-13</h2>
+            <p style="color: #94a3b8; font-size: 1.2rem; margin-bottom: 2rem;">
+                On April 13th, 2026, we cross the threshold into the next generation of connectivity. 
+                Our infrastructure will transition to a fully autonomous state, marking the beginning of the "Nova" era.
+            </p>
+            <div style="height: 2px; width: 100px; background: var(--gradient); margin: 0 auto;"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo">NOVA.26</div>
+        <div class="footer-links">
+            <a href="#">Security</a>
+            <a href="#">Protocol</a>
+            <a href="#">Network State</a>
+        </div>
+        <p>&copy; 2026 Project Horizon. Established for the future. Updated: 2026-04-13.</p>
+    </footer>
+
+</body>
+</html>
