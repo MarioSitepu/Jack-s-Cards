@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nova - Modern Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #6a11cb;
+            --primary-gradient-end: #2575fc;
+            --secondary-color: #00c6ff; /* A lighter blue for accents */
+            --accent-color: #00f2fe; /* A bright cyan for highlights */
+            --text-dark: #333;
+            --text-light: #f9f9f9;
+            --bg-light: #f4f7f6;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --border-radius-lg: 12px;
+            --border-radius-sm: 8px;
+            --spacing-unit: 1rem;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 2);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: var(--text-light);
+            padding: var(--spacing-unit) * 1.5 0;
+            box-shadow: 0 4px 15px var(--shadow-light);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0;
+            background: -webkit-linear-gradient(45deg, var(--accent-color), var(--text-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        header nav a {
+            color: var(--text-light);
+            font-weight: 600;
+            padding: var(--spacing-unit) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent-color);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-out;
+        }
+
+        header nav a:hover::after,
+        header nav a.active::after {
+            transform: translateX(0);
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            padding: calc(var(--spacing-unit) * 3) 0;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-gradient-end) 0%, var(--primary-gradient-start) 100%);
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 6) 0;
+            text-align: center;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            background: -webkit-linear-gradient(45deg, var(--accent-color), var(--text-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-section p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            max-width: 800px;
+            margin: 0 auto calc(var(--spacing-unit) * 2);
+            font-weight: 300;
+        }
+
+        .project-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .project-date span {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 2.5);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            background-color: var(--secondary-color);
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.6);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            text-align: center;
+        }
+
+        .features-section h3 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            color: var(--primary-gradient-start);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 5px 20px var(--shadow-light);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: var(--spacing-unit);
+            color: var(--primary-gradient-end);
+            position: relative;
+            padding-left: var(--spacing-unit) * 2;
+        }
+
+        .feature-card h4::before {
+            content: '✨'; /* A modern icon */
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        /* CTA Banner */
+        .cta-banner {
+            background: linear-gradient(to left, var(--secondary-color), var(--primary-gradient-end));
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 4) 0;
+            text-align: center;
+            border-radius: var(--border-radius-lg);
+            margin-top: calc(var(--spacing-unit) * 4);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-banner h3 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+        }
+
+        .cta-banner p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: calc(var(--spacing-unit) * 2.5);
+            opacity: 0.9;
+        }
+
+        .cta-button.secondary {
+            background-color: var(--text-light);
+            color: var(--primary-gradient-end);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+        }
+
+        .cta-button.secondary:hover {
+            background-color: #e0e0e0;
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 2) 0;
+            text-align: center;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px var(--shadow-light);
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-unit);
+        }
+
+        footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            margin: 0 var(--spacing-unit);
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: var(--spacing-unit);
+            }
+
+            header nav ul {
+                flex-direction: column;
+                gap: var(--spacing-unit);
+            }
+
+            .hero-section {
+                padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 1.5);
+            }
+
+            .hero-section h2 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .hero-section p {
+                font-size: clamp(0.9rem, 3vw, 1.1rem);
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: calc(var(--spacing-unit) * 1.5);
+            }
+
+            .cta-banner {
+                padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 1.5);
+            }
+
+            .cta-banner h3 {
+                font-size: clamp(1.6rem, 6vw, 2.5rem);
+            }
+
+            footer .container {
+                flex-direction: column;
+            }
+
+            .social-links {
+                margin-top: var(--spacing-unit);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            header nav a {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.8);
+                font-size: 0.9rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.2rem;
+            }
+            .feature-card p {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Nova</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Dashboard</a></li>
+                    <li><a href="#">Tasks</a></li>
+                    <li><a href="#">Analytics</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h2>Elevate Your Project Management</h2>
+                <p>Streamline workflows, boost collaboration, and achieve unparalleled success with Project Nova.</p>
+                <div class="project-date">Project Initiated: <span>2026-04-14</span></div>
+                <a href="#" class="cta-button">Explore Features</a>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="container">
+                <h3>Designed for Modern Teams</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Intuitive Interface</h4>
+                        <p>Experience a clean, user-friendly design that makes project navigation effortless for everyone.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Real-time Updates</h4>
+                        <p>Stay informed with instant notifications and live data synchronization across all devices.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Advanced Analytics</h4>
+                        <p>Gain deep insights into project performance with customizable dashboards and reporting tools.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Seamless Integration</h4>
+                        <p>Connect with your favorite tools and platforms for a truly integrated work environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-banner">
+            <div class="container">
+                <h3>Ready to Transform Your Workflow?</h3>
+                <p>Join the future of project management. Start your journey with Project Nova today!</p>
+                <a href="#" class="cta-button secondary">Request a Demo</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
