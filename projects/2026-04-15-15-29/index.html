@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
+            --background-light: #f0f2f5;
+            --text-dark: #333;
+            --text-light: #fff;
+            --card-background: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --border-radius-lg: 15px;
+            --border-radius-md: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--background-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 20px 0;
+            box-shadow: 0 4px 8px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--text-light);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 40px 0;
+        }
+
+        section {
+            padding: 60px 0;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius-lg);
+        }
+
+        .hero-section {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: var(--border-radius-lg);
+            margin-top: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .features-section .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-background);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 4px 12px var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary-gradient);
+            transition: height 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-card:hover::before {
+            height: 10px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #4a4a4a;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .project-details-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 12px var(--shadow-light);
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .project-details-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #4a4a4a;
+        }
+
+        .detail-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--background-light);
+            border-left: 5px solid;
+            border-image: var(--primary-gradient) 1;
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .detail-item strong {
+            font-weight: 600;
+            color: #2a2a2a;
+            min-width: 150px;
+        }
+
+        .detail-item span {
+            color: #555;
+            flex-grow: 1;
+        }
+
+        .date-highlight {
+            font-weight: 700;
+            color: #005bea;
+            font-size: 1.1em;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: auto;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+                padding-top: 15px;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+                width: 100%;
+            }
+
+            .hero-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .features-section .container {
+                grid-template-columns: 1fr;
+            }
+
+            .project-details-section {
+                padding: 30px;
+            }
+
+            .project-details-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .detail-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .detail-item strong {
+                min-width: unset;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 60px 15px;
+            }
+
+            .hero-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+
+            .feature-card {
+                padding: 25px;
+            }
+
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>ProjectNexus</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#details">Details</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h2>Empowering Your Projects with Modern Solutions</h2>
+                <p>ProjectNexus provides a cutting-edge platform to manage, track, and collaborate on your projects efficiently. Experience the future of project management today.</p>
+                <a href="#details" class="btn">Learn More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <div class="feature-card">
+                    <h3>Intuitive Dashboard</h3>
+                    <p>Gain a clear overview of all your projects, tasks, and team progress at a glance with our user-friendly dashboard.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Seamless Collaboration</h3>
+                    <p>Work together effortlessly with integrated communication tools, file sharing, and real-time updates for your entire team.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Advanced Analytics</h3>
+                    <p>Make data-driven decisions with powerful analytics and reporting features that highlight key performance indicators.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="details" class="project-details-section container">
+            <h2>Our Project Milestones</h2>
+            <div class="detail-item">
+                <strong>Project Name:</strong> <span>ProjectNexus Platform V1.0</span>
+            </div>
+            <div class="detail-item">
+                <strong>Project Manager:</strong> <span>Alice Wonderland</span>
+            </div>
+            <div class="detail-item">
+                <strong>Development Lead:</strong> <span>Bob The Builder</span>
+            </div>
+            <div class="detail-item">
+                <strong>Current Status:</strong> <span>In Production</span>
+            </div>
+            <div class="detail-item">
+                <strong>Next Major Update:</strong> <span>Q3 2024</span>
+            </div>
+            <div class="detail-item">
+                <strong>Project Completion Date:</strong> <span class="date-highlight">2026-04-15</span>
+            </div>
+            <div class="detail-item">
+                <strong>Key Technologies:</strong> <span>React, Node.js, PostgreSQL, AWS</span>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2023 ProjectNexus. All rights reserved.</p>
+            <p>Contact us: info@projectnexus.com</p>
+        </div>
+    </footer>
+</body>
+</html>
