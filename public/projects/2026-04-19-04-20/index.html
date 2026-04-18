@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(to right, #00d2ff, #3a7bd5);
+            --header-gradient: linear-gradient(to right, #0f4c81, #1a73e8);
+            --text-dark: #343a40;
+            --text-light: #ffffff;
+            --bg-light: #f8f9fa;
+            --accent-color: #ff6b6b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            background: var(--header-gradient);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-right: 20px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            font-weight: 400;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .primary-btn {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            border: none;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0.9;
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            color: var(--primary-gradient); /* This doesn't apply a gradient to text directly */
+            border: 2px solid #2575fc; /* Use a solid color from the gradient */
+            color: #2575fc;
+        }
+
+        .secondary-btn:hover {
+            background: #2575fc;
+            color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: 120px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero-section .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-section .subtitle span {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #eef1f4;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding-top: 100px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-item {
+            background-color: var(--text-light);
+            padding: 40px 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-item i.icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background: var(--secondary-gradient);
+            border-radius: 50%;
+            margin-bottom: 25px;
+            color: var(--text-light);
+            font-size: 32px;
+            font-style: normal; /* Override default <i> italic */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-responsive::before { content: '📱'; }
+        .icon-modern::before { content: '✨'; }
+        .icon-performance::before { content: '⚡'; }
+        .icon-secure::before { content: '🔒'; }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* About Section */
+        .about-section {
+            text-align: left;
+        }
+
+        .about-section .container {
+            max-width: 900px;
+        }
+
+        .about-section h2 {
+            text-align: center;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .about-section p span {
+            font-weight: 600;
+            color: #2575fc;
+        }
+
+        .about-section .btn {
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 100px 20px;
+        }
+
+        .cta-section h2 {
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        .cta-section h2::after {
+            background: var(--accent-color);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 40px 0;
+            font-size: 0.9rem;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer-date {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .social-links a {
+            color: #ecf0f1;
+            margin-left: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 10px 0;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero-section {
+                padding: 80px 20px;
+                min-height: unset;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section .subtitle {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-section {
+                text-align: center;
+            }
+
+            footer .container {
+                flex-direction: column;
+            }
+
+            footer p {
+                margin-bottom: 15px;
+            }
+
+            .social-links {
+                margin-top: 15px;
+            }
+
+            .social-links a {
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Project <span>2026</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Innovate. Create. Inspire.</h1>
+                <p class="subtitle">Your vision, our future. Launching new possibilities on <span>2026-04-19</span>.</p>
+                <a href="#features" class="btn primary-btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="icon icon-responsive"></i>
+                        <h3>Fully Responsive</h3>
+                        <p>Optimized for all devices, from desktop to mobile, ensuring a seamless experience.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon icon-modern"></i>
+                        <h3>Modern Design</h3>
+                        <p>Sleek, intuitive, and visually stunning interfaces built with cutting-edge trends.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon icon-performance"></i>
+                        <h3>Blazing Fast</h3>
+                        <p>Engineered for speed and efficiency, delivering exceptional performance.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="icon icon-secure"></i>
+                        <h3>Secure & Robust</h3>
+                        <p>Built with security first, providing a reliable and protected environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About Our Vision</h2>
+                <p>We believe in pushing boundaries and redefining what's possible. Our team of dedicated innovators is committed to crafting solutions that not only meet today's demands but also anticipate tomorrow's needs. With a strong focus on user experience and technological excellence, we're building the future, one elegant solution at a time.</p>
+                <p>This project, conceptualized for launch on <span>2026-04-19</span>, embodies our commitment to innovation and quality.</p>
+                <a href="#contact" class="btn secondary-btn">Get in Touch</a>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your Ideas?</h2>
+                <p>Join us on this exciting journey. Let's create something extraordinary together.</p>
+                <a href="#" class="btn primary-btn">Contact Us Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project 2026. All rights reserved. <span class="footer-date">Project Date: 2026-04-19</span></p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
