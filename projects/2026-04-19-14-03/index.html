@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <style>
+        /* Universal box-sizing for consistent layout */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Body styling: Font, line height, colors, and background gradient */
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(to right top, #a1c4fd, #c2e9fb); /* Soft modern gradient */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+
+        /* Container for limiting content width and centering */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styling */
+        header {
+            background: rgba(255, 255, 255, 0.95); /* Semi-transparent white header */
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+            position: sticky; /* Sticky header for navigation */
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #007bff; /* Vibrant accent color for logo */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        /* Underline animation for navigation links */
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #007bff;
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Main content area */
+        main {
+            flex: 1; /* Allows main content to grow and push footer down */
+        }
+
+        /* General section styling */
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        /* Alternating background colors for sections */
+        section:nth-of-type(even) {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        section:nth-of-type(odd) {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right bottom, #007bff, #0056b3); /* Stronger blue gradient for hero */
+            color: white;
+            padding: 120px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        .hero p span {
+            font-weight: 500;
+            color: #ffeb3b; /* Highlight color for the date */
+        }
+
+        /* Buttons styling */
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d; /* A more subdued button style */
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* Headings styling */
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+        h2 {
+            font-size: 2.5rem;
+        }
+        h3 {
+            font-size: 1.8rem;
+        }
+
+        /* Grid layout for features and services */
+        .features-grid, .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid columns */
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        /* Card styling for features and services */
+        .feature-card, .service-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .feature-card:hover, .service-card:hover {
+            transform: translateY(-10px); /* Lift effect on hover */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h3, .service-card h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+
+        .feature-card p, .service-card p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Bold gradient for CTA */
+            color: white;
+            padding: 100px 0;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 3rem;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* Footer styling */
+        footer {
+            background: #333;
+            color: #eee;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #007bff;
+        }
+
+        /* Mobile responsiveness with Media Queries */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column; /* Stack header elements */
+            }
+
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap; /* Allow nav items to wrap */
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 10px 10px 10px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .features-grid, .services-grid {
+                grid-template-columns: 1fr; /* Stack cards vertically */
+            }
+
+            .feature-card, .service-card {
+                text-align: center; /* Center text in stacked cards */
+            }
+            .feature-card h3, .service-card h3
