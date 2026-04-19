@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureScape Project - 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #f76b1c 0%, #fad961 100%);
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --bg-light: #ffffff;
+            --bg-dark-alt: #1a1a2e;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.2);
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 2.8rem; }
+        h2 { font-size: 2.2rem; }
+        h3 { font-size: 1.7rem; }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px var(--shadow-medium);
+        }
+
+        .btn-primary {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px var(--shadow-medium);
+        }
+
+        /* Header */
+        .header {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow-medium);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: 0.5px;
+            background: -webkit-linear-gradient(45deg, #fad961, #f76b1c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .header nav ul li {
+            margin-left: 30px;
+        }
+
+        .header nav ul li a {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding-bottom: 5px;
+            transition: border-bottom 0.3s ease;
+        }
+
+        .header nav ul li a:hover {
+            border-bottom: 2px solid #fad961;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: 100px 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
+            animation: moveShape 10s infinite alternate;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+            animation: moveShape 12s infinite alternate-reverse;
+        }
+
+        @keyframes moveShape {
+            0% { transform: translate(0, 0) rotate(45deg); }
+            100% { transform: translate(20px, 20px) rotate(60deg); }
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+            opacity: 0.9;
+        }
+
+        .hero .date-info {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-top: 2rem;
+            opacity: 0.8;
+        }
+
+        /* Main Sections */
+        .section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .section:nth-of-type(even) {
+            background-color: #f8f8f8;
+        }
+
+        .section h2 {
+            margin-bottom: 3rem;
+            font-size: 2.8rem;
+            color: #444;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-light);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 5px 20px var(--shadow-light);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px var(--shadow-medium);
+        }
+
+        .feature-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #6a11cb;
+            background: -webkit-linear-gradient(45deg, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.6rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            text-align: left;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 8px 25px var(--shadow-medium);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            padding: 100px 0;
+        }
+
+        .cta h2 {
+            color: var(--text-light);
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta h2::after {
+            background: var(--primary-gradient);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-dark-alt);
+            color: var(--text-light);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .footer .project-date {
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .section h2 {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+            }
+            .header .logo {
+                margin-bottom: 1rem;
+            }
+            .header nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .header nav ul li {
+                margin: 0 15px 10px 15px;
+            }
+
+            .hero {
+                padding: 80px 0;
+                min-height: 60vh;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+            .section h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+            .about-text, .about-image {
+                max-width: 100%;
+            }
+
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            .header nav ul li {
+                margin: 0 10px 10px 10px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+            .section h2 {
+                font-size: 1.8rem;
+            }
+            .feature-card {
+                padding: 25px;
+            }
+            .feature-card .icon {
+                font-size: 2rem;
+            }
+            .feature-card h3 {
+                font-size: 1.4rem;
+            }
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">FutureScape</a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="container">
+                <h1>Unleash the Future: FutureScape Project</h1>
+                <p>Revolutionizing possibilities with cutting-edge technology and innovative solutions. Experience tomorrow, today.</p>
+                <a href="#features" class="btn btn-primary">Discover More</a>
+                <p class="date-info">Project Initiated: 2026-04-19</p>
+            </div>
+        </section>
+
+        <section id="features" class="section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed and efficiency, ensuring a seamless user experience across all platforms.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💡</div>
+                        <h3>Intuitive User Interface</h3>
+                        <p>Designed with user-friendliness in mind, making complex tasks simple and accessible for everyone.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h3>Robust Security</h3>
+                        <p>State-of-the-art encryption and security protocols to protect your data and privacy.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🌐</div>
+                        <h3>Scalable & Flexible</h3>
+                        <p>Built on a modular architecture, easily adaptable and expandable to meet future demands.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About FutureScape</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>The FutureScape project, launched on <strong style="background: -webkit-linear-gradient(45deg, #f76b1c, #fad961); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">2026-04-19</strong>, is the culmination of years of research and development by a dedicated team of innovators. Our mission is to bridge the gap between imagination and reality, bringing forth solutions that not only solve current challenges but also anticipate future needs.</p>
+                        <p>We believe in a future where technology empowers individuals and organizations to achieve their full potential. FutureScape is more than just a product; it's a vision for a smarter, more connected, and efficient world.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/6a11cb/ffffff?text=Modern+Tech+Concept" alt="Modern Technology Concept">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Join us on this exciting journey. Contact our team today to learn how FutureScape can benefit you.</p>
+                <a href="mailto:info@futurescape.com" class="btn btn-primary">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 FutureScape Project. All rights reserved.</p>
+            <p class="project-date">Last Updated: 2026-04-19</p>
+        </div>
+    </footer>
+</body>
+</html>
