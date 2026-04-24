@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nexus - Future Forward</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%' y='50%' style='dominant-baseline:central;text-anchor:middle;font-size:90px;'%3E🚀%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <style>
+        :root {
+            --primary-bg: #f8f9fa; /* Light grey background */
+            --secondary-bg: #ffffff; /* White card background */
+            --header-footer-gradient-start: #1e3c72; /* Dark blue */
+            --header-footer-gradient-end: #2a5298; /* Medium blue */
+            --accent-color: #007bff; /* Vibrant blue */
+            --accent-hover: #0056b3; /* Darker vibrant blue */
+            --text-color: #343a40; /* Dark grey text */
+            --light-text-color: #ffffff; /* White text for dark backgrounds */
+            --border-color: #e9ecef; /* Light grey border */
+            --card-shadow: rgba(0, 0, 0, 0.08);
+            --button-gradient-start: #007bff;
+            --button-gradient-end: #0056b3;
+        }
+
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--primary-bg);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, var(--header-footer-gradient-start), var(--header-footer-gradient-end));
+            color: var(--light-text-color);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--light-text-color);
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 0.2rem;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--light-text-color);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main content */
+        main {
+            flex-grow: 1;
+        }
+
+        section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--secondary-bg);
+        }
+
+        h1, h2, h3 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #6a11cb 100%); /* Purple-blue gradient */
+            color: var(--light-text-color);
+            padding: 6rem 0;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            color: var(--light-text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 900px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--button-gradient-start), var(--button-gradient-end));
+            color: var(--light-text-color);
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Features section */
+        .features .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background-color: var(--secondary-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            width: 100%;
+            text-align: center;
+        }
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--header-footer-gradient-start);
+            width: 100%;
+            text-align: center;
+        }
+        .feature-item p {
+            font-size: 1rem;
+            color: #555;
+            text-align: left; /* Ensure text alignment for description */
+            width: 100%;
+            max-width: none; /* Override general p max-width */
+        }
+
+        /* About section */
+        .about {
+            background-color: var(--primary-bg);
+        }
+        .about .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .about p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 1.15rem;
+        }
+
+        /* Call to Action section */
+        .cta {
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Another gradient for CTA */
+            color: var(--light-text-color);
+            padding: 5rem 0;
+        }
+
+        .cta h2 {
+            color: var(--light-text-color);
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta .btn {
+            background: var(--light-text-color);
+            color: var(--accent-color);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .cta .btn:hover {
+            color: var(--accent-hover);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--header-footer-gradient-start), var(--header-footer-gradient-end));
+            color: var(--light-text-color);
+            padding: 2rem 0;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        footer a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            h3 {
+                font-size: 1.4rem;
+            }
+
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .feature-item {
+                padding: 2rem;
+                align-items: center; /* Center content in mobile */
+            }
+            .feature-item p {
+                text-align: center; /* Center description text for mobile */
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project Nexus</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Ignite Your Vision. Build the Future.</h1>
+                <p>Empowering innovation with cutting-edge solutions designed for the challenges of tomorrow.</p>
+                <a href="#features" class="btn">Discover Our Solutions</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features & Capabilities</h2>
+                <div class="grid">
+                    <div class="feature-item">
+                        <span class="icon">💡</span>
+                        <h3>Intuitive Design</h3>
+                        <p>User-centric interfaces that are easy to navigate and a pleasure to use, ensuring a seamless experience for everyone.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">⚡</span>
+                        <h3>Blazing Performance</h3>
+                        <p>Optimized for speed and efficiency, our solutions deliver unparalleled performance, even under heavy loads.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">🔒</span>
+                        <h3>Robust Security</h3>
+                        <p>State-of-the-art security protocols protect your data and privacy, giving you peace of mind in a complex digital world.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">🔗</span>
+                        <h3>Seamless Integration</h3>
+                        <p>Effortlessly integrate with your existing systems and workflows, enhancing productivity without disruption.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">📈</span>
+                        <h3>Scalable Architecture</h3>
+                        <p>Built to grow with you, our scalable architecture ensures your operations can expand without limits.</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">⚙️</span>
+                        <h3>Customizable Workflows</h3>
+                        <p>Tailor every aspect to fit your unique needs, creating a truly personalized and efficient operational environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About Project Nexus</h2>
+                <p>Project Nexus began with a clear vision: to bridge the gap between complex technological challenges and elegant, user-friendly solutions. We believe in harnessing the power of modern design principles and robust engineering to create products that not only meet current demands but also anticipate future needs.</p>
+                <p>Our dedicated team of innovators, designers, and engineers is committed to pushing boundaries and delivering excellence. We thrive on creating tools that empower businesses and individuals to achieve more, fostering a world where technology is an enabler, not a barrier.</p>
+                <p>This project, envisioned and developed for the future, is officially dated <strong>2026-04-24</strong>, marking a significant step forward in our journey.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Future?</h2>
+                <p>Join us in building the next generation of digital excellence.</p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nexus. All rights reserved.</p>
+            <p>Project Date: 2026-04-24</p>
+            <p>Designed with passion for a better tomorrow.</p>
+        </div>
+    </footer>
+</body>
+</html>
