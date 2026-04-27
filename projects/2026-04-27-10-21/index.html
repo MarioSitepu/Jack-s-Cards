@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard - 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --background-light: #ffffff;
+            --background-dark: #1a1a2e;
+            --card-background: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.2);
+            --border-radius: 10px;
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Basic Reset & Body Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f8f8f8;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: var(--background-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support -webkit-text-fill-color */
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            font-weight: 600;
+            color: var(--text-dark);
+            position: relative;
+            transition: color var(--transition-speed);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary-gradient);
+            transition: width var(--transition-speed);
+        }
+
+        nav ul li a:hover {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all var(--transition-speed);
+            box-shadow: 0 5px 15px var(--shadow-light);
+            border: none;
+            cursor: pointer;
+        }
+
+        .primary-btn {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-medium);
+            opacity: 0.9;
+        }
+
+        .secondary-btn {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+        }
+
+        .secondary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-medium);
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            color: var(--text-dark);
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(180deg, #e0f2f7 0%, #c1e4f4 100%); /* Light gradient background for the hero */
+            padding: 8rem 2rem;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            color: #444;
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: var(--background-light);
+            padding-top: 4rem; /* Adjust padding for better spacing */
+            padding-bottom: 6rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--card-background);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 25px var(--shadow-light);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            text-align: left;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px var(--shadow-medium);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: #f0faff; /* Light blue tint */
+            padding: 6rem 2rem;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            margin-bottom: 4rem;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .about-content h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 5rem 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 4rem;
+            box-shadow: 0 10px 30px var(--shadow-medium);
+        }
+
+        .cta-section h2 {
+            color: var(--text-light);
+            background: none; /* Override gradient for text */
+            -webkit-text-fill-color: var(--text-light);
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            font-size: 1.2rem;
+        }
+
+        .cta-section .btn {
+            background: var(--text-light); /* White button on gradient background */
+            color: #2575fc; /* Primary color for text */
+            box-shadow: none;
+        }
+
+        .cta-section .btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--background-dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+            color: inherit;
+        }
+
+        .social-links a {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0 0.8rem;
+            transition: color var(--transition-speed);
+        }
+
+        .social-links a:hover {
+            color: var(--text-light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            nav ul li a {
+                padding: 0.5rem 0;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            h2 {
+                font-size: clamp(1.8rem, 7vw, 2.5rem);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .about-section, .cta-section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                padding: 0 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(1.8rem, 10vw, 2.5rem);
+            }
+
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+            }
+
+            h2 {
+                font-size: clamp(1.6rem, 8vw, 2rem);
+            }
+
+            p {
+                font-size: 0.95rem;
+            }
+
+            footer {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Project 2026</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Future-Proof Your Ideas</h1>
+                <p>Innovative solutions for tomorrow's challenges. Experience the next generation of productivity tools, officially launching on <strong>2026-04-27</strong>.</p>
+                <a href="#features" class="btn primary-btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Seamless Integration</h3>
+                    <p>Connect effortlessly with your existing tools and workflows, creating a unified ecosystem.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Intuitive Design</h3>
+                    <p>A user experience crafted for simplicity and efficiency, making complex tasks feel effortless.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Scalable Performance</h3>
+                    <p>Grow without limits. Our platform is engineered to scale with your ambition, from small teams to large enterprises.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Robust Security</h3>
+                    <p>Your data is protected with state-of-the-art encryption and advanced security protocols.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="about-content">
+                <h2>Our Vision</h2>
+                <p>At Project 2026, we believe in empowering creators and innovators with tools that are not just powerful, but also a joy to use. Our journey began with a simple idea: to build a platform that anticipates your needs and evolves with the future.</p>
+                <p>This project, officially dated <strong>2026-04-27</strong>, marks a significant milestone in bringing that vision to life. We are a team of passionate developers, designers, and strategists dedicated to delivering excellence and pushing the boundaries of what's possible. Join us in shaping the future.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <h2>Ready to Transform Your Workflow?</h2>
+            <p>Get started today and experience the difference that modern, intelligent tools can make. Don't miss out on the future of productivity.</p>
+            <a href="#" class="btn">Join the Waitlist</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project 2026. All rights reserved.</p>
+        <p>Project Launch Date: <strong>2026-04-27</strong></p>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook">Facebook</a>
+            <a href="#" aria-label="Twitter">Twitter</a>
+            <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+</html>
