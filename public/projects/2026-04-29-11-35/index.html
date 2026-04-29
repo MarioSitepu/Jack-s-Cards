@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Vision | 2026</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Nav */
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 10rem 2rem 6rem;
+            background: radial-gradient(circle at top right, #e0e7ff, #f8fafc);
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .date-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #64748b;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Features Section */
+        .features {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Content Section */
+        .content-split {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .content-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .content-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-image::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000') center/cover;
+            opacity: 0.6;
+            mix-blend-mode: overlay;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding-top: 8rem; }
+            .content-split { flex-direction: column; text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">NEXUS.26</div>
+            <div class="nav-links">
+                <a href="#">Innovation</a>
+                <a href="#">Solutions</a>
+                <a href="#">Future</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="date-badge">Release Date: April 29, 2026</div>
+                <h1>The Future of Digital Architecture</h1>
+                <p>Experience the next generation of web interaction. Seamless, intelligent, and designed for the speed of tomorrow.</p>
+                <a href="#" class="cta-button">Explore the Platform</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="card">
+                <div class="icon">⚡</div>
+                <h3>Hyper-Performance</h3>
+                <p>Engineered for sub-millisecond latency using the 2026 quantum-edge protocols.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🛡️</div>
+                <h3>Neural Security</h3>
+                <p>Advanced biometric encryption that evolves with your digital footprint.</p>
+            </div>
+            <div class="card">
+                <h3>Adaptive UI</h3>
+                <div class="icon">🎨</div>
+                <p>Interfaces that reshape themselves based on user intent and environment.</p>
+            </div>
+        </section>
+
+        <section class="content-split">
+            <div class="content-text">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; letter-spacing: -1px;">Defining the New Standard</h2>
+                <p style="color: #64748b; margin-bottom: 1.5rem;">As of <strong>April 29, 2026</strong>, we have officially bridged the gap between human intuition and machine efficiency. Our platform leverages the latest in spatial computing to deliver experiences that were once thought impossible.</p>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.5rem;">✓ Real-time holographic rendering</li>
+                    <li style="margin-bottom: 0.5rem;">✓ Decentralized data sovereignty</li>
+                    <li style="margin-bottom: 0.5rem;">✓ Carbon-negative infrastructure</li>
+                </ul>
+            </div>
+            <div class="content-image"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4 style="margin-bottom: 1rem;">Nexus Vision</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Building the foundation for the decentralized tomorrow. Join us in the evolution.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Resources</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Documentation<br>API Status<br>Whitepaper</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Company</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem;">About Us<br>Careers<br>Privacy Policy</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Nexus Vision Technologies. Last Updated: 2026-04-29.
+        </div>
+    </footer>
+
+</body>
+</html>
