@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Project - Modern Interface</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #6a11cb;
+            --primary-gradient-end: #2575fc;
+            --accent-gradient-start: #00c6ff;
+            --accent-gradient-end: #0072ff;
+            --text-dark: #333;
+            --text-light: #f9f9f9;
+            --bg-light: #f0f2f5;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --transition-speed: 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--card-bg);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            transition: width var(--transition-speed);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--text-light);
+            background: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--shadow-medium);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-medium);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-end));
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: var(--text-light);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 50px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(-45deg);
+        }
+
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px var(--shadow-light);
+        }
+
+        h2 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .features-grid, .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px var(--shadow-light);
+            text-align: center;
+            flex: 1 1 calc(33% - 40px);
+            min-width: 280px;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px var(--shadow-medium);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .about-content {
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1 1 50%;
+            padding-right: 30px;
+        }
+
+        .about-text h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .about-image {
+            flex: 1 1 40%;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px var(--shadow-medium);
+        }
+
+        /* Call to Action */
+        .cta {
+            background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            color: var(--text-light);
+            text-align: center;
+            padding: 80px 0;
+            border-radius: 50px;
+            margin: 50px auto;
+            max-width: 1000px;
+            box-shadow: 0 8px 30px var(--shadow-medium);
+        }
+
+        .cta h2 {
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            color: var(--text-light); /* Override gradient for white text on colored background */
+            -webkit-text-fill-color: var(--text-light);
+        }
+
+        .cta p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--bg-light);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9em;
+            border-radius: 50px 50px 0 0;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer nav ul {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        footer nav ul li {
+            margin: 0 15px;
+        }
+
+        footer nav ul li a {
+            color: var(--bg-light);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        footer nav ul li a:hover {
+            color: var(--accent-gradient-start);
+        }
+
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            nav ul {
+                display: none; /* Simple hide for small screens, could add a hamburger menu */
+            }
+
+            header .container {
+                justify-content: center;
+            }
+
+            .features-grid, .about-content {
+                flex-direction: column;
+            }
+
+            .feature-card {
+                flex: 1 1 100%;
+            }
+
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .cta h2 {
+                font-size: 2em;
+            }
+
+            .cta p {
+                font-size: 1em;
+            }
+
+            footer nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .btn {
+                padding: 10px 20px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+                margin-bottom: 40px;
+            }
+
+            section {
+                padding: 50px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Aurora Project</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Unlocking the Future of Innovation.</h1>
+                <p>Driving progress with cutting-edge technology and seamless experiences.</p>
+                <a href="#features" class="btn">Explore Our Vision</a>
+                <div class="status-badge">Project Live since 2026-04-29</div>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Core Capabilities</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Intuitive Interface</h3>
+                        <p>Designed for simplicity and efficiency, ensuring a smooth user experience from start to finish.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Scalable Solutions</h3>
+                        <p>Built on a robust architecture that grows with your needs, handling any workload with ease.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Real-time Analytics</h3>
+                        <p>Gain instant insights with powerful, real-time data processing and visualization tools.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Secure & Reliable</h3>
+                        <p>Your data is protected with advanced encryption and industry-leading security protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Cross-Platform Access</h3>
+                        <p>Seamlessly access your project from any device, anywhere, anytime.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Dedicated Support</h3>
+                        <p>Our expert team is always ready to assist you, ensuring uninterrupted productivity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Aurora</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Our Mission to Innovate</h3>
+                        <p>Aurora Project was conceived with the vision of bridging the gap between complex technology and accessible solutions. We believe that innovation should empower, not overwhelm. Our dedicated team of engineers, designers, and strategists work tirelessly to create products that are not only powerful but also a joy to use.</p>
+                        <p>Since its inception, Aurora has been committed to pushing boundaries, delivering excellence, and fostering a community of forward-thinkers. We are proud of the journey so far and excited for what the future holds.</p>
+                        <a href="#contact" class="btn btn-secondary">Learn More</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/500x350/6a11cb/2575fc?text=Modern+Tech" alt="Modern technology illustration">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Workflow?</h2>
+                <p>Join the future with Aurora Project. Let's build something amazing together.</p>
+                <a href="mailto:info@auroraproject.com" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <p>&copy; 2026 Aurora Project. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
