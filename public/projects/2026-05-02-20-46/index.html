@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* A modern green */
+            --secondary-color: #2196F3; /* A vibrant blue */
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --background-light: #f7f9fc;
+            --card-background: #ffffff;
+            --gradient-start: #e0f7fa; /* Light cyan */
+            --gradient-end: #bbdefb; /* Light blue */
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(to right, #ffffff, #e0f2f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        main {
+            flex: 1;
+            padding: 40px 0;
+        }
+
+        section {
+            background-color: var(--card-background);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(45deg, var(--secondary-color) 0%, #3f51b5 100%); /* Deeper blue gradient */
+            color: var(--text-light);
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px var(--shadow-medium);
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #ffffff, #e3f2fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-color), #8bc34a);
+            color: var(--text-light);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--background-light);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow-medium);
+        }
+
+        .card h3 {
+            font-size: 1.6rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: linear-gradient(180deg, var(--card-background), var(--background-light));
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: scale(1.03);
+        }
+
+        .stat-item .number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            background: linear-gradient(to right, var(--primary-color), #8bc34a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-item .label {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        footer {
+            background: var(--text-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: auto;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 30px 20px;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .grid-container, .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                padding: 8px 15px;
+            }
+
+            .hero {
+                padding: 40px 15px;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            .card h3 {
+                font-size: 1.4rem;
+            }
+
+            .stat-item .number {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FutureSphere</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#progress">Progress</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Unveiling Tomorrow's Innovation</h2>
+                <p>Welcome to the FutureSphere Project Dashboard. We are thrilled to present our progress towards a groundbreaking solution.</p>
+                <p class="project-date"><strong>Project Launch Target: 2026-05-02</strong></p>
+                <a href="#features" class="cta-button">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features" class="container">
+            <h2>Core Capabilities</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Modular Architecture</h3>
+                    <p>Designed for scalability and flexibility, our system boasts a modular architecture allowing for easy expansion and maintenance.</p>
+                </div>
+                <div class="card">
+                    <h3>AI-Powered Analytics</h3>
+                    <p>Leveraging cutting-edge AI, we provide deep insights and predictive analytics to empower smarter decision-making.</p>
+                </div>
+                <div class="card">
+                    <h3>Seamless Integration</h3>
+                    <p>FutureSphere is built with robust APIs, ensuring effortless integration with your existing ecosystems and third-party services.</p>
+                </div>
+                <div class="card">
+                    <h3>Intuitive User Experience</h3>
+                    <p>A user-centric design approach guarantees an intuitive and delightful experience for all users, regardless of technical proficiency.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="progress" class="container">
+            <h2>Project Milestones</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="number">85%</div>
+                    <div class="label">Completion Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">120</div>
+                    <div class="label">Tasks Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">15</div>
+                    <div class="label">Modules Developed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">99%</div>
+                    <div class="label">System Uptime (Beta)</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2>Get in Touch</h2>
+            <p>Have questions or want to learn more about FutureSphere? Reach out to our team!</p>
+            <p>Email: <a href="mailto:info@futuresphere.com" style="color: var(--secondary-color); text-decoration: none; font-weight: 600;">info@futuresphere.com</a></p>
+            <p>Phone: <a href="tel:+1234567890" style="color: var(--secondary-color); text-decoration: none; font-weight: 600;">+1 (234) 567-890</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 FutureSphere. All rights reserved.</p>
+            <p>Designed with passion for innovation.</p>
+        </div>
+    </footer>
+</body>
+</html>
