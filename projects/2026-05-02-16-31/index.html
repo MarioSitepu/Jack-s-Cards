@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(to right, #fc6767 0%, #ec008c 100%);
+            --dark-text: #333333;
+            --light-text: #f0f2f5;
+            --muted-text: #666666;
+            --background-light: #f0f2f5;
+            --card-background: #ffffff;
+            --border-radius: 12px;
+            --box-shadow-light: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --box-shadow-dark: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--background-light);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--card-background);
+            box-shadow: var(--box-shadow-light);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            font-weight: 600;
+            color: var(--dark-text);
+            position: relative;
+            padding-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #2575fc;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--light-text);
+            padding: 120px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: pulseBackground 20s infinite alternate;
+        }
+
+        @keyframes pulseBackground {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-gradient);
+            color: var(--light-text);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--background-light);
+        }
+
+        section h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-background);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-bottom: 5px solid transparent;
+            border-image: var(--primary-gradient);
+            border-image-slice: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-dark);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            color: #2575fc; /* A solid color from the gradient */
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            line-height: 1;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--muted-text);
+        }
+
+        /* Updates Section */
+        .updates-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .update-item {
+            background: var(--card-background);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .update-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-dark);
+        }
+
+        .update-date {
+            min-width: 90px;
+            text-align: center;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--light-text);
+            background: var(--primary-gradient);
+            padding: 15px 10px;
+            border-radius: var(--border-radius);
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .update-date span {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .update-date small {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .update-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+            font-weight: 600;
+        }
+
+        .update-content p {
+            font-size: 1rem;
+            color: var(--muted-text);
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: var(--secondary-gradient);
+            color: var(--light-text);
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            margin-top: 80px;
+            margin-bottom: 80px;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: rotateBackground 30s infinite linear;
+        }
+
+        @keyframes rotateBackground {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--light-text);
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta .btn {
+            background: var(--primary-gradient);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta .btn:hover {
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-text);
+            color: var(--light-text);
+            padding: 50px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin-top: 10px;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: #2575fc;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            section h2 {
+                font-size: 2.2rem;
+            }
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            nav ul li {
+                margin: 0;
+            }
+            .hero {
+                padding: 80px 0;
+                min-height: auto;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            section {
+                padding: 60px 0;
+            }
+            section h2 {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+            .feature-card {
+                padding: 30px;
+            }
+            .feature-card h3 {
+                font-size: 1.4rem;
+            }
+            .update-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .update-date {
+                width: 100%;
+                max-width: 150px;
+                padding: 10px;
+            }
+            .cta {
+                padding: 80px 0;
+                margin-top: 60px;
+                margin-bottom: 60px;
+            }
+            .cta h2 {
+                font-size: 2rem;
+            }
+            .cta p {
+                font-size: 1rem;
+            }
+            .footer-links ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 0.9rem;
+            }
+            section h2 {
+                font-size: 1.8rem;
+            }
+            .feature-card i {
+                font-size: 2.5rem;
+            }
+            .feature-card h3 {
+                font-size: 1.2rem;
+            }
+            .update-content h3 {
+                font-size: 1.3rem;
+            }
+            .cta h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">Project Nexus</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#updates">Updates</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Unlock the Future with Project Nexus</h1>
+                <p>A cutting-edge solution designed to streamline your workflows and elevate your success. Innovation starts here.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Key Features & Benefits</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-magic"></i>
+                        <h3>Intuitive Design</h3>
+                        <p>Experience a seamless and user-friendly interface crafted for optimal productivity and ease of use.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Blazing Performance</h3>
+                        <p>Leverage state-of-the-art technology for lightning-fast operations and reliable, consistent results.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Robust Security</h3>
+                        <p>Your data is our priority. We employ advanced security protocols to ensure maximum protection.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Seamless Integration</h3>
+                        <p>Effortlessly connect with your existing tools and platforms for a truly unified ecosystem.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="updates">
+            <div class="container">
+                <h2>Latest Project Updates</h2>
+                <div class="updates-grid">
+                    <div class="update-item">
+                        <div class="update-date">
+                            <span>02</span>
+                            <small>MAY 2026</small>
+                        </div>
+                        <div class="update-content">
+                            <h3>Next Major Release Scheduled!</h3>
+                            <p>We're thrilled to announce the upcoming launch of our v2.0 update, packed with exciting new features and performance enhancements. Get ready!</p>
+                        </div>
+                    </div>
+                    <div class="update-item">
+                        <div class="update-date">
+                            <span>15</span>
+                            <small>APR 2026</small>
+                        </div>
+                        <div class="update-content">
+                            <h3>Phase 3 Development Complete</h3>
+                            <p>Our development team has successfully finalized Phase 3, focusing on advanced analytics and custom reporting functionalities.</p>
+                        </div>
+                    </div>
+                    <div class="update-item">
+                        <div class="update-date">
+                            <span>28</span>
+                            <small>MAR 2026</small>
+                        </div>
+                        <div class="update-content">
+                            <h3>New Partnership Announcement</h3>
+                            <p>Project Nexus is proud to partner with InnovateTech to bring enhanced AI capabilities to our platform. More details coming soon!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container cta-content">
+                <h2>Ready to Transform Your Business?</h2>
+                <p>Join the growing number of professionals who are leveraging Project Nexus for unparalleled efficiency and growth.</p>
+                <a href="#" class="btn">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">Project Nexus</div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#updates">Updates</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <p class="copyright">&copy; 2026 Project Nexus. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
