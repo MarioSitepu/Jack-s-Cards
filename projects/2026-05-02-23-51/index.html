@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #6a11cb;
+            --primary-gradient-end: #2575fc;
+            --secondary-gradient-start: #a7bfe8;
+            --secondary-gradient-end: #6190e8;
+            --background-light: #f4f7fa;
+            --text-dark: #333;
+            --text-light: #fff;
+            --accent-color: #00bcd4; /* A vibrant cyan */
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            color: var(--text-light);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0; /* Remove container padding as header has its own */
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: calc(var(--spacing-unit) * 2);
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        main {
+            flex: 1;
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            text-align: center;
+        }
+
+        .hero {
+            background: linear-gradient(45deg, var(--secondary-gradient-start) 0%, var(--secondary-gradient-end) 100%);
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 6) 0;
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            box-shadow: 0 6px 20px var(--shadow-light);
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .project-date {
+            font-weight: 600;
+            color: var(--accent-color);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
+        }
+
+        .button:hover {
+            background-color: #00acc1; /* Slightly darker accent */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 188, 212, 0.6);
+        }
+
+        .features {
+            background-color: var(--card-bg);
+            padding: calc(var(--spacing-unit) * 4) 0;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            border-radius: var(--border-radius);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .features h3 {
+            font-size: 2.2rem;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            font-weight: 700;
+            color: var(--primary-gradient-end);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            padding: 0 calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-card {
+            background-color: var(--background-light);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px var(--shadow-light);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-light);
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-unit);
+            color: var(--primary-gradient-start);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .cta {
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Warm gradient for CTA */
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 5) 0;
+            border-radius: var(--border-radius);
+            margin-top: calc(var(--spacing-unit) * 4);
+            box-shadow: 0 6px 20px rgba(255, 126, 95, 0.4);
+        }
+
+        .cta h3 {
+            font-size: 2.5rem;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            font-weight: 700;
+        }
+
+        footer {
+            background-color: #333;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2);
+            margin-top: auto; /* Pushes footer to the bottom */
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                margin-top: var(--spacing-unit);
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 0.8rem 0;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .features h3 {
+                font-size: 1.8rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta h3 {
+                font-size: 1.8rem;
+            }
+
+            .button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: var(--spacing-unit);
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .features h3 {
+                font-size: 1.5rem;
+            }
+
+            .cta h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Nova</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Dashboard</a></li>
+                    <li><a href="#">Tasks</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Reports</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h2>Empower Your Projects with Modern Tools</h2>
+                <p>Seamless collaboration, intuitive management, and insightful analytics. Project last updated on <span class="project-date">2026-05-02</span>.</p>
+                <a href="#features" class="button">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h3>Key Capabilities</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Intuitive Task Management</h4>
+                        <p>Organize, assign, and track all your project tasks with an easy-to-use interface. Prioritize effortlessly and never miss a deadline.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Real-time Collaboration</h4>
+                        <p>Work together seamlessly with your team, no matter their location. Share files, comment on tasks, and communicate instantly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Advanced Progress Tracking</h4>
+                        <p>Monitor project milestones and deadlines with interactive dashboards and customizable reports. Gain insights at a glance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Secure Data Handling</h4>
+                        <p>Your project data is protected with industry-leading encryption and robust security protocols. Focus on your work, we handle the rest.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h3>Ready to Transform Your Project Workflow?</h3>
+                <p>Join thousands of teams already streamlining their success.</p>
+                <a href="#" class="button">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
