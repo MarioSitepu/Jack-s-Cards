@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nova Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset & Base Styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #1A2980 0%, #26D0CE 100%); /* Deep Blue to Cyan */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styling */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
+            padding: 1.2rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            color: #fff;
+            font-weight: 700;
+            font-size: 2.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #8BE8E5; /* Light Cyan */
+            transform: translateY(-2px);
+        }
+
+        /* Main Content Styling */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        section {
+            width: 100%;
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.08); /* Semi-transparent white */
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(45deg, #6a11cb 0%, #2577fc 100%); /* Purple to Blue */
+            color: #fff;
+            padding: 5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 55vh;
+            border-radius: 25px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 4rem;
+        }
+
+        .hero h2 {
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 700px;
+        }
+
+        .hero .project-date {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            color: #FFE66D; /* Yellow accent */
+        }
+
+        /* Buttons */
+        button {
+            background: linear-gradient(45deg, #FF6B6B 0%, #FFE66D 100%); /* Warm Red to Yellow */
+            color: #333;
+            border: none;
+            padding: 1.1rem 3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.15rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.05em;
+        }
+
+        button:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            opacity: 0.95;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            text-align: left;
+        }
+
+        .features h3 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 2.5rem;
+            grid-column: 1 / -1; /* Span across all columns */
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .feature-card h4 {
+            color: #8BE8E5; /* Light Cyan */
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: #d0d0d0;
+            font-size: 1rem;
+        }
+
+        /* Call to Action Section */
+        .call-to-action {
+            text-align: center;
+            padding: 3.5rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .call-to-action h3 {
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer Styling */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem 2.5rem;
+            text-align: center;
+            color: #a0a0a0;
+            margin-top: auto;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1.5rem 1rem;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav a {
+                margin: 0.5rem 1rem;
+                font-size: 1rem;
+            }
+
+            .hero {
+                padding: 4rem 1.5rem;
+                min-height: 40vh;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero .project-date {
+                font-size: 1.3rem;
+            }
+
+            button {
+                padding: 0.9rem 2rem;
+                font-size: 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr; /* Stack cards on small screens */
+            }
+
+            .features h3 {
+                font-size: 2rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.4rem;
+            }
+
+            .call-to-action h3 {
+                font-size: 2.2rem;
+            }
+
+            section {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            nav a {
+                margin: 0.5rem 0.7rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .hero .project-date {
+                font-size: 1.1rem;
+            }
+
+            button {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.95rem;
+            }
+
+            .features h3 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.2rem;
+            }
+
+            .call-to-action h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Project Nova</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#team">Team</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h2>Welcome to the Project Nova Dashboard</h2>
+            <p>Our cutting-edge platform for managing and tracking innovative projects.</p>
+            <p class="project-date">Project Date: 2026-05-03</p>
+            <button>Explore Dashboard</button>
+        </section>
+
+        <section id="features" class="features">
+            <h3>Key Project Milestones & Metrics</h3>
+            <div class="feature-card">
+                <h4>Phase 1 Completion</h4>
+                <p>Successfully completed the initial research and development phase with 100% target achievement. All core modules are now integrated.</p>
+            </div>
+            <div class="feature-card">
+                <h4>User Acceptance Testing</h4>
+                <p>UAT underway with a diverse group of beta testers. Feedback is being actively collected and prioritized for the next sprint.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Deployment Readiness</h4>
+                <p>Infrastructure setup is 90% complete. Security audits passed with flying colors. Preparing for a smooth production deployment.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Budget & Resources</h4>
+                <p>Project remains within budget, with resources optimally allocated. Projections indicate sustained efficiency and resource availability.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Team Collaboration</h4>
+                <p>Enhanced collaboration tools have boosted team productivity by 15%. Cross-functional communication is at an all-time high.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Future Innovations</h4>
+                <p>Brainstorming sessions for future enhancements and new features have begun, aiming to keep Project Nova ahead of the curve.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="call-to-action">
+            <h3>Ready to Elevate Your Project?</h3>
+            <p>Join Project Nova and transform your vision into reality.</p>
+            <button>Get in Touch</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Nova. All rights reserved. Designed with passion for the future.</p>
+    </footer>
+</body>
+</html>
