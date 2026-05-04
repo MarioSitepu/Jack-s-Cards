@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nebula - Modern Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles & Reset */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color-1: #3498db;
+            --accent-color-2: #8e44ad;
+            --light-bg: #f5f7fa;
+            --dark-text: #333;
+            --light-text: #ecf0f1;
+            --card-bg: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --gradient-hero: linear-gradient(135deg, var(--accent-color-1) 0%, var(--accent-color-2) 100%);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-color-1);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color-2);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 1.5rem 0;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            color: var(--light-text);
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--light-text);
+            font-weight: 400;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: var(--accent-color-1);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            left: 0;
+            background: var(--accent-color-1);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-hero);
+            color: var(--light-text);
+            text-align: center;
+            padding: 6rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-section p span {
+            font-weight: 600;
+            color: var(--light-text);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color-1);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Content Sections */
+        main section {
+            padding: 4rem 0;
+        }
+
+        .features-section {
+            background-color: var(--light-bg);
+            text-align: center;
+        }
+
+        .features-section h3 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-card h4 {
+            color: var(--accent-color-1);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .about-section {
+            background-color: var(--card-bg);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .about-section h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .about-section .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin-top: 1rem;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero-section {
+                padding: 4rem 1rem;
+                min-height: 300px;
+            }
+
+            .hero-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.8rem;
+                font-size: 1rem;
+            }
+
+            main section {
+                padding: 3rem 0;
+            }
+
+            .features-section h3, .about-section h3 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-section .content-wrapper {
+                padding: 0 1rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+
+            .hero-section h2 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+
+            .features-section h3, .about-section h3 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card h4 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Nebula</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h2>Innovate. Create. Inspire.</h2>
+                <p>Welcome to the future of possibilities. Project Nebula is pushing boundaries and redefining excellence.</p>
+                <p>Latest update as of <span>2026-05-04</span>.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h3>Key Milestones & Capabilities</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>Advanced Analytics</h4>
+                        <p>Leverage cutting-edge data processing and visualization to gain unparalleled insights into your operations. Make informed decisions faster than ever before.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Seamless Integration</h4>
+                        <p>Our platform is designed for effortless integration with your existing systems, ensuring a smooth transition and maximized productivity from day one.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Scalable Architecture</h4>
+                        <p>Built on a robust and flexible architecture, Project Nebula scales with your needs, adapting to growth and evolving demands without compromise.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Intuitive User Interface</h4>
+                        <p>Experience a beautifully designed and highly intuitive interface that simplifies complex tasks, making powerful tools accessible to everyone.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Secure & Reliable</h4>
+                        <p>Your data security and system reliability are our top priorities. We employ industry-leading encryption and robust protocols to protect your assets.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>24/7 Support</h4>
+                        <p>Our dedicated support team is available around the clock to assist you with any questions or issues, ensuring continuous operation and peace of mind.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h3>Our Vision for Tomorrow</h3>
+                <div class="content-wrapper">
+                    <p>At Project Nebula, we believe in the transformative power of technology to solve complex challenges and unlock new opportunities. Our journey began with a simple yet ambitious goal: to create solutions that are not only powerful but also elegant and user-centric.</p>
+                    <p>We are a team of innovators, engineers, and designers driven by a passion for excellence and a commitment to our users. Every line of code, every design decision, and every strategic move is made with the aim of delivering exceptional value and shaping a better digital future.</p>
+                    <p>Join us as we continue to explore new frontiers and build the next generation of intelligent systems. The possibilities are endless.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nebula. All rights reserved.</p>
+            <p>Designed with passion and precision.</p>
+        </div>
+    </footer>
+</body>
+</html>
