@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Vision | May 2026</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Gradients */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 100% 100%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+        }
+
+        .date-badge {
+            background: var(--glass);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 600px;
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: #94a3b8;
+        }
+
+        /* Content Section */
+        .content-split {
+            padding: 100px 5%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .content-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .content-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-image::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=1000') center/cover;
+            mix-blend-mode: overlay;
+            opacity: 0.6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 5% 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .copyright {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
+            nav { display: none; }
+            .hero { height: auto; padding: 100px 5%; }
+            .content-split { flex-direction: column; text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">NEO-GEN</div>
+        <nav>
+            <ul>
+                <li><a href="#">Platform</a></li>
+                <li><a href="#">Innovation</a></li>
+                <li><a href="#">Network</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="date-badge">Project Launch: 2026-05-04</div>
+            <h1>The Future is <br>Already Written.</h1>
+            <p>Experience the next generation of digital architecture, designed for the connectivity standards of 2026 and beyond.</p>
+            <a href="#" class="cta-btn">Explore Ecosystem</a>
+        </section>
+
+        <section class="features">
+            <div class="card">
+                <h3>Neural Speed</h3>
+                <p>Proprietary algorithms that anticipate user intent with sub-millisecond response times.</p>
+            </div>
+            <div class="card">
+                <h3>Glass UI 3.0</h3>
+                <p>Fully adaptive interfaces that respond to ambient lighting and user biometric feedback.</p>
+            </div>
+            <div class="card">
+                <h3>Quantum Security</h3>
+                <p>End-to-end encryption built on post-quantum cryptographic standards for absolute privacy.</p>
+            </div>
+        </section>
+
+        <section class="content-split">
+            <div class="content-text">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">May 4, 2026</h2>
+                <p style="margin-bottom: 1.5rem; color: #94a3b8;">This date marks the convergence of artificial intelligence and human-centric design. We aren't just building tools; we're building the infrastructure for a more intuitive world.</p>
+                <p style="color: #94a3b8;">Our commitment to innovation ensures that every interaction is seamless, beautiful, and purposeful.</p>
+            </div>
+            <div class="content-image"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Intelligence</a>
+            <a href="#">Status</a>
+        </div>
+        <p class="copyright">&copy; 2026 NEO-GEN Systems. All rights reserved. Last updated 2026-05-04.</p>
+    </footer>
+</body>
+</html>
