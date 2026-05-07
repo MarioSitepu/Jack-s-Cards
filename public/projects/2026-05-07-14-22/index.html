@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project - 2026-05-07</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nova - Launch Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #1e1e2f 0%, #0a0a1a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: #00c6ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0072ff;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        h1 { font-size: 2.8rem; }
+        h2 { font-size: 2.2rem; }
+        h3 { font-size: 1.8rem; }
+        h4 { font-size: 1.4rem; }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(30, 30, 47, 0.95);
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            background: linear-gradient(45deg, #00c6ff 0%, #0072ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #00c6ff 0%, #0072ff 100%);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 8rem 0;
+            text-align: center;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 70vh;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .project-date {
+            font-weight: 700;
+            color: #ffeb3b; /* A contrasting yellow for emphasis */
+            background: linear-gradient(45deg, #ffeb3b 0%, #ffc107 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 8px rgba(255, 235, 59, 0.7);
+            font-size: 1.5rem;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #00c6ff 0%, #0072ff 100%);
+            color: #ffffff;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 114, 255, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 114, 255, 0.6);
+            background: linear-gradient(45deg, #0072ff 0%, #00c6ff 100%);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex: 1;
+        }
+
+        .content-section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .content-section.alternate-bg {
+            background-color: rgba(30, 30, 47, 0.5);
+        }
+
+        .content-section h3 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            color: #ffffff;
+        }
+
+        .content-section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #00c6ff 0%, #0072ff 100%);
+            border-radius: 2px;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.08);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card h4 {
+            color: #00c6ff;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Feature List */
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            transition: background-color 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-item h4 {
+            color: #a77bf3; /* A soft purple for features */
+            margin-bottom: 0.8rem;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .team-member {
+            background-color: rgba(255, 255, 255, 0.08);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid #00c6ff;
+            box-shadow: 0 0 15px rgba(0, 198, 255, 0.5);
+        }
+
+        .team-member h4 {
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.08);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            font-size: 1rem;
+            color: #e0e0e0;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #b0b0b0;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #00c6ff;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(30, 30, 47, 0.95);
+            padding: 2rem 0;
+            text-align: center;
+            color: #b0b0b0;
+            margin-top: auto;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .hero-section h2 {
+                font-size: 2.8rem;
+            }
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+            .content-section h3 {
+                font-size: 2rem;
+            }
+            .card-grid, .feature-list, .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hero-section {
+                padding: 6rem 0;
+            }
+            .hero-section h2 {
+                font-size: 2.2rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+            .content-section {
+                padding: 4rem 0;
+            }
+            .content-section h3 {
+                font-size: 1.8rem;
+            }
+            .card, .feature-item, .team-member, .contact-form {
+                padding: 2rem;
+            }
+            .card-grid, .feature-list, .team-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+            .contact-form {
+                margin: 2rem auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.5rem; }
+            h4 { font-size: 1.2rem; }
+            header h1 {
+                font-size: 1.8rem;
+            }
+            nav a {
+                font-size: 0.9rem;
+            }
+            .hero-section h2 {
+                font-size: 1.8rem;
+            }
+            .project-date {
+                font-size: 1.2rem;
+            }
+            .cta-button {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Nova</h1>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h2>Welcome to Project Nova</h2>
+                <p>Innovating the future, one step at a time. The official launch date for this groundbreaking project is <span class="project-date">2026-05-07</span>.</p>
+                <button class="cta-button">Explore Our Vision</button>
+            </div>
+        </section>
+
+        <section id="overview" class="content-section">
+            <div class="container">
+                <h3>Project Overview</h3>
+                <div class="card-grid">
+                    <div class="card">
+                        <h4>Objective</h4>
+                        <p>To redefine user experience through cutting-edge AI and seamless integration across platforms. We aim to set a new industry standard for innovation and accessibility.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Milestones</h4>
+                        <p>Successfully completed Alpha testing, with overwhelmingly positive feedback. We are now entering the Beta phase, focusing on performance optimization and scaling.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Impact</h4>
+                        <p>Project Nova is designed to empower individuals and businesses alike, fostering creativity and efficiency. Anticipated to revolutionize several key sectors by Q4 2026.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="content-section alternate-bg">
+            <div class="container">
+                <h3>Key Features</h3>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h4>Intuitive Interface</h4>
+                        <p>Designed for absolute ease of use, ensuring a smooth and enjoyable user journey from the first click.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Scalable Architecture</h4>
+                        <p>Built on a robust, future-proof architecture that can effortlessly grow and adapt with your evolving needs.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Robust Security</h4>
+                        <p>Your data and privacy are our top priorities, protected by advanced encryption and multi-layered security protocols.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Real-time Analytics</h4>
+                        <p>Gain instant, actionable insights with our powerful real-time analytics dashboard, keeping you ahead of the curve.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="content-section">
+            <div class="container">
+                <h3>Our Visionary Team</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/120/00c6ff/ffffff?text=JD" alt="Jane Doe">
+                        <h4>Jane Doe</h4>
+                        <p>Lead AI Architect</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/120/2575fc/ffffff?text=JS" alt="John Smith">
+                        <h4>John Smith</h4>
+                        <p>Product Manager</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/120/6a11cb/ffffff?text=EW" alt="Emily White">
+                        <h4>Emily White</h4>
+                        <p>Senior UX/UI Designer</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/120/ffeb3b/2a2a
+</body>
+</html>
