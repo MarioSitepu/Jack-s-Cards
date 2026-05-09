@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project - 2026-05-09</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSphere Project Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    <style>
+        /* Modern Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        /* CSS Variables for a consistent theme */
+        :root {
+            --primary-color: #6A11CB; /* Deep Purple */
+            --secondary-color: #2575FC; /* Bright Blue */
+            --accent-color: #00E0C2; /* Teal */
+            --text-light: #E0E0E0;
+            --text-dark: #333333;
+            --background-light: #F8F9FA;
+            --background-dark: #1A1A2E; /* Dark base for body */
+            --card-background: rgba(255, 255, 255, 0.05); /* Slightly transparent white for cards on dark bg */
+            --gradient-main: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-button: linear-gradient(45deg, var(--accent-color) 0%, #00BFFF 100%); /* Aqua to Deep Sky Blue */
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --shadow-dark: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --border-radius-sm: 8px;
+            --border-radius-lg: 15px;
+            --font-family-sans: 'Inter', sans-serif;
+            --spacing-unit: 1rem;
+        }
+
+        /* Basic Reset & Body Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-sans);
+            color: var(--text-light);
+            line-height: 1.6;
+            background: var(--gradient-main); /* Main body gradient */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Prevent horizontal scroll on mobile */
+        }
+
+        /* General Container for content width */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        /* Header Styling */
+        header {
+            background: rgba(255, 255, 255, 0.05); /* Semi-transparent background */
+            padding: var(--spacing-unit) 0;
+            box-shadow: var(--shadow-light);
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: -webkit-linear-gradient(45deg, var(--accent-color), #00BFFF); /* Gradient text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            padding: 0.5rem 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1; /* Allows main to take up available space, pushing footer down */
+            padding: 3rem 0;
+        }
+
+        section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background: rgba(255, 255, 255, 0.03); /* Subtle alternating background for sections */
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            background: -webkit-linear-gradient(45deg, var(--accent-color), #00BFFF); /* Gradient text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            max-width: 800px; /* Limit paragraph width for readability */
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-light);
+        }
+
+        /* Hero Section */
+        #hero {
+            padding: 8rem 0;
+            text-align: center;
+            /* Using a data URI for SVG with gradient to avoid external image requests */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%236A11CB" /><stop offset="100%" stop-color="%232575FC" /></linearGradient></defs><rect x="0" y="0" width="100" height="100" fill="url(%23g)" /></svg>');
+            background-size: cover;
+</body>
+</html>
