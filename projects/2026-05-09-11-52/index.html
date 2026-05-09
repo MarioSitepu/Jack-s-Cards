@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard - 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-gradient-start: #6a11cb;
+            --primary-gradient-end: #2575fc;
+            --accent-color: #2575fc;
+            --text-color-dark: #333;
+            --text-color-light: #f9f9f9;
+            --bg-light: #f4f7f6;
+            --bg-card: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-card);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-gradient-start);
+            background: -webkit-linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color-dark);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 8rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            opacity: 0.9;
+        }
+
+        #hero strong {
+            font-weight: 600;
+            color: var(--text-color-light); /* Ensure visibility */
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--bg-card);
+            color: var(--accent-color);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-medium);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-medium);
+            background-color: var(--text-color-light);
+            color: var(--primary-gradient-start);
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            color: var(--text-color-dark);
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Card Section */
+        .card-section {
+            background-color: var(--bg-light);
+        }
+
+        .cards, .feature-grid, .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card, .feature-item, .team-member {
+            background-color: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        .card:hover, .feature-item:hover, .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px var(--shadow-medium);
+        }
+
+        .card h3, .feature-item h3, .team-member h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--primary-gradient-start);
+            background: -webkit-linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card p, .feature-item p, .team-member p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Feature Section */
+        .gradient-section {
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            color: var(--text-color-dark);
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-item .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            color: var(--accent-color);
+        }
+
+        /* Team Section */
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 0 6px rgba(var(--accent-color), 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member img:hover {
+            transform: scale(1.05);
+        }
+
+        .team-member h3 {
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+
+        .team-member p {
+            font-weight: 400;
+            color: #777;
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: var(--bg-card);
+            padding-bottom: 8rem;
+        }
+
+        #contact p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #contact form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        #contact form input,
+        #contact form textarea {
+            padding: 1rem 1.2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #contact form input:focus,
+        #contact form textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(var(--accent-color), 0.2);
+            outline: none;
+        }
+
+        #contact form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        #contact form button {
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: var(--text-color-light);
+            border: none;
+            cursor: pointer;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-medium);
+        }
+
+        #contact form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-medium);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-color-dark);
+            color: var(--bg-light);
+            text-align: center;
+            padding: 2.5rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 0 1rem;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 1rem;
+            }
+
+            #hero {
+                padding: 6rem 1rem;
+                min-height: 60vh;
+            }
+
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            #hero p {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 4rem 1rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .cards, .feature-grid, .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card, .feature-item, .team-member {
+                padding: 2rem;
+            }
+
+            .feature-item .icon {
+                font-size: 3rem;
+            }
+
+            .team-member img {
+                width: 90px;
+                height: 90px;
+            }
+
+            #contact form {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 0.3rem 0;
+            }
+
+            #hero h1 {
+                font-size: 2rem;
+            }
+
+            #hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .card h3, .feature-item h3, .team-member h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Project Zenith</div>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1>Innovating for a Brighter Future</h1>
+            <p>Our commitment to excellence drives us forward. Latest update: <strong>2026-05-09</strong>.</p>
+            <a href="#features" class="btn">Discover Our Vision</a>
+        </section>
+
+        <section id="overview" class="card-section">
+            <h2>Project Overview</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>Strategic Vision</h3>
+                    <p>To lead the market with sustainable and impactful technological solutions, setting new benchmarks for innovation.</p>
+                </div>
+                <div class="card">
+                    <h3>Core Mission</h3>
+                    <p>Empowering global communities through accessible, robust, and user-centric platforms designed for tomorrow's challenges.</p>
+                </div>
+                <div class="card">
+                    <h3>Key Objectives</h3>
+                    <p>Achieve unparalleled user satisfaction, expand our global footprint, and foster a culture of continuous learning and growth.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="gradient-section">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="icon">⚡</i>
+                    <h3>High Performance</h3>
+                    <p>Experience lightning-fast speeds and seamless operations with our optimized infrastructure.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="icon">✨</i>
+                    <h3>Elegant Design</h3>
+                    <p>Intuitive and aesthetically pleasing interfaces that enhance user engagement and productivity.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="icon">🛡️</i>
+                    <h3>Ironclad Security</h3>
+                    <p>Your data is protected with state-of-the-art encryption and robust security protocols.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="icon">📈</i>
+                    <h3>Scalable Architecture</h3>
+                    <p>Built to grow with your needs, ensuring future-proof adaptability and expansion capabilities.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="card-section">
+            <h2>Our Dedicated Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/120/6a11cb/ffffff?text=AJ" alt="Alice Johnson">
+                    <h3>Alice Johnson</h3>
+                    <p>Chief Visionary Officer</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/120/2575fc/ffffff?text=BW" alt="Bob Williams">
+                    <h3>Bob Williams</h3>
+                    <p>Lead Software Architect</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/120/6a11cb/ffffff?text=CB" alt="Charlie Brown">
+                    <h3>Charlie Brown</h3>
+                    <p>Head of User Experience</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/120/2575fc/ffffff?text=DE" alt="Diana Evans">
+                    <h3>Diana Evans</h3>
+                    <p>Strategic Marketing Lead</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <p>We're excited to hear from you! Whether you have questions, feedback, or partnership inquiries, reach out to us.</p>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email Address" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Zenith. All rights reserved.</p>
+        <p>Project Last Updated: May 9, 2026</p>
+    </footer>
+</body>
+</html>
