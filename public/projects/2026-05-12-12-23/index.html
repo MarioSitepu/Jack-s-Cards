@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Project | 2026</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #22d3ee;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Gradient Background Animation */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #0f172a 100%);
+            z-index: -1;
+        }
+
+        .bg-glow::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--primary), transparent, var(--secondary), transparent);
+            animation: rotate 20s linear infinite;
+            opacity: 0.1;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        header {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff 30%, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .date-section {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(45deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+            border-radius: 2rem;
+            margin: 4rem 2rem;
+        }
+
+        .date-display {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--light);
+            text-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+        }
+
+        footer {
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .date-display { font-size: 2.5rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">HORIZON.26</div>
+        <nav>
+            <a href="#">Solutions</a>
+            <a href="#">Vision</a>
+            <a href="#">Network</a>
+            <a href="#" class="cta-button" style="padding: 0.5rem 1.2rem; margin-left: 1rem;">Connect</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">Next Generation Interface</div>
+            <h1>Architecting the<br>Digital Frontier</h1>
+            <p>Experience the convergence of neural computing and spatial design. Built for the high-performance demands of the next decade.</p>
+            <a href="#explore" class="cta-button">Explore Ecosystem</a>
+        </section>
+
+        <div class="container" id="explore">
+            <div class="grid">
+                <div class="card">
+                    <h3>Spatial Intelligence</h3>
+                    <p>Leveraging advanced geometric processing to create immersive environments that respond to human intuition in real-time.</p>
+                </div>
+                <div class="card">
+                    <h3>Quantum Sync</h3>
+                    <p>Zero-latency data distribution across distributed nodes, ensuring your workspace stays synchronized globally.</p>
+                </div>
+                <div class="card">
+                    <h3>Neural Security</h3>
+                    <p>Biometric encryption protocols designed for the era of cognitive computing and decentralized identity.</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="date-section">
+            <p style="text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 1rem;">Project Milestone Reached</p>
+            <div class="date-display">2026-05-12</div>
+            <p style="margin-top: 1.5rem; color: #94a3b8;">The definitive launch of the Horizon Core Protocol.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Horizon Technologies. All rights reserved.</p>
+        <p style="margin-top: 1rem;">Designed for the future. Updated: May 12, 2026</p>
+    </footer>
+</body>
+</html>
