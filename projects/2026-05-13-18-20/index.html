@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project - 2026-05-13</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumFlow - Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette */
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Deep Purple to Bright Blue */
+            --secondary-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); /* Light Blue to Royal Blue */
+            --accent-gradient: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%); /* Warm Orange to Peach */
+            --bg-light: #f4f7fa; /* Light background */
+            --text-dark: #333;
+            --text-light: #fff;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-strong: rgba(0, 0, 0, 0.15);
+
+            /* Spacing & Radius */
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+
+            /* Typography */
+            --font-body: 'Poppins', sans-serif;
+            --font-heading: 'Poppins', sans-serif;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background: var(--bg-light);
+            line-height: 1.6;
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            display: flex;
+            flex-direction: column; /* For sticky footer */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: #222;
+        }
+
+        /* Fluid Typography with clamp() */
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            color: var(--text-light);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-strong);
+            opacity: 0.95;
+        }
+
+        .btn-secondary {
+            background: var(--secondary-gradient);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-strong);
+            opacity: 0.95;
+        }
+
+        /* Header */
+        header {
+            background: var(--card-bg);
+            padding: var(--spacing-sm) 0;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky; /* Sticky header */
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            /* Gradient text for logo */
+            background: -webkit-linear-gradient(135deg, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        nav a {
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+            color: var(--text-dark); /* Default link color */
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+        nav a:hover {
+             color: #2575fc; /* Highlight color on hover */
+        }
+
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient); /* Strong gradient for visual impact */
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh; /* Minimum height for hero section */
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .hero h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.1;
+            color: var(--text-light);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            max-width: 800px;
+            margin: 0 auto var(--spacing-md);
+            opacity: 0.9;
+        }
+
+        /* Main Content Sections */
+        main {
+            flex-grow: 1; /* Allows main to take up available space, pushing footer down */
+        }
+
+        section {
+            padding: var(--spacing-lg) 0;
+        }
+
+        section:nth-of-type(even) {
+            background: #e9eff4; /* Subtle alternating background */
+        }
+
+        .features {
+            text-align: center;
+        }
+
+        .features h3 {
+            margin-bottom: var(--spacing-lg);
+            /* Gradient text for section headings */
+            background: -webkit-linear-gradient(135deg, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 5px 20px var(--shadow-light);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
+            border-left: 5px solid transparent; /* For accent effect */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-strong);
+            border-left-color: #2575fc; /* Highlight on hover */
+        }
+
+        .feature-card i { /* Icon styling */
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-sm);
+            /* Gradient text for icons */
+            background: -webkit-linear-gradient(135deg, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .cta {
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+        }
+
+        .cta h3 {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta p {
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50; /* Darker footer background */
+            color: #ecf0f1;
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: auto; /* Pushes footer to bottom */
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--spacing-sm);
+            }
+
+            header .logo {
+                margin-bottom: var(--spacing-sm);
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            nav a {
+                padding: 0.5rem 0.8rem;
+            }
+
+            .hero {
+                padding: var(--spacing-md) 0;
+                min-height: 40vh;
+            }
+
+            .hero h2 {
+                font-size: clamp(2.5rem, 8vw, 4rem);
+            }
+
+            .hero p {
+                font-size: clamp(0.9rem, 3vw, 1.2rem);
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr; /* Stack features on small screens */
+            }
+
+            .feature-card {
+                text-align: center;
+            }
+
+            .feature-card i {
+                margin: 0 auto var(--spacing-sm);
+            }
+
+            section {
+                padding: var(--spacing-md) 0;
+            }
+        }
+
+        @media (max-width: 480px)
+</body>
+</html>
