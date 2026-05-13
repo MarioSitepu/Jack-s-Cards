@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Project Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset & Typography */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #e2e8f0; /* Light gray text */
+            background: #0f172a; /* Dark background */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: linear-gradient(to bottom right, #0f172a, #1a202c);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #f8fafc; /* Lighter text for headings */
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.2rem; }
+        h3 { font-size: 1.6rem; }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 23, 42, 0.8); /* Slightly transparent dark background */
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(45, 55, 72, 0.5);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #6eebfb; /* Teal accent */
+            text-decoration: none;
+            text-shadow: 0 0 5px rgba(110, 235, 251, 0.5);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #6eebfb, #9d50bb);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #6eebfb;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 0;
+            background: linear-gradient(to bottom right, #1a202c, #2d3748);
+            margin-bottom: 3rem;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #6eebfb, #9d50bb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(110, 235, 251, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            color: #cbd5e0;
+        }
+
+        .hero .date-highlight {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #f8fafc;
+            background: linear-gradient(to right, #9d50bb, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 1.5rem;
+            display: block;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(to right, #6eebfb, #9d50bb);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(157, 80, 187, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(157, 80, 187, 0.6);
+        }
+
+        /* Main Content Sections */
+        main {
+            flex: 1;
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.8rem;
+            background: linear-gradient(to right, #ff6b6b, #9d50bb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: #1a202c;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(45, 55, 72, 0.5);
+            background-image: linear-gradient(to bottom right, #1a202c, #2d3748);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            color: #6eebfb;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .card p {
+            color: #cbd5e0;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(to right, #9d50bb, #ff6b6b);
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-section h2 {
+            color: #fff;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            color: #f8fafc;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .cta-section .btn {
+            background: #0f172a;
+            box-shadow: none;
+        }
+
+        .cta-section .btn:hover {
+            background: #1a202c;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e0;
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(45, 55, 72, 0.5);
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.4rem; }
+
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1rem; }
+            .hero .date-highlight { font-size: 1.4rem; }
+            .btn { padding: 0.8rem 2rem; font-size: 0.9rem; }
+            .logo { font-size: 1.5rem; }
+            nav a { font-size: 0.9rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">FutureCore</a>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#roadmap">Roadmap</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Welcome to Project Nebula</h1>
+                <p>Revolutionizing digital experiences with cutting-edge technology and seamless design. Explore our progress and vision for the future.</p>
+                <span class="date-highlight">Project Launch Target: 2026-05-13</span>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="overview" class="container">
+            <h2 class="section-title">Project Overview</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Vision & Mission</h3>
+                    <p>Our mission is to empower creators and innovators by providing robust, scalable, and intuitive platforms that push the boundaries of what's possible in the digital realm.</p>
+                </div>
+                <div class="card">
+                    <h3>Key Objectives</h3>
+                    <p>Achieve 99.9% uptime, integrate AI-driven analytics, expand global reach by 30%, and foster a vibrant community of users by the end of the next fiscal year.</p>
+                </div>
+                <div class="card">
+                    <h3>Current Status</h3>
+                    <p>Development Phase II is 70% complete, focusing on backend infrastructure and core API functionalities. Frontend integration is commencing next quarter.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="container">
+            <h2 class="section-title">Core Features</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Intelligent Automation</h3>
+                    <p>Streamline workflows and reduce manual effort with our advanced AI-powered automation modules, adapting to your unique operational needs.</p>
+                </div>
+                <div class="card">
+                    <h3>Real-time Collaboration</h3>
+                    <p>Connect teams across the globe with real-time editing, communication tools, and shared workspaces, fostering unparalleled productivity.</p>
+                </div>
+                <div class="card">
+                    <h3>Scalable Architecture</h3>
+                    <p>Built on a microservices foundation, Project Nebula scales effortlessly to meet demand, ensuring consistent performance even under heavy loads.</p>
+                </div>
+                <div class="card">
+                    <h3>Intuitive User Interface</h3>
+                    <p>Designed with user-centric principles, our interface ensures a smooth, engaging, and efficient experience for all skill levels.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="cta-section">
+            <div class="container">
+                <h2>Ready to Explore Our Roadmap?</h2>
+                <p>Dive deep into our future plans, upcoming features, and the exciting milestones we aim to achieve. Your journey with Project Nebula starts here.</p>
+                <a href="#" class="btn">View Roadmap Details</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 FutureCore Solutions. All rights reserved. Project Nebula.</p>
+            <p>Designed with <span style="color: #ff6b6b;">&hearts;</span> for a brighter future.</p>
+        </div>
+    </footer>
+</body>
+</html>
