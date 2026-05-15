@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Innovations - Project Horizon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #6a11cb;
+            --color-secondary: #2575fc;
+            --color-dark-bg: #1a1a2e;
+            --color-light-text: #e0e0e0;
+            --color-dark-text: #0f0f1a;
+            --color-accent-1: #00c6ff;
+            --color-accent-2: #0072ff;
+            --gradient-main: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            --gradient-button: linear-gradient(90deg, var(--color-accent-1) 0%, var(--color-accent-2) 100%);
+            --gradient-card: linear-gradient(135deg, rgba(40, 40, 60, 0.8) 0%, rgba(20, 20, 30, 0.8) 100%);
+            --shadow-light: rgba(0, 0, 0, 0.2) 0px 10px 30px;
+            --shadow-dark: rgba(0, 0, 0, 0.4) 0px 20px 60px;
+            --border-radius-lg: 15px;
+            --border-radius-md: 10px;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--color-light-text);
+            background: var(--color-dark-bg);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--color-accent-1);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-accent-2);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: var(--spacing-sm);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Header */
+        .header {
+            background: rgba(15, 15, 26, 0.9);
+            padding: var(--spacing-sm) 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers not supporting text-fill-color */
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .nav-menu a {
+            color: var(--color-light-text);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-button);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+        }
+
+        .section {
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-hero {
+            background: var(--gradient-main);
+            padding: calc(var(--spacing-lg) * 1.5) 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: var(--spacing-md);
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            background: var(--gradient-button);
+            color: var(--color-dark-bg);
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Features Section */
+        .section-features {
+            background-color: var(--color-dark-bg);
+            padding-top: var(--spacing-lg);
+            padding-bottom: var(--spacing-lg);
+        }
+        
+        .section-features h2, .section-about h2, .section-cta h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .feature-card {
+            background: var(--gradient-card);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-light);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+            background: var(--gradient-button);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-accent-1);
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        .section-about {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .about-content p {
+            opacity: 0.9;
+        }
+        
+        .about-content strong {
+            color: var(--color-accent-1);
+        }
+
+        /* Call to Action Section */
+        .section-cta {
+            background: var(--gradient-main);
+            padding: calc(var(--spacing-lg) * 1.5) 0;
+        }
+
+        .section-cta h2 {
+            color: var(--color-light-text);
+            -webkit-text-fill-color: var(--color-light-text);
+            background-clip: unset;
+            margin-bottom: var(--spacing-md);
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(15, 15, 26, 0.9);
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-light-text);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--color-light-text);
+            opacity: 0.8;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-accent-1);
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                text-align: center;
+            }
+
+            .nav-menu a {
+                padding-bottom: 0;
+            }
+
+            .nav-menu a::after {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                text-align: center;
+            }
+
+            .feature-card .icon {
+                margin: 0 auto var(--spacing-sm);
+            }
+
+            .section {
+                padding: var(--spacing-md) 0;
+            }
+            
+            .section-hero, .section-cta {
+                padding: calc(var(--spacing-md) * 1.5) 0;
+            }
+            
+            .section-features h2, .section-about h2, .section-cta h2 {
+                margin-bottom: var(--spacing-md);
+            }
+
+            .about-content {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">Quantum Innovations</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="section section-hero">
+            <div class="container hero-content">
+                <h1>Revolutionizing Tomorrow, Today.</h1>
+                <p>Empowering businesses with cutting-edge technology and innovative solutions for a future-proof presence.</p>
+                <a href="#services" class="btn">Explore Our Solutions</a>
+            </div>
+        </section>
+
+        <section id="services" class="section section-features">
+            <div class="container">
+                <h2>Our Core Capabilities</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">🚀</div>
+                        <h3>AI & Machine Learning</h3>
+                        <p>Leveraging artificial intelligence to automate processes, gain insights, and drive smarter decisions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">✨</div>
+                        <h3>Cloud Solutions</h3>
+                        <p>Scalable, secure, and flexible cloud infrastructure to power your digital transformation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💡</div>
+                        <h3>Custom Software Development</h3>
+                        <p>Tailored software solutions designed to meet your unique business challenges and objectives.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h3>Cybersecurity</h3>
+                        <p>Protecting your assets with advanced security measures and proactive threat intelligence.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🌐</div>
+                        <h3>Web & Mobile Development</h3>
+                        <p>Crafting intuitive and high-performance web and mobile applications for seamless user experiences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📊</div>
+                        <h3>Data Analytics</h3>
+                        <p>Transforming raw data into actionable insights to optimize performance and foster growth.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section section-about">
+            <div class="container">
+                <h2>About Quantum Innovations</h2>
+                <div class="about-content">
+                    <p>At Quantum Innovations, we believe in the power of technology to redefine possibilities. Established with a vision to lead the next wave of digital evolution, we are a team of passionate engineers, designers, and strategists committed to delivering excellence.</p>
+                    <p>Our journey began with a simple goal: to build solutions that not only solve current problems but also anticipate future challenges. We pride ourselves on our agile methodologies, collaborative spirit, and unwavering dedication to our clients' success.</p>
+                    <p>We are constantly pushing the boundaries of what's possible, exploring emerging technologies, and fostering an environment of continuous learning and innovation. Our commitment to quality and forward-thinking approaches makes us a trusted partner for businesses aiming for sustainable growth in a rapidly evolving digital landscape.</p>
+                    <p>This project was conceptualized and developed with our future vision in mind, dated <strong style="color: var(--color-light-text);">2026-05-15</strong>, showcasing our long-term commitment to innovation.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section section-cta">
+            <div class="container">
+                <h2>Ready to Transform Your Business?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: var(--spacing-md); opacity: 0.9;">Let's discuss how Quantum Innovations can help you achieve your goals.</p>
+                <a href="mailto:info@quantuminnovations.com" class="btn">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Quantum Innovations. All rights reserved.</p>
+            <p>Project Horizon - Development Date: 2026-05-15</p>
+            <ul class="footer-links">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Sitemap</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
