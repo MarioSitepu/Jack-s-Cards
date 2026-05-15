@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nova - Modern Web Solution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient-start: #84fab0;
+            --primary-gradient-end: #8fd3f4;
+            --secondary-gradient-start: #007bff;
+            --secondary-gradient-end: #00c6ff;
+            --text-color-dark: #333;
+            --text-color-light: #f4f4f4;
+            --card-background: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --border-radius-medium: 10px;
+            --max-width: 1200px;
+            --padding-section: 60px 20px;
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--text-color-light);
+            text-shadow: 2px 2px 4px var(--shadow-medium);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-gradient-start), var(--secondary-gradient-end));
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--secondary-gradient-start) 0%, var(--secondary-gradient-end) 100%);
+            color: var(--text-color-light);
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 8px 20px var(--shadow-medium);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px var(--shadow-medium);
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color-light);
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .logo span {
+            color: #ffde59; /* A contrasting accent color */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition-speed), text-shadow var(--transition-speed);
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--text-color-light);
+            transition: width var(--transition-speed);
+        }
+
+        nav ul li a:hover {
+            color: #ffde59;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            color: var(--text-color-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1; /* Allows it to take available space */
+            min-height: 500px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--card-background);
+            padding: var(--padding-section);
+            box-shadow: 0 -5px 20px var(--shadow-light);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: var(--border-radius-medium);
+            box-shadow: 0 5px 20px var(--shadow-light);
+            text-align: center;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow-medium);
+        }
+
+        .feature-item i { /* Placeholder for icons */
+            font-size: 3rem;
+            color: var(--secondary-gradient-start);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .feature-item h3 {
+            font-size: 1.5rem;
+            color: var(--text-color-dark);
+            margin-bottom: 0.8rem;
+        }
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* About Section */
+        .about {
+            padding: var(--padding-section);
+            text-align: center;
+            color: var(--text-color-dark);
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: inset 0 5px 20px var(--shadow-light);
+        }
+        .about .container {
+            max-width: 900px;
+        }
+        .about p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #444;
+        }
+        .about .date-info {
+            font-style: italic;
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background: linear-gradient(90deg, #3f2b96 0%, #a8c0ff 100%); /* Darker gradient for contrast */
+            padding: 80px 20px;
+            text-align: center;
+            color: var(--text-color-light);
+        }
+        .cta h2 {
+            color: var(--text-color-light);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        .cta h2::after {
+            background: var(--text-color-light);
+        }
+        .cta .btn {
+            background: linear-gradient(45deg, #ffde59 0%, #ff9a00 100%); /* Bright accent button */
+            color: #333;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .cta .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: auto; /* Pushes footer to the bottom */
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: var(--secondary-gradient-end);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        footer a:hover {
+            color: var(--primary-gradient-end);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            header .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .logo {
+                margin-bottom: 15px;
+            }
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+            }
+            nav ul li {
+                margin: 0;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            nav ul li a {
+                display: block;
+                padding: 10px 0;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 5px;
+            }
+            nav ul li a:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+            nav ul li a::after {
+                display: none; /* Hide underline on mobile nav items */
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 80px 20px;
+                min-height: 400px;
+            }
+
+            .cta {
+                padding: 60px 20px;
+            }
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.6rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+            .feature-item {
+                padding: 20px;
+            }
+            .feature-item h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Project <span>Nova</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Revolutionizing Your Digital Experience</h1>
+                <p>Innovative solutions designed for the future, bringing clarity and efficiency to your projects.</p>
+                <a href="#features" class="btn">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-lightbulb"></i> <!-- Placeholder icon -->
+                        <h3>Intuitive Design</h3>
+                        <p>Experience a seamless and user-friendly interface designed for optimal interaction.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-rocket"></i> <!-- Placeholder icon -->
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed, our platform ensures a smooth and responsive experience.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i> <!-- Placeholder icon -->
+                        <h3>Robust Security</h3>
+                        <p>Your data is protected with state-of-the-art encryption and security protocols.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-mobile-alt"></i> <!-- Placeholder icon -->
+                        <h3>Cross-Platform Compatibility</h3>
+                        <p>Access your projects from any device, anytime, with full responsiveness.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About Project Nova</h2>
+                <p>Project Nova began with a vision to simplify complex digital challenges and empower users with powerful, yet accessible tools. Our team of dedicated innovators is committed to pushing the boundaries of technology to deliver solutions that truly make a difference.</p>
+                <p>We believe in a future where technology serves humanity, making tasks easier, connections stronger, and ideas more tangible. Join us on this journey to reshape the digital landscape.</p>
+                <p class="date-info">This project page was last updated on <strong>2026-05-15</strong>.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta">
+            <div class="container">
+                <h2>Ready to Elevate Your Project?</h2>
+                <p>Connect with us today to learn how Project Nova can transform your ideas into reality.</p>
+                <a href="mailto:info@projectnova.com" class="btn">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Nova. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons (optional, but good for modern look) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
