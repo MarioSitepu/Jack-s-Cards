@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
+            --background-color-light: #f4f7fa;
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --accent-color-light: #e0f2fe;
+            --card-bg: #ffffff;
+            --border-radius-lg: 15px;
+            --border-radius-md: 10px;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 3rem;
+            --font-family-primary: 'Poppins', sans-serif;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-primary);
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background: var(--background-color-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        /* Header */
+        .header {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: var(--spacing-md) 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: -webkit-linear-gradient(45deg, #f0f8ff, #a7d9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .nav-menu a {
+            color: var(--text-color-light);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-md);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.05) 10%, transparent 70%),
+                        radial-gradient(circle at bottom right, rgba(255,255,255,0.05) 10%, transparent 70%);
+            animation: rotateBackground 20s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 700;
+            line-height: 1.1;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            margin-bottom: var(--spacing-lg);
+            opacity: 0.9;
+        }
+
+        .hero .date {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            display: inline-block;
+            margin-top: var(--spacing-sm);
+            letter-spacing: 0.5px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-gradient);
+            color: var(--text-color-light);
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-lg);
+            font-weight: 600;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+
+        .section:nth-of-type(even) {
+            background: var(--accent-color-light);
+        }
+
+        .section h2 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            margin-bottom: var(--spacing-md);
+            font-weight: 700;
+            color: var(--text-color-dark);
+        }
+
+        .section p {
+            max-width: 800px;
+            margin: 0 auto var(--spacing-lg);
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+            color: #2575fc; /* A color from the primary gradient */
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #666;
+            margin: 0; /* Override section p margin */
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: var(--primary-gradient);
+            color: var(--text-color-light);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: var(--text-color-light);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Footer */
+        .footer {
+            background: #222;
+            color: rgba(255, 255, 255, 0.7);
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            margin-top: auto; /* Pushes footer to the bottom */
+            font-size: 0.9rem;
+        }
+
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .footer .social-links a {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0 0.8rem;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer .social-links a:hover {
+            color: var(--secondary-gradient);
+            background: -webkit-linear-gradient(45deg, #00c6fb, #005bea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .nav-menu ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-menu a {
+                display: block;
+                padding: 0.7rem 0;
+            }
+
+            .hero {
+                min-height: 70vh;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 9vw, 3.5rem);
+            }
+
+            .hero p {
+                font-size: clamp(1rem, 4vw, 1.2rem);
+            }
+
+            .section h2 {
+                font-size: clamp(1.8rem, 7vw, 2.8rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.8rem;
+            }
+            .nav-menu {
+                width: 100%;
+            }
+            .nav-menu ul {
+                padding-top: var(--spacing-sm);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .hero {
+                padding: var(--spacing-lg) var(--spacing-sm);
+            }
+            .btn {
+                padding: 0.8rem 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Project Nexus</h1>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Unleash the Future with Project Nexus</h1>
+                <p>Revolutionizing the way you work, create, and connect.</p>
+                <div class="date">Official Launch: <strong>2026-05-15</strong></div>
+                <button class="btn">Explore Now</button>
+            </div>
+        </section>
+
+        <section id="features" class="section">
+            <div class="container">
+                <h2>Key Features & Innovations</h2>
+                <p>Designed with cutting-edge technology and user-centric principles, Project Nexus delivers an unparalleled experience.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="icon">✨</span>
+                        <h3>Intuitive Interface</h3>
+                        <p>Seamless navigation and a clean design ensure a delightful user experience from day one.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🚀</span>
+                        <h3>Blazing Fast Performance</h3>
+                        <p>Optimized for speed, Project Nexus ensures your tasks are completed with minimal delay.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🔒</span>
+                        <h3>Robust Security</h3>
+                        <p>Your data is protected with enterprise-grade encryption and advanced security protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🔗</span>
+                        <h3>Seamless Integration</h3>
+                        <p>Connect effortlessly with your favorite tools and services for a unified workflow.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2>Our Vision for Tomorrow</h2>
+                <p>At Project Nexus, we believe in building solutions that not only meet today's demands but also anticipate tomorrow's challenges. Our team of innovators is dedicated to pushing boundaries and creating a more connected, efficient world.</p>
+                <button class="btn">Learn More About Us</button>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2>Ready to Join the Revolution?</h2>
+                <p>Sign up for our newsletter to get the latest updates and exclusive early access opportunities.</p>
+                <button class="btn">Get Started Today</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Project Nexus. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+    <!-- Font Awesome for social icons (optional, but good for modern appeal) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
