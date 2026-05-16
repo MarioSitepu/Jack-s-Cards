@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Launch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6A11CB 0%, #2575FC 100%);
+            --secondary-gradient: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
+            --bg-light: #f4f7f6;
+            --bg-dark: #1a202c;
+            --text-dark: #333;
+            --text-light: #fefefe;
+            --accent-color: #0072FF;
+            --border-radius: 8px;
+            --spacing-unit: 1rem;
+            --header-height: 70px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #004d99;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            height: var(--header-height);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        nav a {
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: calc(var(--spacing-unit) * 0.5) var(--spacing-unit);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 0;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 2);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            max-width: 800px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary-gradient);
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 2);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
+        }
+
+        .content-section {
+            padding: calc(var(--spacing-unit) * 5) calc(var(--spacing-unit) * 2);
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .content-section.light-bg {
+            background-color: #fff;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            font-weight: 700;
+            color: var(--text-dark);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: var(--spacing-unit);
+            color: var(--text-dark);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-item h3 {
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-unit);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: calc(var(--spacing-unit) * 0.8);
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 114, 255, 0.2);
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-form .cta-button {
+            align-self: flex-start;
+            margin-top: calc(var(--spacing-unit) * 0.5);
+        }
+
+        footer {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 2);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        footer strong {
+            color: var(--accent-color);
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            margin: 0 calc(var(--spacing-unit) * 0.5);
+            opacity: 0.8;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            opacity: 1;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                height: auto;
+                padding: var(--spacing-unit);
+            }
+
+            .logo {
+                margin-bottom: var(--spacing-unit);
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: calc(var(--spacing-unit) * 0.5);
+                width: 100%;
+                text-align: center;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                display: block;
+                padding: calc(var(--spacing-unit) * 0.75) var(--spacing-unit);
+                border-radius: var(--border-radius);
+                background-color: rgba(0, 0, 0, 0.03);
+            }
+
+            nav a:hover {
+                background-color: rgba(0, 0, 0, 0.08);
+            }
+
+            .hero {
+                padding: calc(var(--spacing-unit) * 5) var(--spacing-unit);
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .content-section {
+                padding: calc(var(--spacing-unit) * 3) var(--spacing-unit);
+            }
+
+            h2 {
+                font-size: 2rem;
+                margin-bottom: calc(var(--spacing-unit) * 2);
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form .cta-button {
+                align-self: stretch;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .cta-button {
+                font-size: 1rem;
+                padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.5);
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">FutureForge</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1>Unleash the Power of Innovation</h1>
+            <p>Revolutionizing the way you work with our cutting-edge solutions, designed for tomorrow.</p>
+            <a href="#features" class="cta-button">Discover Our Platform</a>
+        </section>
+
+        <section id="features" class="content-section light-bg">
+            <h2>Core Capabilities</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>Intuitive Dashboard</h3>
+                    <p>Access all critical information at a glance with our beautifully designed and easy-to-navigate interface.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Scalable Infrastructure</h3>
+                    <p>Built on a robust and flexible architecture, our platform grows with your needs, ensuring peak performance.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Secure Data Handling</h3>
+                    <p>Your data privacy and security are paramount. We employ advanced encryption and compliance standards.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Real-time Analytics</h3>
+                    <p>Gain actionable insights with live data tracking and comprehensive reporting tools tailored to your goals.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Seamless Integration</h3>
+                    <p>Connect effortlessly with your existing tools and workflows, enhancing productivity without disruption.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>24/7 Expert Support</h3>
+                    <p>Our dedicated team is always ready to assist you, ensuring a smooth and uninterrupted experience.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <h2>About FutureForge</h2>
+            <p>At FutureForge, we believe in pushing the boundaries of what's possible. Our journey began with a simple idea: to create technology that not only solves complex problems but also inspires creativity and fosters growth.</p>
+            <p>We are a diverse team of innovators, engineers, and designers committed to delivering excellence. Our passion for technology drives us to continuously evolve and provide solutions that truly make a difference in the modern world.</p>
+            <p>This project was officially launched on <strong>2026-05-16</strong>, marking a significant milestone in our commitment to future-forward development.</p>
+        </section>
+
+        <section id="contact" class="content-section light-bg">
+            <h2>Get in Touch</h2>
+            <p>Have a question, need support, or want to explore partnership opportunities? We'd love to hear from you!</p>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="6" required></textarea>
+                <button type="submit" class="cta-button">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 FutureForge. All rights reserved.</p>
+        <p>Project Launch Date: <strong>2026-05-16</strong></p>
+        <div class="social-links">
+            <a href="#">Facebook</a> |
+            <a href="#">Twitter</a> |
+            <a href="#">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+</html>
