@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Project Horizon</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+
+        :root {
+            --color-primary-dark: #6a11cb;
+            --color-primary-light: #2575fc;
+            --color-accent: #00f2fe; /* Vibrant Cyan */
+            --color-text-light: #e0e0e0;
+            --color-text-dark: #333;
+            --color-bg-card: rgba(255, 255, 255, 0.1);
+            --color-bg-footer: rgba(0, 0, 0, 0.4);
+            --gradient-body: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%);
+            --gradient-button: linear-gradient(90deg, var(--color-accent) 0%, #00c6ff 100%);
+            --gradient-button-hover: linear-gradient(90deg, #00c6ff 0%, var(--color-accent) 100%);
+            --box-shadow-light: 0 8px 30px rgba(0, 0, 0, 0.2);
+            --box-shadow-card: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-light);
+            background: var(--gradient-body);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--box-shadow-light);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 2rem;
+        }
+
+        header nav ul li a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .primary-btn {
+            background: var(--gradient-button);
+            color: var(--color-text-dark);
+        }
+
+        .primary-btn:hover {
+            background: var(--gradient-button-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 2px solid var(--color-accent);
+        }
+
+        .secondary-btn:hover {
+            background: var(--color-accent);
+            color: var(--color-text-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--color-text-light);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 8rem 0 10rem;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .hero-section h2 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            margin: 3rem 0;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow-light);
+        }
+
+        .content-section:first-of-type {
+            margin-top: 0;
+        }
+
+        .content-section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .content-section p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--color-text-light);
+        }
+
+        .content-section strong {
+            color: var(--color-accent);
+            font-weight: 700;
+        }
+
+        /* Feature Grid */
+        .feature-grid .features-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--color-bg-card);
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--box-shadow-card);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--color-accent);
+        }
+
+        .feature-card .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--color-text-light);
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            padding: 4rem 0;
+            margin: 3rem 0;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow-light);
+        }
+
+        .cta-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-bg-footer);
+            padding: 2.5rem 0;
+            text-align: center;
+            margin-top: auto;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: var(--color-text-light);
+        }
+
+        .social-links a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            margin: 0 0.8rem;
+            font-size: 0.9rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            header .container {
+                flex-direction: column;
+            }
+            header h1 {
+                margin-bottom: 1rem;
+            }
+            header nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            header nav ul li {
+                margin: 0.5rem 1rem;
+            }
+
+            .hero-section h2 {
+                font-size: 3.5rem;
+            }
+            .hero-section p {
+                font-size: 1.2rem;
+            }
+            h2 {
+                font-size: 2.5rem;
+            }
+            h3 {
+                font-size: 1.8rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 0;
+            }
+            .hero-section h2 {
+                font-size: 2.8rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+            }
+            .feature-grid .features-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            header nav ul li {
+                margin: 0.3rem 0.7rem;
+            }
+            .hero-section {
+                padding: 6rem 0 8rem;
+            }
+            .hero-section h2 {
+                font-size: 2.2rem;
+            }
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            h3 {
+                font-size: 1.5rem;
+            }
+            footer p {
+                font-size: 0.8rem;
+            }
+            .social-links a {
+                margin: 0 0.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Horizon</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h2>Innovating the Future, Today.</h2>
+                <p>Discover our cutting-edge solutions designed for tomorrow's challenges and opportunities.</p>
+                <a href="#features" class="btn primary-btn">Explore Features</a>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="container">
+                <h3>About Our Vision</h3>
+                <p>At Project Horizon, we are dedicated to pushing the boundaries of technology, creating intuitive and powerful tools that empower businesses and individuals alike. Our journey began with a simple idea: to make advanced technology accessible and impactful for everyone.</p>
+                <p>This initiative was conceptualized and developed with future-forward thinking, officially launching on <strong style="color: var(--color-accent);">2026-05-16</strong>, marking a new era of digital innovation.</p>
+                <p>We believe in a collaborative approach, fostering creativity and leveraging diverse expertise to build robust and scalable solutions that stand the test of time.</p>
+            </div>
+        </section>
+
+        <section id="features" class="content-section feature-grid">
+            <div class="container">
+                <h3>Core Features</h3>
+                <div class="features-wrapper">
+                    <div class="feature-card">
+                        <i class="icon">💡</i>
+                        <h4>Intuitive Design</h4>
+                        <p>User-friendly interfaces ensure a seamless and enjoyable experience for everyone, regardless of technical proficiency.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="icon">⚡</i>
+                        <h4>Blazing Fast Performance</h4>
+                        <p>Optimized algorithms and infrastructure deliver unparalleled speed and efficiency in every operation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="icon">🛡️</i>
+                        <h4>Secure & Reliable</h4>
+                        <p>Robust security measures and redundant systems protect your data and ensure continuous uptime and peace of mind.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="icon">🔗</i>
+                        <h4>Seamless Integration</h4>
+                        <p>Easily connect with your existing tools, platforms, and workflows, enhancing productivity without disruption.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="call-to-action" class="cta-section">
+            <div class="container">
+                <h3>Ready to Transform Your Future?</h3>
+                <p>Join us in building the next generation of digital excellence. Get started with Project Horizon today and unlock new possibilities.</p>
+                <a href="#contact" class="btn secondary-btn">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Horizon. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
